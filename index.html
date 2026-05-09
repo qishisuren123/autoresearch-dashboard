@@ -1,231 +1,169 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>AutoResearch Dashboard</title>
+<meta charset="UTF-8"><title>AutoResearch Dashboard</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.6;padding:20px}
-.container{max-width:1400px;margin:0 auto}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.7;padding:20px}
+.container{max-width:1200px;margin:0 auto}
 header{background:linear-gradient(135deg,#1a1b2e,#16213e);border:1px solid #2a2d3e;border-radius:12px;padding:30px;margin-bottom:24px}
-header h1{font-size:28px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-header .sub{color:#9ca3af;margin-top:8px;font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
-.stat{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:20px;text-align:center}
-.stat .num{font-size:36px;font-weight:700;color:#60a5fa}
-.stat .lbl{color:#9ca3af;font-size:13px;margin-top:4px}
-.section{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:12px;padding:24px;margin-bottom:24px}
-.section h2{font-size:18px;margin-bottom:16px;color:#f4f4f5}
-.badge{background:#3b82f6;color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;margin-left:8px}
-table{width:100%;border-collapse:collapse}
-th{text-align:left;padding:12px 16px;background:#111827;color:#9ca3af;font-size:12px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #2a2d3e}
-td{padding:12px 16px;border-bottom:1px solid #1f2937;font-size:14px}
-tr:hover{background:#111827}
-.genuine{color:#34d399;font-weight:600}
-.likely{color:#fbbf24;font-weight:600}
-.uncertain{color:#f97316;font-weight:600}
-.promoted{color:#ef4444;font-weight:600}
-.nodata{color:#6b7280}
-.bar{display:inline-block;height:6px;border-radius:3px;background:#374151;width:100px;position:relative;vertical-align:middle}
-.bar .fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6)}
-.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin:1px}
-.tag-academic{background:#1e3a5f;color:#60a5fa}
-.tag-engineering{background:#1a3326;color:#34d399}
-.tag-chinese{background:#3b2020;color:#fca5a5}
-.tag-english{background:#2d2b1f;color:#fde047}
-.signal{font-size:11px;padding:2px 6px;background:#1f2937;border-radius:3px;color:#9ca3af;display:inline-block;margin:1px}
-a{color:#60a5fa;text-decoration:none}
-a:hover{text-decoration:underline}
-.channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.ch{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#111827;border-radius:8px}
-.dot{width:10px;height:10px;border-radius:50%}
-.dot-g{background:#34d399}.dot-r{background:#ef4444}.dot-y{background:#fbbf24}
-.ch .name{font-weight:500;flex:1}
-.ch .cnt{color:#9ca3af;font-size:13px}
+header h1{font-size:26px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#9ca3af;font-size:13px;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.stat{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:16px;text-align:center}
+.stat .n{font-size:32px;font-weight:700;color:#60a5fa}
+.stat .l{color:#9ca3af;font-size:12px;margin-top:2px}
+.card{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:12px;padding:24px;margin-bottom:16px}
+.card h3{font-size:16px;color:#f4f4f5;margin-bottom:8px}
+.card .meta{font-size:12px;color:#9ca3af;margin-bottom:10px}
+.card .abstract{font-size:13px;color:#d1d5db;margin-bottom:12px;line-height:1.6}
+.card .evidence{margin-top:10px}
+.card .evidence li{font-size:12px;color:#9ca3af;margin:4px 0;list-style:none;padding-left:16px;position:relative}
+.card .evidence li::before{content:"→";position:absolute;left:0;color:#60a5fa}
+.score-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-right:8px}
+.score-hot{background:#1c4532;color:#34d399}
+.score-good{background:#2d2b1f;color:#fde047}
+.score-ref{background:#1f2937;color:#9ca3af}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin:2px;background:#1e3a5f;color:#60a5fa}
+a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
+.section-title{font-size:18px;color:#f4f4f5;margin:24px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2d3e}
 </style>
 </head>
-<body>
-<div class="container">
+<body><div class="container">
 <header>
-<h1>AutoResearch Dashboard</h1>
-<div class="sub">Idea 采集系统 | 关1: 主流媒体共识 + 关2: 社交舆情验证 | 2026-05-09 10:54</div>
+<h1>AutoResearch - 今日 Idea 筛选报告</h1>
+<div class="sub">2026-05-09 12:49 | 总采集 301 条 → 学术过滤 184 条 → 候选 58 个</div>
 </header>
 
 <div class="stats">
-<div class="stat"><div class="num">240</div><div class="lbl">总采集量</div></div>
-<div class="stat"><div class="num">13</div><div class="lbl">关1 候选</div></div>
-<div class="stat"><div class="num">5</div><div class="lbl">关2 真火</div></div>
-<div class="stat"><div class="num">9</div><div class="lbl">渠道在线</div></div>
+<div class="stat"><div class="n">301</div><div class="l">总采集</div></div>
+<div class="stat"><div class="n">184</div><div class="l">学术过滤后</div></div>
+<div class="stat"><div class="n">58</div><div class="l">候选话题</div></div>
+<div class="stat"><div class="n">14</div><div class="l">强推荐</div></div>
 </div>
 
-<div class="section">
-<h2>高置信 A 候选清单<span class="badge">关2 验证通过</span></h2>
-<table><thead><tr><th>#</th><th>话题</th><th>判定</th><th>真实度</th><th>信号</th><th>跨源类别</th></tr></thead><tbody>
-<tr>
-<td>1</td>
-<td><a href="https://huggingface.co/papers/2605.06548" target="_blank">Continuous Latent Diffusion Language Model</a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.06548</span></td>
-<td><span class="genuine">真火</span></td>
-<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
-<td><span class="signal">high_engagement</span> <span class="signal">healthy_discussion_ratio</span> <span class="signal">moderate_consensus</span> <span class="signal">multi_community</span></td>
-<td><span class="tag tag-engineering">engineering</span> <span class="tag tag-academic">academic</span></td>
-</tr>
-<tr>
-<td>2</td>
-<td><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sknx6n/best_local_llms_apr_2026/" target="_blank">Best Local LLMs - Apr 2026</a></td>
-<td><span class="genuine">真火</span></td>
-<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
-<td><span class="signal">high_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span> <span class="signal">multi_community</span></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-</tr>
-<tr>
-<td>3</td>
-<td><a href="https://i.redd.it/vf2d4tkimszg1.jpeg" target="_blank">Collected the infinity stones</a></td>
-<td><span class="genuine">真火</span></td>
-<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
-<td><span class="signal">high_engagement</span> <span class="signal">healthy_discussion_ratio</span> <span class="signal">strong_consensus</span></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-</tr>
-<tr>
-<td>4</td>
-<td><a href="https://huggingface.co/papers/2605.05242" target="_blank">Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search vi</a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.05242</span></td>
-<td><span class="genuine">真火</span></td>
-<td><div class="bar"><div class="fill" style="width:90%"></div></div> <span style="font-size:12px;color:#9ca3af">0.90</span></td>
-<td><span class="signal">low_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span> <span class="signal">multi_community</span></td>
-<td><span class="tag tag-academic">academic</span></td>
-</tr>
-<tr>
-<td>5</td>
-<td><a href="https://huggingface.co/papers/2605.06130" target="_blank">Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement </a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.06130</span></td>
-<td><span class="likely">大概率真</span></td>
-<td><div class="bar"><div class="fill" style="width:70%"></div></div> <span style="font-size:12px;color:#9ca3af">0.70</span></td>
-<td><span class="signal">low_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span></td>
-<td><span class="tag tag-academic">academic</span></td>
-</tr>
-</tbody></table></div>
+<div class="section-title">🔥 强推荐 A 种子（score ≥ 5.0）</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 11.0分</span> <a href="https://huggingface.co/papers/2605.05185" target="_blank">OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents</a></h3>
+<div class="meta">#1 | <a href="https://arxiv.org/abs/2605.05185" target="_blank">arXiv:2605.05185</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite r</div>
+<ul class="evidence"><li>HuggingFace 社区 92 票认可</li><li>跨源出现: arxiv, rss_marktechpost</li><li>HuggingFace Daily Papers 92 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 9.0分</span> <a href="https://huggingface.co/papers/2605.03849" target="_blank">Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video </a></h3>
+<div class="meta">#2 | <a href="https://arxiv.org/abs/2605.03849" target="_blank">arXiv:2605.03849</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Distillation-based acceleration has become foundational for making autoregressive streaming video diffusion models practical, with distribution matching distillation (DMD) as the de facto choice. Exis</div>
+<ul class="evidence"><li>HuggingFace 社区 116 票认可</li><li>跨源出现: arxiv, hf_daily_papers</li><li>HuggingFace Daily Papers 116 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 9.0分</span> <a href="https://huggingface.co/papers/2605.04461" target="_blank">Stream-T1: Test-Time Scaling for Streaming Video Generation</a></h3>
+<div class="meta">#3 | <a href="https://arxiv.org/abs/2605.04461" target="_blank">arXiv:2605.04461</a> | 强推荐作为 A 种子</div>
+<div class="abstract">While Test-Time Scaling (TTS) offers a promising direction to enhance video generation without the surging costs of training, current test-time video generation methods based on diffusion models suffe</div>
+<ul class="evidence"><li>HuggingFace 社区 98 票认可</li><li>跨源出现: arxiv, hf_daily_papers</li><li>HuggingFace Daily Papers 98 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 8.0分</span> <a href="https://huggingface.co/papers/2605.06130" target="_blank">Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning</a></h3>
+<div class="meta">#4 | <a href="https://arxiv.org/abs/2605.06130" target="_blank">arXiv:2605.06130</a> | 强推荐作为 A 种子</div>
+<div class="abstract">A persistent skill library allows language model agents to reuse successful strategies across tasks. Maintaining such a library requires three coupled capabilities. The agent selects a relevant skill,</div>
+<ul class="evidence"><li>HuggingFace 社区 57 票认可</li><li>跨源出现: arxiv, hf_daily_papers</li><li>HuggingFace Daily Papers 57 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 7.5分</span> <a href="https://www.marktechpost.com/2026/05/08/meet-github-spec-kit-an-open-source-toolkit-for-spec-driven-development-with-ai-coding-agents/" target="_blank">Meet GitHub Spec-Kit: An Open Source Toolkit for Spec-Driven Development with AI</a></h3>
+<div class="meta">#5 | <a href="https://arxiv.org/abs/2605.05185" target="_blank">arXiv:2605.05185</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite r</div>
+<ul class="evidence"><li>HuggingFace 社区 92 票认可</li><li>跨源出现: hf_daily_papers</li><li>英文AI媒体报道: rss_marktechpost</li><li>对应论文: OpenSearch-VL: An Open Recipe for Frontier Multimo</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 7.0分</span> <a href="https://huggingface.co/papers/2605.03269" target="_blank">RLDX-1 Technical Report</a></h3>
+<div class="meta">#6 | <a href="https://arxiv.org/abs/2605.03269" target="_blank">arXiv:2605.03269</a> | 强推荐作为 A 种子</div>
+<div class="abstract">While Vision-Language-Action models (VLAs) have shown remarkable progress toward human-like generalist robotic policies through the versatile intelligence (i.e. broad scene understanding and language-</div>
+<ul class="evidence"><li>HuggingFace 社区 98 票认可</li><li>HuggingFace Daily Papers 98 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 7.0分</span> <a href="https://huggingface.co/papers/2605.06548" target="_blank">Continuous Latent Diffusion Language Model</a></h3>
+<div class="meta">#7 | <a href="https://arxiv.org/abs/2605.06548" target="_blank">arXiv:2605.06548</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still </div>
+<ul class="evidence"><li>HuggingFace 社区 47 票认可</li><li>跨源出现: arxiv, hf_daily_papers</li><li>HuggingFace Daily Papers 47 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 6.5分</span> <a href="https://huggingface.co/papers/2604.28196" target="_blank">HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Ge</a></h3>
+<div class="meta">#8 | <a href="https://arxiv.org/abs/2604.28196" target="_blank">arXiv:2604.28196</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Driving world models serve as a pivotal technology for autonomous driving by simulating environmental dynamics. However, existing approaches predominantly focus on future scene generation, often overl</div>
+<ul class="evidence"><li>HuggingFace 社区 69 票认可</li><li>跨源出现: hf_daily_papers</li><li>HuggingFace Daily Papers 69 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.5分</span> <a href="https://huggingface.co/papers/2605.06416" target="_blank">MiA-Signature: Approximating Global Activation for Long-Context Understanding</a></h3>
+<div class="meta">#9 | <a href="https://arxiv.org/abs/2605.06416" target="_blank">arXiv:2605.06416</a> | 强推荐作为 A 种子</div>
+<div class="abstract">A growing body of work in cognitive science suggests that reportable conscious access is associated with global ignition over distributed memory systems, while such activation is only partially access</div>
+<ul class="evidence"><li>HuggingFace 社区 41 票认可</li><li>跨源出现: arxiv</li><li>HuggingFace Daily Papers 41 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.0分</span> <a href="https://huggingface.co/papers/2605.05242" target="_blank">Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search via Direct C</a></h3>
+<div class="meta">#10 | <a href="https://arxiv.org/abs/2605.05242" target="_blank">arXiv:2605.05242</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Modern retrieval systems, whether lexical or semantic, expose a corpus through a fixed similarity interface that compresses access into a single top-k retrieval step before reasoning. This abstraction</div>
+<ul class="evidence"><li>HuggingFace 社区 54 票认可</li><li>HuggingFace Daily Papers 54 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.0分</span> <a href="https://huggingface.co/papers/2604.27393" target="_blank">MiniCPM-o 4.5: Towards Real-Time Full-Duplex Omni-Modal Interaction</a></h3>
+<div class="meta">#11 | <a href="https://arxiv.org/abs/2604.27393" target="_blank">arXiv:2604.27393</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Recent progress in multimodal large language models (MLLMs) has brought AI capabilities from static offline data processing to real-time streaming interaction, yet they still remain far from human-lev</div>
+<ul class="evidence"><li>HuggingFace 社区 43 票认可</li><li>HuggingFace Daily Papers 43 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.0分</span> <a href="http://arxiv.org/abs/2605.06597v1" target="_blank">UniSD: Towards a Unified Self-Distillation Framework for Large Language Models</a></h3>
+<div class="meta">#12 | <a href="https://arxiv.org/abs/2605.06597v1" target="_blank">arXiv:2605.06597v1</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Self-distillation (SD) offers a promising path for adapting large language models (LLMs) without relying on stronger external teachers. However, SD in autoregressive LLMs remains challenging because s</div>
+<ul class="evidence"><li>跨源出现: hf_daily_papers, rss_marktechpost</li><li>arXiv + 跨源命中: hf_daily_papers, rss_marktechpost</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.0分</span> <a href="http://arxiv.org/abs/2605.06522v1" target="_blank">Agentic AIs Are the Missing Paradigm for Out-of-Distribution Generalization in F</a></h3>
+<div class="meta">#13 | <a href="https://arxiv.org/abs/2605.06522v1" target="_blank">arXiv:2605.06522v1</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge </div>
+<ul class="evidence"><li>跨源出现: hf_daily_papers, rss_marktechpost</li><li>arXiv + 跨源命中: hf_daily_papers, rss_marktechpost</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-hot">🔥 5.0分</span> <a href="http://arxiv.org/abs/2605.04777v1" target="_blank">Bridging Perception and Action: A Lightweight Multimodal Meta-Planner Framework </a></h3>
+<div class="meta">#14 | <a href="https://arxiv.org/abs/2605.04777v1" target="_blank">arXiv:2605.04777v1</a> | 强推荐作为 A 种子</div>
+<div class="abstract">Autonomous Earth Observation (EO) agents are transitioning from passive perception to complex, multi-step task execution. However, current architectures that integrate planning and execution within a </div>
+<ul class="evidence"><li>跨源出现: hf_daily_papers, rss_marktechpost</li><li>arXiv + 跨源命中: hf_daily_papers, rss_marktechpost</li></ul>
+</div>
+<div class="section-title">📌 值得关注（score 3.0-4.9）</div><div class="card">
+<h3><span class="score-badge score-good">📌 4.0分</span> <a href="https://huggingface.co/papers/2605.04523" target="_blank">RaguTeam at SemEval-2026 Task 8: Meno and Friends in a Judge-Orchestrated LLM En</a></h3>
+<div class="meta">#15 | <a href="https://arxiv.org/abs/2605.04523" target="_blank">arXiv:2605.04523</a> | 值得关注，可作为 A 候选</div>
+<div class="abstract">We present our winning system for Task~B (generation with reference passages) in SemEval-2026 Task~8: MTRAGEval. Our method is a heterogeneous ensemble of seven LLMs with two prompting variants, where</div>
+<ul class="evidence"><li>HuggingFace 社区 37 票认可</li><li>HuggingFace Daily Papers 37 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-good">📌 4.0分</span> <a href="https://huggingface.co/papers/2605.06222" target="_blank">When to Trust Imagination: Adaptive Action Execution for World Action Models</a></h3>
+<div class="meta">#16 | <a href="https://arxiv.org/abs/2605.06222" target="_blank">arXiv:2605.06222</a> | 值得关注，可作为 A 候选</div>
+<div class="abstract">World Action Models (WAMs) have recently emerged as a promising paradigm for robotic manipulation by jointly predicting future visual observations and future actions. However, current WAMs typically e</div>
+<ul class="evidence"><li>HuggingFace 社区 34 票认可</li><li>HuggingFace Daily Papers 34 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-good">📌 4.0分</span> <a href="https://huggingface.co/papers/2605.05163" target="_blank">PhysForge: Generating Physics-Grounded 3D Assets for Interactive Virtual World</a></h3>
+<div class="meta">#17 | <a href="https://arxiv.org/abs/2605.05163" target="_blank">arXiv:2605.05163</a> | 值得关注，可作为 A 候选</div>
+<div class="abstract">Synthesizing physics-grounded 3D assets is a critical bottleneck for interactive virtual worlds and embodied AI. Existing methods predominantly focus on static geometry, overlooking the functional pro</div>
+<ul class="evidence"><li>HuggingFace 社区 31 票认可</li><li>HuggingFace Daily Papers 31 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-good">📌 3.0分</span> <a href="https://huggingface.co/papers/2605.05566" target="_blank">Nonsense Helps: Prompt Space Perturbation Broadens Reasoning Exploration</a></h3>
+<div class="meta">#18 | <a href="https://arxiv.org/abs/2605.05566" target="_blank">arXiv:2605.05566</a> | 值得关注，可作为 A 候选</div>
+<div class="abstract">Reinforcement learning with verifiable rewards, particularly Group Relative Policy Optimization (GRPO), has significantly advanced the reasoning capabilities of Large Language Models (LLMs). However, </div>
+<ul class="evidence"><li>HuggingFace 社区 25 票认可</li><li>HuggingFace Daily Papers 25 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-good">📌 3.0分</span> <a href="https://huggingface.co/papers/2605.06376" target="_blank">Continuous-Time Distribution Matching for Few-Step Diffusion Distillation</a></h3>
+<div class="meta">#19 | <a href="https://arxiv.org/abs/2605.06376" target="_blank">arXiv:2605.06376</a> | 值得关注，可作为 A 候选</div>
+<div class="abstract">Step distillation has become a leading technique for accelerating diffusion models, among which Distribution Matching Distillation (DMD) and Consistency Distillation are two representative paradigms. </div>
+<ul class="evidence"><li>HuggingFace 社区 24 票认可</li><li>HuggingFace Daily Papers 24 upvotes</li></ul>
+</div>
+<div class="card">
+<h3><span class="score-badge score-ref">📎 2.5分</span> <a href="https://www.marktechpost.com/2026/05/07/lightseek-foundation-releases-tokenspeed-an-open-source-llm-inference-engine-targeting-tensorrt-llm-level-performance-for-agentic-workloads/" target="_blank">LightSeek Foundation Releases TokenSpeed, an Open-Source LLM Inference Engine Ta</a></h3>
+<div class="meta">#20 | <a href="https://arxiv.org/abs/2605.06522v1" target="_blank">arXiv:2605.06522v1</a> | 参考</div>
+<div class="abstract">Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge </div>
+<ul class="evidence"><li>跨源出现: arxiv</li><li>英文AI媒体报道: rss_marktechpost</li><li>对应论文: Agentic AIs Are the Missing Paradigm for Out-of-Di</li></ul>
+</div>
 
-<div class="section">
-<h2>关1 全部候选<span class="badge">13 个</span></h2>
-<table><thead><tr><th>#</th><th>话题</th><th>共识分</th><th>类别</th><th>社区信号</th><th>备注</th></tr></thead><tbody>
-<tr>
-<td>1</td>
-<td><a href="https://huggingface.co/papers/2605.06548" target="_blank">Continuous Latent Diffusion Language Model</a></td>
-<td><strong>3.5</strong></td>
-<td><span class="tag tag-engineering">engineering</span> <span class="tag tag-academic">academic</span></td>
-<td style="font-size:12px">HF:46票</td>
-<td style="font-size:12px;color:#6b7280"></td>
-</tr>
-<tr>
-<td>2</td>
-<td><a href="https://huggingface.co/papers/2605.06130" target="_blank">Skill1: Unified Evolution of Skill-Augmented Agents via Reinforce</a></td>
-<td><strong>2.5</strong></td>
-<td><span class="tag tag-academic">academic</span></td>
-<td style="font-size:12px">HF:56票</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（HF 50+ upvotes）</td>
-</tr>
-<tr>
-<td>3</td>
-<td><a href="https://huggingface.co/papers/2605.05242" target="_blank">Beyond Semantic Similarity: Rethinking Retrieval for Agentic Sear</a></td>
-<td><strong>2.5</strong></td>
-<td><span class="tag tag-academic">academic</span></td>
-<td style="font-size:12px">HF:51票</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（HF 50+ upvotes）</td>
-</tr>
-<tr>
-<td>4</td>
-<td><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sknx6n/best_local_llms_apr_2026/" target="_blank">Best Local LLMs - Apr 2026</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:493↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>5</td>
-<td><a href="https://i.redd.it/vf2d4tkimszg1.jpeg" target="_blank">Collected the infinity stones</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:1578↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>6</td>
-<td><a href="https://v.redd.it/ccxn81zo5tzg1" target="_blank">Multi-Token Prediction (MTP) for LLaMA.cpp - Gemma 4 speedup by 4</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:514↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>7</td>
-<td><a href="https://www.wired.com/story/mozilla-used-anthropics-mythos-to-find-271-bugs-in-firefox/" target="_blank">Mozilla Used Anthropic’s Mythos to Find and Fix 271 Bugs in Firef</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:890↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>8</td>
-<td><a href="https://www.reddit.com/gallery/1t7iyis" target="_blank">Fields Medal winning mathematician Timothy Gowers used GPT5.5 Pro</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:500↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>9</td>
-<td><a href="https://i.redd.it/4j2yhac41wzg1.png" target="_blank">Anthropic to reach 100% global GDP in 21 months</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:1634↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>10</td>
-<td><a href="https://i.redd.it/7jbvcfs6zszg1.png" target="_blank">Firefox reports a massive April spike in security fixes after usi</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:1264↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>11</td>
-<td><a href="https://i.redd.it/bfpedsz82tzg1.jpeg" target="_blank">Is ilya’s SSI company still a thing? It’s been 2 years ago with n</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:1068↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>12</td>
-<td><a href="https://i.redd.it/6187dxjrspzg1.jpeg" target="_blank">Anthropic partnered with SpaceX for compute</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:658↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-<tr>
-<td>13</td>
-<td><a href="https://v.redd.it/kvdelnxguozg1" target="_blank">Genesis AI playing piano</a></td>
-<td><strong>2.0</strong></td>
-<td><span class="tag tag-engineering">engineering</span></td>
-<td style="font-size:12px">Reddit:661↑</td>
-<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
-</tr>
-</tbody></table></div>
-
-<div class="section">
-<h2>渠道状态</h2>
-<div class="channels">
-<div class="ch"><div class="dot dot-g"></div><div class="name">arXiv</div><div class="cnt">50 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">HuggingFace Papers</div><div class="cnt">58 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">量子位 RSS</div><div class="cnt">10 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">Leiphone RSS</div><div class="cnt">20 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">MarkTechPost</div><div class="cnt">10 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">VentureBeat</div><div class="cnt">7 篇</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">Reddit</div><div class="cnt">75 帖</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">GitHub Trending</div><div class="cnt">9 项目</div></div>
-<div class="ch"><div class="dot dot-g"></div><div class="name">Hacker News</div><div class="cnt">1 条(AI)</div></div>
-<div class="ch"><div class="dot dot-r"></div><div class="name">机器之心</div><div class="cnt">不可用(反爬)</div></div>
-<div class="ch"><div class="dot dot-y"></div><div class="name">Twitter/X</div><div class="cnt">待接入($200/月)</div></div>
-<div class="ch"><div class="dot dot-y"></div><div class="name">小红书</div><div class="cnt">待接入(深灰)</div></div>
-</div></div>
-</div></body></html>
+<div class="section-title">📡 数据源状态</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px">
+<div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">arXiv API</span><span style="color:#9ca3af;font-size:12px">100 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">HuggingFace Papers</span><span style="color:#9ca3af;font-size:12px">63 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">量子位 RSS</span><span style="color:#9ca3af;font-size:12px">10 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">Leiphone RSS</span><span style="color:#9ca3af;font-size:12px">20 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">MarkTechPost RSS</span><span style="color:#9ca3af;font-size:12px">10 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">VentureBeat RSS</span><span style="color:#9ca3af;font-size:12px">7 篇</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">Reddit</span><span style="color:#9ca3af;font-size:12px">75 帖</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">GitHub Trending</span><span style="color:#9ca3af;font-size:12px">9 项目</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#34d399"></div><span style="flex:1;font-size:13px">Hacker News</span><span style="color:#9ca3af;font-size:12px">7 条</span></div><div style="background:#111827;padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#ef4444"></div><span style="flex:1;font-size:13px">机器之心</span><span style="color:#9ca3af;font-size:12px">不可用</span></div></div></div></body></html>
