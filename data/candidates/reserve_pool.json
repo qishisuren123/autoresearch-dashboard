@@ -1,0 +1,74 @@
+[
+  {
+    "title": "LLMs Are Not a Higher Level of Abstraction",
+    "url": "https://news.ycombinator.com/item?id=47999520",
+    "conclusion": "【不适合做A种子】这是一篇软件工程视角的观点文章而非算法论文，无法提取出具体的机制或模块进行A+B组合，但非常适合引用为",
+    "channel": "hackernews",
+    "added_to_reserve": "2026-05-09T16:33:44.699840",
+    "expires": "2026-05-24T16:33:44.699852"
+  },
+  {
+    "title": "I scaled a pure Spiking Neural Network (SNN) to 1.088B parameters from scratch. Ran out of budget, but here is what I found [R]",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1skql34/i_scaled_a_pure_spiking_neural_network_snn_to/",
+    "conclusion": "【值得深入】——该工作在底层优化上撕开了SNN大模型从头训练的口子，工程参考价值极高，非常适合提炼其核心trick用于低",
+    "channel": "",
+    "added_to_reserve": "2026-05-09T16:33:44.699859",
+    "expires": "2026-05-24T16:33:44.699861"
+  },
+  {
+    "title": "Introspective Diffusion Language Models",
+    "url": "https://news.ycombinator.com/item?id=47762641",
+    "conclusion": "【值得深入】文本扩散是极具爆发潜力的非共识方向，该方法为解决离散序列的全局规划与自纠错提供了优雅思路，非常适合在需要强逻",
+    "channel": "hackernews",
+    "added_to_reserve": "2026-05-09T16:33:44.699866",
+    "expires": "2026-05-24T16:33:44.699867"
+  },
+  {
+    "title": "Is Attention sink without Positional Encoding unavoidable? [D]",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1szqzeq/is_attention_sink_without_positional_encoding/",
+    "conclusion": "【值得深入】这是一个极佳的“反常识”现象，从底层机制切入，非常适合衍生出关于注意力正则化、替代Softmax机制或无序数",
+    "channel": "",
+    "added_to_reserve": "2026-05-09T16:33:44.699871",
+    "expires": "2026-05-24T16:33:44.699872"
+  },
+  {
+    "title": "Can Geometric Deep Learning lead eliminate the need of \"Brute Force\" pre-training [D]",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1swkxx1/can_geometric_deep_learning_lead_eliminate_the/",
+    "conclusion": "理论框架极其优雅（用群论、图和流形统一了各类神经网络），但工程实现和数学门槛极高，绝不是简单易用的“即插即用”型tric",
+    "channel": "",
+    "added_to_reserve": "2026-05-09T16:33:44.699874",
+    "expires": "2026-05-24T16:33:44.699876"
+  },
+  {
+    "title": "Scientific Theory of Deep Learning",
+    "url": "https://www.emergentmind.com/papers/2604.21691",
+    "conclusion": "【值得深入】。理由：纯理论研究数学门槛极高且短期内难以直接转化为SOTA应用，但其提供的底层逻辑能为你后续的架构改进、高",
+    "channel": "emergent_mind",
+    "added_to_reserve": "2026-05-09T16:33:44.699879",
+    "expires": "2026-05-24T16:33:44.699880"
+  },
+  {
+    "title": "Decoupled DiLoCo: Resilient Distributed Pre-training",
+    "url": "https://www.emergentmind.com/papers/2604.21428",
+    "conclusion": "【值得深入】。算力碎片化和跨地域集群联合训练是当前工业界刚需，该方向极具实际应用价值；虽然8张卡无法体现真实跨数据中心的",
+    "channel": "emergent_mind",
+    "added_to_reserve": "2026-05-09T16:33:44.699882",
+    "expires": "2026-05-24T16:33:44.699883"
+  },
+  {
+    "title": "Hyperloop Transformers: Efficient Language Modeling",
+    "url": "https://www.emergentmind.com/papers/2604.21254",
+    "conclusion": "【值得深入】。高效Transformer架构是当前降低大模型落地成本的刚需方向；建议先花半天精读论文，若其“Hyperl",
+    "channel": "emergent_mind",
+    "added_to_reserve": "2026-05-09T16:33:44.699887",
+    "expires": "2026-05-24T16:33:44.699888"
+  },
+  {
+    "title": "Generalization at the Edge of Stability",
+    "url": "https://www.emergentmind.com/papers/2604.19740",
+    "conclusion": "【值得深入】。这是一篇揭示深度学习底层优化机制的重量级理论/实证paper，能为解决大模型训练不稳定或过拟合提供全新的视",
+    "channel": "emergent_mind",
+    "added_to_reserve": "2026-05-09T16:33:44.699890",
+    "expires": "2026-05-24T16:33:44.699891"
+  }
+]
