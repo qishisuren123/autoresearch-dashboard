@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AutoResearch Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.6;padding:20px}
+.container{max-width:1400px;margin:0 auto}
+header{background:linear-gradient(135deg,#1a1b2e,#16213e);border:1px solid #2a2d3e;border-radius:12px;padding:30px;margin-bottom:24px}
+header h1{font-size:28px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header .sub{color:#9ca3af;margin-top:8px;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.stat{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:20px;text-align:center}
+.stat .num{font-size:36px;font-weight:700;color:#60a5fa}
+.stat .lbl{color:#9ca3af;font-size:13px;margin-top:4px}
+.section{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:12px;padding:24px;margin-bottom:24px}
+.section h2{font-size:18px;margin-bottom:16px;color:#f4f4f5}
+.badge{background:#3b82f6;color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;margin-left:8px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:12px 16px;background:#111827;color:#9ca3af;font-size:12px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #2a2d3e}
+td{padding:12px 16px;border-bottom:1px solid #1f2937;font-size:14px}
+tr:hover{background:#111827}
+.genuine{color:#34d399;font-weight:600}
+.likely{color:#fbbf24;font-weight:600}
+.uncertain{color:#f97316;font-weight:600}
+.promoted{color:#ef4444;font-weight:600}
+.nodata{color:#6b7280}
+.bar{display:inline-block;height:6px;border-radius:3px;background:#374151;width:100px;position:relative;vertical-align:middle}
+.bar .fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin:1px}
+.tag-academic{background:#1e3a5f;color:#60a5fa}
+.tag-engineering{background:#1a3326;color:#34d399}
+.tag-chinese{background:#3b2020;color:#fca5a5}
+.tag-english{background:#2d2b1f;color:#fde047}
+.signal{font-size:11px;padding:2px 6px;background:#1f2937;border-radius:3px;color:#9ca3af;display:inline-block;margin:1px}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+.channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.ch{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#111827;border-radius:8px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-g{background:#34d399}.dot-r{background:#ef4444}.dot-y{background:#fbbf24}
+.ch .name{font-weight:500;flex:1}
+.ch .cnt{color:#9ca3af;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>AutoResearch Dashboard</h1>
+<div class="sub">Idea 采集系统 | 关1: 主流媒体共识 + 关2: 社交舆情验证 | 2026-05-09 10:54</div>
+</header>
+
+<div class="stats">
+<div class="stat"><div class="num">240</div><div class="lbl">总采集量</div></div>
+<div class="stat"><div class="num">13</div><div class="lbl">关1 候选</div></div>
+<div class="stat"><div class="num">5</div><div class="lbl">关2 真火</div></div>
+<div class="stat"><div class="num">9</div><div class="lbl">渠道在线</div></div>
+</div>
+
+<div class="section">
+<h2>高置信 A 候选清单<span class="badge">关2 验证通过</span></h2>
+<table><thead><tr><th>#</th><th>话题</th><th>判定</th><th>真实度</th><th>信号</th><th>跨源类别</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><a href="https://huggingface.co/papers/2605.06548" target="_blank">Continuous Latent Diffusion Language Model</a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.06548</span></td>
+<td><span class="genuine">真火</span></td>
+<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
+<td><span class="signal">high_engagement</span> <span class="signal">healthy_discussion_ratio</span> <span class="signal">moderate_consensus</span> <span class="signal">multi_community</span></td>
+<td><span class="tag tag-engineering">engineering</span> <span class="tag tag-academic">academic</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sknx6n/best_local_llms_apr_2026/" target="_blank">Best Local LLMs - Apr 2026</a></td>
+<td><span class="genuine">真火</span></td>
+<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
+<td><span class="signal">high_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span> <span class="signal">multi_community</span></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://i.redd.it/vf2d4tkimszg1.jpeg" target="_blank">Collected the infinity stones</a></td>
+<td><span class="genuine">真火</span></td>
+<td><div class="bar"><div class="fill" style="width:100%"></div></div> <span style="font-size:12px;color:#9ca3af">1.00</span></td>
+<td><span class="signal">high_engagement</span> <span class="signal">healthy_discussion_ratio</span> <span class="signal">strong_consensus</span></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://huggingface.co/papers/2605.05242" target="_blank">Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search vi</a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.05242</span></td>
+<td><span class="genuine">真火</span></td>
+<td><div class="bar"><div class="fill" style="width:90%"></div></div> <span style="font-size:12px;color:#9ca3af">0.90</span></td>
+<td><span class="signal">low_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span> <span class="signal">multi_community</span></td>
+<td><span class="tag tag-academic">academic</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://huggingface.co/papers/2605.06130" target="_blank">Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement </a><br><span style="color:#6b7280;font-size:11px">arXiv:2605.06130</span></td>
+<td><span class="likely">大概率真</span></td>
+<td><div class="bar"><div class="fill" style="width:70%"></div></div> <span style="font-size:12px;color:#9ca3af">0.70</span></td>
+<td><span class="signal">low_engagement</span> <span class="signal">very_active_discussion</span> <span class="signal">controversial</span></td>
+<td><span class="tag tag-academic">academic</span></td>
+</tr>
+</tbody></table></div>
+
+<div class="section">
+<h2>关1 全部候选<span class="badge">13 个</span></h2>
+<table><thead><tr><th>#</th><th>话题</th><th>共识分</th><th>类别</th><th>社区信号</th><th>备注</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><a href="https://huggingface.co/papers/2605.06548" target="_blank">Continuous Latent Diffusion Language Model</a></td>
+<td><strong>3.5</strong></td>
+<td><span class="tag tag-engineering">engineering</span> <span class="tag tag-academic">academic</span></td>
+<td style="font-size:12px">HF:46票</td>
+<td style="font-size:12px;color:#6b7280"></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://huggingface.co/papers/2605.06130" target="_blank">Skill1: Unified Evolution of Skill-Augmented Agents via Reinforce</a></td>
+<td><strong>2.5</strong></td>
+<td><span class="tag tag-academic">academic</span></td>
+<td style="font-size:12px">HF:56票</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（HF 50+ upvotes）</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://huggingface.co/papers/2605.05242" target="_blank">Beyond Semantic Similarity: Rethinking Retrieval for Agentic Sear</a></td>
+<td><strong>2.5</strong></td>
+<td><span class="tag tag-academic">academic</span></td>
+<td style="font-size:12px">HF:51票</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（HF 50+ upvotes）</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sknx6n/best_local_llms_apr_2026/" target="_blank">Best Local LLMs - Apr 2026</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:493↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://i.redd.it/vf2d4tkimszg1.jpeg" target="_blank">Collected the infinity stones</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:1578↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="https://v.redd.it/ccxn81zo5tzg1" target="_blank">Multi-Token Prediction (MTP) for LLaMA.cpp - Gemma 4 speedup by 4</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:514↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://www.wired.com/story/mozilla-used-anthropics-mythos-to-find-271-bugs-in-firefox/" target="_blank">Mozilla Used Anthropic’s Mythos to Find and Fix 271 Bugs in Firef</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:890↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="https://www.reddit.com/gallery/1t7iyis" target="_blank">Fields Medal winning mathematician Timothy Gowers used GPT5.5 Pro</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:500↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="https://i.redd.it/4j2yhac41wzg1.png" target="_blank">Anthropic to reach 100% global GDP in 21 months</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:1634↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://i.redd.it/7jbvcfs6zszg1.png" target="_blank">Firefox reports a massive April spike in security fixes after usi</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:1264↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://i.redd.it/bfpedsz82tzg1.jpeg" target="_blank">Is ilya’s SSI company still a thing? It’s been 2 years ago with n</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:1068↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="https://i.redd.it/6187dxjrspzg1.jpeg" target="_blank">Anthropic partnered with SpaceX for compute</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:658↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="https://v.redd.it/kvdelnxguozg1" target="_blank">Genesis AI playing piano</a></td>
+<td><strong>2.0</strong></td>
+<td><span class="tag tag-engineering">engineering</span></td>
+<td style="font-size:12px">Reddit:661↑</td>
+<td style="font-size:12px;color:#6b7280">单源高信号（Reddit 300+ score）</td>
+</tr>
+</tbody></table></div>
+
+<div class="section">
+<h2>渠道状态</h2>
+<div class="channels">
+<div class="ch"><div class="dot dot-g"></div><div class="name">arXiv</div><div class="cnt">50 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">HuggingFace Papers</div><div class="cnt">58 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">量子位 RSS</div><div class="cnt">10 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">Leiphone RSS</div><div class="cnt">20 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">MarkTechPost</div><div class="cnt">10 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">VentureBeat</div><div class="cnt">7 篇</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">Reddit</div><div class="cnt">75 帖</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">GitHub Trending</div><div class="cnt">9 项目</div></div>
+<div class="ch"><div class="dot dot-g"></div><div class="name">Hacker News</div><div class="cnt">1 条(AI)</div></div>
+<div class="ch"><div class="dot dot-r"></div><div class="name">机器之心</div><div class="cnt">不可用(反爬)</div></div>
+<div class="ch"><div class="dot dot-y"></div><div class="name">Twitter/X</div><div class="cnt">待接入($200/月)</div></div>
+<div class="ch"><div class="dot dot-y"></div><div class="name">小红书</div><div class="cnt">待接入(深灰)</div></div>
+</div></div>
+</div></body></html>
