@@ -1,11 +1,11 @@
 #!/bin/bash
-# AutoResearch 每日自动运行脚本
+# 大浪淘沙 每日自动运行脚本
 # 用法: 加入 crontab: 0 8 * * * /data/renyiming/AutoResearch/daily_run.sh
 
 cd /data/renyiming/AutoResearch
 
 # 记录开始时间
-echo "$(date): AutoResearch daily run started" >> logs/cron.log
+echo "$(date): 大浪淘沙 daily run started" >> logs/cron.log
 
 # 运行 pipeline
 python3 src/pipeline_v4.py >> logs/pipeline_$(date +%Y%m%d).log 2>&1
@@ -49,4 +49,4 @@ git add index.html data/ && \
 git commit -m "Daily update $(date +%Y-%m-%d)" && \
 git push origin gh-pages >> logs/git_$(date +%Y%m%d).log 2>&1
 
-echo "$(date): AutoResearch daily run completed" >> logs/cron.log
+echo "$(date): 大浪淘沙 daily run completed" >> logs/cron.log

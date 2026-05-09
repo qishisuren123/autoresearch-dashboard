@@ -70,7 +70,7 @@ def generate_html():
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8"><title>AutoResearch</title>
+<meta charset="UTF-8"><title>大浪淘沙</title>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.7;padding:20px}}
@@ -113,7 +113,7 @@ a{{color:#60a5fa;text-decoration:none}}a:hover{{text-decoration:underline}}
 <body><div class="container">
 <header>
 <div>
-<h1>AutoResearch - 每日研究热点</h1>
+<h1>大浪淘沙 - 每日研究热点</h1>
 <div class="sub">{datetime.now().strftime('%Y-%m-%d %H:%M')} | 数据源: {source_name}</div>
 </div>
 <div class="date-nav">
