@@ -156,12 +156,18 @@ a{{color:#60a5fa;text-decoration:none}}a:hover{{text-decoration:underline}}
         conclusion = c.get('conclusion', '')
         judgment = c.get('llm_judgment', '')
 
+        # 标签完全以 LLM 最终判定为准
         if '强推荐' in conclusion:
             tc, tt = 'tag-strong', '强推荐做 A 种子'
         elif '值得' in conclusion or '深入' in conclusion:
             tc, tt = 'tag-worth', '值得深入了解'
+        elif '不适合' in conclusion:
+            tc, tt = 'tag-skip', '不适合做 A 种子'
+        elif conclusion:
+            # 有判定但不匹配上面的，直接用原文
+            tc, tt = 'tag-skip', conclusion[:20]
         else:
-            tc, tt = 'tag-skip', '观望'
+            tc, tt = 'tag-skip', '待判断'
 
         jhtml = ''
         if judgment and judgment != '调用失败':
