@@ -1,0 +1,576 @@
+{
+  "generated_at": "2026-05-09T12:49:01.249183",
+  "total_collected": 301,
+  "after_filter": 184,
+  "candidates_count": 58,
+  "top_candidates": [
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.05185",
+      "arxiv_id": "2605.05185",
+      "abstract": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite rapid progress, top-tier multimodal search agents remain difficult to reproduce, largely due to the absence of open high-quality training data, transparent trajectory synthesis pipelines, or detailed training recipes. To this end, we introduce OpenSearch-VL, a fully open-source recipe for training fr",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 92,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/shawn0728/OpenSearch-VL",
+      "github_stars": 108,
+      "cross_sources": [
+        "arxiv",
+        "rss_marktechpost"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 92 upvotes"
+      ],
+      "final_score": 11.0
+    },
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.03849",
+      "arxiv_id": "2605.03849",
+      "abstract": "Distillation-based acceleration has become foundational for making autoregressive streaming video diffusion models practical, with distribution matching distillation (DMD) as the de facto choice. Existing methods, however, train the student to match the teacher's output indiscriminately, treating every rollout, frame, and pixel as equally reliable supervision. We argue that this caps distilled quality, since it overlooks two complementary axes of variance in DMD supervision: Inter-Reliability ac",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 116,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/FrameX-AI/Stream-R1",
+      "github_stars": 31,
+      "cross_sources": [
+        "arxiv",
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 116 upvotes"
+      ],
+      "final_score": 9.0
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.04461",
+      "arxiv_id": "2605.04461",
+      "abstract": "While Test-Time Scaling (TTS) offers a promising direction to enhance video generation without the surging costs of training, current test-time video generation methods based on diffusion models suffer from exorbitant candidate exploration costs and lack temporal guidance. To address these structural bottlenecks, we propose shifting the focus to streaming video generation. We identify that its chunk-level synthesis and few denoising steps are intrinsically suited for TTS, significantly lowering ",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 98,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/FrameX-AI/Stream-T1",
+      "github_stars": 24,
+      "cross_sources": [
+        "arxiv",
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 98 upvotes"
+      ],
+      "final_score": 9.0
+    },
+    {
+      "title": "Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.06130",
+      "arxiv_id": "2605.06130",
+      "abstract": "A persistent skill library allows language model agents to reuse successful strategies across tasks. Maintaining such a library requires three coupled capabilities. The agent selects a relevant skill, utilizes it during execution, and distills new skills from experience. Existing methods optimize these capabilities in isolation or with separate reward sources, resulting in partial and conflicting evolution. We propose Skill1, a framework that trains a single policy to co-evolve skill selection, ",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 57,
+      "hf_comments": 0,
+      "github_repo": "",
+      "github_stars": 0,
+      "cross_sources": [
+        "arxiv",
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 57 upvotes"
+      ],
+      "final_score": 8.0
+    },
+    {
+      "title": "Meet GitHub Spec-Kit: An Open Source Toolkit for Spec-Driven Development with AI Coding Agents",
+      "url": "https://www.marktechpost.com/2026/05/08/meet-github-spec-kit-an-open-source-toolkit-for-spec-driven-development-with-ai-coding-agents/",
+      "arxiv_id": "2605.05185",
+      "abstract": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite rapid progress, top-tier multimodal search agents remain difficult to reproduce, largely due to the absence of open high-quality training data, transparent trajectory synthesis pipelines, or detailed training recipes. To this end, we introduce OpenSearch-VL, a fully open-source recipe for training fr",
+      "primary_source": "rss_marktechpost",
+      "hf_upvotes": 92,
+      "cross_sources": [
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "英文AI媒体报道: rss_marktechpost",
+        "对应论文: OpenSearch-VL: An Open Recipe for Frontier Multimo"
+      ],
+      "final_score": 7.5
+    },
+    {
+      "title": "RLDX-1 Technical Report",
+      "url": "https://huggingface.co/papers/2605.03269",
+      "arxiv_id": "2605.03269",
+      "abstract": "While Vision-Language-Action models (VLAs) have shown remarkable progress toward human-like generalist robotic policies through the versatile intelligence (i.e. broad scene understanding and language-conditioned generalization) inherited from pre-trained Vision-Language Models, they still struggle with complex real-world tasks requiring broader functional capabilities (e.g. motion awareness, memory-aware decision making, and physical sensing). To address this, we introduce RLDX-1, a general-purp",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 98,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/RLWRLD/RLDX-1",
+      "github_stars": 105,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 98 upvotes"
+      ],
+      "final_score": 7.0
+    },
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "url": "https://huggingface.co/papers/2605.06548",
+      "arxiv_id": "2605.06548",
+      "abstract": "Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still struggle to jointly achieve generation efficiency, scalable representation learning, and effective global semantic modeling. We propose Cola DLM, a hierarchical latent diffusion language model that frames text generation through hierarchical information decomposition. Cola DLM first learns a stable ",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 47,
+      "hf_comments": 0,
+      "github_repo": "",
+      "github_stars": 0,
+      "cross_sources": [
+        "arxiv",
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 47 upvotes"
+      ],
+      "final_score": 7.0
+    },
+    {
+      "title": "HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation",
+      "url": "https://huggingface.co/papers/2604.28196",
+      "arxiv_id": "2604.28196",
+      "abstract": "Driving world models serve as a pivotal technology for autonomous driving by simulating environmental dynamics. However, existing approaches predominantly focus on future scene generation, often overlooking comprehensive 3D scene understanding. Conversely, while Large Language Models (LLMs) demonstrate impressive reasoning capabilities, they lack the capacity to predict future geometric evolution, creating a significant disparity between semantic interpretation and physical simulation. To bridge",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 69,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/H-EmbodVis/HERMESV2",
+      "github_stars": 47,
+      "cross_sources": [
+        "hf_daily_papers"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 69 upvotes"
+      ],
+      "final_score": 6.5
+    },
+    {
+      "title": "MiA-Signature: Approximating Global Activation for Long-Context Understanding",
+      "url": "https://huggingface.co/papers/2605.06416",
+      "arxiv_id": "2605.06416",
+      "abstract": "A growing body of work in cognitive science suggests that reportable conscious access is associated with global ignition over distributed memory systems, while such activation is only partially accessible as individuals cannot directly access or enumerate all activated contents. This tension suggests a plausible mechanism that cognition may rely on a compact representation that approximates the global influence of activation on downstream processing. Inspired by this idea, we introduce the conce",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 41,
+      "hf_comments": 0,
+      "github_repo": "",
+      "github_stars": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "evidence": [
+        "HuggingFace Daily Papers 41 upvotes"
+      ],
+      "final_score": 5.5
+    },
+    {
+      "title": "Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search via Direct Corpus Interaction",
+      "url": "https://huggingface.co/papers/2605.05242",
+      "arxiv_id": "2605.05242",
+      "abstract": "Modern retrieval systems, whether lexical or semantic, expose a corpus through a fixed similarity interface that compresses access into a single top-k retrieval step before reasoning. This abstraction is efficient, but for agentic search, it becomes a bottleneck: exact lexical constraints, sparse clue conjunctions, local context checks, and multi-step hypothesis refinement are difficult to implement by calling a conventional off-the-shelf retriever, and evidence filtered out early cannot be reco",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 54,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/DCI-Agent/DCI-Agent-Lite",
+      "github_stars": 18,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 54 upvotes"
+      ],
+      "final_score": 5.0
+    },
+    {
+      "title": "MiniCPM-o 4.5: Towards Real-Time Full-Duplex Omni-Modal Interaction",
+      "url": "https://huggingface.co/papers/2604.27393",
+      "arxiv_id": "2604.27393",
+      "abstract": "Recent progress in multimodal large language models (MLLMs) has brought AI capabilities from static offline data processing to real-time streaming interaction, yet they still remain far from human-level multimodal interaction. The key bottlenecks are no longer modality coverage or latency alone, but the interaction paradigm itself. First, perception and response are still separated into alternating phases, preventing models from incorporating new inputs for timely adjustment during generation. S",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 43,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/OpenBMB/MiniCPM-o",
+      "github_stars": 24521,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 43 upvotes"
+      ],
+      "final_score": 5.0
+    },
+    {
+      "title": "UniSD: Towards a Unified Self-Distillation Framework for Large Language Models",
+      "url": "http://arxiv.org/abs/2605.06597v1",
+      "arxiv_id": "2605.06597v1",
+      "abstract": "Self-distillation (SD) offers a promising path for adapting large language models (LLMs) without relying on stronger external teachers. However, SD in autoregressive LLMs remains challenging because self-generated trajectories are free-form, correctness is task-dependent, and plausible rationales can still provide unstable or unreliable supervision. Existing methods mainly examine isolated design choices, leaving their effectiveness, roles, and interactions unclear. In this paper, we propose Uni",
+      "primary_source": "arxiv",
+      "cross_sources": [
+        "hf_daily_papers",
+        "rss_marktechpost"
+      ],
+      "evidence": [
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "final_score": 5.0
+    },
+    {
+      "title": "Agentic AIs Are the Missing Paradigm for Out-of-Distribution Generalization in Foundation Models",
+      "url": "http://arxiv.org/abs/2605.06522v1",
+      "arxiv_id": "2605.06522v1",
+      "abstract": "Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge boundaries, capability ceilings, compositional shifts, and open-ended task variation -- differ in kind from the settings that have shaped prior OOD research, and are further complicated because the pretraining and post-training distributions of modern FMs are often only partially observed. Our posit",
+      "primary_source": "arxiv",
+      "cross_sources": [
+        "hf_daily_papers",
+        "rss_marktechpost"
+      ],
+      "evidence": [
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "final_score": 5.0
+    },
+    {
+      "title": "Bridging Perception and Action: A Lightweight Multimodal Meta-Planner Framework for Robust Earth Observation Agents",
+      "url": "http://arxiv.org/abs/2605.04777v1",
+      "arxiv_id": "2605.04777v1",
+      "abstract": "Autonomous Earth Observation (EO) agents are transitioning from passive perception to complex, multi-step task execution. However, current architectures that integrate planning and execution within a single model often struggle with combinatorial complexity and reasoning errors in dynamic EO scenarios. To resolve these challenges, we propose the Lightweight Multimodal Meta-Planner (LMMP) framework. LMMP incorporates a dual-awareness mechanism that grounds strategic plans in both multimodal image",
+      "primary_source": "arxiv",
+      "cross_sources": [
+        "hf_daily_papers",
+        "rss_marktechpost"
+      ],
+      "evidence": [
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "final_score": 5.0
+    },
+    {
+      "title": "RaguTeam at SemEval-2026 Task 8: Meno and Friends in a Judge-Orchestrated LLM Ensemble for Faithful Multi-Turn Response Generation",
+      "url": "https://huggingface.co/papers/2605.04523",
+      "arxiv_id": "2605.04523",
+      "abstract": "We present our winning system for Task~B (generation with reference passages) in SemEval-2026 Task~8: MTRAGEval. Our method is a heterogeneous ensemble of seven LLMs with two prompting variants, where a GPT-4o-mini judge selects the best candidate per instance. We ranked 1st out of 26 teams, achieving a conditioned harmonic mean of 0.7827 and outperforming the strongest baseline (gpt-oss-120b, 0.6390). Ablations show that diversity in model families, scales, and prompting strategies is essential",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 37,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/RaguTeam/ragu_mtrag_semeval",
+      "github_stars": 2,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 37 upvotes"
+      ],
+      "final_score": 4.0
+    },
+    {
+      "title": "When to Trust Imagination: Adaptive Action Execution for World Action Models",
+      "url": "https://huggingface.co/papers/2605.06222",
+      "arxiv_id": "2605.06222",
+      "abstract": "World Action Models (WAMs) have recently emerged as a promising paradigm for robotic manipulation by jointly predicting future visual observations and future actions. However, current WAMs typically execute a fixed number of predicted actions after each model inference, leaving the robot blind to whether the imagined future remains consistent with the actual physical rollout. In this work, we formulate adaptive WAM execution as a future-reality verification problem: the robot should execute long",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 34,
+      "hf_comments": 0,
+      "github_repo": "",
+      "github_stars": 0,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 34 upvotes"
+      ],
+      "final_score": 4.0
+    },
+    {
+      "title": "PhysForge: Generating Physics-Grounded 3D Assets for Interactive Virtual World",
+      "url": "https://huggingface.co/papers/2605.05163",
+      "arxiv_id": "2605.05163",
+      "abstract": "Synthesizing physics-grounded 3D assets is a critical bottleneck for interactive virtual worlds and embodied AI. Existing methods predominantly focus on static geometry, overlooking the functional properties essential for interaction. We propose that interactive asset generation must be rooted in functional logic and hierarchical physics. To bridge this gap, we introduce PhysForge, a decoupled two-stage framework supported by PhysDB, a large-scale dataset of 150,000 assets with four-tier physica",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 31,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/HKU-MMLab/PhysForge",
+      "github_stars": 54,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 31 upvotes"
+      ],
+      "final_score": 4.0
+    },
+    {
+      "title": "Nonsense Helps: Prompt Space Perturbation Broadens Reasoning Exploration",
+      "url": "https://huggingface.co/papers/2605.05566",
+      "arxiv_id": "2605.05566",
+      "abstract": "Reinforcement learning with verifiable rewards, particularly Group Relative Policy Optimization (GRPO), has significantly advanced the reasoning capabilities of Large Language Models (LLMs). However, in complex tasks, GRPO frequently suffers from the ``zero-advantage problem'': when all sampled rollouts for a query fail, the relative advantage collapses to zero. Consequently, the model loses effective training signals for these questions, wasting the training data and computational budget. While",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 25,
+      "hf_comments": 0,
+      "github_repo": "",
+      "github_stars": 0,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 25 upvotes"
+      ],
+      "final_score": 3.0
+    },
+    {
+      "title": "Continuous-Time Distribution Matching for Few-Step Diffusion Distillation",
+      "url": "https://huggingface.co/papers/2605.06376",
+      "arxiv_id": "2605.06376",
+      "abstract": "Step distillation has become a leading technique for accelerating diffusion models, among which Distribution Matching Distillation (DMD) and Consistency Distillation are two representative paradigms. While consistency methods enforce self-consistency along the full PF-ODE trajectory to steer it toward the clean data manifold, vanilla DMD relies on sparse supervision at a few predefined discrete timesteps. This restricted discrete-time formulation and mode-seeking nature of the reverse KL diverge",
+      "primary_source": "hf_daily_papers",
+      "hf_upvotes": 24,
+      "hf_comments": 0,
+      "github_repo": "https://github.com/byliutao/cdm",
+      "github_stars": 39,
+      "cross_sources": [],
+      "evidence": [
+        "HuggingFace Daily Papers 24 upvotes"
+      ],
+      "final_score": 3.0
+    },
+    {
+      "title": "LightSeek Foundation Releases TokenSpeed, an Open-Source LLM Inference Engine Targeting TensorRT-LLM-Level Performance for Agentic Workloads",
+      "url": "https://www.marktechpost.com/2026/05/07/lightseek-foundation-releases-tokenspeed-an-open-source-llm-inference-engine-targeting-tensorrt-llm-level-performance-for-agentic-workloads/",
+      "arxiv_id": "2605.06522v1",
+      "abstract": "Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge boundaries, capability ceilings, compositional shifts, and open-ended task variation -- differ in kind from the settings that have shaped prior OOD research, and are further complicated because the pretraining and post-training distributions of modern FMs are often only partially observed. Our posit",
+      "primary_source": "rss_marktechpost",
+      "hf_upvotes": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "evidence": [
+        "英文AI媒体报道: rss_marktechpost",
+        "对应论文: Agentic AIs Are the Missing Paradigm for Out-of-Di"
+      ],
+      "final_score": 2.5
+    }
+  ],
+  "summaries": [
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "what_it_does": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite r",
+      "arxiv_id": "2605.05185",
+      "evidence_chain": [
+        "HuggingFace 社区 92 票认可",
+        "跨源出现: arxiv, rss_marktechpost",
+        "HuggingFace Daily Papers 92 upvotes"
+      ],
+      "score": 11.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation",
+      "what_it_does": "Distillation-based acceleration has become foundational for making autoregressive streaming video diffusion models practical, with distribution matching distillation (DMD) as the de facto choice. Exis",
+      "arxiv_id": "2605.03849",
+      "evidence_chain": [
+        "HuggingFace 社区 116 票认可",
+        "跨源出现: arxiv, hf_daily_papers",
+        "HuggingFace Daily Papers 116 upvotes"
+      ],
+      "score": 9.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "what_it_does": "While Test-Time Scaling (TTS) offers a promising direction to enhance video generation without the surging costs of training, current test-time video generation methods based on diffusion models suffe",
+      "arxiv_id": "2605.04461",
+      "evidence_chain": [
+        "HuggingFace 社区 98 票认可",
+        "跨源出现: arxiv, hf_daily_papers",
+        "HuggingFace Daily Papers 98 upvotes"
+      ],
+      "score": 9.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning",
+      "what_it_does": "A persistent skill library allows language model agents to reuse successful strategies across tasks. Maintaining such a library requires three coupled capabilities. The agent selects a relevant skill,",
+      "arxiv_id": "2605.06130",
+      "evidence_chain": [
+        "HuggingFace 社区 57 票认可",
+        "跨源出现: arxiv, hf_daily_papers",
+        "HuggingFace Daily Papers 57 upvotes"
+      ],
+      "score": 8.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Meet GitHub Spec-Kit: An Open Source Toolkit for Spec-Driven Development with AI Coding Agents",
+      "what_it_does": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite r",
+      "arxiv_id": "2605.05185",
+      "evidence_chain": [
+        "HuggingFace 社区 92 票认可",
+        "跨源出现: hf_daily_papers",
+        "英文AI媒体报道: rss_marktechpost",
+        "对应论文: OpenSearch-VL: An Open Recipe for Frontier Multimo"
+      ],
+      "score": 7.5,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "RLDX-1 Technical Report",
+      "what_it_does": "While Vision-Language-Action models (VLAs) have shown remarkable progress toward human-like generalist robotic policies through the versatile intelligence (i.e. broad scene understanding and language-",
+      "arxiv_id": "2605.03269",
+      "evidence_chain": [
+        "HuggingFace 社区 98 票认可",
+        "HuggingFace Daily Papers 98 upvotes"
+      ],
+      "score": 7.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "what_it_does": "Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still ",
+      "arxiv_id": "2605.06548",
+      "evidence_chain": [
+        "HuggingFace 社区 47 票认可",
+        "跨源出现: arxiv, hf_daily_papers",
+        "HuggingFace Daily Papers 47 upvotes"
+      ],
+      "score": 7.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation",
+      "what_it_does": "Driving world models serve as a pivotal technology for autonomous driving by simulating environmental dynamics. However, existing approaches predominantly focus on future scene generation, often overl",
+      "arxiv_id": "2604.28196",
+      "evidence_chain": [
+        "HuggingFace 社区 69 票认可",
+        "跨源出现: hf_daily_papers",
+        "HuggingFace Daily Papers 69 upvotes"
+      ],
+      "score": 6.5,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "MiA-Signature: Approximating Global Activation for Long-Context Understanding",
+      "what_it_does": "A growing body of work in cognitive science suggests that reportable conscious access is associated with global ignition over distributed memory systems, while such activation is only partially access",
+      "arxiv_id": "2605.06416",
+      "evidence_chain": [
+        "HuggingFace 社区 41 票认可",
+        "跨源出现: arxiv",
+        "HuggingFace Daily Papers 41 upvotes"
+      ],
+      "score": 5.5,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search via Direct Corpus Interaction",
+      "what_it_does": "Modern retrieval systems, whether lexical or semantic, expose a corpus through a fixed similarity interface that compresses access into a single top-k retrieval step before reasoning. This abstraction",
+      "arxiv_id": "2605.05242",
+      "evidence_chain": [
+        "HuggingFace 社区 54 票认可",
+        "HuggingFace Daily Papers 54 upvotes"
+      ],
+      "score": 5.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "MiniCPM-o 4.5: Towards Real-Time Full-Duplex Omni-Modal Interaction",
+      "what_it_does": "Recent progress in multimodal large language models (MLLMs) has brought AI capabilities from static offline data processing to real-time streaming interaction, yet they still remain far from human-lev",
+      "arxiv_id": "2604.27393",
+      "evidence_chain": [
+        "HuggingFace 社区 43 票认可",
+        "HuggingFace Daily Papers 43 upvotes"
+      ],
+      "score": 5.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "UniSD: Towards a Unified Self-Distillation Framework for Large Language Models",
+      "what_it_does": "Self-distillation (SD) offers a promising path for adapting large language models (LLMs) without relying on stronger external teachers. However, SD in autoregressive LLMs remains challenging because s",
+      "arxiv_id": "2605.06597v1",
+      "evidence_chain": [
+        "跨源出现: hf_daily_papers, rss_marktechpost",
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "score": 5.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Agentic AIs Are the Missing Paradigm for Out-of-Distribution Generalization in Foundation Models",
+      "what_it_does": "Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge ",
+      "arxiv_id": "2605.06522v1",
+      "evidence_chain": [
+        "跨源出现: hf_daily_papers, rss_marktechpost",
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "score": 5.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "Bridging Perception and Action: A Lightweight Multimodal Meta-Planner Framework for Robust Earth Observation Agents",
+      "what_it_does": "Autonomous Earth Observation (EO) agents are transitioning from passive perception to complex, multi-step task execution. However, current architectures that integrate planning and execution within a ",
+      "arxiv_id": "2605.04777v1",
+      "evidence_chain": [
+        "跨源出现: hf_daily_papers, rss_marktechpost",
+        "arXiv + 跨源命中: hf_daily_papers, rss_marktechpost"
+      ],
+      "score": 5.0,
+      "recommendation": "强推荐作为 A 种子"
+    },
+    {
+      "title": "RaguTeam at SemEval-2026 Task 8: Meno and Friends in a Judge-Orchestrated LLM Ensemble for Faithful Multi-Turn Response Generation",
+      "what_it_does": "We present our winning system for Task~B (generation with reference passages) in SemEval-2026 Task~8: MTRAGEval. Our method is a heterogeneous ensemble of seven LLMs with two prompting variants, where",
+      "arxiv_id": "2605.04523",
+      "evidence_chain": [
+        "HuggingFace 社区 37 票认可",
+        "HuggingFace Daily Papers 37 upvotes"
+      ],
+      "score": 4.0,
+      "recommendation": "值得关注，可作为 A 候选"
+    },
+    {
+      "title": "When to Trust Imagination: Adaptive Action Execution for World Action Models",
+      "what_it_does": "World Action Models (WAMs) have recently emerged as a promising paradigm for robotic manipulation by jointly predicting future visual observations and future actions. However, current WAMs typically e",
+      "arxiv_id": "2605.06222",
+      "evidence_chain": [
+        "HuggingFace 社区 34 票认可",
+        "HuggingFace Daily Papers 34 upvotes"
+      ],
+      "score": 4.0,
+      "recommendation": "值得关注，可作为 A 候选"
+    },
+    {
+      "title": "PhysForge: Generating Physics-Grounded 3D Assets for Interactive Virtual World",
+      "what_it_does": "Synthesizing physics-grounded 3D assets is a critical bottleneck for interactive virtual worlds and embodied AI. Existing methods predominantly focus on static geometry, overlooking the functional pro",
+      "arxiv_id": "2605.05163",
+      "evidence_chain": [
+        "HuggingFace 社区 31 票认可",
+        "HuggingFace Daily Papers 31 upvotes"
+      ],
+      "score": 4.0,
+      "recommendation": "值得关注，可作为 A 候选"
+    },
+    {
+      "title": "Nonsense Helps: Prompt Space Perturbation Broadens Reasoning Exploration",
+      "what_it_does": "Reinforcement learning with verifiable rewards, particularly Group Relative Policy Optimization (GRPO), has significantly advanced the reasoning capabilities of Large Language Models (LLMs). However, ",
+      "arxiv_id": "2605.05566",
+      "evidence_chain": [
+        "HuggingFace 社区 25 票认可",
+        "HuggingFace Daily Papers 25 upvotes"
+      ],
+      "score": 3.0,
+      "recommendation": "值得关注，可作为 A 候选"
+    },
+    {
+      "title": "Continuous-Time Distribution Matching for Few-Step Diffusion Distillation",
+      "what_it_does": "Step distillation has become a leading technique for accelerating diffusion models, among which Distribution Matching Distillation (DMD) and Consistency Distillation are two representative paradigms. ",
+      "arxiv_id": "2605.06376",
+      "evidence_chain": [
+        "HuggingFace 社区 24 票认可",
+        "HuggingFace Daily Papers 24 upvotes"
+      ],
+      "score": 3.0,
+      "recommendation": "值得关注，可作为 A 候选"
+    },
+    {
+      "title": "LightSeek Foundation Releases TokenSpeed, an Open-Source LLM Inference Engine Targeting TensorRT-LLM-Level Performance for Agentic Workloads",
+      "what_it_does": "Foundation models (FMs) are increasingly deployed in open-world settings where distribution shift is the rule rather than the exception. The out-of-distribution (OOD) phenomena they face -- knowledge ",
+      "arxiv_id": "2605.06522v1",
+      "evidence_chain": [
+        "跨源出现: arxiv",
+        "英文AI媒体报道: rss_marktechpost",
+        "对应论文: Agentic AIs Are the Missing Paradigm for Out-of-Di"
+      ],
+      "score": 2.5,
+      "recommendation": "参考"
+    }
+  ]
+}

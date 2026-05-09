@@ -1,0 +1,1086 @@
+[
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06667v1",
+    "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+    "abstract": "For artistic applications, video generation requires fine-grained control over both performance and cinematography, i.e., the actor's motion and the camera trajectory. We present ActCam, a zero-shot method for video generation that jointly transfers character motion from a driving video into a new scene and enables per-frame control of intrinsic and extrinsic camera parameters. ActCam builds on any pretrained image-to-video diffusion model that accepts conditioning in terms of scene depth and ch",
+    "authors": [
+      "Omar El Khalifi",
+      "Thomas Rossi",
+      "Oscar Fossey",
+      "Thibault Fouque",
+      "Ulysse Mizrahi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:59:58+00:00",
+    "url": "http://arxiv.org/abs/2605.06667v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06667v1",
+    "collected_at": "2026-05-09T10:28:44.093117"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06665v1",
+    "title": "UniPool: A Globally Shared Expert Pool for Mixture-of-Experts",
+    "abstract": "Modern Mixture-of-Experts (MoE) architectures allocate expert capacity through a rigid per-layer rule: each transformer layer owns a separate expert set. This convention couples depth scaling with linear expert-parameter growth and assumes that every layer needs isolated expert capacity. However, recent analyses and our routing probe challenge this allocation rule: replacing a deeper layer's learned top-k router with uniform random routing drops downstream accuracy by only 1.0-1.6 points across ",
+    "authors": [
+      "Minbin Huang",
+      "Han Shi",
+      "Chuanyang Zheng",
+      "Yimeng Wu",
+      "Guoxuan Chen"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:59:44+00:00",
+    "url": "http://arxiv.org/abs/2605.06665v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06665v1",
+    "collected_at": "2026-05-09T10:28:44.093165"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06664v1",
+    "title": "BAMI: Training-Free Bias Mitigation in GUI Grounding",
+    "abstract": "GUI grounding is a critical capability for enabling GUI agents to execute tasks such as clicking and dragging. However, in complex scenarios like the ScreenSpot-Pro benchmark, existing models often suffer from suboptimal performance. Utilizing the proposed \\textbf{Masked Prediction Distribution (MPD)} attribution method, we identify that the primary sources of errors are twofold: high image resolution (leading to precision bias) and intricate interface elements (resulting in ambiguity bias). To ",
+    "authors": [
+      "Borui Zhang",
+      "Bo Zhang",
+      "Bo Wang",
+      "Wenzhao Zheng",
+      "Yuhao Cheng"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:59:31+00:00",
+    "url": "http://arxiv.org/abs/2605.06664v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06664v1",
+    "collected_at": "2026-05-09T10:28:44.093200"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06660v1",
+    "title": "Verifier-Backed Hard Problem Generation for Mathematical Reasoning",
+    "abstract": "Large Language Models (LLMs) demonstrate strong capabilities for solving scientific and mathematical problems, yet they struggle to produce valid, challenging, and novel problems - an essential component for advancing LLM training and enabling autonomous scientific research. Existing problem generation approaches either depend on expensive human expert involvement or adopt naive self-play paradigms, which frequently yield invalid problems due to reward hacking. This work introduces VHG, a verifi",
+    "authors": [
+      "Yuhang Lai",
+      "Jiazhan Feng",
+      "Yee Whye Teh",
+      "Ning Miao"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:58:32+00:00",
+    "url": "http://arxiv.org/abs/2605.06660v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06660v1",
+    "collected_at": "2026-05-09T10:28:44.093231"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06654v1",
+    "title": "Optimizer-Model Consistency: Full Finetuning with the Same Optimizer as Pretraining Forgets Less",
+    "abstract": "Optimizers play an important role in both pretraining and finetuning stages when training large language models (LLMs). In this paper, we present an observation that full finetuning with the same optimizer as in pretraining achieves a better learning-forgetting tradeoff, i.e., forgetting less while achieving the same or better performance on the new task, than other optimizers and, possibly surprisingly, LoRA, during the supervised finetuning (SFT) stage. We term this phenomenon optimizer-model ",
+    "authors": [
+      "Yuxing Liu",
+      "Jianyu Wang",
+      "Tong Zhang"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "math.OC"
+    ],
+    "published": "2026-05-07T17:57:02+00:00",
+    "url": "http://arxiv.org/abs/2605.06654v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06654v1",
+    "collected_at": "2026-05-09T10:28:44.093259"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06652v1",
+    "title": "When No Benchmark Exists: Validating Comparative LLM Safety Scoring Without Ground-Truth Labels",
+    "abstract": "Many deployments must compare candidate language models for safety before a labeled benchmark exists for the relevant language, sector, or regulatory regime. We formalize this setting as benchmarkless comparative safety scoring and specify the contract under which a scenario-based audit can be interpreted as deployment evidence. Scores are valid only under a fixed scenario pack, rubric, auditor, judge, sampling configuration, and rerun budget. Because no labels are available, we replace ground-t",
+    "authors": [
+      "Sushant Gautam",
+      "Finn Schwall",
+      "Annika Willoch Olstad",
+      "Fernando Vallecillos Ruiz",
+      "Birk Torpmann-Hagen"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:56:41+00:00",
+    "url": "http://arxiv.org/abs/2605.06652v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06652v1",
+    "collected_at": "2026-05-09T10:28:44.093291"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06651v1",
+    "title": "AI Co-Mathematician: Accelerating Mathematicians with Agentic AI",
+    "abstract": "We introduce the AI co-mathematician, a workbench for mathematicians to interactively leverage AI agents to pursue open-ended research. The AI co-mathematician is optimized to provide holistic support for the exploratory and iterative reality of mathematical workflows, including ideation, literature search, computational exploration, theorem proving and theory building. By providing an asynchronous, stateful workspace that manages uncertainty, refines user intent, tracks failed hypotheses, and o",
+    "authors": [
+      "Daniel Zheng",
+      "Ingrid von Glehn",
+      "Yori Zwols",
+      "Iuliya Beloshapka",
+      "Lars Buesing"
+    ],
+    "categories": [
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:56:32+00:00",
+    "url": "http://arxiv.org/abs/2605.06651v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06651v1",
+    "collected_at": "2026-05-09T10:28:44.093322"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06647v1",
+    "title": "Superintelligent Retrieval Agent: The Next Frontier of Information Retrieval",
+    "abstract": "Retrieval-augmented agents are increasingly the interface to large organizational knowledge bases, yet most still treat retrieval as a black box: they issue exploratory queries, inspect returned snippets, and iteratively reformulate until useful evidence emerges. This approach resembles how a newcomer searches an unfamiliar database rather than how an expert navigates it with strong priors about terminology and likely evidence, and results in unnecessary retrieval rounds, increased latency, and ",
+    "authors": [
+      "Zeyu Yang",
+      "Qi Ma",
+      "Jason Chen",
+      "Anshumali Shrivastava"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:54:29+00:00",
+    "url": "http://arxiv.org/abs/2605.06647v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06647v1",
+    "collected_at": "2026-05-09T10:28:44.093348"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06643v1",
+    "title": "Are We Making Progress in Multimodal Domain Generalization? A Comprehensive Benchmark Study",
+    "abstract": "Despite the growing popularity of Multimodal Domain Generalization (MMDG) for enhancing model robustness, it remains unclear whether reported performance gains reflect genuine algorithmic progress or are artifacts of inconsistent evaluation protocols. Current research is fragmented, with studies varying significantly across datasets, modality configurations, and experimental settings. Furthermore, existing benchmarks focus predominantly on action recognition, often neglecting critical real-world",
+    "authors": [
+      "Hao Dong",
+      "Hongzhao Li",
+      "Shupan Li",
+      "Muhammad Haris Khan",
+      "Eleni Chatzi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG",
+      "cs.MM"
+    ],
+    "published": "2026-05-07T17:51:16+00:00",
+    "url": "http://arxiv.org/abs/2605.06643v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06643v1",
+    "collected_at": "2026-05-09T10:28:44.093376"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06642v1",
+    "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+    "abstract": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we present Strategic Trajectory Abstraction (StraTA), a simple framework that introduces an explicit trajectory-level strategy into agentic reinforcement learning (RL). StraTA samples a compact strategy from",
+    "authors": [
+      "Xiangyuan Xue",
+      "Yifan Zhou",
+      "Zidong Wang",
+      "Shengji Tang",
+      "Philip Torr"
+    ],
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:51:16+00:00",
+    "url": "http://arxiv.org/abs/2605.06642v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06642v1",
+    "collected_at": "2026-05-09T10:28:44.093402"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06667v1",
+    "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+    "abstract": "For artistic applications, video generation requires fine-grained control over both performance and cinematography, i.e., the actor's motion and the camera trajectory. We present ActCam, a zero-shot method for video generation that jointly transfers character motion from a driving video into a new scene and enables per-frame control of intrinsic and extrinsic camera parameters. ActCam builds on any pretrained image-to-video diffusion model that accepts conditioning in terms of scene depth and ch",
+    "authors": [
+      "Omar El Khalifi",
+      "Thomas Rossi",
+      "Oscar Fossey",
+      "Thibault Fouque",
+      "Ulysse Mizrahi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:59:58+00:00",
+    "url": "http://arxiv.org/abs/2605.06667v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06667v1",
+    "collected_at": "2026-05-09T10:28:47.457792"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06665v1",
+    "title": "UniPool: A Globally Shared Expert Pool for Mixture-of-Experts",
+    "abstract": "Modern Mixture-of-Experts (MoE) architectures allocate expert capacity through a rigid per-layer rule: each transformer layer owns a separate expert set. This convention couples depth scaling with linear expert-parameter growth and assumes that every layer needs isolated expert capacity. However, recent analyses and our routing probe challenge this allocation rule: replacing a deeper layer's learned top-k router with uniform random routing drops downstream accuracy by only 1.0-1.6 points across ",
+    "authors": [
+      "Minbin Huang",
+      "Han Shi",
+      "Chuanyang Zheng",
+      "Yimeng Wu",
+      "Guoxuan Chen"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:59:44+00:00",
+    "url": "http://arxiv.org/abs/2605.06665v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06665v1",
+    "collected_at": "2026-05-09T10:28:47.457831"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06660v1",
+    "title": "Verifier-Backed Hard Problem Generation for Mathematical Reasoning",
+    "abstract": "Large Language Models (LLMs) demonstrate strong capabilities for solving scientific and mathematical problems, yet they struggle to produce valid, challenging, and novel problems - an essential component for advancing LLM training and enabling autonomous scientific research. Existing problem generation approaches either depend on expensive human expert involvement or adopt naive self-play paradigms, which frequently yield invalid problems due to reward hacking. This work introduces VHG, a verifi",
+    "authors": [
+      "Yuhang Lai",
+      "Jiazhan Feng",
+      "Yee Whye Teh",
+      "Ning Miao"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:58:32+00:00",
+    "url": "http://arxiv.org/abs/2605.06660v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06660v1",
+    "collected_at": "2026-05-09T10:28:47.457860"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06656v1",
+    "title": "Why Global LLM Leaderboards Are Misleading: Small Portfolios for Heterogeneous Supervised ML",
+    "abstract": "Ranking LLMs via pairwise human feedback underpins current leaderboards for open-ended tasks, such as creative writing and problem-solving. We analyze ~89K comparisons in 116 languages from 52 LLMs from Arena, and show that the best-fit global Bradley-Terry (BT) ranking is misleading. Nearly 2/3 of the decisive votes cancel out, and even the top 50 models according to the global BT ranking are statistically indistinguishable (pairwise win probabilities are at most 0.53 within the top 50 models).",
+    "authors": [
+      "Jai Moondra",
+      "Ayela Chughtai",
+      "Bhargavi Lanka",
+      "Swati Gupta"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.DM",
+      "cs.ET",
+      "math.OC"
+    ],
+    "published": "2026-05-07T17:57:58+00:00",
+    "url": "http://arxiv.org/abs/2605.06656v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06656v1",
+    "collected_at": "2026-05-09T10:28:47.457889"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06654v1",
+    "title": "Optimizer-Model Consistency: Full Finetuning with the Same Optimizer as Pretraining Forgets Less",
+    "abstract": "Optimizers play an important role in both pretraining and finetuning stages when training large language models (LLMs). In this paper, we present an observation that full finetuning with the same optimizer as in pretraining achieves a better learning-forgetting tradeoff, i.e., forgetting less while achieving the same or better performance on the new task, than other optimizers and, possibly surprisingly, LoRA, during the supervised finetuning (SFT) stage. We term this phenomenon optimizer-model ",
+    "authors": [
+      "Yuxing Liu",
+      "Jianyu Wang",
+      "Tong Zhang"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "math.OC"
+    ],
+    "published": "2026-05-07T17:57:02+00:00",
+    "url": "http://arxiv.org/abs/2605.06654v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06654v1",
+    "collected_at": "2026-05-09T10:28:47.457914"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06652v1",
+    "title": "When No Benchmark Exists: Validating Comparative LLM Safety Scoring Without Ground-Truth Labels",
+    "abstract": "Many deployments must compare candidate language models for safety before a labeled benchmark exists for the relevant language, sector, or regulatory regime. We formalize this setting as benchmarkless comparative safety scoring and specify the contract under which a scenario-based audit can be interpreted as deployment evidence. Scores are valid only under a fixed scenario pack, rubric, auditor, judge, sampling configuration, and rerun budget. Because no labels are available, we replace ground-t",
+    "authors": [
+      "Sushant Gautam",
+      "Finn Schwall",
+      "Annika Willoch Olstad",
+      "Fernando Vallecillos Ruiz",
+      "Birk Torpmann-Hagen"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:56:41+00:00",
+    "url": "http://arxiv.org/abs/2605.06652v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06652v1",
+    "collected_at": "2026-05-09T10:28:47.457943"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06647v1",
+    "title": "Superintelligent Retrieval Agent: The Next Frontier of Information Retrieval",
+    "abstract": "Retrieval-augmented agents are increasingly the interface to large organizational knowledge bases, yet most still treat retrieval as a black box: they issue exploratory queries, inspect returned snippets, and iteratively reformulate until useful evidence emerges. This approach resembles how a newcomer searches an unfamiliar database rather than how an expert navigates it with strong priors about terminology and likely evidence, and results in unnecessary retrieval rounds, increased latency, and ",
+    "authors": [
+      "Zeyu Yang",
+      "Qi Ma",
+      "Jason Chen",
+      "Anshumali Shrivastava"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:54:29+00:00",
+    "url": "http://arxiv.org/abs/2605.06647v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06647v1",
+    "collected_at": "2026-05-09T10:28:47.457969"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06646v1",
+    "title": "Inductive Venn-Abers and related regressors",
+    "abstract": "Venn-Abers predictors are probabilistic predictors that enjoy appealing properties of validity, but their major limitation is that they are applicable only to the case of binary classification, with a recent extension to bounded regression. We generalize them to the case of unbounded regression, which requires adding an element of conformal prediction. In our simulation and empirical studies we investigate the predictive efficiency of point regressors derived from Venn-Abers regressors and argue",
+    "authors": [
+      "Ivan Petej",
+      "Vladimir Vovk"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:52:08+00:00",
+    "url": "http://arxiv.org/abs/2605.06646v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06646v1",
+    "collected_at": "2026-05-09T10:28:47.457991"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06644v1",
+    "title": "Edge-specific signal propagation on mature chromophore-region 3D mechanism graphs for fluorescent protein quantum-yield prediction",
+    "abstract": "Fluorescent protein quantum yield (QY) is governed by the mature chromophore and its three-dimensional microenvironment rather than sequence identity alone. Protein language models and emission-band averages capture global trends, but do not model how local physical signals act on specific chromophore regions.\n  We present a chromophore-centred mechanism graph algorithm for QY prediction. Each PDB structure is converted into a typed 3D residue graph, registered to a mature-CRO state, partitioned",
+    "authors": [
+      "Yuchen Xiong",
+      "Swee Keong Yeap",
+      "Steven Aw Yoong Kit"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:51:41+00:00",
+    "url": "http://arxiv.org/abs/2605.06644v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06644v1",
+    "collected_at": "2026-05-09T10:28:47.458015"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06643v1",
+    "title": "Are We Making Progress in Multimodal Domain Generalization? A Comprehensive Benchmark Study",
+    "abstract": "Despite the growing popularity of Multimodal Domain Generalization (MMDG) for enhancing model robustness, it remains unclear whether reported performance gains reflect genuine algorithmic progress or are artifacts of inconsistent evaluation protocols. Current research is fragmented, with studies varying significantly across datasets, modality configurations, and experimental settings. Furthermore, existing benchmarks focus predominantly on action recognition, often neglecting critical real-world",
+    "authors": [
+      "Hao Dong",
+      "Hongzhao Li",
+      "Shupan Li",
+      "Muhammad Haris Khan",
+      "Eleni Chatzi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG",
+      "cs.MM"
+    ],
+    "published": "2026-05-07T17:51:16+00:00",
+    "url": "http://arxiv.org/abs/2605.06643v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06643v1",
+    "collected_at": "2026-05-09T10:28:47.458055"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06663v1",
+    "title": "EMO: Pretraining Mixture of Experts for Emergent Modularity",
+    "abstract": "Large language models are typically deployed as monolithic systems, requiring the full model even when applications need only a narrow subset of capabilities, e.g., code, math, or domain-specific knowledge. Mixture-of-Experts (MoEs) seemingly offer a potential alternative by activating only a subset of experts per input, but in practice, restricting inference to a subset of experts for a given domain leads to severe performance degradation. This limits their practicality in memory-constrained se",
+    "authors": [
+      "Ryan Wang",
+      "Akshita Bhagia",
+      "Sewon Min"
+    ],
+    "categories": [
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:59:20+00:00",
+    "url": "http://arxiv.org/abs/2605.06663v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06663v1",
+    "collected_at": "2026-05-09T10:28:50.799647"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06660v1",
+    "title": "Verifier-Backed Hard Problem Generation for Mathematical Reasoning",
+    "abstract": "Large Language Models (LLMs) demonstrate strong capabilities for solving scientific and mathematical problems, yet they struggle to produce valid, challenging, and novel problems - an essential component for advancing LLM training and enabling autonomous scientific research. Existing problem generation approaches either depend on expensive human expert involvement or adopt naive self-play paradigms, which frequently yield invalid problems due to reward hacking. This work introduces VHG, a verifi",
+    "authors": [
+      "Yuhang Lai",
+      "Jiazhan Feng",
+      "Yee Whye Teh",
+      "Ning Miao"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:58:32+00:00",
+    "url": "http://arxiv.org/abs/2605.06660v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06660v1",
+    "collected_at": "2026-05-09T10:28:50.799683"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06652v1",
+    "title": "When No Benchmark Exists: Validating Comparative LLM Safety Scoring Without Ground-Truth Labels",
+    "abstract": "Many deployments must compare candidate language models for safety before a labeled benchmark exists for the relevant language, sector, or regulatory regime. We formalize this setting as benchmarkless comparative safety scoring and specify the contract under which a scenario-based audit can be interpreted as deployment evidence. Scores are valid only under a fixed scenario pack, rubric, auditor, judge, sampling configuration, and rerun budget. Because no labels are available, we replace ground-t",
+    "authors": [
+      "Sushant Gautam",
+      "Finn Schwall",
+      "Annika Willoch Olstad",
+      "Fernando Vallecillos Ruiz",
+      "Birk Torpmann-Hagen"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:56:41+00:00",
+    "url": "http://arxiv.org/abs/2605.06652v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06652v1",
+    "collected_at": "2026-05-09T10:28:50.799714"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06650v1",
+    "title": "Beyond Negative Rollouts: Positive-Only Policy Optimization with Implicit Negative Gradients",
+    "abstract": "Reinforcement learning with verifiable rewards (RLVR), due to the deterministic verification, becomes a dominant paradigm for enhancing the reasoning ability of large language models (LLMs). The community witnesses the rapid change from the Proximal Policy Optimization (PPO) to Group Relative Policy Optimization (GRPO), in which GRPO reduces the complicated advantage estimation with simple estimation over grouped positive and negative rollouts. However, we note that negative rollouts may admit n",
+    "authors": [
+      "Mingwei Xu",
+      "Hao Fang"
+    ],
+    "categories": [
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:55:21+00:00",
+    "url": "http://arxiv.org/abs/2605.06650v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06650v1",
+    "collected_at": "2026-05-09T10:28:50.799739"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06642v1",
+    "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+    "abstract": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we present Strategic Trajectory Abstraction (StraTA), a simple framework that introduces an explicit trajectory-level strategy into agentic reinforcement learning (RL). StraTA samples a compact strategy from",
+    "authors": [
+      "Xiangyuan Xue",
+      "Yifan Zhou",
+      "Zidong Wang",
+      "Shengji Tang",
+      "Philip Torr"
+    ],
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:51:16+00:00",
+    "url": "http://arxiv.org/abs/2605.06642v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06642v1",
+    "collected_at": "2026-05-09T10:28:50.799766"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06639v1",
+    "title": "Recursive Agent Optimization",
+    "abstract": "We introduce Recursive Agent Optimization (RAO), a reinforcement learning approach for training recursive agents: agents that can spawn and delegate sub-tasks to new instantiations of themselves recursively. Recursive agents implement an inference-time scaling algorithm that naturally allows agents to scale to longer contexts and generalize to more difficult problems via divide-and-conquer. RAO provides a method to train models to best take advantage of such recursive inference, teaching agents ",
+    "authors": [
+      "Apurva Gandhi",
+      "Satyaki Chakraborty",
+      "Xiangjun Wang",
+      "Aviral Kumar",
+      "Graham Neubig"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL",
+      "cs.MA"
+    ],
+    "published": "2026-05-07T17:49:09+00:00",
+    "url": "http://arxiv.org/abs/2605.06639v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06639v1",
+    "collected_at": "2026-05-09T10:28:50.799791"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06638v1",
+    "title": "Can RL Teach Long-Horizon Reasoning to LLMs? Expressiveness Is Key",
+    "abstract": "Reinforcement learning (RL) has been applied to improve large language model (LLM) reasoning, yet the systematic study of how training scales with task difficulty has been hampered by the lack of controlled, scalable environments. We introduce ScaleLogic, a synthetic logical reasoning framework that offers independent control over two axes of difficulty: the depth of the required proof planning (i.e., the horizon) and the expressiveness of the underlying logic. Our proposed framework supports a ",
+    "authors": [
+      "Tianle Wang",
+      "Zhaoyang Wang",
+      "Guangchen Lan",
+      "Xinpeng Wei",
+      "Sipeng Zhang"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:48:42+00:00",
+    "url": "http://arxiv.org/abs/2605.06638v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06638v1",
+    "collected_at": "2026-05-09T10:28:50.799818"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06635v1",
+    "title": "Cited but Not Verified: Parsing and Evaluating Source Attribution in LLM Deep Research Agents",
+    "abstract": "Large language models (LLMs) power deep research agents that synthesize information from hundreds of web sources into cited reports, yet these citations cannot be reliably verified. Current approaches either trust models to self-cite accurately, risking bias, or employ retrieval-augmented generation (RAG) that does not validate source accessibility, relevance, or factual consistency. We introduce the first source attribution evaluation framework that uses a reproducible AST parser to extract and",
+    "authors": [
+      "Hailey Onweller",
+      "Elias Lumer",
+      "Austin Huber",
+      "Pia Ramchandani",
+      "Vamse Kumar Subbiah"
+    ],
+    "categories": [
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:46:45+00:00",
+    "url": "http://arxiv.org/abs/2605.06635v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06635v1",
+    "collected_at": "2026-05-09T10:28:50.799844"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06625v1",
+    "title": "Parser agreement and disagreement in L2 Korean UD: Implications for human-in-the-loop annotation",
+    "abstract": "We propose a simplified human-in-the-loop workflow for second language (L2) Korean morphosyntactic annotation by leveraging agreement between two domain-adapted parsers. We first evaluate whether parser agreement can serve as a proxy for annotation correctness by comparing it with independent human judgments. The results show strong correspondence between parser and human judgments, supporting the feasibility of semi-automatic L2-Korean UD annotation. Further analysis demonstrates that parser di",
+    "authors": [
+      "Hakyung Sung",
+      "Gyu-Ho Shin"
+    ],
+    "categories": [
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:39:04+00:00",
+    "url": "http://arxiv.org/abs/2605.06625v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06625v1",
+    "collected_at": "2026-05-09T10:28:50.799867"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06623v1",
+    "title": "MASPO: Joint Prompt Optimization for LLM-based Multi-Agent Systems",
+    "abstract": "Large language model (LLM)-based Multi-agent systems (MAS) have shown promise in tackling complex collaborative tasks, where agents are typically orchestrated via role-specific prompts. While the quality of these prompts is pivotal, jointly optimizing them across interacting agents remains a non-trivial challenge, primarily due to the misalignment between local agent objectives and holistic system goals. To address this, we introduce MASPO, a novel framework designed to automatically and iterati",
+    "authors": [
+      "Zhexuan Wang",
+      "Xuebo Liu",
+      "Li Wang",
+      "Zifei Shan",
+      "Yutong Wang"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T17:35:26+00:00",
+    "url": "http://arxiv.org/abs/2605.06623v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06623v1",
+    "collected_at": "2026-05-09T10:28:50.799892"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06667v1",
+    "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+    "abstract": "For artistic applications, video generation requires fine-grained control over both performance and cinematography, i.e., the actor's motion and the camera trajectory. We present ActCam, a zero-shot method for video generation that jointly transfers character motion from a driving video into a new scene and enables per-frame control of intrinsic and extrinsic camera parameters. ActCam builds on any pretrained image-to-video diffusion model that accepts conditioning in terms of scene depth and ch",
+    "authors": [
+      "Omar El Khalifi",
+      "Thomas Rossi",
+      "Oscar Fossey",
+      "Thibault Fouque",
+      "Ulysse Mizrahi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:59:58+00:00",
+    "url": "http://arxiv.org/abs/2605.06667v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06667v1",
+    "collected_at": "2026-05-09T10:28:54.225228"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06664v1",
+    "title": "BAMI: Training-Free Bias Mitigation in GUI Grounding",
+    "abstract": "GUI grounding is a critical capability for enabling GUI agents to execute tasks such as clicking and dragging. However, in complex scenarios like the ScreenSpot-Pro benchmark, existing models often suffer from suboptimal performance. Utilizing the proposed \\textbf{Masked Prediction Distribution (MPD)} attribution method, we identify that the primary sources of errors are twofold: high image resolution (leading to precision bias) and intricate interface elements (resulting in ambiguity bias). To ",
+    "authors": [
+      "Borui Zhang",
+      "Bo Zhang",
+      "Bo Wang",
+      "Wenzhao Zheng",
+      "Yuhao Cheng"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "published": "2026-05-07T17:59:31+00:00",
+    "url": "http://arxiv.org/abs/2605.06664v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06664v1",
+    "collected_at": "2026-05-09T10:28:54.225264"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06658v1",
+    "title": "Relit-LiVE: Relight Video by Jointly Learning Environment Video",
+    "abstract": "Recent advances have shown that large-scale video diffusion models can be repurposed as neural renderers by first decomposing videos into intrinsic scene representations and then performing forward rendering under novel illumination. While promising, this paradigm fundamentally relies on accurate intrinsic decomposition, which remains highly unreliable for real-world videos and often leads to distorted appearances, broken materials, and accumulated temporal artifacts during relighting. In this w",
+    "authors": [
+      "Weiqing Xiao",
+      "Hong Li",
+      "Xiuyu Yang",
+      "Houyuan Chen",
+      "Wenyi Li"
+    ],
+    "categories": [
+      "cs.CV"
+    ],
+    "published": "2026-05-07T17:58:15+00:00",
+    "url": "http://arxiv.org/abs/2605.06658v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06658v1",
+    "collected_at": "2026-05-09T10:28:54.225295"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06643v1",
+    "title": "Are We Making Progress in Multimodal Domain Generalization? A Comprehensive Benchmark Study",
+    "abstract": "Despite the growing popularity of Multimodal Domain Generalization (MMDG) for enhancing model robustness, it remains unclear whether reported performance gains reflect genuine algorithmic progress or are artifacts of inconsistent evaluation protocols. Current research is fragmented, with studies varying significantly across datasets, modality configurations, and experimental settings. Furthermore, existing benchmarks focus predominantly on action recognition, often neglecting critical real-world",
+    "authors": [
+      "Hao Dong",
+      "Hongzhao Li",
+      "Shupan Li",
+      "Muhammad Haris Khan",
+      "Eleni Chatzi"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG",
+      "cs.MM"
+    ],
+    "published": "2026-05-07T17:51:16+00:00",
+    "url": "http://arxiv.org/abs/2605.06643v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06643v1",
+    "collected_at": "2026-05-09T10:28:54.225324"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06641v1",
+    "title": "GlazyBench: A Benchmark for Ceramic Glaze Property Prediction and Image Generation",
+    "abstract": "Developing ceramic glazes is a costly, time-consuming process of trial and error due to complex chemistry, placing a significant burden on independent artists. While recent advances in multimodal AI offer a modern solution, the field lacks the large-scale datasets required to train these models. We propose GlazyBench, the first dataset for AI-assisted glaze design. Comprising 23,148 real glaze formulations, GlazyBench supports two primary tasks: predicting post-firing surface properties, such as",
+    "authors": [
+      "Ziyu Zhai",
+      "Siyou Li",
+      "Juexi Shao",
+      "Juntao Yu"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.CV"
+    ],
+    "published": "2026-05-07T17:51:13+00:00",
+    "url": "http://arxiv.org/abs/2605.06641v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06641v1",
+    "collected_at": "2026-05-09T10:28:54.225351"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06637v1",
+    "title": "DPM++: Dynamic Masked Metric Learning for Occluded Person Re-identification",
+    "abstract": "Although person re-identification has made impressive progress, occlusion caused by obstacles remains an unsettled issue in real applications. The difficulty lies in the mismatch between incomplete occluded samples and holistic identity representations. Severe occlusion removes discriminative body cues and introduces interference from background clutter and occluders, making global metric learning unreliable. Existing methods mainly rely on extra pre-trained models to estimate visible parts for ",
+    "authors": [
+      "Lei Tan",
+      "Yingshi Luan",
+      "Pincong Zou",
+      "Pingyang Dai",
+      "Liujuan Cao"
+    ],
+    "categories": [
+      "cs.CV"
+    ],
+    "published": "2026-05-07T17:47:23+00:00",
+    "url": "http://arxiv.org/abs/2605.06637v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06637v1",
+    "collected_at": "2026-05-09T10:28:54.225377"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06610v1",
+    "title": "SoftSAE: Dynamic Top-K Selection for Adaptive Sparse Autoencoders",
+    "abstract": "Sparse Autoencoders (SAEs) have become an important tool in mechanistic interpretability, helping to analyze internal representations in both Large Language Models (LLMs) and Vision Transformers (ViTs). By decomposing polysemantic activations into sparse sets of monosemantic features, SAEs aim to translate neural network computations into human-understandable concepts. However, common architectures such as TopK SAEs rely on a fixed sparsity level. They enforce the same number of active features ",
+    "authors": [
+      "Jakub Stępień",
+      "Marcin Mazur",
+      "Jacek Tabor",
+      "Przemysław Spurek"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.CV"
+    ],
+    "published": "2026-05-07T17:28:40+00:00",
+    "url": "http://arxiv.org/abs/2605.06610v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06610v1",
+    "collected_at": "2026-05-09T10:28:54.225400"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06592v1",
+    "title": "DINORANKCLIP: DINOv3 Distillation and Injection for Vision-Language Pretraining with High-Order Ranking Consistency",
+    "abstract": "Contrastive language-image pretraining (CLIP) suffers from two structural weaknesses: the symmetric InfoNCE loss discards the relative ordering among unmatched in-batch pairs, and global pooling collapses the visual representation into a semantic bottleneck that is poorly sensitive to fine-grained local structure. RANKCLIP partially addresses the first issue with a list-wise Plackett-Luce ranking-consistency loss, but its model is strictly first-order and inherits the second weakness untouched. ",
+    "authors": [
+      "Shuyang Jiang",
+      "Nan Yu",
+      "Yiming Zhang",
+      "Zenghui Ding",
+      "Zhenyu Wu"
+    ],
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T17:19:52+00:00",
+    "url": "http://arxiv.org/abs/2605.06592v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06592v1",
+    "collected_at": "2026-05-09T10:28:54.225426"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06572v1",
+    "title": "Solving Minimal Problems Without Matrix Inversion Using FFT-Based Interpolation",
+    "abstract": "Estimating camera geometry typically involves solving minimal problems formulated as systems of multivariate polynomial equations, which often pose computational challenges when using existing Gröbner-basis or resultant-based methods due to matrix inversion needed in the online solver. Here we propose a sampling-based, matrix inversion-free method that constructs the solvers using sparse hidden-variable resultants. The determinant polynomial in the hidden variable is efficiently reconstructed vi",
+    "authors": [
+      "Haidong Wu",
+      "Snehal Bhayani",
+      "Janne Heikkilä"
+    ],
+    "categories": [
+      "cs.CV",
+      "math.NA"
+    ],
+    "published": "2026-05-07T17:03:56+00:00",
+    "url": "http://arxiv.org/abs/2605.06572v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06572v1",
+    "collected_at": "2026-05-09T10:28:54.225448"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06548v1",
+    "title": "Continuous Latent Diffusion Language Model",
+    "abstract": "Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still struggle to jointly achieve generation efficiency, scalable representation learning, and effective global semantic modeling. We propose Cola DLM, a hierarchical latent diffusion language model that frames text generation through hierarchical information decomposition. Cola DLM first learns a stable ",
+    "authors": [
+      "Hongcan Guo",
+      "Qinyu Zhao",
+      "Yian Zhao",
+      "Shen Nie",
+      "Rui Zhu"
+    ],
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.CV"
+    ],
+    "published": "2026-05-07T16:44:56+00:00",
+    "url": "http://arxiv.org/abs/2605.06548v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06548v1",
+    "collected_at": "2026-05-09T10:28:54.225476"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06639v1",
+    "title": "Recursive Agent Optimization",
+    "abstract": "We introduce Recursive Agent Optimization (RAO), a reinforcement learning approach for training recursive agents: agents that can spawn and delegate sub-tasks to new instantiations of themselves recursively. Recursive agents implement an inference-time scaling algorithm that naturally allows agents to scale to longer contexts and generalize to more difficult problems via divide-and-conquer. RAO provides a method to train models to best take advantage of such recursive inference, teaching agents ",
+    "authors": [
+      "Apurva Gandhi",
+      "Satyaki Chakraborty",
+      "Xiangjun Wang",
+      "Aviral Kumar",
+      "Graham Neubig"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL",
+      "cs.MA"
+    ],
+    "published": "2026-05-07T17:49:09+00:00",
+    "url": "http://arxiv.org/abs/2605.06639v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06639v1",
+    "collected_at": "2026-05-09T10:28:57.617490"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06595v1",
+    "title": "Cross-Modal Navigation with Multi-Agent Reinforcement Learning",
+    "abstract": "Robust embodied navigation relies on complementary sensory cues. However, high-quality and well-aligned multi-modal data is often difficult to obtain in practice. Training a monolithic model is also challenging as rich multi-modal inputs induce complex representations and substantially enlarge the policy space. Cross-modal collaboration among lightweight modality-specialized agents offers a scalable paradigm. It enables flexible deployment and parallel execution, while preserving the strength of",
+    "authors": [
+      "Shuo Liu",
+      "Xinzichen Li",
+      "Christopher Amato"
+    ],
+    "categories": [
+      "cs.RO",
+      "cs.AI",
+      "cs.LG",
+      "cs.MA"
+    ],
+    "published": "2026-05-07T17:20:34+00:00",
+    "url": "http://arxiv.org/abs/2605.06595v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06595v1",
+    "collected_at": "2026-05-09T10:28:57.617524"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06557v1",
+    "title": "Coordination Matters: Evaluation of Cooperative Multi-Agent Reinforcement Learning",
+    "abstract": "Cooperative multi-agent reinforcement learning (MARL) benchmarks commonly emphasize aggregate outcomes such as return, success rate, or completion time. While essential, these metrics often fail to reveal how agents coordinate, particularly in settings where agents, tasks, and joint assignment choices scale combinatorially. We propose a coordination-aware evaluation perspective that supplements return with process-level diagnostics. We instantiate this perspective using STAT, a controlled commit",
+    "authors": [
+      "Maria Ana Cardei",
+      "Matthew Landers",
+      "Afsaneh Doryab"
+    ],
+    "categories": [
+      "cs.MA",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "published": "2026-05-07T16:50:53+00:00",
+    "url": "http://arxiv.org/abs/2605.06557v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06557v1",
+    "collected_at": "2026-05-09T10:28:57.617551"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06525v1",
+    "title": "Sustaining Cooperation in Populations Guided by AI: A Folk Theorem for LLMs",
+    "abstract": "Large language models (LLMs) are increasingly used to provide instructions to many agents who interact with one another. Such shared reliance couples agents who appear to act independently: they may in fact be guided by a common model. This coupling can change the prospects for cooperation among agents with misaligned incentives. We study settings in which multiple LLMs each advise a population of clients who participate in instances of an underlying game, creating strategic interaction at the l",
+    "authors": [
+      "Jonathan Shaki",
+      "Eden Hartman",
+      "Sarit Kraus",
+      "Yonatan Aumann"
+    ],
+    "categories": [
+      "cs.GT",
+      "cs.MA",
+      "econ.TH"
+    ],
+    "published": "2026-05-07T16:31:12+00:00",
+    "url": "http://arxiv.org/abs/2605.06525v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06525v1",
+    "collected_at": "2026-05-09T10:28:57.617577"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06520v1",
+    "title": "Optimizing Social Utility in Sequential Experiments",
+    "abstract": "Regulatory approval of products in high-stakes domains such as drug development requires statistical evidence of safety and efficacy through large-scale randomized controlled trials. However, the high financial cost of these trials may deter developers who lack absolute certainty in their product's efficacy, ultimately stifling the development of `moonshot' products that could offer high social utility. To address this inefficiency, in this paper, we introduce a statistical protocol for experime",
+    "authors": [
+      "Ander Artola Velasco",
+      "Stratis Tsirtsis",
+      "Manuel Gomez-Rodriguez"
+    ],
+    "categories": [
+      "cs.GT",
+      "cs.LG",
+      "cs.MA",
+      "stat.ME"
+    ],
+    "published": "2026-05-07T16:28:25+00:00",
+    "url": "http://arxiv.org/abs/2605.06520v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06520v1",
+    "collected_at": "2026-05-09T10:28:57.617601"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06443v1",
+    "title": "AgenticPrecoding: LLM-Empowered Multi-Agent System for Precoding Optimization",
+    "abstract": "Precoding is a key technique for interference management and performance improvement in multi-antenna wireless systems. However, existing precoding methods are typically developed for specific system models, objectives, and constraint sets, which limits their adaptability to the heterogeneous and evolving scenarios expected in future 6G networks. To address this limitation, we propose AgenticPrecoding, a universal multi-agent framework that automates end-to-end precoding derivation directly from",
+    "authors": [
+      "Zijiu Yang",
+      "Zixiang Zhang",
+      "Shunpu Tang",
+      "Qianqian Yang",
+      "Zhiguo Shi"
+    ],
+    "categories": [
+      "cs.MA"
+    ],
+    "published": "2026-05-07T15:43:12+00:00",
+    "url": "http://arxiv.org/abs/2605.06443v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06443v1",
+    "collected_at": "2026-05-09T10:28:57.617627"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06377v1",
+    "title": "Independent Learning of Nash Equilibria in Partially Observable Markov Potential Games with Decoupled Dynamics",
+    "abstract": "We study Nash equilibrium learning in partially observable Markov games (POMGs), a multi-agent reinforcement learning framework in which agents cannot fully observe the underlying state. Prior work in this setting relies on centralization or information sharing, and suffers from sample and computational complexity that scales exponentially in the number of players. We focus on a subclass of POMGs with independent state transitions, where agents remain coupled through their rewards, and assume th",
+    "authors": [
+      "Philip Jordan",
+      "Maryam Kamgarpour"
+    ],
+    "categories": [
+      "cs.GT",
+      "cs.LG",
+      "cs.MA"
+    ],
+    "published": "2026-05-07T14:56:56+00:00",
+    "url": "http://arxiv.org/abs/2605.06377v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06377v1",
+    "collected_at": "2026-05-09T10:28:57.617652"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06365v1",
+    "title": "From Agent Loops to Deterministic Graphs: Execution Lineage for Reproducible AI-Native Work",
+    "abstract": "Large language model systems are increasingly deployed as agentic workflows that interleave reasoning, tool use, memory, and iterative refinement. These systems are effective at producing answers, but they often rely on implicit conversational state, making it difficult to preserve stable work products, isolate irrelevant updates, or propagate changes through intermediate artifacts.\n  We introduce execution lineage: an execution model in which AI-native work is represented as a directed acyclic ",
+    "authors": [
+      "Josh Rosen",
+      "Seth Rosen"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.MA",
+      "cs.SE"
+    ],
+    "published": "2026-05-07T14:39:37+00:00",
+    "url": "http://arxiv.org/abs/2605.06365v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06365v1",
+    "collected_at": "2026-05-09T10:28:57.617676"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06320v1",
+    "title": "Improving the Efficiency of Language Agent Teams with Adaptive Task Graphs",
+    "abstract": "Large language models (LLMs) are increasingly deployed in teams, yet existing coordination approaches often occupy two extremes. Highly structured methods rely on fixed roles, pipelines, or task decompositions assigned a priori. In contrast, fully unstructured teams enable adaptability and exploration but suffer from inefficiencies such as error propagation, inter-agent conflicts, and wasted resources (measured in time, tokens, or file operations). We introduce Language Agent Teams for Task Evol",
+    "authors": [
+      "Elizabeth Mieczkowski",
+      "Alexander Ku",
+      "Tiwalayo Eisape",
+      "Dilip Arumugam",
+      "John Matters"
+    ],
+    "categories": [
+      "cs.MA",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "published": "2026-05-07T14:19:17+00:00",
+    "url": "http://arxiv.org/abs/2605.06320v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06320v1",
+    "collected_at": "2026-05-09T10:28:57.617704"
+  },
+  {
+    "source": "arxiv",
+    "source_category": "academic",
+    "arxiv_id": "2605.06286v1",
+    "title": "Power-Efficiency and Scalability Analysis of Magnetically-Actuated Satellite Swarms via Convex Optimization",
+    "abstract": "This correspondence presents a convex-optimization-based evaluation framework of satellite-swarm-based apertures maintained by magnetic-field interactions. Spaceborne distributed apertures are composed of multiple satellites and are attractive for scientific and commercial missions because their scalability enables high-gain, narrow-beam, and large-aperture capabilities beyond the launch-size limitations. A key challenge is that the long-term maintenance of such virtual structures requires consi",
+    "authors": [
+      "Yuta Takahashi",
+      "Seang Shim",
+      "Hiraku Sakamoto",
+      "Shin-ichiro Sakai"
+    ],
+    "categories": [
+      "cs.MA"
+    ],
+    "published": "2026-05-07T13:56:27+00:00",
+    "url": "http://arxiv.org/abs/2605.06286v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06286v1",
+    "collected_at": "2026-05-09T10:28:57.617729"
+  }
+]

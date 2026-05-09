@@ -1,0 +1,655 @@
+{
+  "generated_at": "2026-05-09T13:50:53.364619",
+  "pipeline_version": "v3",
+  "stats": {
+    "total_collected": 292,
+    "after_rule_filter": 285,
+    "after_llm_filter": 162,
+    "candidates_built": 98,
+    "final_judged": 8
+  },
+  "final_candidates": [
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.03849",
+      "arxiv_id": "2605.03849",
+      "abstract": "Distillation-based acceleration has become foundational for making autoregressive streaming video diffusion models practical, with distribution matching distillation (DMD) as the de facto choice. Existing methods, however, train the student to match the teacher's output indiscriminately, treating every rollout, frame, and pixel as equally reliable supervision. We argue that this caps distilled quality, since it overlooks two complementary axes of variance in DMD supervision: Inter-Reliability ac",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 116,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 31,
+      "score": 5.0,
+      "llm_judgment": "**一句话总结:** \n该工作提出了一种名为Stream-R1的奖励蒸馏方法，旨在通过评估教师模型输出的质量，解决流式视频扩散模型在加速过程中因无差别学习教师信号而导致的性能瓶颈。\n\n**核心贡献:** \n打破了传统分布匹配蒸馏（DMD）将所有教师输出视为同等可靠的局限，创新性地引入“可靠性”与“困惑度”作为奖励机制，实现了对帧、像素和生成轨迹（rollout）级别的选择性/加权蒸馏。\n\n**A+B潜力:** \n非常适合。这种“基于信号可靠性/困惑度加权的奖励蒸馏”思想（方法A），可自然迁移至长音频流式生成加速、自回归大语言模型（LLM）的知识蒸馏，或具身智能中连续动作轨迹的策略克隆与蒸馏。\n\n**可行性:** \n具有一定挑战但衍生实验可行。8张L20（48GB）对于高分辨率长视频扩散模型的从头蒸馏显存压力较大，但在4周内完成低分辨率/短序列的微调复现，或将该机制迁移到轻量级模型（如图像或小参数量视频模型）上做验证是完全可行的。\n\n**研判结论:** \n【值得深入了解】（注：若你的团队目前正主攻“生成模型加速”或“RL/Reward机制与扩散模型结合”方向，则可视为【强推荐做A种子】）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.04461",
+      "arxiv_id": "2605.04461",
+      "abstract": "While Test-Time Scaling (TTS) offers a promising direction to enhance video generation without the surging costs of training, current test-time video generation methods based on diffusion models suffer from exorbitant candidate exploration costs and lack temporal guidance. To address these structural bottlenecks, we propose shifting the focus to streaming video generation. We identify that its chunk-level synthesis and few denoising steps are intrinsically suited for TTS, significantly lowering ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 98,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 24,
+      "score": 5.0,
+      "llm_judgment": "一句话总结: 该工作提出了Stream-T1，通过引入分块（chunk-based）的流式生成框架，解决了传统视频扩散模型在测试时计算扩展（Test-Time Scaling）中搜索成本过高和缺乏时序引导的问题。\n\n核心贡献: 核心创新在于将测试时扩展（TTS）范式从全局视频转移到流式分块生成中，大幅降低了候选样本的评估成本，并通过块间依赖自然地提供了强时序引导。\n\nA+B潜力: 非常适合。这种“分块测试时搜索与扩展”的策略可作为方法A，极具潜力迁移到长音频生成、流式语音合成（Text-to-Speech）或长序列机器人动作规划等需要强时序一致性的流式/自回归生成任务中。\n\n可行性: 完全可行。由于该方法侧重于推理阶段的算法优化（无需从头训练大规模视频基础模型），8张48GB显存的L20足以支撑分块视频扩散模型的推理、搜索与评估，4周时间足够完成复现与衍生实验。\n\n研判结论: 【强推荐做A种子】（Test-Time Scaling在多模态生成领域的应用是当前绝对热点，该流式分块思路巧妙且算力友好，极具衍生价值）。",
+      "conclusion": "【强推荐做A种子】（Test-Time Scaling在多模态生成领域的应用是当前绝对热点，该流式分块思路巧妙且算力友好，极具衍生价值）。"
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.05185",
+      "arxiv_id": "2605.05185",
+      "abstract": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite rapid progress, top-tier multimodal search agents remain difficult to reproduce, largely due to the absence of open high-quality training data, transparent trajectory synthesis pipelines, or detailed training recipes. To this end, we introduce OpenSearch-VL, a fully open-source recipe for training fr",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 92,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 108,
+      "score": 5.0,
+      "llm_judgment": "**一句话总结:** \n该工作提供了一套完整的开源方案（包含高质量训练数据、多步推理轨迹合成流水线和训练配方），旨在解决前沿多模态深度搜索智能体（Multimodal Search Agents）难以复现的问题。\n\n**核心贡献:** \n其核心创新不在于底层模型架构，而是填补了开源生态的系统性空白，提出了一套透明且可扩展的“主动搜索+多模态证据验证”的数据合成流水线及训练方法论。\n\n**A+B潜力:** \n非常适合。其“多步搜索与多模态证据验证的轨迹合成流水线”（方法A），可高效迁移至医疗影像辅助诊断、工业图纸排故、电商竞品分析等需要复杂多模态信息检索与推理的垂直领域（领域B）。\n\n**可行性:** \n完全可行。8张L20（48GB）算力充裕，4周时间足够支持跑通其开源的数据合成流水线，并对7B-14B规模的多模态基座模型完成微调（如LoRA或全参微调）及衍生消融实验。\n\n**研判结论:** \n【强推荐做A种子】（该工作提供了极佳的工程基建和数据合成范式，非常适合作为基石，结合垂直领域数据快速产出高质量的衍生研究或应用）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "url": "https://huggingface.co/papers/2605.06548",
+      "arxiv_id": "2605.06548",
+      "abstract": "Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still struggle to jointly achieve generation efficiency, scalable representation learning, and effective global semantic modeling. We propose Cola DLM, a hierarchical latent diffusion language model that frames text generation through hierarchical information decomposition. Cola DLM first learns a stable ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 47,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** 该工作提出了Cola DLM（一种层次化连续潜在扩散语言模型），旨在打破传统自回归模型从左到右的生成限制，实现高效且具备全局语义建模能力的非自回归文本生成。\n\n**核心贡献:** 核心创新在于将离散文本映射到连续潜在空间，并构建层次化的扩散架构。该方法有效解决了现有非自回归模型在生成效率、表征学习可扩展性以及全局语义建模之间的平衡难题。\n\n**A+B潜力:** 非常适合作为“方法A”迁移到需要全局结构规划或双向上下文依赖的离散序列生成任务中。最可能迁移的方向包括：代码生成（需全局逻辑）、分子/蛋白质序列设计（需空间结构约束）以及长文本/剧本的结构化生成。\n\n**可行性:** 8张L20 (48GB) 配合4周时间，足以在中小规模数据集（如特定垂直领域或百万级token）上复现其核心架构并完成衍生实验。但受限于算力，无法从头预训练对标主流大模型规模（如7B以上）的基础扩散语言模型。\n\n**研判结论:** 【值得深入了解】（注：若您的研究方向侧重于非自回归生成、长文本全局规划或跨模态连续空间对齐，可将其视为【强推荐做A种子】）。",
+      "conclusion": "** 【值得深入了解】（注：若您的研究方向侧重于非自回归生成、长文本全局规划或跨模态连续空间对齐，可将其视为【强推荐做A种子】）。"
+    },
+    {
+      "title": "MiA-Signature: Approximating Global Activation for Long-Context Understanding",
+      "url": "https://huggingface.co/papers/2605.06416",
+      "arxiv_id": "2605.06416",
+      "abstract": "A growing body of work in cognitive science suggests that reportable conscious access is associated with global ignition over distributed memory systems, while such activation is only partially accessible as individuals cannot directly access or enumerate all activated contents. This tension suggests a plausible mechanism that cognition may rely on a compact representation that approximates the global influence of activation on downstream processing. Inspired by this idea, we introduce the conce",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 41,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** \n受认知科学“全局工作空间”理论启发，该工作提出了一种名为MiA-Signature的紧凑表示方法，通过近似全局激活来高效处理大模型的长上下文理解。\n\n**核心贡献:** \n其方法论创新在于摒弃了传统的全量KV Cache注意力，设计了一种将超长分布式记忆压缩为紧凑特征（Signature）的机制。这在保留全局上下文核心语义的同时，显著降低了长文本处理的计算复杂度和显存开销。\n\n**A+B潜力:** \n具有很强的迁移潜力。作为一种高效的上下文压缩与全局特征提取机制，它非常适合作为“方法A”迁移到长视频多模态理解（如长视频帧的全局特征压缩）、多智能体长期记忆构建，以及RAG系统中的超长文档向量化表示。\n\n**可行性:** \n完全可行。8张48GB L20显卡足以支持在7B-14B规模开源模型上进行长上下文（如32k-128k）的微调与评测（如LongBench）；4周时间充裕，足够完成基线复现及在特定垂直领域的衍生实验。\n\n**研判结论:** \n【强推荐做A种子】",
+      "conclusion": "**"
+    },
+    {
+      "title": "MARBLE: Multi-Aspect Reward Balance for Diffusion RL",
+      "url": "https://huggingface.co/papers/2605.06507",
+      "arxiv_id": "2605.06507",
+      "abstract": "Reinforcement learning fine-tuning has become the dominant approach for aligning diffusion models with human preferences. However, assessing images is intrinsically a multi-dimensional task, and multiple evaluation criteria need to be optimized simultaneously. Existing practice deal with multiple rewards by training one specialist model per reward, optimizing a weighted-sum reward R(x)=sum_k w_k R_k(x), or sequentially fine-tuning with a hand-crafted stage schedule. These approaches either fail ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 34,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 24,
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** 针对扩散模型强化学习微调中多维评估标准难以兼顾的问题，该工作提出了一种动态平衡多方面奖励信号（而非简单静态加权求和）的对齐框架。\n\n**核心贡献:** 突破了传统静态加权求和（weighted-sum）奖励容易导致目标冲突或次优解的局限，提出了一种多目标强化学习（MORL）机制，能在单次训练中动态协调并优化多个维度的奖励（如美学、文本对齐度、安全性等）。\n\n**A+B潜力:** 非常适合。该“多奖励动态平衡机制”可直接作为方法A，迁移至大语言模型（LLM）的多目标RLHF（如同时兼顾有用性、安全性和事实性），或视频/3D生成等多模态对齐任务中。\n\n**可行性:** 完全可行。8张48GB L20显存结合LoRA或梯度检查点技术，足以支撑SD 1.5或SDXL级别的扩散模型RL微调，4周时间充裕，足够完成基线复现及A+B衍生实验。\n\n**研判结论:** 【强推荐做A种子】（多目标对齐是当前生成式AI的核心痛点，该方法具有极强的通用性和跨模态迁移价值）。",
+      "conclusion": "** 【强推荐做A种子】（多目标对齐是当前生成式AI的核心痛点，该方法具有极强的通用性和跨模态迁移价值）。"
+    },
+    {
+      "title": "SkillOS: Learning Skill Curation for Self-Evolving Agents",
+      "url": "https://huggingface.co/papers/2605.06614",
+      "arxiv_id": "2605.06614",
+      "abstract": "LLM-based agents are increasingly deployed to handle streaming tasks, yet they often remain one-off problem solvers that fail to learn from past interactions. Reusable skills distilled from experience provide a natural substrate for self-evolution, where high-quality skill curation serves as the key bottleneck. Existing approaches either rely on manual skill curation, prescribe heuristic skill operations, or train for short-horizon skill operations. However, they still struggle to learn complex ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 23,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.5,
+      "llm_judgment": "**一句话总结:** \n本工作提出了SkillOS框架，旨在通过让LLM智能体自动学习技能的筛选与管理（Skill Curation），解决智能体在连续任务中无法利用历史经验进行自我进化的瓶颈。\n\n**核心贡献:** \n核心创新在于摒弃了传统的手动或启发式技能管理，提出了一种**数据驱动/可学习的技能管理机制**，使智能体能够像操作系统一样，在流式任务中动态提取、评估、更新和检索高质量的可复用技能。\n\n**A+B潜力:** \n非常适合。这种“动态技能库学习与管理”机制（方法A）可极好地迁移至**具身智能（Embodied AI）**的长期动作规划、**软件工程智能体（SWE-agent）**的代码片段沉淀与复用，或**多智能体协作**中的动态共享知识库构建。\n\n**可行性:** \n高度可行。8张 L20 (48GB) 足以支持 7B-14B 级别开源模型（如 Llama-3/Qwen）的并发推理与微调，4周时间完全足够跑通其技能库构建流程，并在特定垂直领域（如特定API调用或游戏环境）完成衍生实验。\n\n**研判结论:** \n【强推荐做A种子】（Agent的“长期记忆与自我进化”是当前核心痛点，该框架的“技能操作系统”概念具有极强的扩展性和启发性）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "D-OPSD: On-Policy Self-Distillation for Continuously Tuning Step-Distilled Diffusion Models",
+      "url": "https://huggingface.co/papers/2605.05204",
+      "arxiv_id": "2605.05204",
+      "abstract": "The landscape of high-performance image generation models is currently shifting from the inefficient multi-step ones to the efficient few-step counterparts (e.g, Z-Image-Turbo and FLUX.2-klein). However, these models present significant challenges for directly continuous supervised fine-tuning. For example, applying the commonly used fine-tuning technique would compromises their inherent few-step inference capability. To address this, we propose D-OPSD, a novel training paradigm for step-distill",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 22,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 60,
+      "score": 3.5,
+      "llm_judgment": "一句话总结: 本工作提出了一种基于同策略自蒸馏（On-Policy Self-Distillation）的方法，旨在解决少步扩散模型（如Turbo或FLUX变体）在连续微调时容易丧失其少步高效生成能力的问题。\n\n核心贡献: 核心创新在于引入“同策略自蒸馏”机制，在微调过程中动态对齐模型自身的输出分布，从而在注入新知识的同时，有效保护并维持了模型原有的少步推理特性。\n\nA+B潜力: 非常适合。该“保持蒸馏特性的连续微调”范式可作为方法A，极具潜力迁移至大语言模型（LLM）的蒸馏后微调、视频生成（Video Diffusion）的少步加速微调，或端侧小模型的持续学习任务中。\n\n可行性: 完全可行。8张 48GB L20 显存足以支撑主流少步扩散模型（配合LoRA或显存优化技术）的微调与自蒸馏，4周时间非常充裕，足够完成复现及跨领域的衍生实验。\n\n研判结论: 【强推荐做A种子】（当前开源社区对少步模型微调需求极大，该方法切中痛点，且极易作为通用插件迁移到其他生成模型的微调任务中）。",
+      "conclusion": "【强推荐做A种子】（当前开源社区对少步模型微调需求极大，该方法切中痛点，且极易作为通用插件迁移到其他生成模型的微调任务中）。"
+    }
+  ],
+  "all_scored": [
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.03849",
+      "arxiv_id": "2605.03849",
+      "abstract": "Distillation-based acceleration has become foundational for making autoregressive streaming video diffusion models practical, with distribution matching distillation (DMD) as the de facto choice. Existing methods, however, train the student to match the teacher's output indiscriminately, treating every rollout, frame, and pixel as equally reliable supervision. We argue that this caps distilled quality, since it overlooks two complementary axes of variance in DMD supervision: Inter-Reliability ac",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 116,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 31,
+      "score": 5.0,
+      "llm_judgment": "**一句话总结:** \n该工作提出了一种名为Stream-R1的奖励蒸馏方法，旨在通过评估教师模型输出的质量，解决流式视频扩散模型在加速过程中因无差别学习教师信号而导致的性能瓶颈。\n\n**核心贡献:** \n打破了传统分布匹配蒸馏（DMD）将所有教师输出视为同等可靠的局限，创新性地引入“可靠性”与“困惑度”作为奖励机制，实现了对帧、像素和生成轨迹（rollout）级别的选择性/加权蒸馏。\n\n**A+B潜力:** \n非常适合。这种“基于信号可靠性/困惑度加权的奖励蒸馏”思想（方法A），可自然迁移至长音频流式生成加速、自回归大语言模型（LLM）的知识蒸馏，或具身智能中连续动作轨迹的策略克隆与蒸馏。\n\n**可行性:** \n具有一定挑战但衍生实验可行。8张L20（48GB）对于高分辨率长视频扩散模型的从头蒸馏显存压力较大，但在4周内完成低分辨率/短序列的微调复现，或将该机制迁移到轻量级模型（如图像或小参数量视频模型）上做验证是完全可行的。\n\n**研判结论:** \n【值得深入了解】（注：若你的团队目前正主攻“生成模型加速”或“RL/Reward机制与扩散模型结合”方向，则可视为【强推荐做A种子】）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.04461",
+      "arxiv_id": "2605.04461",
+      "abstract": "While Test-Time Scaling (TTS) offers a promising direction to enhance video generation without the surging costs of training, current test-time video generation methods based on diffusion models suffer from exorbitant candidate exploration costs and lack temporal guidance. To address these structural bottlenecks, we propose shifting the focus to streaming video generation. We identify that its chunk-level synthesis and few denoising steps are intrinsically suited for TTS, significantly lowering ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 98,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 24,
+      "score": 5.0,
+      "llm_judgment": "一句话总结: 该工作提出了Stream-T1，通过引入分块（chunk-based）的流式生成框架，解决了传统视频扩散模型在测试时计算扩展（Test-Time Scaling）中搜索成本过高和缺乏时序引导的问题。\n\n核心贡献: 核心创新在于将测试时扩展（TTS）范式从全局视频转移到流式分块生成中，大幅降低了候选样本的评估成本，并通过块间依赖自然地提供了强时序引导。\n\nA+B潜力: 非常适合。这种“分块测试时搜索与扩展”的策略可作为方法A，极具潜力迁移到长音频生成、流式语音合成（Text-to-Speech）或长序列机器人动作规划等需要强时序一致性的流式/自回归生成任务中。\n\n可行性: 完全可行。由于该方法侧重于推理阶段的算法优化（无需从头训练大规模视频基础模型），8张48GB显存的L20足以支撑分块视频扩散模型的推理、搜索与评估，4周时间足够完成复现与衍生实验。\n\n研判结论: 【强推荐做A种子】（Test-Time Scaling在多模态生成领域的应用是当前绝对热点，该流式分块思路巧妙且算力友好，极具衍生价值）。",
+      "conclusion": "【强推荐做A种子】（Test-Time Scaling在多模态生成领域的应用是当前绝对热点，该流式分块思路巧妙且算力友好，极具衍生价值）。"
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.05185",
+      "arxiv_id": "2605.05185",
+      "abstract": "Deep search has become a crucial capability for frontier multimodal agents, enabling models to solve complex questions through active search, evidence verification, and multi-step reasoning. Despite rapid progress, top-tier multimodal search agents remain difficult to reproduce, largely due to the absence of open high-quality training data, transparent trajectory synthesis pipelines, or detailed training recipes. To this end, we introduce OpenSearch-VL, a fully open-source recipe for training fr",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 92,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 108,
+      "score": 5.0,
+      "llm_judgment": "**一句话总结:** \n该工作提供了一套完整的开源方案（包含高质量训练数据、多步推理轨迹合成流水线和训练配方），旨在解决前沿多模态深度搜索智能体（Multimodal Search Agents）难以复现的问题。\n\n**核心贡献:** \n其核心创新不在于底层模型架构，而是填补了开源生态的系统性空白，提出了一套透明且可扩展的“主动搜索+多模态证据验证”的数据合成流水线及训练方法论。\n\n**A+B潜力:** \n非常适合。其“多步搜索与多模态证据验证的轨迹合成流水线”（方法A），可高效迁移至医疗影像辅助诊断、工业图纸排故、电商竞品分析等需要复杂多模态信息检索与推理的垂直领域（领域B）。\n\n**可行性:** \n完全可行。8张L20（48GB）算力充裕，4周时间足够支持跑通其开源的数据合成流水线，并对7B-14B规模的多模态基座模型完成微调（如LoRA或全参微调）及衍生消融实验。\n\n**研判结论:** \n【强推荐做A种子】（该工作提供了极佳的工程基建和数据合成范式，非常适合作为基石，结合垂直领域数据快速产出高质量的衍生研究或应用）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "url": "https://huggingface.co/papers/2605.06548",
+      "arxiv_id": "2605.06548",
+      "abstract": "Large language models have achieved remarkable success under the autoregressive paradigm, yet high-quality text generation need not be tied to a fixed left-to-right order. Existing alternatives still struggle to jointly achieve generation efficiency, scalable representation learning, and effective global semantic modeling. We propose Cola DLM, a hierarchical latent diffusion language model that frames text generation through hierarchical information decomposition. Cola DLM first learns a stable ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 47,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** 该工作提出了Cola DLM（一种层次化连续潜在扩散语言模型），旨在打破传统自回归模型从左到右的生成限制，实现高效且具备全局语义建模能力的非自回归文本生成。\n\n**核心贡献:** 核心创新在于将离散文本映射到连续潜在空间，并构建层次化的扩散架构。该方法有效解决了现有非自回归模型在生成效率、表征学习可扩展性以及全局语义建模之间的平衡难题。\n\n**A+B潜力:** 非常适合作为“方法A”迁移到需要全局结构规划或双向上下文依赖的离散序列生成任务中。最可能迁移的方向包括：代码生成（需全局逻辑）、分子/蛋白质序列设计（需空间结构约束）以及长文本/剧本的结构化生成。\n\n**可行性:** 8张L20 (48GB) 配合4周时间，足以在中小规模数据集（如特定垂直领域或百万级token）上复现其核心架构并完成衍生实验。但受限于算力，无法从头预训练对标主流大模型规模（如7B以上）的基础扩散语言模型。\n\n**研判结论:** 【值得深入了解】（注：若您的研究方向侧重于非自回归生成、长文本全局规划或跨模态连续空间对齐，可将其视为【强推荐做A种子】）。",
+      "conclusion": "** 【值得深入了解】（注：若您的研究方向侧重于非自回归生成、长文本全局规划或跨模态连续空间对齐，可将其视为【强推荐做A种子】）。"
+    },
+    {
+      "title": "MiA-Signature: Approximating Global Activation for Long-Context Understanding",
+      "url": "https://huggingface.co/papers/2605.06416",
+      "arxiv_id": "2605.06416",
+      "abstract": "A growing body of work in cognitive science suggests that reportable conscious access is associated with global ignition over distributed memory systems, while such activation is only partially accessible as individuals cannot directly access or enumerate all activated contents. This tension suggests a plausible mechanism that cognition may rely on a compact representation that approximates the global influence of activation on downstream processing. Inspired by this idea, we introduce the conce",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 41,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** \n受认知科学“全局工作空间”理论启发，该工作提出了一种名为MiA-Signature的紧凑表示方法，通过近似全局激活来高效处理大模型的长上下文理解。\n\n**核心贡献:** \n其方法论创新在于摒弃了传统的全量KV Cache注意力，设计了一种将超长分布式记忆压缩为紧凑特征（Signature）的机制。这在保留全局上下文核心语义的同时，显著降低了长文本处理的计算复杂度和显存开销。\n\n**A+B潜力:** \n具有很强的迁移潜力。作为一种高效的上下文压缩与全局特征提取机制，它非常适合作为“方法A”迁移到长视频多模态理解（如长视频帧的全局特征压缩）、多智能体长期记忆构建，以及RAG系统中的超长文档向量化表示。\n\n**可行性:** \n完全可行。8张48GB L20显卡足以支持在7B-14B规模开源模型上进行长上下文（如32k-128k）的微调与评测（如LongBench）；4周时间充裕，足够完成基线复现及在特定垂直领域的衍生实验。\n\n**研判结论:** \n【强推荐做A种子】",
+      "conclusion": "**"
+    },
+    {
+      "title": "MARBLE: Multi-Aspect Reward Balance for Diffusion RL",
+      "url": "https://huggingface.co/papers/2605.06507",
+      "arxiv_id": "2605.06507",
+      "abstract": "Reinforcement learning fine-tuning has become the dominant approach for aligning diffusion models with human preferences. However, assessing images is intrinsically a multi-dimensional task, and multiple evaluation criteria need to be optimized simultaneously. Existing practice deal with multiple rewards by training one specialist model per reward, optimizing a weighted-sum reward R(x)=sum_k w_k R_k(x), or sequentially fine-tuning with a hand-crafted stage schedule. These approaches either fail ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 34,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 24,
+      "score": 4.0,
+      "llm_judgment": "**一句话总结:** 针对扩散模型强化学习微调中多维评估标准难以兼顾的问题，该工作提出了一种动态平衡多方面奖励信号（而非简单静态加权求和）的对齐框架。\n\n**核心贡献:** 突破了传统静态加权求和（weighted-sum）奖励容易导致目标冲突或次优解的局限，提出了一种多目标强化学习（MORL）机制，能在单次训练中动态协调并优化多个维度的奖励（如美学、文本对齐度、安全性等）。\n\n**A+B潜力:** 非常适合。该“多奖励动态平衡机制”可直接作为方法A，迁移至大语言模型（LLM）的多目标RLHF（如同时兼顾有用性、安全性和事实性），或视频/3D生成等多模态对齐任务中。\n\n**可行性:** 完全可行。8张48GB L20显存结合LoRA或梯度检查点技术，足以支撑SD 1.5或SDXL级别的扩散模型RL微调，4周时间充裕，足够完成基线复现及A+B衍生实验。\n\n**研判结论:** 【强推荐做A种子】（多目标对齐是当前生成式AI的核心痛点，该方法具有极强的通用性和跨模态迁移价值）。",
+      "conclusion": "** 【强推荐做A种子】（多目标对齐是当前生成式AI的核心痛点，该方法具有极强的通用性和跨模态迁移价值）。"
+    },
+    {
+      "title": "SkillOS: Learning Skill Curation for Self-Evolving Agents",
+      "url": "https://huggingface.co/papers/2605.06614",
+      "arxiv_id": "2605.06614",
+      "abstract": "LLM-based agents are increasingly deployed to handle streaming tasks, yet they often remain one-off problem solvers that fail to learn from past interactions. Reusable skills distilled from experience provide a natural substrate for self-evolution, where high-quality skill curation serves as the key bottleneck. Existing approaches either rely on manual skill curation, prescribe heuristic skill operations, or train for short-horizon skill operations. However, they still struggle to learn complex ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 23,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.5,
+      "llm_judgment": "**一句话总结:** \n本工作提出了SkillOS框架，旨在通过让LLM智能体自动学习技能的筛选与管理（Skill Curation），解决智能体在连续任务中无法利用历史经验进行自我进化的瓶颈。\n\n**核心贡献:** \n核心创新在于摒弃了传统的手动或启发式技能管理，提出了一种**数据驱动/可学习的技能管理机制**，使智能体能够像操作系统一样，在流式任务中动态提取、评估、更新和检索高质量的可复用技能。\n\n**A+B潜力:** \n非常适合。这种“动态技能库学习与管理”机制（方法A）可极好地迁移至**具身智能（Embodied AI）**的长期动作规划、**软件工程智能体（SWE-agent）**的代码片段沉淀与复用，或**多智能体协作**中的动态共享知识库构建。\n\n**可行性:** \n高度可行。8张 L20 (48GB) 足以支持 7B-14B 级别开源模型（如 Llama-3/Qwen）的并发推理与微调，4周时间完全足够跑通其技能库构建流程，并在特定垂直领域（如特定API调用或游戏环境）完成衍生实验。\n\n**研判结论:** \n【强推荐做A种子】（Agent的“长期记忆与自我进化”是当前核心痛点，该框架的“技能操作系统”概念具有极强的扩展性和启发性）。",
+      "conclusion": "**"
+    },
+    {
+      "title": "D-OPSD: On-Policy Self-Distillation for Continuously Tuning Step-Distilled Diffusion Models",
+      "url": "https://huggingface.co/papers/2605.05204",
+      "arxiv_id": "2605.05204",
+      "abstract": "The landscape of high-performance image generation models is currently shifting from the inefficient multi-step ones to the efficient few-step counterparts (e.g, Z-Image-Turbo and FLUX.2-klein). However, these models present significant challenges for directly continuous supervised fine-tuning. For example, applying the commonly used fine-tuning technique would compromises their inherent few-step inference capability. To address this, we propose D-OPSD, a novel training paradigm for step-distill",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 22,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 60,
+      "score": 3.5,
+      "llm_judgment": "一句话总结: 本工作提出了一种基于同策略自蒸馏（On-Policy Self-Distillation）的方法，旨在解决少步扩散模型（如Turbo或FLUX变体）在连续微调时容易丧失其少步高效生成能力的问题。\n\n核心贡献: 核心创新在于引入“同策略自蒸馏”机制，在微调过程中动态对齐模型自身的输出分布，从而在注入新知识的同时，有效保护并维持了模型原有的少步推理特性。\n\nA+B潜力: 非常适合。该“保持蒸馏特性的连续微调”范式可作为方法A，极具潜力迁移至大语言模型（LLM）的蒸馏后微调、视频生成（Video Diffusion）的少步加速微调，或端侧小模型的持续学习任务中。\n\n可行性: 完全可行。8张 48GB L20 显存足以支撑主流少步扩散模型（配合LoRA或显存优化技术）的微调与自蒸馏，4周时间非常充裕，足够完成复现及跨领域的衍生实验。\n\n研判结论: 【强推荐做A种子】（当前开源社区对少步模型微调需求极大，该方法切中痛点，且极易作为通用插件迁移到其他生成模型的微调任务中）。",
+      "conclusion": "【强推荐做A种子】（当前开源社区对少步模型微调需求极大，该方法切中痛点，且极易作为通用插件迁移到其他生成模型的微调任务中）。"
+    },
+    {
+      "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+      "url": "https://huggingface.co/papers/2605.06642",
+      "arxiv_id": "2605.06642",
+      "abstract": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we present Strategic Trajectory Abstraction (StraTA), a simple framework that introduces an explicit trajectory-level strategy into agentic reinforcement learning (RL). StraTA samples a compact strategy from",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 12,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 4,
+      "score": 3.0
+    },
+    {
+      "title": "Auto Research with Specialist Agents Develops Effective and Non-Trivial Training Recipes",
+      "url": "https://huggingface.co/papers/2605.05724",
+      "arxiv_id": "2605.05724",
+      "abstract": "We study auto research as a closed empirical loop driven by external measurement. Each submitted trial carries a hypothesis, an executable code edit, an evaluator-owned outcome, and feedback that shapes the next proposal. The output is not a generated paper or a single model checkpoint, but an auditable trajectory of proposals, code diffs, experiments, scores, and failure labels. We instantiate this loop with specialist agents that partition recipe surfaces and share measured lineage across tria",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 11,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 3,
+      "score": 3.0
+    },
+    {
+      "title": "A^2TGPO: Agentic Turn-Group Policy Optimization with Adaptive Turn-level Clipping",
+      "url": "https://huggingface.co/papers/2605.06200",
+      "arxiv_id": "2605.06200",
+      "abstract": "Reinforcement learning for agentic large language models (LLMs) typically relies on a sparse, trajectory-level outcome reward, making it difficult to evaluate the contribution of individual tool-calls within multi-turn interactions. Existing approaches to such process credit assignment either depend on separate external process reward models that introduce additional consumption, or tree-based structural rollout that merely redistributes the outcome signal while constraining trajectory diversity",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 10,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 4,
+      "score": 3.0
+    },
+    {
+      "title": "Can RL Teach Long-Horizon Reasoning to LLMs? Expressiveness Is Key",
+      "url": "https://huggingface.co/papers/2605.06638",
+      "arxiv_id": "2605.06638",
+      "abstract": "Reinforcement learning (RL) has been applied to improve large language model (LLM) reasoning, yet the systematic study of how training scales with task difficulty has been hampered by the lack of controlled, scalable environments. We introduce ScaleLogic, a synthetic logical reasoning framework that offers independent control over two axes of difficulty: the depth of the required proof planning (i.e., the horizon) and the expressiveness of the underlying logic. Our proposed framework supports a ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 10,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "UniPool: A Globally Shared Expert Pool for Mixture-of-Experts",
+      "url": "https://huggingface.co/papers/2605.06665",
+      "arxiv_id": "2605.06665",
+      "abstract": "Modern Mixture-of-Experts (MoE) architectures allocate expert capacity through a rigid per-layer rule: each transformer layer owns a separate expert set. This convention couples depth scaling with linear expert-parameter growth and assumes that every layer needs isolated expert capacity. However, recent analyses and our routing probe challenge this allocation rule: replacing a deeper layer's learned top-k router with uniform random routing drops downstream accuracy by only 1.0-1.6 points across ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 7,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 5,
+      "score": 3.0
+    },
+    {
+      "title": "AI Co-Mathematician: Accelerating Mathematicians with Agentic AI",
+      "url": "https://huggingface.co/papers/2605.06651",
+      "arxiv_id": "2605.06651",
+      "abstract": "We introduce the AI co-mathematician, a workbench for mathematicians to interactively leverage AI agents to pursue open-ended research. The AI co-mathematician is optimized to provide holistic support for the exploratory and iterative reality of mathematical workflows, including ideation, literature search, computational exploration, theorem proving and theory building. By providing an asynchronous, stateful workspace that manages uncertainty, refines user intent, tracks failed hypotheses, and o",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 6,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "The Granularity Axis: A Micro-to-Macro Latent Direction for Social Roles in Language Models",
+      "url": "https://huggingface.co/papers/2605.06196",
+      "arxiv_id": "2605.06196",
+      "abstract": "Large language models (LLMs) are routinely prompted to take on social roles ranging from individuals to institutions, yet it remains unclear whether their internal representations encode the granularity of such roles, from micro-level individual experience to macro-level organizational, institutional, or national reasoning. We show that they do. We define a contrast-based Granularity Axis as the difference between mean macro- and micro-role hidden states. In Qwen3-8B, this axis aligns with the p",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 5,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 3,
+      "score": 3.0
+    },
+    {
+      "title": "EMO: Pretraining Mixture of Experts for Emergent Modularity",
+      "url": "https://huggingface.co/papers/2605.06663",
+      "arxiv_id": "2605.06663",
+      "abstract": "Large language models are typically deployed as monolithic systems, requiring the full model even when applications need only a narrow subset of capabilities, e.g., code, math, or domain-specific knowledge. Mixture-of-Experts (MoEs) seemingly offer a potential alternative by activating only a subset of experts per input, but in practice, restricting inference to a subset of experts for a given domain leads to severe performance degradation. This limits their practicality in memory-constrained se",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 5,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 7,
+      "score": 3.0
+    },
+    {
+      "title": "KernelBench-X: A Comprehensive Benchmark for Evaluating LLM-Generated GPU Kernels",
+      "url": "https://huggingface.co/papers/2605.04956",
+      "arxiv_id": "2605.04956",
+      "abstract": "LLM-based Triton kernel generation has attracted significant interest, yet a fundamental empirical question remains unanswered: where does this capability break down, and why? We present KernelBench-X, a benchmark designed to answer this question through category-aware evaluation of correctness and hardware efficiency across 176 tasks in 15 categories. Our systematic comparison of five representative methods yields three main findings. First, task structure determines correctness more than metho",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 3,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 14,
+      "score": 3.0
+    },
+    {
+      "title": "Think, then Score: Decoupled Reasoning and Scoring for Video Reward Modeling",
+      "url": "https://huggingface.co/papers/2605.05922",
+      "arxiv_id": "2605.05922",
+      "abstract": "Recent advances in generative video models are increasingly driven by post-training and test-time scaling, both of which critically depend on the quality of video reward models (RMs). An ideal reward model should predict accurate rewards that align with human preferences across diverse scenarios. However, existing paradigms face a fundamental dilemma: Discriminative RMs regress rewards directly on features extracted by multimodal large language models (MLLMs) without explicit reasoning, making t",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 2,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "PianoCoRe: Combined and Refined Piano MIDI Dataset",
+      "url": "https://huggingface.co/papers/2605.06627",
+      "arxiv_id": "2605.06627",
+      "abstract": "Symbolic music datasets with matched scores and performances are essential for many music information retrieval (MIR) tasks. Yet, existing resources often cover a narrow range of composers, lack performance variety, omit note-level alignments, or use inconsistent naming formats. This work presents PianoCoRe, a large-scale piano MIDI dataset that unifies and refines major open-source piano corpora. The dataset contains 250,046 performances of 5,625 pieces written by 483 composers, totaling 21,763",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 2,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 13,
+      "score": 3.0
+    },
+    {
+      "title": "GeoStack: A Framework for Quasi-Abelian Knowledge Composition in VLMs",
+      "url": "https://huggingface.co/papers/2605.06477",
+      "arxiv_id": "2605.06477",
+      "abstract": "We address the challenge of knowledge composition in Vision-Language Models (VLMs), where accumulating expertise across multiple domains or tasks typically leads to catastrophic forgetting. We introduce GeoStack (Geometric Stacking), a modular framework that allows independently trained domain experts to be composed into a unified model. By imposing geometric and structural constraints on the adapter manifold, GeoStack ensures the foundational knowledge of the base model is preserved. Furthermor",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 2,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "When No Benchmark Exists: Validating Comparative LLM Safety Scoring Without Ground-Truth Labels",
+      "url": "https://huggingface.co/papers/2605.06652",
+      "arxiv_id": "2605.06652",
+      "abstract": "Many deployments must compare candidate language models for safety before a labeled benchmark exists for the relevant language, sector, or regulatory regime. We formalize this setting as benchmarkless comparative safety scoring and specify the contract under which a scenario-based audit can be interpreted as deployment evidence. Scores are valid only under a fixed scenario pack, rubric, auditor, judge, sampling configuration, and rerun budget. Because no labels are available, we replace ground-t",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 2,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 14,
+      "score": 3.0
+    },
+    {
+      "title": "Recovering Hidden Reward in Diffusion-Based Policies",
+      "url": "https://huggingface.co/papers/2605.00623",
+      "arxiv_id": "2605.00623",
+      "abstract": "This paper introduces EnergyFlow, a framework that unifies generative action modeling with inverse reinforcement learning by parameterizing a scalar energy function whose gradient is the denoising field. We establish that under maximum-entropy optimality, the score function learned via denoising score matching recovers the gradient of the expert's soft Q-function, enabling reward extraction without adversarial training. Formally, we prove that constraining the learned field to be conservative re",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 2,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "BioTool: A Comprehensive Tool-Calling Dataset for Enhancing Biomedical Capabilities of Large Language Models",
+      "url": "https://huggingface.co/papers/2605.05758",
+      "arxiv_id": "2605.05758",
+      "abstract": "Despite the success of large language models (LLMs) on general-purpose tasks, their performance in highly specialized domains such as biomedicine remains unsatisfactory. A key limitation is the inability of LLMs to effectively leverage biomedical tools, which clinical experts and biomedical researchers rely on extensively in daily workflows. While recent general-domain tool-calling datasets have substantially improved the capabilities of LLM agents, existing efforts in the biomedical domain larg",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 1,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "Sparkle: Realizing Lively Instruction-Guided Video Background Replacement via Decoupled Guidance",
+      "url": "https://huggingface.co/papers/2605.06535",
+      "arxiv_id": "2605.06535",
+      "abstract": "In recent years, open-source efforts like Senorita-2M have propelled video editing toward natural language instruction. However, current publicly available datasets predominantly focus on local editing or style transfer, which largely preserve the original scene structure and are easier to scale. In contrast, Background Replacement, a task central to creative applications such as film production and advertising, requires synthesizing entirely new, temporally consistent scenes while maintaining a",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 1,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 2,
+      "score": 3.0
+    },
+    {
+      "title": "EDU-CIRCUIT-HW: Evaluating Multimodal Large Language Models on Real-World University-Level STEM Student Handwritten Solutions",
+      "url": "https://huggingface.co/papers/2602.00095",
+      "arxiv_id": "2602.00095",
+      "abstract": "Multimodal Large Language Models (MLLMs) hold significant promise for revolutionizing traditional education and reducing teachers' workload. However, accurately interpreting unconstrained STEM student handwritten solutions with intertwined mathematical formulas, diagrams, and textual reasoning poses a significant challenge due to the lack of authentic and domain-specific benchmarks. Additionally, current evaluation paradigms predominantly rely on the outcomes of downstream tasks (e.g., auto-grad",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 1,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 4,
+      "score": 3.0
+    },
+    {
+      "title": "XL-SafetyBench: A Country-Grounded Cross-Cultural Benchmark for LLM Safety and Cultural Sensitivity",
+      "url": "https://huggingface.co/papers/2605.05662",
+      "arxiv_id": "2605.05662",
+      "abstract": "Current LLM safety benchmarks are predominantly English-centric and often rely on translation, failing to capture country-specific harms. Moreover, they rarely evaluate a model's ability to detect culturally embedded sensitivities as distinct from universal harms. We introduce XL-SafetyBench. a suite of 5,500 test cases across 10 country-language pairs, comprising a Jailbreak Benchmark of country-grounded adversarial prompts and a Cultural Benchmark where local sensitivities are embedded within ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 4,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 5,
+      "score": 3.0
+    },
+    {
+      "title": "ResRL: Boosting LLM Reasoning via Negative Sample Projection Residual Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.00380",
+      "arxiv_id": "2605.00380",
+      "abstract": "Reinforcement Learning with Verifiable Rewards (RLVR) enhances reasoning of Large Language Models (LLMs) but usually exhibits limited generation diversity due to the over-incentivization of positive rewards. Although methods like Negative Sample Reinforcement (NSR) mitigate this issue by upweighting penalty from negative samples, they may suppress the semantic distributions shared between positive and negative responses. To boost reasoning ability without losing diversity, this paper proposes ne",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 4,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": 8,
+      "score": 3.0
+    },
+    {
+      "title": "Diffusion Model as a Generalist Segmentation Learner",
+      "url": "https://huggingface.co/papers/2604.24575",
+      "arxiv_id": "2604.24575",
+      "abstract": "Diffusion models are primarily trained for image synthesis, yet their denoising trajectories encode rich, spatially aligned visual priors. In this paper, we demonstrate that these priors can be utilized for text-conditioned semantic and open-vocabulary segmentation, and this approach can be generalized to various downstream tasks to make a general-purpose diffusion segmentation framework. Concretely, we introduce DiGSeg (Diffusion Models as a Generalist Segmentation Learner), which repurposes a ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 3,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "When to Think, When to Speak: Learning Disclosure Policies for LLM Reasoning",
+      "url": "https://huggingface.co/papers/2605.03314",
+      "arxiv_id": "2605.03314",
+      "abstract": "In single-stream autoregressive interfaces, the same tokens both update the model state and constitute an irreversible public commitment. This coupling creates a silence tax: additional deliberation postpones the first task-relevant content, while naive early streaming risks premature commitments that bias subsequent generations. We introduce Side-by-Side (SxS) Interleaved Reasoning, which makes disclosure timing a controllable decision within standard autoregressive generation. SxS interleaves ",
+      "primary_source": "hf_daily_papers",
+      "source_category": "academic",
+      "hf_upvotes": 1,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "arxiv"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    },
+    {
+      "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+      "url": "http://arxiv.org/abs/2605.06667v1",
+      "arxiv_id": "2605.06667v1",
+      "abstract": "For artistic applications, video generation requires fine-grained control over both performance and cinematography, i.e., the actor's motion and the camera trajectory. We present ActCam, a zero-shot method for video generation that jointly transfers character motion from a driving video into a new scene and enables per-frame control of intrinsic and extrinsic camera parameters. ActCam builds on any pretrained image-to-video diffusion model that accepts conditioning in terms of scene depth and ch",
+      "primary_source": "arxiv",
+      "source_category": "academic",
+      "hf_upvotes": 0,
+      "reddit_score": 0,
+      "hn_score": 0,
+      "cross_sources": [
+        "hf_daily_papers"
+      ],
+      "github_stars": "",
+      "score": 3.0
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+[
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "持续领跑！商汤大装置稳居中国MaaS市场第一梯队",
+    "url": "https://www.qbitai.com/2026/05/414428.html",
+    "published": "2026-05-08T11:09:17",
+    "summary": "位列第二",
+    "collected_at": "2026-05-08T22:05:27.964379"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "Redis之父下场，给DeepSeek V4单独造了一台推理引擎",
+    "url": "https://www.qbitai.com/2026/05/414316.html",
+    "published": "2026-05-08T08:20:40",
+    "summary": "Mac上就能本地跑deepseek",
+    "collected_at": "2026-05-08T22:05:27.964391"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "Anthropic出手！AI的内心独白，曝光了",
+    "url": "https://www.qbitai.com/2026/05/414213.html",
+    "published": "2026-05-08T06:34:22",
+    "summary": "原来Claude早就识破了人类的套路（doge）",
+    "collected_at": "2026-05-08T22:05:27.964397"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "GPT-5级推理能力塞进语音模型，OpenAI把同传翻译成本砍穿地板价",
+    "url": "https://www.qbitai.com/2026/05/414194.html",
+    "published": "2026-05-08T04:35:32",
+    "summary": "OpenAI上新三款实时语音模型",
+    "collected_at": "2026-05-08T22:05:27.964402"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "特斯拉百万年薪招数据标注员，朝九晚五，无需AI经验",
+    "url": "https://www.qbitai.com/2026/05/414156.html",
+    "published": "2026-05-08T04:25:39",
+    "summary": "服务FSD和Optimus",
+    "collected_at": "2026-05-08T22:05:27.964407"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "所有实验室都怕字节，所有人都在夸DeepSeek！美国研究员36小时中国AI行",
+    "url": "https://www.qbitai.com/2026/05/414141.html",
+    "published": "2026-05-08T04:15:24",
+    "summary": "这跟中国的开源精神，显然是一脉相承的",
+    "collected_at": "2026-05-08T22:05:27.964411"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "第一批「AI原生」本科生，要毕业了",
+    "url": "https://www.qbitai.com/2026/05/414125.html",
+    "published": "2026-05-08T04:06:46",
+    "summary": "全部都是AI加持的超级个体",
+    "collected_at": "2026-05-08T22:05:27.964416"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "原生Agent杀入画布！一站式搞定专业创作，全程可控、不抽卡",
+    "url": "https://www.qbitai.com/2026/05/413912.html",
+    "published": "2026-05-07T15:54:00",
+    "summary": "背靠国内最大ComfyUI生态",
+    "collected_at": "2026-05-08T22:05:27.964420"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "离谱！一句话+百元预算，这只龙虾就给我搓出了一支百万级广告片？",
+    "url": "https://www.qbitai.com/2026/05/414006.html",
+    "published": "2026-05-07T14:01:49",
+    "summary": "让广告创意不再卡在预算里",
+    "collected_at": "2026-05-08T22:05:27.964424"
+  },
+  {
+    "source": "rss_qbitai",
+    "source_category": "chinese_media",
+    "title": "00后下场整顿Agent：啥都不学就能用好AI，这才是正确打开方式",
+    "url": "https://www.qbitai.com/2026/05/413612.html",
+    "published": "2026-05-07T07:14:28",
+    "summary": "低提示词，挑战主流模型的交互逻辑",
+    "collected_at": "2026-05-08T22:05:27.964429"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "百度搭子DuMate登顶PinchBench，超越Anthropic拿下全球龙虾执行争霸赛冠军",
+    "url": "https://www.leiphone.com/category/industrynews/Oh9CnFrZHHOodA9n.html",
+    "published": "2026-05-08T10:36:00",
+    "summary": "<p>5月8日凌晨，百度搭子DuMate登顶智能体评测基准PinchBench榜首，并在前5位中占据3席，超越Anthropic和OpenAI拿下全球龙虾执行争霸赛冠军。在另外一项DeepResearch深度研究榜单中，DuMate同样位列第一。</p><p>PinchBench是OpenClaw赛道最能体现Agent真实工作能力的评测基准，重点考察Agent在23个真实工作场景下147个任务的多步推理、工具调用和任务闭环能力，并从成功率、速度、成本三个维度综合排名。榜单显示，DuMate以93.3%和93.2%的总成绩包揽前两名。作为对照，Anthropic和OpenAI的同款模型场景下的成",
+    "collected_at": "2026-05-08T22:05:30.273811"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "中国移动与火山引擎推出机密模型服务，为企业提供安全可信AI服务",
+    "url": "https://www.leiphone.com/category/industrynews/aZWpqeMDsRB841I1.html",
+    "published": "2026-05-08T10:23:00",
+    "summary": "<p>5月8日，在2026移动云大会上，中国移动与火山引擎正式发布“移动引擎机密模型服务”专区，为各行业提供兼具技术领先与安全可信的AI服务，包括豆包大模型MaaS服务、Agent开发平台和工具等。</p><p style=\"text-align: center;\"><img src=\"https://static.leiphone.com/uploads/new/images/20260508/69fdb968dc832.png?imageView2/2/w/740\" />&nbsp;</p><p style=\"text-align: center;\"><span style=\"font-s",
+    "collected_at": "2026-05-08T22:05:30.273824"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "当AI开始懂情绪，AI奇妙物语点亮全民创意风潮",
+    "url": "https://www.leiphone.com/category/industrynews/iAOqSCD9VnjVkekb.html",
+    "published": "2026-05-08T08:55:00",
+    "summary": "<p>2026年社交网络的“活人感”，一定是AI给的。从朋友圈的“赛博旅行照”到聊天框里的“AI扩图”，生成式AI已不再是极客的玩具，而是普通人记录生活、表达情绪的第六感。当技术门槛被踏平，一场关于“谁更会玩”的创意竞赛悄然开启。</p><p>近日，由「AI奇妙物语」与安慕希联合发起的“即梦X安慕希整颗蓝莓AI创作大赛” 正在社交平台卷起一场创意风暴。这场事关想象力的全民狂欢折射出的是“AI奇妙物语”IP的先锋创意和贴近大众生活的特质，也为行业提供了一个“AI+艺术+品牌”深度融合的样本。</p><p><strong>用AI解构生活，给日常加上奇幻滤镜</strong></p><p>「AI奇妙",
+    "collected_at": "2026-05-08T22:05:30.273830"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "海信&Vidda“非电视”发布会：六大3C潮品齐发，RGB-Mini LED领衔技术下放",
+    "url": "https://www.leiphone.com/category/weiwu/w3z7rUtQyVlcwUoc.html",
+    "published": "2026-05-08T08:42:00",
+    "summary": "<p style=\"margin-top: 0px; text-align: left; line-height: 1.75em; margin-bottom: 20px;\">5月8日，主题为“有态度 就登场”的海信&amp;Vidda全场景新品发布会正式拉开帷幕。作为全球显示产业的领跑者，海信视像在这一次的发布会上，打破传统屏幕的物理界限，以显示技术为原点，向声音、智能感知与移动能源全面延伸。这并非一次简单的品类试水，而是海信以50余年深厚的全栈智能硬件研发底座和全链AI智造能力，向全场景3C生态发起的一次系统性技术赋能。</p><p style=\"text-align: center; l",
+    "collected_at": "2026-05-08T22:05:30.273835"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "研发投入同比增长25.44%，奇瑞以科技创新推动高质量发展",
+    "url": "https://www.leiphone.com/category/industrynews/9W0R1Vr4Xt3eTXyg.html",
+    "published": "2026-05-08T02:01:00",
+    "summary": "<p><span>2026年4月，奇瑞集团销量再创新高：单月总销量25.14万辆，同比增长25.2%，稳居中国品牌销量第二；新能源销量10.03万辆，同比增长63.8%，规模与增速均居行业前列；出口17.76万辆，同比增长102.4%，再创中国汽车单月出口新纪录。</span></p><p style=\"text-align: justify; margin-top: 0; margin-bottom: 0;\"><span style=\"font-family: '微软雅黑'; font-size: 14pt;\">销量稳步增长的背后，是奇瑞长期坚持技术立企、持续加大创新投入的战略定力。这从最新",
+    "collected_at": "2026-05-08T22:05:30.273840"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "总部人均奖金610万，中国厂却一毛不拔！三星、SK海力士国内员工集体求涨薪；昆仑芯启动A股IPO；男子五一加班身亡！涉事公司：假期自愿",
+    "url": "https://www.leiphone.com/category/zaobao/tqf2pEDQn63OH1d6.html",
+    "published": "2026-05-08T00:35:00",
+    "summary": "<section></section><section><section><section><section><section><section><section style=\"text-align: center;\"><span style=\"font-size: 24px;\"><strong><span style=\"text-align: justify;\">要闻提示</span></strong></span></section><section><section><br /></section></section></section></section></section></sec",
+    "collected_at": "2026-05-08T22:05:30.273845"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "我所知道的胡峥楠",
+    "url": "https://www.leiphone.com/category/transportation/ObpVY9BieePGe8w6.html",
+    "published": "2026-05-07T06:10:00",
+    "summary": "<p>2024年的初夏，小米SU7的爆单与偶发的几起事故，将这家初出茅庐的造车新势力拉入了冰火两重天的舆论场。在新技术的冲击面前，有人感叹诺基亚式的倾覆就在眼前，但真正的局内人眼里，却浮现出另一番光景。</p><p>当一些狂热的粉丝在社交网络上对着传统车企疯狂输出时，雷军却在牌桌底下，做着最务实、甚至是最传统的算计。</p><p>这个算计的核心，叫胡峥楠。</p><p>2026年4月，胡峥楠成为小米汽车CTO，“互联网打法” 的小米有了不一样的意味。</p><h3 style=\"text-align: center;\">1. 杭州湾的暗夜与“无情系统”</h3><p>时间拨回2021年夏天。距",
+    "collected_at": "2026-05-08T22:05:30.273850"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "Anthropic 2千亿豪赌，谷歌云成最大赢家？",
+    "url": "https://www.leiphone.com/category/yanxishe/61V72k9RQozzfeX2.html",
+    "published": "2026-05-07T03:44:00",
+    "summary": "<section><section><section><section><section></section><section><section><section><section></section></section></section><section><span><br /></span></section><section><section><section><section><section style=\"padding-top: 10px; padding-bottom: 10px; text-align: center;\"><section style=\"display: in",
+    "collected_at": "2026-05-08T22:05:30.273854"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "中国高校科研 AI 云市场，阿里云第一！",
+    "url": "https://www.leiphone.com/category/industrynews/oue4W89QPv8sRtVl.html",
+    "published": "2026-05-07T03:35:00",
+    "summary": "<p>5 月 6 日，国际市场调研机构沙利文（Frost &amp; Sullivan）发布《中国高校科研机构AI4S市场追踪报告，2025年》。报告显示，阿里云以26%的市场份额领跑中国高校科研机构AI4S云市场，稳居第一。</p><p style=\"text-align: center;\"><img src=\"https://static.leiphone.com/uploads/new/images/20260507/69fc084da19fc.png?imageView2/2/w/740\" /></p><p>AI4S，即AI for Science，人工智能驱动的科学研究，被称作实验、",
+    "collected_at": "2026-05-08T22:05:30.273859"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "三星官宣家电业务退出中国大陆市场；曝DeepSeek投后估值或达450亿美元；中国航天员中心招募「卧床」志愿者：最高拿7万元，还能玩手机",
+    "url": "https://www.leiphone.com/category/zaobao/hStD94lQmS7vzJG3.html",
+    "published": "2026-05-07T03:24:00",
+    "summary": "<section></section><section><section><section><section><section><section><section></section><section><section>要闻提示</section><section><br /></section></section></section></section></section></section></section></section><p>1.三星宣布停止在中国大陆市场销售所有家电产品，手机业务不受影响</p><p>2.估值近450亿美元？DeepSeek获国家大基金领投磋商</p><p>3.",
+    "collected_at": "2026-05-08T22:05:30.273864"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "无问芯穹再获超7亿融资：首发AI生产力公式，跻身Token经济枢纽",
+    "url": "https://www.leiphone.com/category/yanxishe/eM6mjqZl27orl1gE.html",
+    "published": "2026-05-07T03:16:00",
+    "summary": "<p>5 月 7 日，<strong>无问芯穹宣布此前已再获超 7 亿元融资，持续稳居中国 AI 原生基础设施公司融资规模之首。</strong>联合领投方为杭州高新金投集团和惠远资本，跟投方包括国兴资本、秦淮数据、广发乾和、力合清瞳、中保投资、AEF NextGen、腾瑞资本、卡莱特、中信建投资本和宽德智能学习实验室 (Will)，老股东君联资本、上海国投孚腾和元智未来追加投资。</p><p style=\"text-align: left;\"><img src=\"https://static.leiphone.com/uploads/new/images/20260507/69fc02cee",
+    "collected_at": "2026-05-08T22:05:30.273869"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "美团：“五一”小城服务消费走热  中低线城市休闲玩乐订单增长70%",
+    "url": "https://www.leiphone.com/category/industrynews/LHNcdHNh6k42yp42.html",
+    "published": "2026-05-07T01:36:00",
+    "summary": "<p>“下了飞机直奔洗头店，缅式洗头体验，洗出了全国人气。”被称为“东南亚风情平替”的云南芒市，在“五一”假期，迎来四面八方的游客，当地特色体验“缅式洗头”成为不少游客的打卡项目。</p><p>从边境小城的民族风情体验，到县域目的地的亲子DIY、洗浴休闲和本地美食，小城服务消费正在释放新的增长活力。5月6日，美团发布“五一”假期休闲玩乐消费趋势。美团数据显示，假期期间，中低线城市休闲玩乐订单环比增长近70%，异地用户环比增速达205%，跨城消费持续活跃。</p><p>体验经济蓬勃发展，边境小城、烟火县城成为全国消费者探寻深度体验的目的地。广西南宁、新疆库车、吉林延边、内蒙古乌兰察布、广东澄海、",
+    "collected_at": "2026-05-08T22:05:30.273873"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "从街头骑行到2.5亿生意：汽配在东南亚的另一种打开方式",
+    "url": "https://www.leiphone.com/category/industrynews/3dD07R2heyorIrLv.html",
+    "published": "2026-05-06T10:06:00",
+    "summary": "<p>东南亚街头的晚高峰，摩托车与汽车交织而行。有人在红灯间隙低头调整头盔耳机，有人将手机稳稳架在车充支架上导航前行——这些看似不起眼的细节背后，正构成一个正在被重新定义的汽配消费场景。</p><p>而十年前，这些细化的需求还很少被专门定义。那时，中国卖家刚刚开始通过跨境电商尝试走向海外，更多是在寻找“能卖什么”。而十年后的今天，随着平台能力与市场环境的成熟，越来越多卖家开始思考“为谁而做”“如何才能做得更贴近当地使用场景”。&nbsp;</p><p>对于深圳美特艾电子商务有限公司来说，这样的变化并不只是一次关于产品逻辑的升级，更像是一条与平台发展同步展开的成长路径。</p><p>从2016年",
+    "collected_at": "2026-05-08T22:05:30.273881"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "蚂蚁阿福启动“健康中国体检关怀行动”，为1亿人免费解读体检报告",
+    "url": "https://www.leiphone.com/category/industrynews/B3MGZRHtiuWL4b1A.html",
+    "published": "2026-05-06T09:28:00",
+    "summary": "<p>&nbsp;春季是传统的体检季，可很多人拿到体检报告却犯了难。一项5000名网友参与的调研显示，80%的受访者表示体检报告没有得到详细讲解，也不知道检后该怎么做；75%的受访者没有按体检报告的建议进行复查。</p><p>为解决这一普遍痛点，5月6日，国内最大的AI健康应用蚂蚁阿福启动“健康中国体检关怀行动”，为1亿人免费解读体检报告。用户打开阿福App拍照或上传体检报告，即可获得实时、免费、专业的解读，明明白白看懂报告。</p><p style=\"text-align: center;\"><img src=\"https://static.leiphone.com/uploads/new/",
+    "collected_at": "2026-05-08T22:05:30.273885"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "独家丨腾讯云成立云产品六部，王慧星担任负责人",
+    "url": "https://www.leiphone.com/category/industrynews/YkSi35iAcrFzjzVJ.html",
+    "published": "2026-05-06T09:17:00",
+    "summary": "<p>雷峰网消息，腾讯云发布一则内部信，将成立云产品六部，负责构建AI原生的代码（CodeBuddy）与泛生产力智能体（WorkBuddy），推进系列智能体产品的能力建设与商业化。腾讯副总裁、腾讯云CTO王慧星兼任云产品六部负责人，向CSIG总裁汤道生汇报；刘毅担任云产品六部助理总经理，向王慧星汇报。</p><p>此前，腾讯云产研一共有五大产品部，产品一部主要负责IaaS相关产品，以及数据库、消息列队等部分PaaS；产品二部主要负责 PaaS以及大数据；产品三部则是负责智能体开发平台、AI SaaS、知识引擎、计算加速；产品四部负责中台业务，包括面向开发者的AI coding；产品五部负责CD",
+    "collected_at": "2026-05-08T22:05:30.273890"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "滴滴充电：“五一”假期充电量同比增逾40%  自驾热潮推动需求增长",
+    "url": "https://www.leiphone.com/category/industrynews/lgNRrnuEEaZrVBue.html",
+    "published": "2026-05-06T08:58:00",
+    "summary": "<p style=\"margin-top: 0; margin-bottom: 0; text-indent: 2em;\"><span>随着充电基础设施的逐渐完善，越来越多</span><span>的新能源车主加入自驾出游的行列。</span></p><p style=\"margin-top: 0; margin-bottom: 0; text-indent: 2em;\"><span style=\"font-family: '宋体'; font-size: 12pt;\">滴滴充电数据显示，</span><span style=\"font-family: '宋体'; font-size: 12p",
+    "collected_at": "2026-05-08T22:05:30.273894"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "爱芯元智的双轮驱动：车载放量，边缘爆发",
+    "url": "https://www.leiphone.com/category/transportation/ufAiBGGYeOrCDL9X.html",
+    "published": "2026-05-06T06:57:00",
+    "summary": "<section><section><section><section><section></section><section><section><section><section></section></section></section><section><span><p>作者丨郑浩钧</p><p>编辑丨李雨晨</p></span></section><p style=\"text-align: justify; margin-bottom: 24px; line-height: 1.75em;\"><span style=\"font-family: Arial; font-size: 11p",
+    "collected_at": "2026-05-08T22:05:30.273899"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "独家丨Manus 收购案叫停「后遗症」：Meta AI 宫斗迎来最大变数",
+    "url": "https://www.leiphone.com/category/industrynews/XLaWypQzCBXv3vqU.html",
+    "published": "2026-05-06T06:13:00",
+    "summary": "<section><section><section><section><section></section><section><section><section><section></section></section></section><p><span><br /></span></p><p style=\"text-align: center;\"><span><img src=\"https://static.leiphone.com/uploads/new/images/20260506/69fadb6f596dd.png?imageView2/2/w/740\" /></span></p",
+    "collected_at": "2026-05-08T22:05:30.273904"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "全球首款8K AI拇指运动相机！光子跃迁LEAPTIC Cube正式预售",
+    "url": "https://www.leiphone.com/category/industrynews/yna6yWhZdmT3QxYt.html",
+    "published": "2026-05-06T02:57:00",
+    "summary": "<p>它是唯一登录央视春晚的智能影像品牌，也是首个拿下TechRadar“Best of CES”奖项的中国智能影像产品，还是CES 2026被媒体誉为AI影像新物种的拇指相机。</p><p>近日，承载着全球期待与顶级赞誉的<strong>全球首款8K AI拇指运动相机</strong>&nbsp;LEAPTIC Cube正式预售（4月30日-5月11日）。这不仅是一次新品的预售，更像是一场关于「创作自由」的宣言。</p><p>根据新品信息，光子跃迁并未试图在传统运动相机的赛道上做加法，而是选择打破物理与认知的双重边界，用仅有拇指大小的体积，向世界证明：极致的便携、顶格的画质与懂你所想的AI，",
+    "collected_at": "2026-05-08T22:05:30.273908"
+  },
+  {
+    "source": "rss_leiphone_ai",
+    "source_category": "chinese_media",
+    "title": "豆包将新增付费订阅，主打生产力场景；宇树机器人在美买票坐飞机，电池被没收；亚马逊进军物流行业；红果短剧将收费？抖音副总裁辟谣",
+    "url": "https://www.leiphone.com/category/zaobao/N2sl4ulRn8N6QNST.html",
+    "published": "2026-05-06T00:41:00",
+    "summary": "<p style=\"text-align: center;\"><span style=\"font-size: 24px;\"><strong>要闻提示</strong></span></p><p style=\"text-align: justify;\">1.宇树机器人在美买票坐飞机，电池被没收，致航班延误逾1小时</p><p style=\"text-align: justify;\">2.豆包将在免费模式外新增付费订阅，主打生产力场景</p><p style=\"text-align: justify;\">3.红果短剧将收费？抖音副总裁辟谣：免费追剧核心模式未变</p><p style=\"text-",
+    "collected_at": "2026-05-08T22:05:30.273912"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "Anthropic Introduces Natural Language Autoencoders That Convert Claude’s Internal Activations Directly into Human-Readable Text Explanations",
+    "url": "https://www.marktechpost.com/2026/05/08/anthropic-introduces-natural-language-autoencoders-that-convert-claudes-internal-activations-directly-into-human-readable-text-explanations/",
+    "published": "2026-05-08T07:45:09",
+    "summary": "<p>When you type a message to Claude, something invisible happens in the middle. The words you send get converted into long lists of numbers called activations that the model uses to process context and generate a response. These activations are, in effect, where the model&#8217;s &#8220;thinking&#8",
+    "collected_at": "2026-05-08T22:05:31.426313"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "OpenAI Releases Three Realtime Audio Models: GPT-Realtime-2, GPT-Realtime-Translate, and GPT-Realtime-Whisper in the Realtime API",
+    "url": "https://www.marktechpost.com/2026/05/08/openai-releases-three-realtime-audio-models-gpt-realtime-2-gpt-realtime-translate-and-gpt-realtime-whisper-in-the-realtime-api/",
+    "published": "2026-05-08T07:05:36",
+    "summary": "<p>Three purpose-built audio models expand what developers can build with live voice: reasoning agents, speech translation across 70+ languages, and streaming transcription.</p>\n<p>The post <a href=\"https://www.marktechpost.com/2026/05/08/openai-releases-three-realtime-audio-models-gpt-realtime-2-gp",
+    "collected_at": "2026-05-08T22:05:31.426325"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "Build a CloakBrowser Automation Workflow with Stealth Chromium, Persistent Profiles, and Browser Signal Inspection",
+    "url": "https://www.marktechpost.com/2026/05/07/build-a-cloakbrowser-automation-workflow-with-stealth-chromium-persistent-profiles-and-browser-signal-inspection/",
+    "published": "2026-05-08T00:14:49",
+    "summary": "<p>In this tutorial, we explore CloakBrowser, a Python-friendly browser automation tool that uses Playwright-style APIs within a stealth Chromium environment. We begin by setting up CloakBrowser, preparing the required browser binary, and resolving the common Colab asyncio loop issue by running the ",
+    "collected_at": "2026-05-08T22:05:31.426330"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "LightSeek Foundation Releases TokenSpeed, an Open-Source LLM Inference Engine Targeting TensorRT-LLM-Level Performance for Agentic Workloads",
+    "url": "https://www.marktechpost.com/2026/05/07/lightseek-foundation-releases-tokenspeed-an-open-source-llm-inference-engine-targeting-tensorrt-llm-level-performance-for-agentic-workloads/",
+    "published": "2026-05-07T22:03:47",
+    "summary": "<p>Inference efficiency has quietly become one of the most consequential bottlenecks in AI deployment. As agentic coding systems such as Claude Code, Codex, and Cursor scale from developer tools to infrastructure powering software development at large, the underlying inference engines serving those ",
+    "collected_at": "2026-05-08T22:05:31.426335"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "Meta AI Releases NeuralBench: A Unified Open-Source Framework to Benchmark NeuroAI Models Across 36 EEG Tasks and 94 Datasets",
+    "url": "https://www.marktechpost.com/2026/05/07/meta-ai-releases-neuralbench-a-unified-open-source-framework-to-benchmark-neuroai-models-across-36-eeg-tasks-and-94-datasets/",
+    "published": "2026-05-07T08:37:32",
+    "summary": "<p>Meta AI team has released NeuralBench, a unified open-source framework for benchmarking NeuroAI models, alongside NeuralBench-EEG v1.0 — the largest open EEG benchmark to date, covering 36 tasks, 94 datasets, and 14 deep learning architectures evaluated under a single standardized interface acros",
+    "collected_at": "2026-05-08T22:05:31.426340"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "OpenAI Introduces MRC (Multipath Reliable Connection): A New Open Networking Protocol for Large-Scale AI Supercomputer Training Clusters",
+    "url": "https://www.marktechpost.com/2026/05/07/openai-introduces-mrc-multipath-reliable-connection-a-new-open-networking-protocol-for-large-scale-ai-supercomputer-training-clusters/",
+    "published": "2026-05-07T07:50:02",
+    "summary": "<p>MRC (Multipath Reliable Connection) is a new open networking protocol developed by OpenAI in partnership with AMD, Broadcom, Intel, Microsoft, and NVIDIA that improves GPU networking performance and resilience in large-scale AI training clusters by spreading packets across hundreds of paths simul",
+    "collected_at": "2026-05-08T22:05:31.426345"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "Zyphra Releases ZAYA1-8B: A Reasoning MoE Trained on AMD Hardware That Punches Far Above Its Weight Class",
+    "url": "https://www.marktechpost.com/2026/05/06/zyphra-releases-zaya1-8b-a-reasoning-moe-trained-on-amd-hardware-that-punches-far-above-its-weight-class/",
+    "published": "2026-05-07T05:44:59",
+    "summary": "<p>Zyphra releases ZAYA1-8B, a reasoning Mixture of Experts model with only 760M active parameters that outperforms open-weight models many times its size on math and coding benchmarks — closing in on DeepSeek-V3.2 and surpassing Claude 4.5 Sonnet on HMMT'25 with its novel Markovian RSA test-time co",
+    "collected_at": "2026-05-08T22:05:31.426350"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "A Groq-Powered Agentic Research Assistant with LangGraph, Tool Calling, Sub-Agents, and Agentic Memory: Lets Built It",
+    "url": "https://www.marktechpost.com/2026/05/06/a-groq-powered-agentic-research-assistant-with-langgraph-tool-calling-sub-agents-and-agentic-memory-lets-built-it/",
+    "published": "2026-05-06T23:00:03",
+    "summary": "<p>In this tutorial, we build a Groq-powered agentic research workflow that runs directly using Groq’s free OpenAI-compatible inference endpoint</p>\n<p>The post <a href=\"https://www.marktechpost.com/2026/05/06/a-groq-powered-agentic-research-assistant-with-langgraph-tool-calling-sub-agents-and-agent",
+    "collected_at": "2026-05-08T22:05:31.426354"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "CopilotKit Introduces Enterprise Intelligence Platform That Gives Agentic Applications Persistent Memory Across Sessions and Devices",
+    "url": "https://www.marktechpost.com/2026/05/06/copilotkit-introduces-enterprise-intelligence-platform-that-gives-agentic-applications-persistent-memory-across-sessions-and-devices/",
+    "published": "2026-05-06T21:10:08",
+    "summary": "<p>CopilotKit Intelligence adds a managed persistence layer on top of the open-source CopilotKit stack, giving agents the ability to retain context, state, and interaction history without custom storage infrastructure</p>\n<p>The post <a href=\"https://www.marktechpost.com/2026/05/06/copilotkit-introd",
+    "collected_at": "2026-05-08T22:05:31.426359"
+  },
+  {
+    "source": "rss_marktechpost",
+    "source_category": "english_media",
+    "title": "Google AI Releases Multi-Token Prediction (MTP) Drafters for Gemma 4: Delivering Up to 3x Faster Inference Without Quality Loss",
+    "url": "https://www.marktechpost.com/2026/05/06/google-ai-releases-multi-token-prediction-mtp-drafters-for-gemma-4-delivering-up-to-3x-faster-inference-without-quality-loss/",
+    "published": "2026-05-06T08:23:04",
+    "summary": "<p>Google Introduces MTP Drafters for Gemma 4 Family Using Speculative Decoding to Achieve Up to 3x Speedup</p>\n<p>The post <a href=\"https://www.marktechpost.com/2026/05/06/google-ai-releases-multi-token-prediction-mtp-drafters-for-gemma-4-delivering-up-to-3x-faster-inference-without-quality-loss/\">",
+    "collected_at": "2026-05-08T22:05:31.426363"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "5% GPU utilization: The $401 billion AI infrastructure problem enterprises can't keep ignoring",
+    "url": "https://venturebeat.com/infrastructure/5-gpu-utilization-the-401-billion-ai-infrastructure-problem-enterprises-cant-keep-ignoring",
+    "published": "2026-05-08T13:00:00",
+    "summary": "<p>For the last 24 months, one narrative justified every over-provisioned data center and bloated IT budget: the GPU scramble. Silicon was the new oil, and H100s traded like contraband. Reserve capacity now or your enterprise would be left behind.</p><p>The bill is now due, and the CFO is paying att",
+    "collected_at": "2026-05-08T22:05:33.247163"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "Anthropic introduces \"dreaming,\" a system that lets AI agents learn from their own mistakes",
+    "url": "https://venturebeat.com/technology/anthropic-introduces-dreaming-a-system-that-lets-ai-agents-learn-from-their-own-mistakes",
+    "published": "2026-05-08T00:09:35",
+    "summary": "<p><a href=\"https://www.anthropic.com/\">Anthropic</a> on Tuesday unveiled a suite of updates to its <a href=\"https://platform.claude.com/docs/en/managed-agents/overview\">Claude Managed Agents</a> platform at its second annual <a href=\"https://claude.com/code-with-claude\">Code with Claude developer c",
+    "collected_at": "2026-05-08T22:05:33.247173"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "How Sakana trained a 7B model to orchestrate GPT, Claude and Gemini LLMs",
+    "url": "https://venturebeat.com/orchestration/how-sakana-trained-a-7b-model-to-orchestrate-gpt-5-claude-sonnet-4-and-gemini-2-5-pro",
+    "published": "2026-05-07T21:23:46",
+    "summary": "<p>Every LangChain pipeline your team hardcodes starts breaking the moment the query distribution shifts — and it always shifts. That bottleneck is what Sakana AI set out to eliminate.</p><p>Researchers at Sakana AI have introduced the &quot;<a href=\"https://arxiv.org/abs/2512.04388\">RL Conductor</a",
+    "collected_at": "2026-05-08T22:05:33.247178"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "Meet ZAYA1-8B, a super efficient, open reasoning model trained on AMD Instinct MI300 GPUs",
+    "url": "https://venturebeat.com/technology/meet-zaya1-8b-a-super-efficient-open-reasoning-model-trained-on-amd-instinct-mi300-gpus",
+    "published": "2026-05-07T18:24:00",
+    "summary": "<p>Even as leading AI providers like OpenAI and Anthropic <a href=\"https://x.ai/news/anthropic-compute-partnership\">battle over the compute</a> to train and release ever larger, more powerful models, other labs are going in a different direction — pursuing the development of smaller, more efficient ",
+    "collected_at": "2026-05-08T22:05:33.247183"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "Why AI breaks without context — and how to fix it",
+    "url": "https://venturebeat.com/orchestration/why-ai-breaks-without-context-and-how-to-fix-it",
+    "published": "2026-05-07T07:00:00",
+    "summary": "<p><i>Presented by Zeta Global</i></p><hr /><p>The gap between what AI promises and what it delivers is not subtle. The same model can produce precise, useful output in one system and generic, irrelevant results in another. </p><p>The issue is not the model. It&#x27;s the context.</p><p>Most enterpr",
+    "collected_at": "2026-05-08T22:05:33.247188"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "Anthropic Skill scanners passed every check. The malicious code rode in on a test file.",
+    "url": "https://venturebeat.com/security/anthropic-skill-scanners-passed-every-check-malicious-code-test-file",
+    "published": "2026-05-07T07:00:00",
+    "summary": "<p>Picture this scenario: An Anthropic Skill scanner runs a full analysis of a Skill pulled from ClawHub or skills.sh. Its markdown instructions are clean, and no prompt injection is detected. No shell commands are hiding in the SKILL.md. Green across the board.</p><p>The scanner never looked at the",
+    "collected_at": "2026-05-08T22:05:33.247192"
+  },
+  {
+    "source": "rss_venturebeat",
+    "source_category": "english_media",
+    "title": "Market research is too slow for the AI era, so Brox built 60,000 identical 'digital twins' of real people you can survey instantly, repeatedly",
+    "url": "https://venturebeat.com/data/market-research-is-too-slow-for-the-ai-era-so-brox-built-60-000-identical-digital-twins-of-real-people-you-can-survey-instantly-repeatedly",
+    "published": "2026-05-06T16:16:49",
+    "summary": "<p>In a world where a viral TikTok video can cause a brand to trend globally in mere hours, the traditional market research cycle — often spanning 12 weeks — is becoming a liability. </p><p>The lag between a survey question and the answers from a wide (or targeted) pool of respondents has become a p",
+    "collected_at": "2026-05-08T22:05:33.247197"
+  }
+]

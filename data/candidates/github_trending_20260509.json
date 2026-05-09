@@ -1,0 +1,92 @@
+[
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "addyosmani/agent-skills",
+    "url": "https://github.com/addyosmani/agent-skills",
+    "description": "Production-grade engineering skills for AI coding agents.",
+    "stars_today": "1,893 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431088"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "Hmbown/DeepSeek-TUI",
+    "url": "https://github.com/Hmbown/DeepSeek-TUI",
+    "description": "Coding agent for DeepSeek models that runs in your terminal",
+    "stars_today": "3,731 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431184"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "z-lab/dflash",
+    "url": "https://github.com/z-lab/dflash",
+    "description": "DFlash: Block Diffusion for Flash Speculative Decoding",
+    "stars_today": "379 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431266"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "decolua/9router",
+    "url": "https://github.com/decolua/9router",
+    "description": "Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.",
+    "stars_today": "1,052 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431346"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "awslabs/aidlc-workflows",
+    "url": "https://github.com/awslabs/aidlc-workflows",
+    "description": "AI-Driven Life Cycle (AI-DLC) adaptive workflow steering rules for AI coding agents",
+    "stars_today": "58 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431516"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "HKUDS/AI-Trader",
+    "url": "https://github.com/HKUDS/AI-Trader",
+    "description": "\"AI-Trader: 100% Fully-Automated Agent-Native Trading\"",
+    "stars_today": "202 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431595"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "LearningCircuit/local-deep-research",
+    "url": "https://github.com/LearningCircuit/local-deep-research",
+    "description": "~95% on SimpleQA (e.g. Qwen3.6-27B on a 3090). Supports all local and cloud LLMs (llama.cpp, Ollama, Google, ...). 10+ search engines - arXiv, PubMed, your private documents. Everything Local & Encrypted.",
+    "stars_today": "559 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431687"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "lobehub/lobehub",
+    "url": "https://github.com/lobehub/lobehub",
+    "description": "The ultimate space for work and life — to find, build, and collaborate with agent teammates that grow with you. We are taking agent harness to the next level — enabling multi-agent collaboration, effortless agent team design, and introducing agents as the unit of work interaction.",
+    "stars_today": "125 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431783"
+  },
+  {
+    "source": "github_trending",
+    "source_category": "engineering",
+    "repo": "datawhalechina/hello-agents",
+    "url": "https://github.com/datawhalechina/hello-agents",
+    "description": "📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程",
+    "stars_today": "667 stars today",
+    "since": "daily",
+    "collected_at": "2026-05-09T10:28:42.431863"
+  }
+]
