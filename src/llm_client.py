@@ -26,11 +26,12 @@ def get_preset(name):
 # ============================================================
 # Gemini 系列（OpenAI 兼容格式，需代理）
 # ============================================================
-def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, max_tokens=2000):
+def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, max_tokens=2000, retries=3):
     cfg = get_preset(preset_name)
     if not cfg:
         return None
 
+    import time as _time
     url = cfg["base_url"].rstrip("/") + "/chat/completions"
     headers = {
         "Content-Type": "application/json",
@@ -43,53 +44,65 @@ def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, ma
         "max_tokens": max_tokens,
     }
 
-    try:
-        kwargs = {"timeout": 90}
-        if cfg.get("needs_proxy"):
-            kwargs["proxy"] = PROXY_URL
-        with httpx.Client(**kwargs) as client:
-            resp = client.post(url, headers=headers, json=payload)
-        if resp.status_code == 200:
-            return resp.json()["choices"][0]["message"]["content"]
-        else:
-            print(f"  [Gemini] HTTP {resp.status_code}: {resp.text[:100]}")
+    for attempt in range(retries):
+        try:
+            kwargs = {"timeout": 120}
+            if cfg.get("needs_proxy"):
+                kwargs["proxy"] = PROXY_URL
+            with httpx.Client(**kwargs) as client:
+                resp = client.post(url, headers=headers, json=payload)
+            if resp.status_code == 200:
+                return resp.json()["choices"][0]["message"]["content"]
+            elif resp.status_code >= 500 and attempt < retries - 1:
+                _time.sleep(5)
+                continue
+            else:
+                print(f"  [Gemini] HTTP {resp.status_code}: {resp.text[:100]}")
+                return None
+        except Exception as e:
+            if attempt < retries - 1:
+                _time.sleep(5)
+                continue
+            print(f"  [Gemini] 失败(重试{retries}次): {e}")
             return None
-    except Exception as e:
-        print(f"  [Gemini] 失败: {e}")
-        return None
 
 
 # ============================================================
 # Claude 系列（AWS Bedrock invoke_model）
 # ============================================================
-def call_claude(prompt, preset_name="claude-haiku", temperature=0.3, max_tokens=2000):
+def call_claude(prompt, preset_name="claude-haiku", temperature=0.3, max_tokens=2000, retries=3):
     cfg = get_preset(preset_name)
     if not cfg:
         return None
 
-    try:
-        client = boto3.client(
-            "bedrock-runtime",
-            region_name=cfg["aws_region"],
-            aws_access_key_id=cfg["aws_access_key_id"],
-            aws_secret_access_key=cfg["aws_secret_access_key"],
-        )
-        response = client.invoke_model(
-            modelId=cfg["model"],
-            contentType="application/json",
-            accept="application/json",
-            body=json.dumps({
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": max_tokens,
-                "temperature": temperature,
-                "messages": [{"role": "user", "content": prompt}],
-            }),
-        )
-        result = json.loads(response["body"].read())
-        return result["content"][0]["text"]
-    except Exception as e:
-        print(f"  [Claude/{preset_name}] 失败: {e}")
-        return None
+    import time as _time
+    for attempt in range(retries):
+        try:
+            client = boto3.client(
+                "bedrock-runtime",
+                region_name=cfg["aws_region"],
+                aws_access_key_id=cfg["aws_access_key_id"],
+                aws_secret_access_key=cfg["aws_secret_access_key"],
+            )
+            response = client.invoke_model(
+                modelId=cfg["model"],
+                contentType="application/json",
+                accept="application/json",
+                body=json.dumps({
+                    "anthropic_version": "bedrock-2023-05-31",
+                    "max_tokens": max_tokens,
+                    "temperature": temperature,
+                    "messages": [{"role": "user", "content": prompt}],
+                }),
+            )
+            result = json.loads(response["body"].read())
+            return result["content"][0]["text"]
+        except Exception as e:
+            if attempt < retries - 1:
+                _time.sleep(5)
+                continue
+            print(f"  [Claude/{preset_name}] 失败(重试{retries}次): {e}")
+            return None
 
 
 # ============================================================

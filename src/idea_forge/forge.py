@@ -380,5 +380,5 @@ if __name__ == "__main__":
     for s in seeds:
         print(f"  - {s['title'][:60]}")
 
-    # 先用 1 个种子 × 2 个 B 方向做测试（节省 token）
-    run_idea_forge(seeds[:1], b_ids=["mllm_position", "mllm_fusion"])
+    # 全量运行：所有种子 × 所有 B 方向
+    run_idea_forge(seeds)
