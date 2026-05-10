@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-05-10T08:02:04.452305",
+  "pipeline_version": "v4",
+  "approach": "社区真实讨论为入口 → LLM insight过滤 → Pro深度研判",
+  "stats": {
+    "reddit_raw": 0,
+    "reddit_quality": 0,
+    "hn_raw": 24,
+    "hn_quality": 24,
+    "after_insight_filter": 0,
+    "final_judged": 0
+  },
+  "final_candidates": []
+}

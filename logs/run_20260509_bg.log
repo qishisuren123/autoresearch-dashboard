@@ -468,3 +468,49 @@
     [gpt-5.5] → ⚠️ 调用失败
   → ❌ 未通过 (0/1)
     [gpt-5.5] → ❌ 核心理由（一句话）：PCA尾部维度等同于“诱发幻觉的视觉噪声”这一机制映射缺乏充
+    [claude-sonnet] → ❌ **核心理由：** 机制映射存在根本性缺陷——PCA的"尾部维度为噪声"是针对数
+  → ❌ 未通过 (0/2)
+    [gemini-pro] → ❌ 
+    [gpt-5.5] → ❌ 核心理由：PCA 按跨图像方差分离“视觉独特信号/语言先验信号”的机制假设不成立
+  → ❌ 未通过 (0/2)
+    [gemini-pro] → ❌ 核心理由：机制映射停留在表面类比（将PCA的
+    [gpt-5.5] → ❌ 核心理由（一句话）：PCA映射主要停留在“信息压缩”的表面类比，关键的“贡献度”
+  → ❌ 未通过 (0/2)
+    [gpt-5.5] → ❌ 核心理由（一句话）：方案几乎没有给出具体机制、数学映射、方法细节或可验证实验设计
+    [claude-sonnet] → ❌ 核心理由：提交内容实为提示词工程的元指令片段，并非完整研究方案，缺乏任何可评审的
+  → ❌ 未通过 (0/2)
+    [gemini-pro] → ❌ 
+    [gpt-5.5] → ⚠️ 调用失败
+  → ❌ 未通过 (0/1)
+    [gpt-5.5] → ❌ 核心理由（一句话）：该方案本质上只是对记忆检索 embedding 做局部 PC
+    [claude-sonnet] → ❌ 核心理由：方案本质上只是将PCA降维应用于检索向量的工程优化，机制映射停留在表面
+  → ❌ 未通过 (0/2)
+    [gemini-pro] → ✅ 通过
+    [gpt-5.5] → ❌ 核心理由：该方案将“高方差/高复现语义模式”直接等同于“未来决策重要性”这一关键
+  → ❌ 未通过 (1/2)
+
+  通过验证: 1/10
+
+────────────────────────────────────────────────────────────
+  Step 3: 生成计划书 (1 个)
+────────────────────────────────────────────────────────────
+
+  生成计划: 多模态大模型 (MLLM) [claude-sonnet]...
+  [Claude/claude-sonnet] 失败(重试3次): Connection was closed before we received a valid response from endpoint URL: "https://bedrock-runtime.us-east-1.amazonaws.com/model/arn%3Aaws%3Abedrock%3Aus-east-1%3A493919098970%3Ainference-profile%2Fglobal.anthropic.claude-sonnet-4-6/invoke".
+  [Gemini] 失败(重试3次): [Errno 111] Connection refused
+    ❌ (fallback)
+
+════════════════════════════════════════════════════════════
+  Forge 完成
+  生成 idea: 21
+  通过验证: 2
+  产出计划: 2
+  保存: /data/renyiming/AutoResearch/data/idea_forge/forge_20260509_2102.json
+════════════════════════════════════════════════════════════
+[21:02:10] Forge 结果: {'seeds_processed': 3, 'total_ideas': 21, 'total_validated': 2, 'total_plans': 2}
+[21:02:10] 更新网页...
+Generated /data/renyiming/AutoResearch/index.html (25960 bytes)
+[21:02:10]   Git push 完成
+[21:02:10] ════════════════════════════════════════════════════════════
+[21:02:10] 全流程完成，耗时 73.5 分钟
+[21:02:10] ════════════════════════════════════════════════════════════
