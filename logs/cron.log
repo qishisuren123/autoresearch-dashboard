@@ -1,0 +1,103 @@
+[08:00:01] ════════════════════════════════════════════════════════════
+[08:00:01] 每日全流程开始: 2026-05-10
+[08:00:01] ════════════════════════════════════════════════════════════
+[08:00:01] ============================================================
+[08:00:01] 模块一：大浪淘沙 - 信息采集与热点筛选
+[08:00:01] ============================================================
+
+============================================================
+  Stage 1: 从社区真实讨论出发（Reddit 近1个月）
+============================================================
+    r/MachineLearning 失败: _ssl.c:983: The handshake operation timed out
+    r/MachineLearning 'flair:Research...': 0 帖
+    r/MachineLearning 失败: _ssl.c:983: The handshake operation timed out
+    r/MachineLearning 'flair:Discussion...': 0 帖
+    r/MachineLearning 失败: _ssl.c:983: The handshake operation timed out
+    r/MachineLearning 'paper OR method OR architectur...': 0 帖
+    r/LocalLLaMA 失败: _ssl.c:983: The handshake operation timed out
+    r/LocalLLaMA 'paper OR research OR method OR...': 0 帖
+    r/LocalLLaMA 失败: _ssl.c:983: The handshake operation timed out
+    r/LocalLLaMA 'benchmark OR evaluation OR tra...': 0 帖
+
+  去重后: 0 帖
+
+  --- Hacker News 近1个月高讨论 ---
+    HN: 28 去重 → 24 高讨论帖（评论≥30）
+
+  讨论质量过滤: 0 → 0 (评论≥15, score≥50)
+
+  Reddit 高质量讨论: 0 帖
+  HN 高质量讨论: 24 帖
+
+============================================================
+  Stage 2: LLM 判断 insight 质量 (Reddit)
+============================================================
+
+============================================================
+  Stage 2: LLM 判断 insight 质量 (Hacker News)
+============================================================
+  [Gemini] 失败(重试3次): [Errno 111] Connection refused
+    Batch 1: 15 → 0 有insight
+  [Gemini] 失败(重试3次): [Errno 111] Connection refused
+    Batch 2: 9 → 0 有insight
+
+  Insight 过滤: 24 → 0
+
+============================================================
+  经 insight 过滤后: 0 个有价值的研究讨论
+============================================================
+
+============================================================
+  Stage 3: Gemini Pro 深度研判 (Top-0)
+============================================================
+
+════════════════════════════════════════════════════════════
+  最终研判结果（社区真实热议 + insight 验证）
+════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════
+  保存: /data/renyiming/AutoResearch/data/verified/pipeline_v4_20260510.json
+════════════════════════════════════════════════════════════
+[08:02:04] 附加渠道采集...
+
+  --- Emergent Mind (社交讨论热度聚合) ---
+    ✅ 17 篇社交热议论文
+
+  --- Paper Digest (影响力排名) ---
+    ✅ 10 篇
+
+  --- AI 研究者博客 + Lab 博客 ---
+    Lilian Weng (OpenAI): ❌ 解析失败
+    Sebastian Raschka (Ahead of AI): 无新文章
+    Chip Huyen: 无新文章
+    Jay Alammar: ❌ [Errno 104] Connection reset by peer
+    Chris Olah (Anthropic): ❌ 解析失败
+    Andrej Karpathy: ❌ 解析失败
+    Simon Willison: ✅ 10 篇
+    OpenAI Research: ✅ 10 篇
+    Google DeepMind: ✅ 1 篇
+    Google Research: ❌ 解析失败
+    Microsoft Research: ✅ 2 篇
+    BAIR (Berkeley AI Research): ✅ 1 篇
+    Hugging Face Blog: ❌ 解析失败
+    Distill.pub: 无新文章
+    Off the Convex Path: 无新文章
+    The Gradient: 无新文章
+
+  --- 顶会 Best Paper / Oral ---
+    找到 0 个顶会相关热议帖
+
+  --- 中文AI媒体 (Jina Reader) [增量] ---
+    机器之心: ✅ 29 篇 (1 页)
+    新智元: ✅ 57 篇
+    智东西: ✅ 46 篇
+[08:06:37]   附加渠道总计: 183 条
+[08:06:37] 强推荐种子: 0 个
+[08:06:37] 使用历史种子: 0 个
+[08:06:37] 无种子可处理，跳过 Forge
+[08:06:37] 更新网页...
+Generated /data/renyiming/AutoResearch/index.html (26005 bytes)
+[08:09:25]   Git push 完成
+[08:09:25] ════════════════════════════════════════════════════════════
+[08:09:25] 全流程完成，耗时 9.4 分钟
+[08:09:25] ════════════════════════════════════════════════════════════
