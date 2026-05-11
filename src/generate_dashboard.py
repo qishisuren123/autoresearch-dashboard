@@ -114,7 +114,7 @@ a{{color:#60a5fa;text-decoration:none}}a:hover{{text-decoration:underline}}
 <header>
 <div>
 <h1>大浪淘沙 - 每日研究热点</h1>
-<div class="sub">{datetime.now().strftime('%Y-%m-%d %H:%M')} | 数据源: {source_name}</div>
+<div class="sub">{datetime.now().strftime('%Y-%m-%d %H:%M')} | 数据源: {source_name} | <a href="./ideas.html" style="color:#a78bfa">→ 查看 Idea 生成结果 (Idea Forge)</a></div>
 </div>
 <div class="date-nav">
 <select onchange="alert('历史查看功能: 请在 data/verified/ 目录下查找对应日期的 JSON 文件')">
