@@ -28,6 +28,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from config.settings import CANDIDATES_DIR, VERIFIED_DIR, REDDIT_USER_AGENT
 from llm_client import call_flash, call_pro
+try:
+    from idea_forge.influential_people import get_boost_score
+except ImportError:
+    def get_boost_score(text):
+        return 1.0, []
 
 
 def search_reddit_research(subreddit, query, time_filter="month", limit=50):
@@ -199,8 +204,8 @@ def get_hn_discussed(time_filter_days=30):
 
 def llm_insight_filter(posts, source_label="Reddit"):
     """
-    用 LLM(Flash) 判断哪些帖子讨论的是有 genuine insight 的研究,
-    而不是"又大又全的工程项目"或"产品发布"
+    用 LLM(Flash) 判断哪些帖子讨论的是有 genuine insight 的研究
+    改进: 如果帖子提到了大佬（Sam Altman、Yann LeCun、马斯克等），直接跳过 LLM 筛选放行
     """
     print(f"\n{'=' * 60}")
     print(f"  Stage 2: LLM 判断 insight 质量 ({source_label})")
@@ -209,9 +214,30 @@ def llm_insight_filter(posts, source_label="Reddit"):
     if not posts:
         return []
 
+    # 优先通过: 被大佬提及的工作
+    mentioned_by_vip = []
+    remaining = []
+    for p in posts:
+        full_text = p.get("title", "") + " " + p.get("selftext", "")[:500]
+        score, mentions = get_boost_score(full_text)
+        if mentions:
+            p["vip_mentions"] = [m["person"] for m in mentions]
+            p["vip_boost"] = score
+            mentioned_by_vip.append(p)
+        else:
+            remaining.append(p)
+
+    if mentioned_by_vip:
+        print(f"  🌟 {len(mentioned_by_vip)} 帖提及大佬，直接放行")
+        for p in mentioned_by_vip[:5]:
+            print(f"     [{','.join(p['vip_mentions'])}] {p['title'][:50]}")
+
+    # 对剩余的跑正常 LLM 筛选
+    posts = remaining
+
     # 分批处理
     batch_size = 15
-    insightful = []
+    insightful = mentioned_by_vip[:]  # VIP 提及的直接进入
 
     for batch_idx in range(0, len(posts), batch_size):
         batch = posts[batch_idx:batch_idx + batch_size]

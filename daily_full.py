@@ -125,18 +125,31 @@ def main():
         seeds = [c for c in candidates if "强推荐" in c.get("conclusion", "")]
     log(f"强推荐种子: {len(seeds)} 个")
 
-    # 如果今天没有新种子，加载历史种子
+    # 如果今天没有新种子，翻历史文件找（从最近往前）
     if not seeds:
         import glob
         verified_dir = Path(__file__).parent / "data" / "verified"
-        files = sorted(glob.glob(str(verified_dir / "final_*.json")) +
-                       glob.glob(str(verified_dir / "pipeline_v4_*.json")))
-        if files:
-            with open(files[-1]) as f:
-                data = json.load(f)
-            candidates = data.get("final_candidates", [])
-            seeds = [c for c in candidates if "强推荐" in c.get("conclusion", "")]
-        log(f"使用历史种子: {len(seeds)} 个")
+        all_files = sorted(
+            glob.glob(str(verified_dir / "final_*.json")) +
+            glob.glob(str(verified_dir / "pipeline_v4_*.json")) +
+            glob.glob(str(verified_dir / "pipeline_v5_*.json")),
+            reverse=True
+        )
+        all_seeds = {}  # title -> seed dict
+        for fpath in all_files[:10]:
+            try:
+                with open(fpath) as f:
+                    fdata = json.load(f)
+                cands = fdata.get("final_candidates", fdata.get("top_candidates", []))
+                for c in cands:
+                    if "强推荐" in c.get("conclusion", ""):
+                        title = c.get("title", "")
+                        if title and title not in all_seeds:
+                            all_seeds[title] = c
+            except Exception as e:
+                continue
+        seeds = list(all_seeds.values())
+        log(f"从历史文件累积强推荐种子: {len(seeds)} 个")
 
     # 4. Idea Forge（对所有强推荐种子跑 A+B）
     if seeds:

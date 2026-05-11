@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from llm_client import call_model
 from idea_forge.b_library import get_b_library, format_b_context
+from idea_forge.consensus_check import filter_by_consensus
 
 # 三个模型各自独立思考
 IDEA_MODELS = ["gemini-pro", "gpt-5.5", "claude-sonnet"]
@@ -27,12 +28,11 @@ PLAN_MODEL = "claude-sonnet"
 def generate_deep_idea_prompt(seed, b_direction):
     """
     构造深度 idea 生成 prompt
-    关键: 给足 B 方向的上下文，不预设 A+B 的迁移方式
+    关键变化: 加入 B 方向的完整领域知识 MD，让模型不再"缺常识"
     """
     title = seed.get("title", "")
     judgment = seed.get("llm_judgment", "")
 
-    # 提取核心 insight（不提取之前模型建议的方向）
     core_insight = ""
     for line in judgment.split("\n"):
         if "核心insight" in line or "核心 insight" in line:
@@ -41,19 +41,22 @@ def generate_deep_idea_prompt(seed, b_direction):
     if not core_insight:
         core_insight = title
 
-    b_context = format_b_context(b_direction)
+    # 带完整知识 MD
+    b_context = format_b_context(b_direction, include_full_knowledge=True)
 
-    prompt = f"""你是一位顶级 AI 研究者，目标是产出能被 ICLR/NeurIPS/ICML 接收的论文。
+    prompt = f"""你是一位在 B 领域深耕多年的顶级研究者，目标是产出能被 ICLR/NeurIPS/ICML 接收的论文。
 
 【任务】
-下面给你一个"A 种子"（近期被社区热议的技术 insight）和一个"B 方向"（有明确本质问题的研究领域）。
-请你思考：A 的核心机制能否用于解决 B 的本质问题？如果能，请给出一个深度研究方案。
+下面给你一个"A 种子"（近期被社区热议的技术 insight）和一个"B 方向"（你所在的研究领域）。
+B 方向附带了**该领域的真实社区共识、路线之争、常见误区**——你必须严格遵守这些常识。
+
+请思考：A 的核心机制能否真正解决 B 的本质问题？
 
 【A 种子 - 核心 Insight】
 标题: {title}
 洞见: {core_insight}
 
-【B 方向 - 领域与本质问题】
+【B 方向 - 包含社区真实共识】
 {b_context}
 
 【硬件约束】
@@ -61,22 +64,37 @@ def generate_deep_idea_prompt(seed, b_direction):
 - 4 周时间
 - 只能用公开数据集
 
-【要求 - 极其重要】
-1. 你必须深入思考 A 的**底层机制**和 B 的**本质问题**之间有没有结构性的对应关系。如果没有，请直接说"没有合理的映射"，不要硬凑。
-2. 如果有映射，必须说清楚：A 的什么机制 ←→ B 的什么问题，为什么它们是同构的（不是表面相似）。
-3. 论文的故事必须从 B 的问题出发，不能提"受 A 启发"——读者应该觉得这个方法是自然从 B 的问题中长出来的。
-4. 方法必须简洁——能用 1-2 句话说清核心 idea。复杂的方法大概率做不出来。
-5. 必须给出具体的实验方案——用什么数据集、什么基线、什么指标，预期提升多少。
+【核心要求 - 极其重要，必须严格遵守】
+
+1. **必须尊重 B 领域的社区共识**：
+   - 看"常见错误直觉"部分！如果你的 idea 撞到了这些错误直觉，直接放弃，输出 NO_MATCH
+   - 例如：如果 B 是视觉 token 管理，不要说"按时间衰减"（因为视觉 token 没时间维度）
+   - 例如：如果 B 是 Agent 记忆，不要说"直接套遗忘曲线"（社区不认同强行遗忘）
+
+2. **必须从 B 领域"可行创新切入点"出发**：
+   - 在 MD 的"值得做的方向"里找你要做的事
+   - 如果 A 的机制能给这些方向带来新价值，那就是好 idea
+   - 如果硬要在 MD 没提的方向做，大概率会踩坑
+
+3. **机制映射必须有深层道理**（不是表面类比）：
+   - A 的数学形式 vs B 的数学形式
+   - 为什么这两者本质上是同一个问题
+
+4. **方法必须简洁**：能用 1-2 句说清
+
+5. **严禁硬凑**：如果 A 和 B 没有合理映射，直接输出 NO_MATCH，我宁可少一个 idea
 
 【输出格式】
-如果你认为 A 和 B 之间没有合理映射，请输出:
-NO_MATCH: <一句话说为什么不匹配>
 
-如果有合理映射，请输出:
+如果不匹配:
+NO_MATCH: <为什么不匹配，参考 B 的常识说明>
+
+如果有合理映射:
 ===
 核心idea（一句话）: ...
-机制映射: A 的「...」机制 ←→ B 的「...」问题，同构性在于「...」
-论文故事线: 从 B 领域自身出发的动机是什么（不提 A）
+为什么不撞社区共识: (明确说出你的 idea 避开了哪些错误直觉，符合哪些已知有价值的方向)
+机制映射: A 的「...」机制 ←→ B 的「...」问题，数学上的同构性在于「...」
+论文故事线: 从 B 领域自身出发的动机（不提 A）
 方法描述（2-3句）: 具体怎么做
 草拟标题: ...
 关键实验:
@@ -84,8 +102,8 @@ NO_MATCH: <一句话说为什么不匹配>
   - 基线: ...
   - 指标: ...
   - 预期结果: ...
-预实验（1周内可完成）: 做什么小实验能验证这个 idea 有没有信号
-风险: 最可能失败的原因是什么
+预实验（1周内）: 具体做什么，成功标准
+风险: 最可能失败的原因
 ==="""
     return prompt
 
@@ -307,8 +325,14 @@ def run_idea_forge(seeds, b_ids=None):
             print("  无 idea 通过验证")
             continue
 
+        # Step 2.5: 社区共识检查（新增：避免撞 B 领域常识）
+        consensus_passed = filter_by_consensus(validated)
+        if not consensus_passed:
+            print("  无 idea 通过共识检查")
+            continue
+
         # Step 3: 生成计划书
-        with_plans = step3_plan_generation(validated)
+        with_plans = step3_plan_generation(consensus_passed)
 
         all_results.append({
             "seed_title": seed.get("title", ""),
