@@ -161,11 +161,18 @@ def main():
     else:
         log("无种子可处理，跳过 Forge")
 
-    # 5. 更新网页
+    # 5. 更新网页（主页 + Idea Forge 页）
     try:
         update_dashboard()
     except Exception as e:
-        log(f"网页更新失败: {e}")
+        log(f"主页更新失败: {e}")
+
+    try:
+        from generate_idea_page import generate as gen_idea
+        gen_idea()
+        log("Idea Forge 页面已更新")
+    except Exception as e:
+        log(f"Idea 页面更新失败: {e}")
 
     # 6. 推送
     git_push()
