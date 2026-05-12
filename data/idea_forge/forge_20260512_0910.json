@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-05-12T09:10:56.254999",
+  "module": "idea_forge",
+  "config": {
+    "models": [
+      "gemini-pro",
+      "gpt-5.5",
+      "claude-sonnet"
+    ],
+    "plan_model": "claude-sonnet",
+    "b_directions": [
+      "mllm_fusion",
+      "mllm_visual_tokens",
+      "llm_reasoning",
+      "agent_memory"
+    ],
+    "validation": "strict (顶会标准, >50% 通过)"
+  },
+  "results": [],
+  "summary": {
+    "seeds_processed": 12,
+    "total_ideas": 0,
+    "total_validated": 0,
+    "total_plans": 0
+  }
+}

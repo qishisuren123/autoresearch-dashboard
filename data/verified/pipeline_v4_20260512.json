@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-05-12T08:02:30.843149",
+  "pipeline_version": "v4",
+  "approach": "社区真实讨论为入口 → LLM insight过滤 → Pro深度研判",
+  "stats": {
+    "reddit_raw": 0,
+    "reddit_quality": 0,
+    "hn_raw": 25,
+    "hn_quality": 25,
+    "after_insight_filter": 2,
+    "final_judged": 2
+  },
+  "final_candidates": [
+    {
+      "title": "Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)",
+      "url": "https://github.com/nex-crm/wuphf",
+      "hn_url": "https://news.ycombinator.com/item?id=47899844",
+      "score": 260,
+      "num_comments": 115,
+      "created": "2026-04-25T08:53:53Z",
+      "source": "hackernews",
+      "vip_mentions": [
+        "Andrej Karpathy"
+      ],
+      "vip_boost": 1.5,
+      "llm_judgment": "调用失败",
+      "conclusion": "待判断"
+    },
+    {
+      "title": "Show HN: How LLMs Work – Interactive visual guide based on Karpathy's lecture",
+      "url": "https://ynarwal.github.io/how-llms-work/",
+      "hn_url": "https://news.ycombinator.com/item?id=47886517",
+      "score": 245,
+      "num_comments": 55,
+      "created": "2026-04-24T06:48:53Z",
+      "source": "hackernews",
+      "vip_mentions": [
+        "Andrej Karpathy"
+      ],
+      "vip_boost": 1.5,
+      "llm_judgment": "调用失败",
+      "conclusion": "待判断"
+    }
+  ]
+}
