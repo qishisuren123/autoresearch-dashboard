@@ -109,17 +109,17 @@ details pre {
 
 <header>
 <h1>🌊 大浪淘沙 - AI 研究方案锻造</h1>
-<div class="sub">每日自动运行 · 更新于 2026-05-13 09:07</div>
+<div class="sub">每日自动运行 · 更新于 2026-05-13 18:28</div>
 <a class="nav-link" href="./index.html">← 返回信息聚合主页</a>
 </header>
 
 
 <div class="stats">
-    <div class="stat"><div class="n">12</div><div class="l">A 种子</div></div>
+    <div class="stat"><div class="n">14</div><div class="l">A 种子</div></div>
     <div class="stat"><div class="n">4</div><div class="l">B 方向知识库</div></div>
-    <div class="stat"><div class="n">18</div><div class="l">Idea 生成</div></div>
-    <div class="stat"><div class="n">3</div><div class="l">通过验证</div></div>
-    <div class="stat"><div class="n">3</div><div class="l">计划书</div></div>
+    <div class="stat"><div class="n">8</div><div class="l">Idea 生成</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">通过验证</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">计划书</div></div>
 </div>
 
 
@@ -216,7 +216,7 @@ details pre {
 </div>
 </div>
 
-<div class="tab-content" id="tab-seeds"><h2>🌱 A 种子池（12 个强推荐）</h2><p>这些是大浪淘沙筛出的「强推荐做 A 种子」的工作。</p>
+<div class="tab-content" id="tab-seeds"><h2>🌱 A 种子池（14 个强推荐）</h2><p>这些是大浪淘沙筛出的「强推荐做 A 种子」的工作。</p>
 <div class="card">
 <div class="card-top">
 <span class="rank">1</span>
@@ -305,6 +305,49 @@ A+B潜力:
 <div class="card">
 <div class="card-top">
 <span class="rank">5</span>
+<h4><a href="https://news.ycombinator.com/item?id=47899844" target="_blank">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a></h4>
+</div>
+<div class="meta"><span class="ch">hackernews</span> <span class="hot">115 评论</span> <span>260 分</span></div>
+<div class="conclusion"><b>判定：</b>** 【强推荐】。它提供了一个极其优雅、轻量且可解释的Agent记忆范式，是做“Agent+X”应用层创新或微调特定任务模型的绝佳基础种子。</div>
+<details><summary>完整研判</summary><pre>核心insight: 摒弃复杂的向量数据库（Vector DB），利用最基础的纯文本（Markdown）和版本控制（Git）作为AI Agent的长期记忆与知识库。这种“Karpathy风格”的极简架构让Agent的知识读写、修改和回溯过程完全透明，且高度契合大模型处理纯文本的天赋。
+
+社区热议原因: 触动了开发者对当前RAG和Agent记忆系统“过度工程化（如滥用复杂数据库）”的疲劳痛点。采用Git+Markdown不仅大幅降低了开发门槛，还完美解决了Agent行为不可解释、难以调试和无法回滚的痛点。
+
+方法简洁度: 极度简洁优雅。将复杂的Agent记忆与状态管理“降维”为标准的文件读写和Git Commit，没有引入任何黑盒机制，是极其理想的“方法A”基座。
+
+A+B潜力: 作为“方法A（基于Git+Markdown的Agent记忆机制）”，最适合迁移到：1）多智能体协作系统（Agent之间通过类似Pull Request的方式进行代码/文档的审查与合并）；2）动态长文本生成（如长篇小说、法律合同的迭代式撰写与版本控制）；3）游戏NPC/虚拟伴侣的长期记忆演化（记忆随时间自然迭代且可追溯）。
+
+可行性: 绰绰有余。该框架本身偏向工程架构，主要依赖API调用；若要在4周内利用8张L20微调出专门针对“Markdown精准编辑与Git指令操作”优化的开源本地模型（如Llama-3-8B），算力和时间完全充足。
+
+最终判定: 【强推荐】。它提供了一个极其优雅、轻量且可解释的Agent记忆范式，是做“Agent+X”应用层创新或微调特定任务模型的绝佳基础种子。</pre></details>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="rank">6</span>
+<h4><a href="https://www.reddit.com/r/MachineLearning/comments/1skzuhd/i_dont_know_teaching_neural_networks_to_abstain/" target="_blank">&quot;I don&#x27;t know!&quot;: Teaching neural networks to abstain with the HALO-Loss. [R]</a></h4>
+</div>
+<div class="meta"><span class="ch"></span> <span class="hot">28 评论</span> <span>77 分</span></div>
+<div class="conclusion"><b>判定：</b>** 【强推荐】—— 基础且优雅的底层改进，直击“幻觉”这一顶流痛点，即插即用的特性使其具备极高的“A+B”低成本发高分Paper的潜力。</div>
+<details><summary>完整研判</summary><pre>核心insight: 传统交叉熵损失（CE Loss）会迫使特征在空间中无限远离原点，导致模型对分布外（OOD）的垃圾数据产生过度自信的幻觉。HALO-Loss 通过重塑特征空间的几何结构（如限制特征范数或引入拒识区域），让模型学会对未知数据表达“我不知道”。
+
+社区热议原因: 直击了当前AI（尤其是大模型和自动驾驶等高风险领域）最致命的痛点——“过度自信的幻觉”。同时，它从几何直觉出发挑战了统治深度学习多年的标准交叉熵损失，理论优美且容易引发共鸣。
+
+方法简洁度: 高度简洁优雅。作为一种损失函数的底层改进（Loss-level modification），它无需改变网络主体架构，属于典型的“即插即用”模块，极度适合做 A+B 迁移。
+
+A+B潜力: 
+1) 大模型幻觉抑制/对齐（HALO-Loss + SFT/RLHF，从Loss层面教大模型拒绝回答未知问题）；
+2) 高风险视觉任务（HALO-Loss + 医疗影像/自动驾驶，提升OOD检测和系统安全性）；
+3) 开放世界目标检测/分类（HALO-Loss + Open-vocabulary models，处理训练集未见过的类别）。
+
+可行性: 完全可行且算力充裕。修改损失函数的代码实现成本极低，8张L20在4周内足以完成在主流CV数据集（如ImageNet）或中等规模LLM（如Llama-3-8B）上的对比实验、消融分析及衍生创新。
+
+最终判定: 【强推荐】—— 基础且优雅的底层改进，直击“幻觉”这一顶流痛点，即插即用的特性使其具备极高的“A+B”低成本发高分Paper的潜力。</pre></details>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="rank">7</span>
 <h4><a href="https://news.ycombinator.com/item?id=47957627" target="_blank">Alignment whack-a-mole: Finetuning activates recall of copyrighted books in LLMs</a></h4>
 </div>
 <div class="meta"><span class="ch">hackernews</span> <span class="hot">166 评论</span> <span>201 分</span></div>
@@ -324,7 +367,7 @@ A+B潜力: 作为“方法A”（微调导致对齐失效的探测机制），�
 
 <div class="card">
 <div class="card-top">
-<span class="rank">6</span>
+<span class="rank">8</span>
 <h4><a href="https://www.reddit.com/r/MachineLearning/comments/1skql34/i_scaled_a_pure_spiking_neural_network_snn_to/" target="_blank">I scaled a pure Spiking Neural Network (SNN) to 1.088B parameters from scratch. Ran out of budget, but here is what I found [R]</a></h4>
 </div>
 <div class="meta"><span class="ch"></span> <span class="hot">60 评论</span> <span>146 分</span></div>
@@ -346,7 +389,7 @@ A+B潜力:
 
 <div class="card">
 <div class="card-top">
-<span class="rank">7</span>
+<span class="rank">9</span>
 <h4><a href="https://news.ycombinator.com/item?id=48065254" target="_blank">Can LLMs model real-world systems in TLA+?</a></h4>
 </div>
 <div class="meta"><span class="ch">hackernews</span> <span class="hot">32 评论</span> <span>120 分</span></div>
@@ -369,7 +412,7 @@ A+B潜力:
 
 <div class="card">
 <div class="card-top">
-<span class="rank">8</span>
+<span class="rank">10</span>
 <h4><a href="https://www.reddit.com/r/LocalLLaMA/comments/1t0vp3w/pflash_10x_prefill_speedup_over_llamacpp_at_128k/" target="_blank">PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090</a></h4>
 </div>
 <div class="meta"><span class="ch"></span> <span class="hot">91 评论</span> <span>454 分</span></div>
@@ -389,7 +432,7 @@ A+B潜力: 作为“方法A（投机预填充）”，最适合迁移到：1）�
 
 <div class="card">
 <div class="card-top">
-<span class="rank">9</span>
+<span class="rank">11</span>
 <h4><a href="https://www.emergentmind.com/papers/2604.21999" target="_blank">UT Memory: Depth-State Trade-offs in Reasoning</a></h4>
 </div>
 <div class="meta"><span class="ch">emergent_mind</span></div>
@@ -409,7 +452,7 @@ A+B潜力:
 
 <div class="card">
 <div class="card-top">
-<span class="rank">10</span>
+<span class="rank">12</span>
 <h4><a href="https://www.emergentmind.com/papers/2604.19752" target="_blank">Soft-Label Governance in Multi-Agent Systems</a></h4>
 </div>
 <div class="meta"><span class="ch">emergent_mind</span></div>
@@ -431,7 +474,7 @@ A+B潜力:
 
 <div class="card">
 <div class="card-top">
-<span class="rank">11</span>
+<span class="rank">13</span>
 <h4><a href="https://www.emergentmind.com/papers/2604.20209" target="_blank">Scaling Self-Play with Self-Guidance</a></h4>
 </div>
 <div class="meta"><span class="ch">emergent_mind</span></div>
@@ -447,7 +490,7 @@ A+B潜力: 极具迁移价值，非常适合与复杂推理任务（如数学证
 
 <div class="card">
 <div class="card-top">
-<span class="rank">12</span>
+<span class="rank">14</span>
 <h4><a href="https://www.emergentmind.com/papers/2604.20817" target="_blank">Convergent Evolution: LM Number Representations</a></h4>
 </div>
 <div class="meta"><span class="ch">emergent_mind</span></div>
@@ -891,14 +934,14 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 <div class="tab-content" id="tab-plans"><h2>💡 最新方案（Idea + 计划书）</h2>
 <div class="info-box">
-<b>文件：</b>forge_20260511_1157.json<br>
-<b>时间：</b>2026-05-11T11:57:35<br>
-<b>处理种子：</b>4
-&nbsp;|&nbsp;<b>生成 idea：</b>18
-&nbsp;|&nbsp;<b>通过验证：</b>3
-&nbsp;|&nbsp;<b>计划书：</b>3
+<b>文件：</b>forge_20260513_1828.json<br>
+<b>时间：</b>2026-05-13T18:28:00<br>
+<b>处理种子：</b>2
+&nbsp;|&nbsp;<b>生成 idea：</b>8
+&nbsp;|&nbsp;<b>通过验证：</b>1
+&nbsp;|&nbsp;<b>计划书：</b>1
 </div>
-<h3>种子 1: Alignment whack-a-mole: Finetuning activates recall of copyrighted books in LLMs</h3><p>生成 9 idea，通过 2 个</p>
+<h3>种子 1: &quot;I don&#x27;t know!&quot;: Teaching neural networks to abstain with the HALO-Loss. [R]</h3><p>生成 8 idea，通过 1 个</p>
 <div class="card plan-card">
 <div class="plan-header">
 <span class="plan-rank">方案 1.1</span>
@@ -908,1343 +951,191 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 <div class="b-problem"><b>B 问题：</b>视觉信息与文本信息的深层融合机制</div>
 <div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
 <details><summary>📌 Idea 原文</summary><pre>===
-核心idea（一句话）: 视觉encoder的细粒度感知能力在微调中会被&quot;遗忘&quot;（类似安全护栏被破坏），因此提出一种冻结视觉记忆锚点的训练策略，在多模态指令微调过程中通过显式的视觉特征一致性约束，防止视觉encoder的低层局部感知能力在任务导向微调中退化，从而提升细粒度视觉推理。
-
----
+核心idea（一句话）: 在多模态LLM的视觉编码阶段引入&quot;几何感知的特征置信度&quot;机制——让视觉token的特征范数显式编码其语义可靠性，使LLM在融合时能感知哪些视觉区域是&quot;高置信&quot;的、哪些是&quot;模糊/低信息&quot;的，从而在attention层面实现质量感知的模态融合。
 
 为什么不撞社区共识:
-- ❌ 没有&quot;给LLM加额外视觉attention层&quot;（避开了错误直觉1）
-- ❌ 没有&quot;让文本token主动query视觉token&quot;（避开了错误直觉2）
-- ❌ 没有&quot;让视觉token和文本token分布更相似&quot;（避开了错误直觉4）
-- ✅ 命中&quot;Mixture of Vision Encoders&quot;方向：本方法本质上是在保护不同encoder各自的特征专属性（DINO的local特征、CLIP的semantic特征），防止微调把它们&quot;均质化&quot;
-- ✅ 命中&quot;Text-Aware Visual Encoding&quot;方向：通过锚点约束，使视觉编码保留query无关的底层感知能力，作为后续条件编码的可靠基础
-
----
+- ❌ 不是&quot;给MLLM加额外视觉attention层&quot;（我们不改LLM的attention结构，只在视觉token的表示上动手）
+- ❌ 不是&quot;让文本token主动query视觉token&quot;（不改attention pattern，causal attention保持不变）
+- ❌ 不是&quot;让视觉token和文本token更相似&quot;（我们是在视觉token内部区分质量，不是拉近两个模态的分布）
+- ✅ 对应社区认可方向：&quot;Text-Aware Visual Encoding&quot;——先理解哪些视觉信息是可信的，再让LLM有差异地利用它们
+- ✅ 对应社区认可方向：&quot;Mixture of Vision Encoders&quot;的精神——不同视觉区域的语义密度不同，应该被区别对待
+- ✅ 直接打击幻觉问题（HallusionBench），这是社区公认的核心痛点之一
 
 机制映射:
-A 的「微调破坏预训练记忆护栏」机制 ←→ B 的「指令微调破坏视觉encoder细粒度感知能力」问题
+A的「特征范数编码置信度」机制 ←→ B的「视觉token质量异质性导致幻觉」问题
 
 数学上的同构性在于：
-
-两者本质上都是参数空间中的灾难性遗忘（catastrophic forgetting）在特定子能力上的定向表现。
-
-- 在A中：LLM在预训练阶段形成了&quot;版权内容记忆&quot;的激活回路，安全对齐通过微调在参数空间中压制了这些回路的激活，但这种压制是脆弱的——新的无害微调会在参数空间中产生扰动，重新激活这些回路。形式上：$\theta_{aligned} = \theta_{pretrain} + \Delta\theta_{safety}$，新微调 $\Delta\theta_{ft}$ 与 $\Delta\theta_{safety}$ 在参数空间方向上相互干扰。
-
-- 在B中：视觉encoder（尤其是DINO/CLIP）在预训练阶段形成了细粒度局部感知的特征流形，但在多模态指令微调（如VQA、Caption任务）中，梯度反传会使encoder向&quot;回答问题有用&quot;的方向漂移，系统性地压缩低层局部特征的表达，导致细粒度感知退化。形式上：$\phi_{ft} = \phi_{pretrain} + \Delta\phi_{vit}$，其中 $\Delta\phi_{vit}$ 的方向与细粒度特征子空间正交甚至对立。
-
-同构性：两者都是&quot;微调梯度在参数空间中定向破坏预训练形成的特定能力子空间&quot;，A的洞见是这种破坏是可检测且可预防的（通过激活监控），映射到B就是：通过特征空间的锚点约束，检测并防止视觉细粒度能力子空间的漂移。
-
----
+- HALO-Loss的核心洞察：CE Loss让所有样本的特征范数趋向无穷大，导致模型无法区分&quot;我见过的&quot;和&quot;我没见过的&quot;。数学上，softmax(Wᵀf/‖f‖·‖f‖) 在 ‖f‖→∞ 时对任何输入都给出极度尖锐的分布。
+- MLLM的对应问题：CLIP视觉encoder对所有patch都输出固定范数的token（经过LayerNorm归一化），LLM无法从token的几何属性中感知&quot;这个patch的视觉语义是清晰的&quot;还是&quot;这是背景噪声/低信息区域&quot;。LLM只能靠attention权重隐式学习，但这个信号极弱且不稳定，导致模型对模糊视觉区域产生幻觉式填充。
+- 同构性：两者本质上都是&quot;特征空间的几何结构没有编码不确定性&quot;的问题。HALO的解法是让范数成为置信度信号；映射到MLLM就是：让视觉token的范数（或等价的显式置信度标量）在projection之前被重新标定，使LLM的attention机制能自然地&quot;少信任&quot;低置信视觉token。
 
 论文故事线（从B领域自身出发）:
+当前MLLM幻觉的一个被忽视的根源：视觉encoder（CLIP）的输出经过LayerNorm后，所有视觉token的范数被强制均一化，这抹去了&quot;语义密度&quot;信息。一张图中，清晰的前景物体和模糊的背景噪声，在进入LLM时携带的几何信号是完全相同的。LLM的attention机制没有先验来区分&quot;可信视觉证据&quot;和&quot;低质量视觉填充&quot;，只能靠大量数据隐式学习，这在分布外场景（罕见物体、低质量图像、遮挡）下必然失效，表现为幻觉。
 
-&gt; 当前MLLM的视觉encoder在多模态指令微调后，其细粒度感知能力系统性下降——这一现象被社区归因于&quot;视觉encoder本身的限制&quot;，但我们发现真正的罪魁祸首是微调过程本身。我们设计了一套诊断实验，证明：同一个CLIP/DINO encoder，在多模态微调前后，其在细粒度视觉基准（BLINK、HallusionBench）上的特征判别力显著下降，而在语义层面的性能几乎不变。这说明微调在&quot;教会模型回答问题&quot;的同时，悄悄&quot;遗忘&quot;了视觉预训练赋予的细粒度感知能力。基于此，我们提出Visual Anchor Preservation（VAP）训练策略：在微调过程中，通过轻量级的特征一致性损失，将视觉encoder的关键感知子空间锚定在预训练状态附近，同时允许高层语义特征自由适配下游任务。
-
----
+我们的核心主张：视觉token的特征范数应该成为一个显式的、可学习的语义置信度信号，而不是被归一化抹去。
 
 方法描述（2-3句）:
-
-1. 诊断阶段：在微调前后，用DINO的自监督patch相似度矩阵（无需标注）作为细粒度感知的代理指标，量化视觉encoder各层特征的漂移程度，定位&quot;易损层&quot;（通常是中低层）。
-
-2. VAP损失：对易损层施加选择性特征锚定损失 $\mathcal{L}_{VAP} = \sum_{l \in \mathcal{L}_{vuln}} \| G(\phi^l_{ft}(I)) - G(\phi^l_{pretrain}(I)) \|_F^2$，其中 $G(\cdot)$ 是Gram矩阵（捕捉特征的二阶统计，即纹理/局部结构），而非直接约束特征向量（避免过度限制高层语义适配）。
-
-3. 动态权重调度：$\lambda_{VAP}$ 随训练进行衰减，早期强锚定保护细粒度能力，后期放松允许任务适配——整个方法无需额外参数，仅增加约8%训练计算量。
-
----
+在CLIP视觉encoder输出之后、linear projection之前，插入一个轻量级的&quot;Geometric Confidence Calibration（GCC）&quot;模块：(1) 用一个小网络（2层MLP）预测每个patch token的置信度标量 c_i ∈ (0,1]，训练时用HALO风格的几何损失约束——高语义密度的token应有大范数，低信息token的范数应收缩向原点附近的&quot;拒识区域&quot;；(2) 将置信度标量以乘性方式调制token的投影结果：ṽ_i = c_i · Proj(v_i)，使低置信token在LLM的attention中自然获得更小的key/value幅度；(3) 在训练时增加一个辅助损失，用VQA的答案置信度作为弱监督信号反向传播到c_i的预测，无需额外标注。整个GCC模块参数量 &lt; 5M，可插入任何现有MLLM而不改变LLM结构。
 
 草拟标题:
-&quot;Visual Forgetting in Multimodal Finetuning: Diagnosing and Preserving Fine-Grained Perception via Feature Anchor Regularization&quot;
-
-备选（更aggressive）:
-&quot;Don&#x27;t Forget What You Saw: Preventing Fine-Grained Visual Capability Degradation in Multimodal Instruction Tuning&quot;
-
----
+&quot;Geometry-Aware Visual Token Calibration for Hallucination Mitigation in Multimodal LLMs&quot;
+或更具体：
+&quot;HALO-Vision: Teaching MLLMs to Distrust Uncertain Visual Tokens via Feature Geometry Calibration&quot;
 
 关键实验:
-
 - 数据集:
-  - 主评测：HallusionBench（幻觉，细粒度感知敏感）、BLINK（视觉感知基础能力）、MathVista（需要细粒度空间推理）
-  - 辅助评测：MMBench（综合，验证不掉通用性能）、MMMU（验证高层语义不受损）
-
+  - HallusionBench（核心，直接测幻觉）
+  - POPE（物体幻觉，消融用）
+  - MMBench（综合能力，确保不退化）
+  - MMMU（高难度推理，测置信度机制在复杂场景的效果）
+  - MathVista（视觉推理，测细粒度视觉理解）
 - 基线:
-  - LLaVA-1.6-7B（标准微调，无任何保护）
-  - LLaVA-1.6-7B + 完全冻结视觉encoder（上界参考，但会损失适配性）
-  - LLaVA-1.6-7B + L2正则化（naive的参数约束基线）
-  - LLaVA-1.6-7B + EWC（Elastic Weight Consolidation，经典灾难性遗忘对比方法）
-  - InternVL2-8B（验证方法在更强基线上的可迁移性）
-
+  - LLaVA-1.6-7B（直接插入GCC模块，对比原版）
+  - InternVL2-8B（验证方法的通用性）
+  - 消融：去掉几何损失（只用MLP置信度）、去掉乘性调制（只用加性）、去掉辅助损失
 - 指标:
-  - 主指标：HallusionBench准确率、BLINK各子任务均值
-  - 次指标：MathVista准确率、MMBench总分（验证无负迁移）
-  - 分析指标：视觉encoder各层特征的线性可分性（用细粒度分割任务的线性probe评估，量化能力保留程度）
-
+  - HallusionBench: accuracy, yes-ratio
+  - POPE: F1, accuracy
+  - MMBench: overall score
+  - 新增指标：置信度校准曲线（高置信token对应的VQA正确率 vs 低置信token，验证c_i确实有意义）
 - 预期结果:
-  - VAP vs 标准微调：HallusionBench +3~5点，BLINK +2~4点
-  - VAP vs 完全冻结encoder：MMBench持平或更好（说明VAP允许有益的语义适配）
-  - 消融：Gram矩阵约束 &gt; 直接特征L2约束（验证二阶统计的必要性）
-  - 消融：动态权重调度 &gt; 固定权重（验证早期保护、后期放松的设计）
-
----
+  - HallusionBench: +3~5点（幻觉是最直接受益的）
+  - POPE F1: +1~2点
+  - MMBench: 持平或微涨（不退化是底线）
+  - 置信度校准曲线：高c_i的token对应的视觉区域应该是语义清晰的前景，可视化展示
 
 预实验（1周内）:
-
 具体做什么：
-1. （Day 1-2）取LLaVA-1.6-7B，在LLaVA-Instruct-150K上做标准微调（3 epoch），每500步保存checkpoint。用DINO的patch相似度矩阵和线性probe（在ADE20K上）评估视觉encoder各层的细粒度感知能力变化曲线。这是整个论文的核心诊断实验，必须先验证现象存在。
+1. 取LLaVA-1.6-7B，冻结所有参数，只训练一个2层MLP（输入：CLIP patch token，输出：标量c_i）
+2. 用最简单的代理任务训练这个MLP：对于VQA数据，如果模型答对，则答案中涉及的视觉区域（用attention rollout近似）的token应该有高c_i；答错则低c_i。这是一个弱监督二分类。
+3. 训练完后，不改变任何LLM权重，只用c_i做可视化：在POPE/HallusionBench的错误样本上，看低c_i的token是否集中在&quot;幻觉来源&quot;的视觉区域（背景、遮挡、模糊区域）。
 
-2. （Day 3）在HallusionBench和BLINK上跑微调前后的对比，确认细粒</pre></details>
-<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre># 可执行计划书：Visual Anchor Preservation (VAP)
+成功标准：
+- 低c_i token的可视化结果与人类直觉一致（背景/模糊区域置信度低）的比例 &gt; 60%
+- 在POPE上，将低c_i token的投影向量乘以0.1（手动抑制）后，直接inference，幻觉率下降 &gt; 2%（无需任何训练）
 
----
+这个预实验的意义：如果成功，说明CLIP的特征空间中确实存在可被挖掘的&quot;几何置信度&quot;信号，方法的核心假设成立。如果失败（c_i随机分布，可视化无意义），说明CLIP的归一化太彻底，需要换成在projection之后操作，或改用范数本身而非学习的标量。
 
-## 预实验计划（第 1 周）
+风险:
+最可能失败的原因：
 
-### 目标
-验证核心现象：多模态指令微调确实会系统性破坏视觉encoder的细粒度感知能力，且该破坏可被量化检测。
+1. CLIP的LayerNorm太强：CLIP的最后几层LayerNorm会把所有token的范数压到几乎相同，导致&quot;几何置信度&quot;信号</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这份计划书针对你的硬件条件（8张 L20 48GB，无NVLink）进行了深度定制。无NVLink意味着跨卡通信（AllReduce）会受到PCIe带宽的严重限制，因此在训练策略上必须避免频繁的跨卡梯度同步，尽量采用数据并行+梯度累加，或者ZeRO-2（避免ZeRO-3的高频通信）。
 
----
-
-### 1. 环境搭建
-
-#### 硬件分配策略
-```
-预实验阶段：使用 2 张 L20（GPU 0,1）
-保留 6 张用于后续完整实验
-```
-
-#### 代码库选择
-```bash
-# 主代码库：LLaVA-NeXT（官方维护，支持 LLaVA-1.6）
-git clone https://github.com/LLaVA-VL/LLaVA-NeXT.git
-cd LLaVA-NeXT
-git checkout main  # 使用最新稳定版
-
-# 辅助代码库：用于 DINO 特征提取
-# 直接用 timm / transformers，无需额外克隆
-```
-
-#### Python 环境
-```bash
-# 创建独立 conda 环境
-conda create -n vap python=3.10 -y
-conda activate vap
-
-# 核心依赖（按顺序安装，避免冲突）
-pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu121
-pip install transformers==4.40.0
-pip install accelerate==0.28.0
-pip install deepspeed==0.14.0
-pip install peft==0.10.0
-pip install timm==0.9.16
-pip install einops
-pip install open_clip_torch
-
-# 安装 LLaVA-NeXT
-cd LLaVA-NeXT
-pip install -e &quot;.[train]&quot;
-
-# 验证安装
-python -c &quot;import torch; print(torch.cuda.device_count())&quot;  # 应输出 8
-python -c &quot;import transformers; print(transformers.__version__)&quot;
-```
-
-#### 目录结构
-```bash
-mkdir -p /data/vap/{models,datasets,checkpoints,results,logs}
-# /data/vap/models      - 预训练模型权重
-# /data/vap/datasets    - 所有数据集
-# /data/vap/checkpoints - 训练中间checkpoint
-# /data/vap/results     - 评测结果 JSON
-# /data/vap/logs        - 训练日志
-```
+以下是极具执行力的 4 周实验计划。
 
 ---
 
-### 2. 数据准备
+# 🚀 预实验计划（第 1 周）
 
-#### 2.1 预训练模型下载
-```bash
-# LLaVA-1.6-7B（主实验模型）
-cd /data/vap/models
-pip install huggingface_hub
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;liuhaotian/llava-v1.6-vicuna-7b&#x27;,
-    local_dir=&#x27;/data/vap/models/llava-1.6-7b&#x27;,
-    ignore_patterns=[&#x27;*.msgpack&#x27;, &#x27;*.h5&#x27;]
-)
-&quot;
+目标: 用最小成本（不训练LLM，只训一个&lt;5M的MLP）验证CLIP特征空间中是否存在可提取的&quot;几何置信度&quot;信号，并验证抑制低置信度token能否直接减少幻觉。
 
-# CLIP ViT-L/14@336（LLaVA-1.6 使用的视觉encoder）
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;openai/clip-vit-large-patch14-336&#x27;,
-    local_dir=&#x27;/data/vap/models/clip-vit-large-patch14-336&#x27;
-)
-&quot;
+### 1. 环境搭建 (Day 1)
+*   代码库: 使用官方 `LLaVA` (用于模型加载和修改) + `lmms-eval` (用于标准化评测)。
+*   Python环境:
+    ```bash
+    conda create -n gcc_mllm python=3.10 -y
+    conda activate gcc_mllm
+    pip install torch==2.1.2 torchvision --index-url https://download.pytorch.org/whl/cu121
+    git clone https://github.com/haotian-liu/LLaVA.git &amp;&amp; cd LLaVA &amp;&amp; pip install -e .
+    git clone https://github.com/EvolvingLMMs-Lab/lmms-eval.git &amp;&amp; cd lmms-eval &amp;&amp; pip install -e .
+    ```
 
-# DINOv2-Large（用于细粒度感知代理指标）
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;facebook/dinov2-large&#x27;,
-    local_dir=&#x27;/data/vap/models/dinov2-large&#x27;
-)
-&quot;
-```
+### 2. 数据准备 (Day 1)
+*   训练代理任务数据: 下载 `VQAv2` 的一个极小验证集（约5000张图），用于快速训练MLP。
+*   评测数据: 下载 `POPE` 数据集（直接通过 `lmms-eval` 自动下载）。
 
-#### 2.2 微调训练数据
-```bash
-# LLaVA-Instruct-150K（用于微调实验）
-cd /data/vap/datasets
-wget https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/resolve/main/llava_instruct_150k.json
+### 3. 基线运行 (Day 1)
+*   目的: 确认环境无误，记录 Vanilla LLaVA-1.6-7B 的 POPE 原始分数。
+*   命令:
+    ```bash
+    accelerate launch --num_processes=1 -m lmms_eval --model llava --model_args pretrained=&quot;liuhaotian/llava-v1.6-vicuna-7b&quot; --tasks pope --batch_size 1 --log_samples
+    ```
 
-# 对应图片：COCO 2017 train
-wget http://images.cocodataset.org/zips/train2017.zip
-unzip train2017.zip -d coco/
-rm train2017.zip
+### 4. 核心验证实验 (Day 2-4)
+Step 4.1: 提取伪标签 (Day 2)
+*   操作: 写一个简短的脚本，加载冻结的 LLaVA-1.6-7B。遍历 5000 条 VQAv2 数据。
+*   获取信号: 对于每个样本，输入图像和问题，获取模型输出。提取LLM最后一层对视觉token的 Cross-Attention 权重（或直接用输入视觉token的梯度范数作为显著性图）。
+*   二值化: 将注意力权重排名前 30% 的视觉 token 标记为 `1` (高置信)，后 70% 标记为 `0` (低置信)。保存这些 `(CLIP_feature, label)` 对。
 
-# 验证数据完整性
-python -c &quot;
-import json
-data = json.load(open(&#x27;/data/vap/datasets/llava_instruct_150k.json&#x27;))
-print(f&#x27;Total samples: {len(data)}&#x27;)  # 应为 ~150K
-&quot;
-```
+Step 4.2: 训练置信度 MLP (Day 3)
+*   操作: 独立写一个 PyTorch 脚本，定义一个 2 层 MLP（输入维度 1024，输出维度 1，Sigmoid 激活）。
+*   训练: 用 Step 4.1 提取的特征和标签，跑一个简单的 Binary Cross Entropy (BCE) Loss。在单张 L20 上训练，几分钟即可收敛。
 
-#### 2.3 评测数据集
-```bash
-# HallusionBench
-cd /data/vap/datasets
-git clone https://github.com/tianyi-lab/HallusionBench.git
-# 图片已包含在仓库中（~500MB）
+Step 4.3: 侵入式推理 (Day 4)
+*   操作: 修改 LLaVA 的 `modeling_llava.py`。在 CLIP 输出后、Projector 之前，插入你训练好的 MLP。
+*   逻辑:
+    ```python
+    # 伪代码
+    clip_features = vision_tower(images)
+    c_i = mlp(clip_features) # shape: [batch, num_tokens, 1]
+    
+    # 核心 Hack: 手动抑制低置信度 token
+    # 如果 c_i &lt; 0.5，将其特征范数缩小到 0.1 倍
+    mask = (c_i &lt; 0.5).float()
+    modified_features = clip_features * (1 - mask) + clip_features * mask * 0.1
+    
+    projected_features = projector(modified_features)
+    ```
+*   评测: 再次运行 POPE 评测脚本。
 
-# BLINK
-git clone https://github.com/zeyofu/BLINK_Benchmark.git
-# 按照 README 下载图片（需要从 HuggingFace 下载）
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;BLINK-Benchmark/BLINK&#x27;,
-    local_dir=&#x27;/data/vap/datasets/BLINK&#x27;,
-    repo_type=&#x27;dataset&#x27;
-)
-&quot;
+### 5. 成功标准 (Day 5 总结)
+1.  可视化: 随机抽 20 张图，将 $c_i$ 映射回 24x24 的图像网格（Heatmap）。如果高亮区域 &gt;60% 集中在前景物体/问题相关区域，说明信号存在。
+2.  指标: 侵入式推理后的 POPE Accuracy 或 F1 相比基线提升 &gt; 1.5%。
 
-# ADE20K（用于线性probe评估细粒度感知）
-wget http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip
-unzip ADEChallengeData2016.zip -d ADE20K/
-# 只需要验证集：ADE20K/ADEChallengeData2016/images/validation/
-
-# MMBench（验证通用能力不退化）
-wget https://opencompass.openxlab.space/utils/MMBench/MMBench_DEV_EN_legacy.tsv \
-     -O /data/vap/datasets/mmbench_dev.tsv
-```
+### 6. 预估资源
+*   硬件: 1 张 L20 即可（无需多卡通信）。
+*   时间: 5 天内完成。
 
 ---
 
-### 3. 基线运行（Day 1 下午，验证环境 OK）
-
-#### 3.1 快速环境验证脚本
-```python
-# scripts/verify_env.py
-import torch
-import transformers
-from transformers import AutoProcessor, LlavaNextForConditionalGeneration
-from PIL import Image
-import requests
-
-print(f&quot;PyTorch: {torch.__version__}&quot;)
-print(f&quot;CUDA available: {torch.cuda.is_available()}&quot;)
-print(f&quot;GPU count: {torch.cuda.device_count()}&quot;)
-for i in range(torch.cuda.device_count()):
-    print(f&quot;  GPU {i}: {torch.cuda.get_device_name(i)}, &quot;
-          f&quot;{torch.cuda.get_device_properties(i).total_memory/1e9:.1f}GB&quot;)
-
-# 加载模型做一次前向传播
-model = LlavaNextForConditionalGeneration.from_pretrained(
-    &quot;/data/vap/models/llava-1.6-7b&quot;,
-    torch_dtype=torch.float16,
-    device_map=&quot;cuda:0&quot;
-)
-processor = AutoProcessor.from_pretrained(&quot;/data/vap/models/llava-1.6-7b&quot;)
-
-# 用本地测试图片
-img = Image.new(&#x27;RGB&#x27;, (336, 336), color=&#x27;red&#x27;)
-inputs = processor(
-    text=&quot;[INST] &lt;image&gt;\nWhat color is this? [/INST]&quot;,
-    images=img,
-    return_tensors=&quot;pt&quot;
-).to(&quot;cuda:0&quot;, torch.float16)
-
-with torch.no_grad():
-    output = model.generate(inputs, max_new_tokens=20)
-print(&quot;Model output:&quot;, processor.decode(output[0], skip_special_tokens=True))
-print(&quot;✅ Environment OK&quot;)
-```
-
-```bash
-python scripts/verify_env.py
-```
-
-#### 3.2 HallusionBench 基线评测（微调前）
-```bash
-# 先跑一次微调前的 baseline，记录初始性能
-# 使用 LLaVA-NeXT 官方评测脚本
-cd LLaVA-NeXT
-
-python llava/eval/run_llava.py \
-    --model-path /data/vap/models/llava-1.6-7b \
-    --question-file /data/vap/datasets/HallusionBench/HallusionBench.json \
-    --image-folder /data/vap/datasets/HallusionBench/ \
-    --answers-file /data/vap/results/hallusion_before_ft.jsonl \
-    --temperature 0 \
-    --conv-mode vicuna_v1
-
-# 计算分数
-python /data/vap/datasets/HallusionBench/evaluate.py \
-    --answer_file /data/vap/results/hallusion_before_ft.jsonl \
-    | tee /data/vap/results/hallusion_before_ft_score.txt
-```
-
-预期输出：LLaVA-1.6-7B 在 HallusionBench 上约 31-35% accuracy（已知基准）
-
----
-
-### 4. 核心验证实验
-
-#### 4.1 【Day 1-2】标准微调 + 多步骤 Checkpoint 保存
-
-```bash
-# 创建微调配置文件
-cat &gt; /data/vap/configs/finetune_diagnostic.yaml &lt;&lt; &#x27;EOF&#x27;
-model_name_or_path: /data/vap/models/llava-1.6-7b
-data_path: /data/vap/datasets/llava_instruct_150k.json
-image_folder: /data/vap/datasets/coco/train2017
-output_dir: /data/vap/checkpoints/diagnostic_ft
-
-# 训练参数
-num_train_epochs: 3
-per_device_train_batch_size: 4
-gradient_accumulation_steps: 4  # 有效 batch size = 32
-learning_rate: 2e-5
-weight_decay: 0.0
-warmup_ratio: 0.03
-lr_scheduler_type: cosine
-bf16: true
-
-# 关键：频繁保存 checkpoint 用于诊断
-save_strategy: steps
-save_steps: 500
-save_total_limit: 20  # 保留所有 checkpoint
-
-# 视觉 encoder 解冻（标准微调设置）
-freeze_mm_mlp_adapter: false
-unfreeze_mm_vision_tower: true  # 允许视觉encoder更新
-
-# 日志
-logging_steps: 50
-report_to: tensorboard
-logging_dir: /data/vap/logs/diagnostic_ft
-EOF
-
-# 启动微调（使用 2 张 GPU，保留其他 GPU 用于并行评测）
-CUDA_VISIBLE_DEVICES=0,1 torchrun \
-    --nproc_per_node=2 \
-    --master_port=29500 \
-    LLaVA-NeXT/llava/train/train_mem.py \
-    --config /data/vap/configs/finetune_diagnostic.yaml \
-    2&gt;&amp;1 | tee /data/vap/logs/diagnostic_ft.log &amp;
-
-# 记录 PID 以便监控
-echo $! &gt; /data/vap/logs/finetune_pid.txt
-```
-
-#### 4.2 【Day 2-3】核心诊断脚本：特征漂移量化
-
-```python
-# scripts/diagnose_feature_drift.py
-&quot;&quot;&quot;
-核心诊断实验：量化微调过程中视觉encoder各层特征的细粒度感知能力变化
-运行方式：python scripts/diagnose_feature_drift.py --checkpoint_dir /data/vap/checkpoints/diagnostic_ft
-&quot;&quot;&quot;
-
-import torch
-import torch.nn.functional as F
-import numpy as np
-from pathlib import Path
-from transformers import LlavaNextForConditionalGeneration, AutoProcessor
-from transformers import AutoModel  # DINOv2
-from PIL import Image
-import json
-import argparse
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-
-# ============================================================
-# 工具函数
-# ============================================================
-
-def load_ade20k_val_images(ade20k_dir, n_samples=200):
-    &quot;&quot;&quot;加载 ADE20K 验证集图片（用于无标注的特征分析）&quot;&quot;&quot;
-    img_dir = Path(ade20k_dir) / &quot;ADEChallengeData2016/images/validation&quot;
-    img_paths = list(img_dir.glob(&quot;*.jpg&quot;))[:n_samples]
-    images = []
-    for p in img_paths:
-        try:
-            img = Image.open(p).convert(&quot;RGB&quot;).resize((336, 336))
-            images.append(img)
-        except:
-            continue
-    print(f&quot;Loaded {len(images)} ADE20K validation images&quot;)
-    return images
-
-
-def extract_clip_layer_features(model, processor, images, device, batch_size=8):
-    &quot;&quot;&quot;
-    提取 CLIP ViT 各层的 patch 特征
-    返回: dict {layer_idx: tensor of shape (N, num_patches, hidden_dim)}
-    &quot;&quot;&quot;
-    vision_tower = model.model.vision_tower  # CLIP ViT
-    
-    # 注册 hook 提取中间层特征
-    layer_features = {}
-    hooks = []
-    
-    # LLaVA-1.6 使用 CLIP ViT-L/14，共 24 层
-    target_layers = [3, 6, 9, 12, 15, 18, 21, 23]  # 采样关键层
-    
-    def make_hook(layer_idx):
-        def hook_fn(module, input, output):
-            # output shape: (batch, seq_len, hidden_dim)
-            # seq_len = 1 (cls) + num_patches
-            layer_features[layer_idx] = output[:, 1:, :].detach().cpu()  # 去掉 CLS token
-        return hook_fn
-    
-    for layer_idx in target_layers:
-        hook = vision_tower.vision_model.encoder.layers[layer_idx].register_forward_hook(
-            make_hook(layer_idx)
-        )
-        hooks.append(hook)
-    
-    all_features = {l: [] for l in target_layers}
-    
-    model.eval()
-    with torch.no_grad():
-        for i in range(0, len(images), batch_size):
-            batch_imgs = images[i:i+batch_size]
-            # 只需要图片输入，不需要文本
-            pixel_values = processor.image_processor(
-                batch_imgs, return_tensors=&quot;pt&quot;
-            ).pixel_values.to(device, torch.float16)
-            
-            # 只跑视觉 encoder
-            vision_tower(pixel_values)
-            
-            for layer_idx in target_layers:
-                all_features[layer_idx].append(layer_features[layer_idx].float())
-    
-    # 移除 hooks
-    for hook in hooks:
-        hook.remove()
-    
-    # 合并所有 batch
-    for layer_idx in target_layers:
-        all_features[layer_</pre></details>
-</div>
-
-<div class="card plan-card">
-<div class="plan-header">
-<span class="plan-rank">方案 1.2</span>
-<span class="model-tag">claude-sonnet</span>
-<span class="domain-tag">多模态大模型 - 视觉 Token 管理</span>
-</div>
-<div class="b-problem"><b>B 问题：</b>视觉 token 的数量、层间动态、查询相关性</div>
-<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
-<details><summary>📌 Idea 原文</summary><pre>我来仔细分析 A 种子的核心机制与 B 方向的深层对应关系。
-
----
-
-## 深度分析
-
-A 种子的核心机制是什么？
-
-表面上是&quot;安全对齐被微调破坏&quot;，但更深层的机制是：
-
-&gt; 预训练阶段记忆的信息（版权内容）并未真正被&quot;删除&quot;，而是被护栏&quot;压制&quot;（suppressed）。微调改变了激活分布，导致压制失效，记忆被重新激活（recall）。
-
-数学本质：模型内部存在一种隐性的、被抑制的激活模式，这种模式在特定条件下会被&quot;解锁&quot;。
-
-这个机制能映射到视觉 Token 管理的什么问题？
-
-让我想想……
-
-视觉 token 管理的核心挑战之一是：被 attention 分数判定为&quot;不重要&quot;的视觉 token，真的是不重要的吗？还是它们只是在当前层/当前 query 下被&quot;压制&quot;了，但在后续层或不同 query 下会变得关键？
-
-这正好对应 A 的机制：被压制的信息 ≠ 无用的信息。
-
-这个映射是否踩了社区禁区？
-- ❌ 不是&quot;按时间衰减&quot; → 我们讨论的是&quot;层深度&quot;和&quot;query相关性&quot;两个维度
-- ❌ 不是&quot;视觉 token 自主竞争 top-k&quot; → 我们要解决的恰恰是 top-k 的缺陷
-- ✅ 符合&quot;Query-aware + 层深双因素&quot;这个有价值方向
-- ✅ 符合&quot;层间渐进式 token 减少&quot;这个有价值方向
-
-这个映射有没有深层道理？
-
-FastV / SparseVLM 的核心假设：attention 分数低 = 该 token 不重要 → 可以 prune。
-
-A 种子揭示的问题：被&quot;压制&quot;的激活模式不等于无用信息，它可能在不同条件下被重新激活。
-
-映射：被浅层 attention 低分的视觉 token，不等于对深层推理无用。FastV 在浅层（第2层）做 pruning，但浅层 attention 分数反映的是局部特征匹配，而非跨层语义推理的必要性。
-
-这是一个真实的、被社区忽视的问题：&quot;当前层 attention 低分&quot;是否是 prune 的充分条件？
-
-A 种子给了我们一个新视角：被压制的激活 ≠ 无用激活。我们可以设计一个机制，检测哪些&quot;低 attention 分数&quot;的视觉 token 实际上在后续层会被&quot;重新激活&quot;（re-activated），从而避免过早 prune 这些 token。
-
----
-
-===
-核心idea（一句话）: 视觉 token 的 attention 分数在浅层被&quot;压制&quot;不等于该 token 在深层无用——提出 Reactivation-Aware Token Pruning (RATP)，通过预测视觉 token 的&quot;跨层重激活潜力&quot;来指导 pruning 决策，替代 FastV 式的单层 attention 阈值判断。
-
----
-
-为什么不撞社区共识:
-
-- ✅ 避开了&quot;按时间衰减&quot;：我们的维度是层深度（浅层→深层的 attention 变化轨迹），不是时间
-- ✅ 避开了&quot;单纯 attention top-k&quot;：我们的核心论点恰恰是批判 FastV 的单层 top-k 不可靠，因为它忽略了跨层重激活现象
-- ✅ 避开了&quot;压到1个全局 token&quot;：我们保留 64-256 个精选 token
-- ✅ 符合&quot;层间动态 token 数量&quot;：浅层保留更多，深层逐步减少，但 schedule 由重激活预测驱动
-- ✅ 符合&quot;Query-aware + 层深双因素&quot;：重激活潜力同时依赖 query 和层深
-
----
-
-机制映射:
-
-A 的「微调解锁被压制的预训练记忆激活」机制 ←→ B 的「浅层低 attention 分数的视觉 token 在深层被重新激活用于推理」问题
-
-数学上的同构性在于：
-
-两者都是 &quot;当前观测到的低激活幅度 ≠ 该特征的全局重要性&quot; 这一核心命题。
-
-- A 中：$\text{activation}(x)_{\text{aligned}} \approx 0$，但 $\text{activation}(x)_{\text{finetuned}} \gg 0$，说明信息从未消失，只是被抑制
-- B 中：$\text{attn\_score}(v_i)_{\text{layer}=2} \approx 0$，但 $\text{attn\_score}(v_i)_{\text{layer}=20} \gg 0$（这是可以实验验证的现象）
-
-形式化：定义 token $v_i$ 的重激活分数：
-
-$$\text{RA}(v_i) = \mathbb{E}_{l &gt; l_{\text{prune}}} \left[ \text{attn}(q, v_i)_l \mid \text{attn}(q, v_i)_{l_{\text{prune}}} &lt; \tau \right]$$
-
-即：在浅层 attention 低于阈值的条件下，该 token 在后续层的期望 attention 分数。FastV 隐含假设 $\text{RA}(v_i) \approx 0$，而 A 种子的发现暗示这个假设对于某类 token 是错误的。
-
----
-
-论文故事线（从 B 领域自身出发）:
-
-&gt; 视觉 token 压缩是 MLLM 推理加速的关键。FastV 等方法依赖浅层 attention 分数做 pruning，隐含假设&quot;浅层不重要的 token 在深层也不重要&quot;。然而，我们发现这一假设存在系统性违反：约 15-25% 的视觉 token 在浅层 attention 分数极低，但在深层推理层（layer 20+）却产生了显著的 attention 激活——我们称之为&quot;视觉 token 重激活&quot;现象。这些被过早 prune 的 token 恰好对应图像中语义上下文依赖的区域（如背景中的文字、遮挡物体的局部特征），其缺失直接导致 TextVQA 和 GQA 的性能下降。基于此，我们提出 RATP，用轻量级的跨层 attention 轨迹预测器替代单层阈值判断，在相同压缩率下显著减少&quot;误杀&quot;。
-
----
-
-方法描述（2-3句）:
-
-1. 现象验证：在 LLaVA-1.6 上系统统计所有视觉 token 的逐层 attention 分数轨迹，定义&quot;重激活 token&quot;为满足 $\text{attn}_l &lt; \tau_1$ 且 $\exists l&#x27; &gt; l: \text{attn}_{l&#x27;} &gt; \tau_2$ 的 token，量化其比例及其对最终答案的因果影响（通过 causal intervention）。
-
-2. 轻量预测器：训练一个 2 层 MLP（输入：token 的浅层 attention 分数向量 + query embedding + 空间位置编码，输出：重激活概率），在 pruning 决策时将重激活概率高的 token 从 prune 候选中排除，即使其当前 attention 分数低于阈值。
-
-3. 渐进式集成：将 RATP 插入 FastV/VisionZip 的 pruning pipeline，作为一个即插即用的&quot;保护层&quot;——在每个 pruning 检查点，先用原有 attention 分数排序，再用重激活预测器对排名靠后但重激活概率高的 token 进行&quot;救回&quot;，最终实现更精准的层间渐进压缩。
-
----
-
-草拟标题:
-
-&gt; &quot;Don&#x27;t Prune the Sleeping Tokens: Reactivation-Aware Visual Token Compression for Multimodal LLMs&quot;
-
-备选：
-&gt; </pre></details>
-<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre># RATP 执行计划书
-
-## 总体时间线
-
-```
-Week 1: 预实验 — 验证&quot;重激活现象&quot;是否真实存在
-Week 2: 现象深挖 + 方法实现
-Week 3: 完整实验矩阵
-Week 4: 消融 + 写作 + 图表
-```
-
----
-
-# 第一周：预实验计划
-
-核心问题：在 LLaVA-1.6 上，是否真实存在&quot;浅层 attention 低但深层 attention 高&quot;的视觉 token？比例是多少？它们是否对答案有因果影响？
-
----
-
-## 1. 环境搭建
-
-### 1.1 基础环境
-
-```bash
-# 创建独立 conda 环境
-conda create -n ratp python=3.10 -y
-conda activate ratp
-
-# PyTorch（L20 支持 CUDA 12.1）
-pip install torch==2.2.0 torchvision==0.17.0 --index-url https://download.pytorch.org/whl/cu121
-
-# 核心依赖
-pip install transformers==4.40.0 \
-            accelerate==0.29.0 \
-            datasets==2.18.0 \
-            einops==0.7.0 \
-            pillow==10.2.0 \
-            numpy==1.26.4 \
-            scipy==1.13.0 \
-            matplotlib==3.8.4 \
-            seaborn==0.13.2 \
-            tqdm==4.66.2 \
-            wandb==0.16.6 \
-            scikit-learn==1.4.2
-
-# LLaVA 代码库（选 LLaVA-NeXT，维护活跃且对应 1.6）
-git clone https://github.com/LLaVA-VL/LLaVA-NeXT.git
-cd LLaVA-NeXT
-pip install -e &quot;.[train]&quot;
-
-# FastV 参考实现（用于 baseline 对比）
-git clone https://github.com/pkunlp-icler/FastV.git
-cd FastV &amp;&amp; pip install -e . &amp;&amp; cd ..
-
-# 验证安装
-python -c &quot;import torch; print(torch.__version__); print(torch.cuda.device_count())&quot;
-# 期望输出: 2.2.0, 8
-```
-
-### 1.2 项目目录结构
-
-```bash
-mkdir -p ~/ratp/{data,checkpoints,logs,results,scripts,figures}
-cd ~/ratp
-
-# 目录说明
-# data/          — 数据集
-# checkpoints/   — 模型权重
-# logs/          — 实验日志
-# results/       — 数值结果（json/csv）
-# scripts/       — 所有实验脚本
-# figures/       — 生成的图表
-```
-
-### 1.3 模型下载
-
-```bash
-# 下载 LLaVA-1.6-Vicuna-7B（主力模型，7B 在单卡 L20 可跑）
-cd ~/ratp/checkpoints
-pip install huggingface_hub
-
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;liuhaotian/llava-v1.6-vicuna-7b&#x27;,
-    local_dir=&#x27;./llava-v1.6-vicuna-7b&#x27;,
-    ignore_patterns=[&#x27;*.bin&#x27;],  # 只下载 safetensors
-)
-&quot;
-
-# 同时下载 13B 备用（Week 2 用）
-python -c &quot;
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id=&#x27;liuhaotian/llava-v1.6-vicuna-13b&#x27;,
-    local_dir=&#x27;./llava-v1.6-vicuna-13b&#x27;,
-)
-&quot;
-```
-
----
-
-## 2. 数据准备
-
-### 2.1 预实验数据集（最小集）
-
-预实验只需要 500-1000 张图像，覆盖多种视觉推理类型。
-
-```bash
-cd ~/ratp/data
-
-# === 数据集 1: COCO val2017（通用 VQA 基础）===
-wget http://images.cocodataset.org/zips/val2017.zip
-unzip val2017.zip -d coco/
-
-# === 数据集 2: TextVQA val（文字理解，预期重激活现象最显著）===
-# 下载图像
-wget https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip
-unzip train_val_images.zip -d textvqa/
-
-# 下载标注
-wget https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_val.json -P textvqa/
-
-# === 数据集 3: GQA val（空间推理）===
-wget https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip
-unzip images.zip -d gqa/
-wget https://downloads.cs.stanford.edu/nlp/data/gqa/questions1.2.zip
-unzip questions1.2.zip -d gqa/
-
-# === 预实验子集构建（各取 300 样本）===
-python scripts/build_pilot_dataset.py \
-    --textvqa_json data/textvqa/TextVQA_0.5.1_val.json \
-    --gqa_json data/gqa/val_balanced_questions.json \
-    --n_per_dataset 300 \
-    --output data/pilot_500.json
-```
-
-`scripts/build_pilot_dataset.py` 内容：
-
-```python
-#!/usr/bin/env python3
-&quot;&quot;&quot;构建预实验子集，确保问题类型多样性&quot;&quot;&quot;
-import json, random, argparse
-from pathlib import Path
-
-def build_pilot(textvqa_json, gqa_json, n_per_dataset, output):
-    random.seed(42)
-    samples = []
-    
-    # TextVQA
-    with open(textvqa_json) as f:
-        tvqa = json.load(f)[&#x27;data&#x27;]
-    tvqa_sample = random.sample(tvqa, min(n_per_dataset, len(tvqa)))
-    for item in tvqa_sample:
-        samples.append({
-            &#x27;source&#x27;: &#x27;textvqa&#x27;,
-            &#x27;question_id&#x27;: item[&#x27;question_id&#x27;],
-            &#x27;image_path&#x27;: f&quot;data/textvqa/train_images/{item[&#x27;image_id&#x27;]}.jpg&quot;,
-            &#x27;question&#x27;: item[&#x27;question&#x27;],
-            &#x27;answers&#x27;: item[&#x27;answers&#x27;],
-        })
-    
-    # GQA
-    with open(gqa_json) as f:
-        gqa = json.load(f)
-    gqa_items = list(gqa.items())
-    gqa_sample = random.sample(gqa_items, min(n_per_dataset, len(gqa_items)))
-    for qid, item in gqa_sample:
-        samples.append({
-            &#x27;source&#x27;: &#x27;gqa&#x27;,
-            &#x27;question_id&#x27;: qid,
-            &#x27;image_path&#x27;: f&quot;data/gqa/images/{item[&#x27;imageId&#x27;]}.jpg&quot;,
-            &#x27;question&#x27;: item[&#x27;question&#x27;],
-            &#x27;answers&#x27;: [item[&#x27;answer&#x27;]],
-        })
-    
-    random.shuffle(samples)
-    with open(output, &#x27;w&#x27;) as f:
-        json.dump(samples, f, indent=2)
-    print(f&quot;Built pilot dataset: {len(samples)} samples -&gt; {output}&quot;)
-
-if __name__ == &#x27;__main__&#x27;:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(&#x27;--textvqa_json&#x27;, required=True)
-    parser.add_argument(&#x27;--gqa_json&#x27;, required=True)
-    parser.add_argument(&#x27;--n_per_dataset&#x27;, type=int, default=300)
-    parser.add_argument(&#x27;--output&#x27;, required=True)
-    args = parser.parse_args()
-    build_pilot(args.textvqa_json, args.gqa_json, args.n_per_dataset, args.output)
-```
-
----
-
-## 3. 基线运行（验证环境 OK）
-
-### 3.1 跑通 LLaVA-1.6 推理
-
-```python
-# scripts/test_llava_inference.py
-&quot;&quot;&quot;验证 LLaVA-1.6 推理环境正常&quot;&quot;&quot;
-import torch
-from llava.model.builder import load_pretrained_model
-from llava.mm_utils import get_model_name_from_path, process_images, tokenizer_image_token
-from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
-from PIL import Image
-
-model_path = &quot;checkpoints/llava-v1.6-vicuna-7b&quot;
-model_name = get_model_name_from_path(model_path)
-
-tokenizer, model, image_processor, context_len = load_pretrained_model(
-    model_path, None, model_name, device_map=&quot;cuda:0&quot;
-)
-model.eval()
-
-# 测试一张图
-image = Image.open(&quot;data/coco/val2017/000000000139.jpg&quot;).convert(&quot;RGB&quot;)
-image_tensor = process_images([image], image_processor, model.config)
-image_tensor = image_tensor.to(dtype=torch.float16, device=&quot;cuda:0&quot;)
-
-question = &quot;What is in this image?&quot;
-prompt = f&quot;&lt;image&gt;\n{question}&quot;
-input_ids = tokenizer_image_token(
-    prompt, tokenizer, IMAGE_TOKEN_INDEX, return_tensors=&#x27;pt&#x27;
-).unsqueeze(0).to(&quot;cuda:0&quot;)
-
-with torch.no_grad():
-    output_ids = model.generate(
-        input_ids,
-        images=image_tensor,
-        image_sizes=[image.size],
-        max_new_tokens=100,
-        use_cache=True,
-    )
-
-response = tokenizer.decode(output_ids[0], skip_special_tokens=True)
-print(f&quot;Response: {response}&quot;)
-print(&quot;✅ Environment OK&quot;)
-```
-
-```bash
-python scripts/test_llava_inference.py
-# 期望：输出图像描述，无报错
-```
-
-### 3.2 跑通 FastV baseline
-
-```bash
-# 参考 FastV 官方评估脚本，在 TextVQA 上跑 baseline
-cd FastV
-python src/llava/eval/run_llava_fastv.py \
-    --model-path ../checkpoints/llava-v1.6-vicuna-7b \
-    --image-folder ../data/textvqa/train_images \
-    --question-file ../data/textvqa/TextVQA_0.5.1_val.json \
-    --answers-file ../results/fastv_textvqa_baseline.jsonl \
-    --fastv_k 3 \
-    --fastv_r 0.5 \
-    --conv-mode vicuna_v1
-
-# 记录 baseline 分数（TextVQA accuracy）
-python eval/eval_textvqa.py \
-    --annotation-file ../data/textvqa/TextVQA_0.5.1_val.json \
-    --result-file ../results/fastv_textvqa_baseline.jsonl
-```
-
-期望结果：FastV (K=3, R=0.5) 在 TextVQA 上约 55-58%（原始 LLaVA-1.6 约 64%），确认 baseline 可复现。
-
----
-
-## 4. 核心验证实验
-
-这是第一周最重要的部分。目标：用 2 天时间，用数据证明&quot;重激活现象&quot;存在。
-
-### 4.1 Attention 轨迹提取脚本
-
-```python
-# scripts/extract_attention_trajectories.py
-&quot;&quot;&quot;
-核心脚本：提取每个视觉 token 在所有层的 attention 分数轨迹
-输出：每个样本的 attention 矩阵，shape = [n_layers, n_visual_tokens]
-&quot;&quot;&quot;
-import torch
-import json
-import numpy as np
-from pathlib import Path
-from tqdm import tqdm
-from PIL import Image
-from llava.model.builder import load_pretrained_model
-from llava.mm_utils import get_model_name_from_path, process_images, tokenizer_image_token
-from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
-
-def extract_attention_for_sample(model, tokenizer, image_processor, sample, device):
-    &quot;&quot;&quot;提取单个样本的逐层 attention 轨迹&quot;&quot;&quot;
-    image = Image.open(sample[&#x27;image_path&#x27;]).convert(&quot;RGB&quot;)
-    image_tensor = process_images([image], image_processor, model.config)
-    image_tensor = image_tensor.to(dtype=torch.float16, device=device)
-    
-    question = sample[&#x27;question&#x27;]
-    prompt = f&quot;{DEFAULT_IMAGE_TOKEN}\n{question}&quot;
-    input_ids = tokenizer_image_token(
-        prompt, tokenizer, IMAGE_TOKEN_INDEX, return_tensors=&#x27;pt&#x27;
-    ).unsqueeze(0).to(device)
-    
-    # 注册 hook 提取 attention weights
-    attention_maps = {}  # layer_idx -&gt; attention tensor
-    hooks = []
-    
-    def make_hook(layer_idx):
-        def hook_fn(module, input, output):
-            # output[1] 是 attention weights，shape: [batch, heads, seq_len, seq_len]
-            if isinstance(output, tuple) and len(output) &gt; 1 and output[1] is not None:
-                attn = output[1].detach().cpu().float()  # [1, H, S, S]
-                attention_maps[layer_idx] = attn
-        return hook_fn
-    
-    # 注册到所有 transformer 层
-    for idx, layer in enumerate(model.model.layers):
-        h = layer.self_attn.register_forward_hook(make_hook(idx))
-        hooks.append(h)
-    
-    with torch.no_grad():
-        outputs = model(
-            input_ids=input_ids,
-            images=image_tensor,
-            image_sizes=[image.size],
-            output_attentions=True,
-            return_dict=True,
-        )
-    
-    # 清理 hooks
-    for h in hooks:
-        h.remove()
-    
-    # 找到视觉 token 的位置范围
-    # LLaVA-1.6: 图像 token 在序列中的位置
-    input_ids_cpu = input_ids[0].cpu().numpy()
-    img_token_id = IMAGE_TOKEN_INDEX  # 通常是 -200 或特定值
-    
-    # 获取实际序列长度（含视觉 token 展开后）
-    seq_len = list(attention_maps.values())[0].shape[-1]
-    
-    # 视觉 token 数量（LLaVA-1.6 用 336x336 图像，patch 14x14，每个 patch 展开为 576 个 token）
-    # 实际数量从模型配置获取
-    n_visual = model.config.image_token_len if hasattr(model.config, &#x27;image_token_len&#x27;) else 576
-    
-    # 假设视觉 token 在序列开头（LLaVA 的标准布局）
-    # 精确位置需要从 input_ids 解</pre></details>
-</div>
-<h3>种子 2: Zero-shot World Models Are Developmentally Efficient Learners [R]</h3><p>生成 9 idea，通过 1 个</p>
-<div class="card plan-card">
-<div class="plan-header">
-<span class="plan-rank">方案 2.1</span>
-<span class="model-tag">claude-sonnet</span>
-<span class="domain-tag">多模态大模型 - 模态融合</span>
-</div>
-<div class="b-problem"><b>B 问题：</b>视觉信息与文本信息的深层融合机制</div>
-<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
-<details><summary>📌 Idea 原文</summary><pre>===
-核心idea（一句话）: 在 MLLM 的视觉编码阶段引入&quot;预测性世界模型&quot;作为辅助预训练目标——让视觉 encoder 在 egocentric 风格的视觉序列上预测被遮挡/未来的视觉状态，从而获得更强的细粒度空间-语义表征，再以此增强 Text-Aware Visual Encoding 路线中 query-conditional 的视觉特征质量。
-
----
-
-为什么不撞社区共识:
-
-| 社区禁区 | 本方案的处理 |
-|---|---|
-| ❌ 图像生成损失与理解损失冲突 | ✅ 预测目标是视觉特征空间内的预测（预测 patch embedding），不是像素级生成，不引入像素重建损失 |
-| ❌ 给 LLM 加额外 attention 层破坏权重 | ✅ 改动完全在视觉 encoder 侧，LLM 权重冻结或正常微调，不触碰 LLM 结构 |
-| ❌ 让视觉/文本 token 分布相似 | ✅ 目标是提升视觉 token 自身的细粒度质量，不做跨模态分布对齐 |
-| ❌ 文本 query 视觉（等于没加）| ✅ 我们在 encoder 侧做 query-conditional masking，是在特征提取阶段就引入文本条件，而非在 LLM 的 attention 层重复做 |
-
-符合的有价值方向：
-- Text-Aware Visual Encoding（ATP-LLaVA 路线）：先看问题再编码图像
-- Mixture/Enhancement of Vision Encoders：提升 encoder 本身的细粒度能力，弥补 CLIP 对细粒度理解天然弱的缺陷
-
----
-
-机制映射:
-
-A 的「零样本世界模型：用预测缺失/未来视觉状态作为自监督信号，强迫模型学习细粒度空间结构」机制
-
-←→
-
-B 的「视觉 encoder（CLIP）对细粒度、空间关系理解天然弱，导致 MLLM 幻觉和空间推理差」问题
-
-数学上的同构性在于：
-
-两者本质上都是一个条件预测问题：
-
-- A 中：$\hat{v}_{t+1} = f_\theta(v_{\leq t}, \text{context})$，通过预测未观测状态，迫使模型编码因果空间结构
-- B 中：MLLM 的视觉理解本质上是 $\hat{a} = g(q, \text{encode}(I))$，其中 encode(I) 的质量瓶颈在于 CLIP 的对比学习目标 $\mathcal{L}_\text{CLIP} = -\log \frac{\exp(\text{sim}(v,t)/\tau)}{\sum_j \exp(\text{sim}(v_j,t)/\tau)}$ 只优化全局图文相似度，不优化局部结构
-
-同构性：如果我们在视觉 encoder 微调阶段加入 query-conditioned masked patch prediction 损失：
-
-$$\mathcal{L}_\text{pred} = \| f_\theta(\text{visible patches} | q_\text{text}) - \text{target}(\text{masked patches}) \|^2$$
-
-其中 mask 策略由文本 query $q$ 引导（query 相关区域更高概率被保留，query 无关区域更高概率被遮挡），则模型被迫学习：在给定文本语义条件下，从局部视觉线索推断被遮挡区域的视觉特征——这与 A 中世界模型从上下文预测未来状态的机制完全同构，只是把&quot;时间轴上的预测&quot;映射成了&quot;query 条件下的空间预测&quot;。
-
----
-
-论文故事线（从 B 领域自身出发）:
-
-&gt; 当前 MLLM 的核心瓶颈之一是视觉 encoder 的表征质量：CLIP 以图文对比为目标，天然倾向于编码全局语义，而忽视细粒度空间结构。这导致模型在需要精确定位、空间推理和细节理解的任务上表现欠佳，并产生幻觉。已有工作（ATP-LLaVA）表明，让编码过程感知文本 query 可以显著提升相关区域的特征质量，但这些方法仍依赖 CLIP 本身的特征，并未从根本上改变 encoder 的表征能力。
-&gt;
-&gt; 我们提出：视觉 encoder 缺乏细粒度理解能力的根本原因，是其训练目标从未要求它理解局部视觉结构的内在一致性。为此，我们引入一种query-conditioned 视觉预测微调（QC-VPT）：在视觉 encoder 的微调阶段，以文本 query 为条件对图像 patch 进行结构化遮挡，要求 encoder 从可见 patch 预测被遮挡 patch 的特征表示。这一目标直接激励 encoder 学习 query 相关的细粒度空间依赖，所得表征在插入 MLLM 后无需修改 LLM 结构即可提升下游理解性能。
-
----
-
-方法描述（2-3句）:
-
-1. Query-Conditioned Masking：给定一张图像和对应的文本 query（来自 VQA 数据），用一个轻量 cross-attention 模块计算每个 patch 与 query token 的相关性得分，相关性低的 patch 以更高概率被 mask（反向遮挡：强迫模型从 query 相关区域推断 query 无关区域的细节，同时也做少量正向 mask 保证 query 相关区域的预测能力）。
-
-2. 特征空间预测目标：被 mask 的 patch 位置由一个轻量 MLP prediction head 预测其在教师网络（frozen DINO-v2 或 frozen 原始 CLIP）下的特征向量，损失为 smooth-L1，不做像素重建，避免生成-理解冲突。
-
-3. 插入 MLLM：微调后的视觉 encoder 直接替换 LLaVA-1.6 / InternVL2 中的原始 CLIP encoder，无需修改 LLM 或 projection layer，保持路线 B（token 拼接）的简洁性，同时在 inference 时 masking 模块可选择性保留（作为 query-conditional encoding）或丢弃（退化为标准 encoding）。
-
----
-
-草拟标题:
-
-&quot;Query-Conditioned Visual Predictive Tuning for Fine-Grained Multimodal Understanding&quot;
-
-或更具体：
-
-&quot;Seeing What You Ask: Predictive Visual Encoder Tuning via Query-Conditioned Masked Patch Modeling&quot;
-
----
-
-关键实验:
-
-数据集:
-- MMBench / MMBench-CN（综合细粒度理解）
-- MMMU（需要细粒度视觉+知识推理）
-- MathVista（空间/图表推理，最能体现细粒度提升）
-- HallusionBench（幻觉，直接验证细粒度表征是否减少幻觉）
-- BLINK（视觉感知基础能力，最直接测 encoder 质量）
-
-基线:
-- LLaVA-1.6-7B（主基线，直接替换其 CLIP encoder）
-- InternVL2-8B（验证方法的通用性）
-- ATP-LLaVA（最相关的 Text-Aware Encoding 对比方法）
-- MAE + CLIP encoder（消融：无 query 条件的普通 masked prediction 是否足够）
-
-指标:
-- 各数据集标准 accuracy / score
-- 关键消融：有无 query-conditional masking 的对比（验证&quot;条件&quot;的必要性）
-- 关键消融：特征预测 target 选 DINO vs CLIP vs 混合（验证教师网络选择）
-- Inference 时保留 vs 丢弃 masking 模块的性能差异
-
-预期结果:
-- MathVista 和 BLINK 上相对 LLaVA-1.6-7B 提升 +3~5%（这两个最依赖细粒度视觉）
-- HallusionBench</pre></details>
-<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre># 可执行计划书：Query-Conditioned Visual Predictive Tuning (QC-VPT)
-
----
-
-## 预实验计划（第 1 周）
-
-### 目标
-用最小成本验证核心假设：query-conditioned masked patch prediction 能让视觉 encoder 学到更好的细粒度表征，信号体现在下游 VQA 任务的准确率提升。
-
----
-
-### Day 1：环境搭建
-
-#### 代码库选择
-```bash
-# 主体框架：LLaVA-1.5/1.6（结构清晰，encoder 替换方便）
-git clone https://github.com/haotian-liu/LLaVA.git
-cd LLaVA
-
-# 辅助：timm（ViT 操作）、transformers（CLIP/DINOv2）
-```
-
-#### Python 环境
-```bash
-conda create -n qcvpt python=3.10 -y
-conda activate qcvpt
-
-# PyTorch（L20 支持 CUDA 12.1）
-pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu121
-
-# LLaVA 依赖
-cd LLaVA &amp;&amp; pip install -e &quot;.[train]&quot;
-
-# 额外依赖
-pip install timm==0.9.12 einops==0.7.0 transformers==4.37.2
-pip install deepspeed==0.13.1  # 多卡训练
-pip install lmms-eval==0.2.0   # 统一评测框架
-
-# 验证
-python -c &quot;import torch; print(torch.cuda.device_count())&quot;  # 应输出 8
-python -c &quot;import timm; print(timm.__version__)&quot;
-```
-
-#### 目录结构
-```
-/workspace/
-├── QC-VPT/
-│   ├── src/
-│   │   ├── model/
-│   │   │   ├── qc_encoder.py        # 核心：带 masking 的 encoder
-│   │   │   ├── prediction_head.py   # MLP prediction head
-│   │   │   └── cross_attn_scorer.py # patch-query 相关性打分
-│   │   ├── train/
-│   │   │   └── train_qcvpt.py       # 预训练脚本
-│   │   └── eval/
-│   │       └── run_eval.sh          # 评测脚本
-│   ├── configs/
-│   ├── scripts/
-│   └── data/
-├── LLaVA/                           # 原始代码库
-└── datasets/                        # 数据存储（~500GB 预留）
-```
-
----
-
-### Day 1-2：数据准备
-
-#### 预实验用数据（轻量）
-
-微调训练数据（encoder 预训练用）
-```bash
-# 使用 LLaVA-Instruct-150K 的子集（VQA 格式，有 query-image 对）
-# 下载 LLaVA 官方 instruction tuning 数据
-cd /workspace/datasets
-wget https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/resolve/main/llava_v1_5_mix665k.json
-
-# 对应图像：COCO 2017 train（最常用，约 18GB）
-wget http://images.cocodataset.org/zips/train2017.zip
-unzip train2017.zip -d coco/
-
-# 预实验只用前 50K 条（含 query-image 对）
-python scripts/subsample_data.py \
-    --input llava_v1_5_mix665k.json \
-    --output llava_50k_subset.json \
-    --n 50000 \
-    --seed 42
-```
-
-subsample_data.py（直接可用）
-```python
-import json, random, argparse
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(&#x27;--input&#x27;, type=str)
-    parser.add_argument(&#x27;--output&#x27;, type=str)
-    parser.add_argument(&#x27;--n&#x27;, type=int, default=50000)
-    parser.add_argument(&#x27;--seed&#x27;, type=int, default=42)
-    args = parser.parse_args()
-    
-    random.seed(args.seed)
-    with open(args.input) as f:
-        data = json.load(f)
-    
-    # 只保留有图像的条目
-    data = [d for d in data if &#x27;image&#x27; in d]
-    sampled = random.sample(data, min(args.n, len(data)))
-    
-    with open(args.output, &#x27;w&#x27;) as f:
-        json.dump(sampled, f)
-    print(f&quot;Sampled {len(sampled)} items&quot;)
-
-if __name__ == &#x27;__main__&#x27;:
-    main()
-```
-
-评测数据（预实验用 2 个轻量集）
-```bash
-# 1. POPE（幻觉评测，快速，~3K 题）
-git clone https://github.com/AoiDragon/POPE.git
-# 图像复用 COCO val2017
-wget http://images.cocodataset.org/zips/val2017.zip &amp;&amp; unzip val2017.zip -d coco/
-
-# 2. MMBench-DEV-EN（综合，~4.3K 题，lmms-eval 支持直接下载）
-# 通过 lmms-eval 自动处理，无需手动下载
-
-# 3. ScienceQA-IMG（空间推理，~6K 题，有图像子集）
-# HuggingFace 下载
-python -c &quot;
-from datasets import load_dataset
-ds = load_dataset(&#x27;derek-thomas/ScienceQA&#x27;, split=&#x27;test&#x27;)
-ds.save_to_disk(&#x27;/workspace/datasets/scienceqa_test&#x27;)
-&quot;
-```
-
----
-
-### Day 2-3：基线运行
-
-#### Step 1：下载预训练权重
-```bash
-# CLIP ViT-L/14@336（LLaVA-1.6 使用的 encoder）
-python -c &quot;
-import open_clip
-model, _, preprocess = open_clip.create_model_and_transforms(
-    &#x27;ViT-L-14-336&#x27;, pretrained=&#x27;openai&#x27;
-)
-import torch
-torch.save(model.visual.state_dict(), &#x27;/workspace/QC-VPT/weights/clip_vitl14_336.pth&#x27;)
-print(&#x27;CLIP saved&#x27;)
-&quot;
-
-# DINOv2 ViT-L（作为教师网络）
-python -c &quot;
-import torch
-model = torch.hub.load(&#x27;facebookresearch/dinov2&#x27;, &#x27;dinov2_vitl14&#x27;)
-torch.save(model.state_dict(), &#x27;/workspace/QC-VPT/weights/dinov2_vitl14.pth&#x27;)
-print(&#x27;DINOv2 saved&#x27;)
-&quot;
-
-# LLaVA-1.6-7B（完整模型，用于最终评测）
-# 注意：预实验阶段只需要 encoder 部分，LLM 权重可以延后下载
-huggingface-cli download liuhaotian/llava-v1.6-vicuna-7b \
-    --local-dir /workspace/QC-VPT/weights/llava-1.6-7b \
-    --include &quot;*.safetensors&quot; &quot;*.json&quot; &quot;tokenizer*&quot;
-```
-
-#### Step 2：跑 vanilla baseline 确认环境
-```bash
-# 用 lmms-eval 跑 LLaVA-1.6 在 POPE 上的基线
-cd /workspace/LLaVA
-python -m lmms_eval \
-    --model llava \
-    --model_args pretrained=/workspace/QC-VPT/weights/llava-1.6-7b \
-    --tasks pope \
-    --batch_size 4 \
-    --output_path /workspace/QC-VPT/results/baseline_pope.json \
-    --num_fewshot 0
-
-# 预期：POPE accuracy ~85-87%（与论文一致则环境 OK）
-# 预计时间：约 30 分钟，单卡即可
-```
-
----
-
-### Day 3-5：核心验证实验
-
-#### 核心模块实现
-
-1. Cross-Attention Scorer（patch-query 相关性打分）
-
-```python
-# src/model/cross_attn_scorer.py
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class CrossAttentionScorer(nn.Module):
-    &quot;&quot;&quot;
-    给定 patch embeddings 和 text query embeddings，
-    输出每个 patch 与 query 的相关性分数。
-    轻量设计：单头 cross-attention，不引入大量参数。
-    &quot;&quot;&quot;
-    def __init__(self, patch_dim=1024, text_dim=768, hidden_dim=256):
-        super().__init__()
-        # 投影到统一维度
-        self.patch_proj = nn.Linear(patch_dim, hidden_dim)
-        self.text_proj = nn.Linear(text_dim, hidden_dim)
-        self.scale = hidden_dim  -0.5
-        
-    def forward(self, patch_embeds, text_embeds):
-        &quot;&quot;&quot;
-        patch_embeds: (B, N_patches, patch_dim)  e.g., (B, 576, 1024)
-        text_embeds:  (B, L_text, text_dim)      e.g., (B, 32, 768)
-        returns: (B, N_patches) 每个 patch 的相关性分数 [0,1]
-        &quot;&quot;&quot;
-        # 投影
-        P = self.patch_proj(patch_embeds)   # (B, N, hidden_dim)
-        T = self.text_proj(text_embeds)     # (B, L, hidden_dim)
-        
-        # cross-attention scores: patch attend to text
-        # (B, N, hidden_dim) x (B, hidden_dim, L) -&gt; (B, N, L)
-        attn = torch.bmm(P, T.transpose(1, 2)) * self.scale
-        attn = F.softmax(attn, dim=-1)
-        
-        # 对 text token 维度取 max（每个 patch 与最相关 text token 的分数）
-        scores, _ = attn.max(dim=-1)  # (B, N)
-        
-        return scores  # 高分 = 与 query 相关
-```
-
-2. Query-Conditioned Masking 策略
-
-```python
-# src/model/masking.py
-import torch
-import numpy as np
-
-def query_conditioned_mask(
-    relevance_scores,    # (B, N) patch-query 相关性
-    mask_ratio=0.40,     # 总 mask 比例
-    query_irrelevant_ratio=0.75,  # mask 中有多少来自低相关区域
-    temperature=1.0      # 控制 mask 随机性
-):
-    &quot;&quot;&quot;
-    核心 masking 策略：
-    - 75% 的 mask 从低相关性 patch 中采样（强迫从 query 相关区域推断无关区域）
-    - 25% 的 mask 从高相关性 patch 中采样（保证 query 相关区域的预测能力）
-    
-    返回: mask (B, N), True = 被 mask（需要预测）
-    &quot;&quot;&quot;
-    B, N = relevance_scores.shape
-    n_mask = int(N * mask_ratio)
-    n_irrelevant_mask = int(n_mask * query_irrelevant_ratio)
-    n_relevant_mask = n_mask - n_irrelevant_mask
-    
-    masks = torch.zeros(B, N, dtype=torch.bool, device=relevance_scores.device)
-    
-    for b in range(B):
-        scores = relevance_scores[b]  # (N,)
-        
-        # 按相关性排序
-        sorted_idx = torch.argsort(scores)  # 从低到高
-        
-        # 低相关性 patch（前 60%）中采样
-        low_rel_pool = sorted_idx[:int(N * 0.6)]
-        # 高相关性 patch（后 40%）中采样
-        high_rel_pool = sorted_idx[int(N * 0.6):]
-        
-        # 随机采样（加温度控制的随机性）
-        low_perm = torch.randperm(len(low_rel_pool))[:n_irrelevant_mask]
-        high_perm = torch.randperm(len(high_rel_pool))[:n_relevant_mask]
-        
-        mask_idx = torch.cat([
-            low_rel_pool[low_perm],
-            high_rel_pool[high_perm]
-        ])
-        masks[b, mask_idx] = True
-    
-    return masks
-```
-
-3. Prediction Head
-
-```python
-# src/model/prediction_head.py
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class PatchPredictionHead(nn.Module):
-    &quot;&quot;&quot;
-    轻量 MLP：从可见 patch 的聚合表示预测被 mask patch 的教师特征。
-    输入：被 mask 位置的 encoder 输出（用 [MASK] token 填充后的特征）
-    输出：预测的教师网络特征
-    &quot;&quot;&quot;
-    def __init__(self, input_dim=1024, hidden_dim=2048, output_dim=1024):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.GELU(),
-            nn.LayerNorm(hidden_dim),
-            nn.Linear(hidden_dim, output_dim)
-        )
-        # output_dim 与教师网络特征维度一致
-        # CLIP ViT-L: 1024, DINOv2 ViT-L: 1024
-        
-    def forward(self, x):
-        &quot;&quot;&quot;x: (B, N_masked, input_dim)&quot;&quot;&quot;
-        return self.net(x)
-```
-
-4. QC-VPT Encoder（核心封装）
-
-```python
-# src/model/qc_encoder.py
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from transformers import CLIPVisionModel, CLIPVisionConfig
-from .cross_attn_scorer import CrossAttentionScorer
-from .masking import query_conditioned_mask
-from .prediction_head import PatchPredictionHead
-
-class QCVPTEncoder(nn.Module):
-    &quot;&quot;&quot;
-    Query-Conditioned Visual Predictive Tuning Encoder
-    
-    训练阶段：
-    1. 用 cross-attention scorer 计算 patch-query 相关性
-    2. 按相关性做 query-conditioned masking
-    3. 将 masked patches 替换为可学习 [MASK] token
-    4. 过 CLIP ViT encoder
-    5. 用 prediction head 预测被 mask patch </pre></details>
+# 🏆 完整实验计划（第 2-4 周，仅预实验通过后执行）
+
+前提: 预实验证明 CLIP 特征中确实存在可挖掘的置信度信号。接下来将 GCC 模块与 MLLM 联合训练（Projector + GCC 模块微调，冻结 LLM 和 Vision Tower）。
+
+### 1. 完整实验矩阵
+| 模型 | 视觉编码器 | 训练策略 | 目的 |
+| :--- | :--- | :--- | :--- |
+| LLaVA-1.5-7B | CLIP-ViT-L | Projector + GCC Tuning | 快速迭代，消融实验的主力 |
+| LLaVA-1.6-7B | CLIP-ViT-L (AnyRes) | Projector + GCC Tuning | 刷主表格，证明在SOTA模型上有效 |
+| InternVL2-8B | InternViT | 仅插入GCC微调 | 证明方法不依赖于特定的CLIP架构 |
+
+### 2. 对比基线
+1.  Vanilla Baseline: 官方开源权重直接测试。
+2.  Standard Finetune: 不加 GCC，仅用相同数据微调 Projector（控制变量，证明收益来自架构而非多训了几个epoch）。
+3.  VCD (Visual Contrastive Decoding): 训练免的幻觉缓解 SOTA 方法（直接在 `lmms-eval` 中开启参数即可对比）。
+4.  OPERA: 另一种基于 Attention 惩罚的幻觉缓解方法。
+
+### 3. 评估指标列表
+*   幻觉核心: `HallusionBench` (Acc, Yes-ratio), `POPE` (F1, Acc, Yes-ratio)。
+*   综合能力 (防退化): `MMBench` (Overall), `MME` (Perception &amp; Cognition)。
+*   复杂推理: `MMMU` (Val set), `MathVista`。
+*   自定义指标 (置信度校准曲线): 按照 $c_i$ 的值将 token 分为 10 个 Bin，计算每个 Bin 对应的 VQA 准确率。预期画出一条完美的正相关曲线（$c_i$ 越高，准确率越高）。
+
+### 4. 训练设计与消融实验 (Week 2-3)
+
+训练数据: LLaVA 官方的 665K SFT 数据集。
+硬件策略 (针对无NVLink的L20):
+*   绝对不要做 Full LLM Finetuning。
+*   使用 DeepSpeed ZeRO-2，开启 Gradient Checkpointing。
+*   由于只训练 Projector (约20M参数) + GCC (约5M参数)，通信量极小，无NVLink的劣势被完美规避。8张 L20 跑 665K 数据大约只需 10-15 小时。
+
+Loss 设计 (核心创新):
+$L_{total} = L_{CE\_LLM} + \lambda L_{HALO\_GCC}$
+*   $L_{CE\_LLM}$: 标准的 LLM Next-token 预测交叉熵损失。
+*   $L_{HALO\_GCC}$: 几何约束损失。$\max(0, \gamma - \|c_i \cdot v_i\|)$ 对于有用的 token，$\max(0, \|c_i \cdot v_i\| - \epsilon)$ 对于无用的 token（可用预实验的伪标签，或直接用无监督的对比损失）。
+
+消融实验 (Ablations):
+1.  w/o HALO Loss: 去掉几何约束，只让模型隐式学习 $c_i$。
+2.  Additive vs. Multiplicative: 将 $\tilde{v}_i = c_i \cdot \text{Proj}(v_i)$ 改为 $\tilde{v}_i = \text{Proj}(v_i) + \text{MLP}(v_i)$。证明乘性（范数缩放）的几何意义更优。
+3.  Position of GCC: 在 Projector 之前 vs. 在 Projector 之后。
+
+### 5. 图表规划 (Week 4 写作准备)
+*   Figure 1 (Teaser): 概念对比图。左边：传统 MLLM（所有视觉 token 范数相同，LLM 被迫吸收背景噪声产生幻觉）。右边：我们的 GCC（高置信度 token 范数大，低置信度 token 范数收缩，LLM 轻松过滤噪声）。
+*   Figure 2 (Method): GCC 模块的架构图和 HALO-Loss 的几何空间示意图。
+*   Table 1 (Main Results): 包含 5 个 Benchmark 的大表格。
+*   Figure 3 (Calibration): 置信度校准曲线（Line chart）。
+*   Figure 4 (Qualitative): 3 组对比案例。展示原版模型产生幻觉的图片，附带我们的</pre></details>
 </div>
 </div>
 

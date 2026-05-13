@@ -22,7 +22,7 @@ from idea_forge.consensus_check import filter_by_consensus
 
 # 三个模型各自独立思考
 IDEA_MODELS = ["gemini-pro", "gpt-5.5", "claude-sonnet"]
-PLAN_MODEL = "claude-sonnet"
+PLAN_MODEL = "gpt-5.5"
 
 
 def generate_deep_idea_prompt(seed, b_direction):
