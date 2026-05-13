@@ -1,12 +1,11 @@
 """
 LLM 统一调用客户端
-支持: Gemini (OpenAI兼容) / Claude (AWS Bedrock) / GPT-5.5 (中转站)
+支持: Gemini (OpenAI兼容) / Claude (evomap gateway, Anthropic 原生) / GPT-5.5 (中转站)
 所有 key 从 /data/renyiming/config.json 读取
 """
 
 import json
 import httpx
-import boto3
 from pathlib import Path
 
 CONFIG_PATH = Path("/data/renyiming/config.json")
@@ -21,6 +20,15 @@ def load_config():
 def get_preset(name):
     config = load_config()
     return config.get("presets", {}).get(name)
+
+
+def _resolve_claude_preset(name):
+    """把短名映射到真实 preset 名"""
+    config = load_config()
+    aliases = config.get("_aliases", {})
+    if name in aliases:
+        name = aliases[name]
+    return name
 
 
 # ============================================================
@@ -68,40 +76,60 @@ def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, ma
 
 
 # ============================================================
-# Claude 系列（AWS Bedrock invoke_model）
+# Claude 系列（evomap gateway, Anthropic 原生 Messages API）
 # ============================================================
-def call_claude(prompt, preset_name="claude-haiku", temperature=0.3, max_tokens=2000, retries=3):
+def call_claude(prompt, preset_name="claude-sonnet-4-6", temperature=0.3, max_tokens=2000, retries=3):
+    preset_name = _resolve_claude_preset(preset_name)
     cfg = get_preset(preset_name)
     if not cfg:
+        print(f"  [Claude] 未找到 preset: {preset_name}")
+        return None
+    if cfg.get("provider") != "anthropic_gateway":
+        print(f"  [Claude] preset {preset_name} 不是 anthropic_gateway，请更新 config.json")
         return None
 
     import time as _time
+    url = cfg["base_url"].rstrip("/") + "/v1/messages"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {cfg['auth_token']}",
+        "anthropic-version": "2023-06-01",
+        "User-Agent": "curl/7.88.1",
+    }
+    payload = {
+        "model": cfg["model"],
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+
     for attempt in range(retries):
         try:
-            client = boto3.client(
-                "bedrock-runtime",
-                region_name=cfg["aws_region"],
-                aws_access_key_id=cfg["aws_access_key_id"],
-                aws_secret_access_key=cfg["aws_secret_access_key"],
-            )
-            response = client.invoke_model(
-                modelId=cfg["model"],
-                contentType="application/json",
-                accept="application/json",
-                body=json.dumps({
-                    "anthropic_version": "bedrock-2023-05-31",
-                    "max_tokens": max_tokens,
-                    "temperature": temperature,
-                    "messages": [{"role": "user", "content": prompt}],
-                }),
-            )
-            result = json.loads(response["body"].read())
-            return result["content"][0]["text"]
+            req_kwargs = {"timeout": 180}
+            if cfg.get("needs_proxy"):
+                req_kwargs["proxy"] = PROXY_URL
+            resp = httpx.post(url, headers=headers, json=payload, **req_kwargs)
+            if resp.status_code == 200:
+                data = resp.json()
+                content = data.get("content", [])
+                for block in content:
+                    if block.get("type") == "text":
+                        return block.get("text", "")
+                return None
+            elif resp.status_code >= 500 and attempt < retries - 1:
+                _time.sleep(5)
+                continue
+            else:
+                print(f"  [Claude/{cfg['model']}] HTTP {resp.status_code}: {resp.text[:200]}")
+                if attempt < retries - 1:
+                    _time.sleep(5)
+                    continue
+                return None
         except Exception as e:
             if attempt < retries - 1:
                 _time.sleep(5)
                 continue
-            print(f"  [Claude/{preset_name}] 失败(重试{retries}次): {e}")
+            print(f"  [Claude/{cfg['model']}] 失败(重试{retries}次): {e}")
             return None
 
 
@@ -182,6 +210,7 @@ def call_model(model_name, prompt, **kwargs):
 
 if __name__ == "__main__":
     print("测试所有模型连通性...")
-    print(f"  Gemini Flash: {call_flash('1+1=?', max_tokens=10)}")
-    print(f"  GPT-5.5: {call_gpt('1+1=?', max_tokens=10)}")
-    print(f"  Claude Haiku: {call_claude('1+1=?', 'claude-haiku', max_tokens=10)}")
+    print(f"  Gemini Flash: {call_flash('1+1=?', max_tokens=20)}")
+    print(f"  GPT-5.5: {call_gpt('1+1=?', max_tokens=30)}")
+    print(f"  Claude Sonnet: {call_claude('1+1=?', 'claude-sonnet-4-6', max_tokens=20)}")
+    print(f"  Claude Opus: {call_claude('1+1=?', 'claude-opus-4-7', max_tokens=20)}")
