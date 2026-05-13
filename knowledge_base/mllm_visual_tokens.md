@@ -84,10 +84,11 @@
 - TextVQA（细粒度 OCR）
 - MME-RealWorld（实际效率）
 
-**基线：**
-- LLaVA-1.6-7B（全量 token）
-- FastV（attention-based pruning）
-- VisionZip（merge + prune 混合）
+**基线（2025-2026 主流，禁止用 LLaVA-1.5/1.6 作主基线）：**
+- Qwen2.5-VL-7B / InternVL3-8B / LLaVA-OneVision-7B（全量 token）
+- FastV / VisionZip / PyramidDrop（pruning baselines，2024-2025）
+- SparseVLM / TokenPacker / LLaVA-Mini（2025 新方法）
+- ⚠️ 评测必须额外报告 OCRBench / DocVQA / ChartQA / MMMU-Pro 等 2025 主流 benchmark
 
 **评估指标：**
 - 准确率 vs token 数量曲线

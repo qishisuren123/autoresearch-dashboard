@@ -77,11 +77,13 @@
 - MemoryBank
 - LoCoMo (长对话)
 
-**基线：**
-- MemGPT
-- 基础 RAG (FAISS + GPT-3.5)
-- Full-context baseline
-- A-Mem
+**基线（2025-2026 主流，禁止只用 GPT-3.5 / Llama-2 作 backbone）：**
+- MemGPT-v2 / Letta（2024-2025 主流落地版本）
+- A-Mem（2024 学术）、LangMem 2025（LangGraph 官方记忆框架）
+- Mem0（2025 开源 SOTA agent memory）
+- RAG baseline 必须用 2025+ embedding（如 BGE-M3、Nomic v2、E5-Mistral-2025）+ Qwen3-32B / Llama-4 / DeepSeek-V3 作生成器
+- Full-context baseline 必须用至少 128K-1M context 的 2025+ 模型（Gemini 1.5/2、Claude 3.5/4、Qwen3-128K、DeepSeek-V3）
+- ⚠️ 不允许只用 GPT-3.5 / Llama-2 做主对比，会被审稿人秒拒
 
 **评估：**
 - 任务完成率

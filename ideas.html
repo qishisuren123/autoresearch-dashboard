@@ -109,7 +109,7 @@ details pre {
 
 <header>
 <h1>🌊 大浪淘沙 - AI 研究方案锻造</h1>
-<div class="sub">每日自动运行 · 更新于 2026-05-13 18:28</div>
+<div class="sub">每日自动运行 · 更新于 2026-05-13 22:28</div>
 <a class="nav-link" href="./index.html">← 返回信息聚合主页</a>
 </header>
 
@@ -117,9 +117,9 @@ details pre {
 <div class="stats">
     <div class="stat"><div class="n">14</div><div class="l">A 种子</div></div>
     <div class="stat"><div class="n">4</div><div class="l">B 方向知识库</div></div>
-    <div class="stat"><div class="n">8</div><div class="l">Idea 生成</div></div>
-    <div class="stat"><div class="n">1</div><div class="l">通过验证</div></div>
-    <div class="stat"><div class="n">1</div><div class="l">计划书</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Idea 生成</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">通过验证</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">计划书</div></div>
 </div>
 
 
@@ -510,7 +510,7 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 <div class="tab-content" id="tab-kb"><h2>📘 B 领域深度知识库</h2><p>由领域内专家手动维护（人为保证客观），AI 不自动修改。</p>
 <div class="card">
-<h4>📄 agent_memory <small>(1483 字符)</small></h4>
+<h4>📄 agent_memory <small>(1842 字符)</small></h4>
 <details><summary>展开查看完整知识</summary><pre class="kb-content"># LLM Agent 长期记忆
 
 **本质问题：** Agent 在长任务中要么上下文爆炸，要么用 RAG 但不知道什么该存什么该忘。
@@ -590,11 +590,13 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 - MemoryBank
 - LoCoMo (长对话)
 
-**基线：**
-- MemGPT
-- 基础 RAG (FAISS + GPT-3.5)
-- Full-context baseline
-- A-Mem
+**基线（2025-2026 主流，禁止只用 GPT-3.5 / Llama-2 作 backbone）：**
+- MemGPT-v2 / Letta（2024-2025 主流落地版本）
+- A-Mem（2024 学术）、LangMem 2025（LangGraph 官方记忆框架）
+- Mem0（2025 开源 SOTA agent memory）
+- RAG baseline 必须用 2025+ embedding（如 BGE-M3、Nomic v2、E5-Mistral-2025）+ Qwen3-32B / Llama-4 / DeepSeek-V3 作生成器
+- Full-context baseline 必须用至少 128K-1M context 的 2025+ 模型（Gemini 1.5/2、Claude 3.5/4、Qwen3-128K、DeepSeek-V3）
+- ⚠️ 不允许只用 GPT-3.5 / Llama-2 做主对比，会被审稿人秒拒
 
 **评估：**
 - 任务完成率
@@ -605,7 +607,7 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 
 <div class="card">
-<h4>📄 llm_reasoning <small>(1482 字符)</small></h4>
+<h4>📄 llm_reasoning <small>(1691 字符)</small></h4>
 <details><summary>展开查看完整知识</summary><pre class="kb-content"># LLM 推理与测试时计算
 
 **本质问题：** O1/R1 式长思维链推理效果好但成本高。如何在有限推理预算下最大化能力？
@@ -681,19 +683,17 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 
 ## 四、数据集和基线
 
-**数据集：**
-- MATH-500
-- GSM8K
-- AIME 2024/2025
-- Olympiad Bench
-- LiveCodeBench
-- GPQA
-- ARC-AGI
+**数据集（2025-2026 主流）：**
+- MATH-500、AIME 2024/2025、Olympiad Bench
+- LiveCodeBench-v6（2025 滚动更新）、SWE-Bench-Verified
+- ARC-AGI-2（2025）、FrontierMath、HumanEval-V
+- ⚠️ 仅用 GSM8K / 老 GPQA 作为主指标会被审稿人质疑&quot;已被刷爆&quot;
 
-**基线：**
-- DeepSeek-R1-7B (或蒸馏版)
-- Qwen2.5-Math-7B
-- Llama-3.1-8B + CoT prompt
+**基线（2025-2026 主流推理模型，禁止用 Llama-2/3、Vicuna、GPT-3.5 作主基线）：**
+- DeepSeek-R1（2025 旗舰）/ DeepSeek-V3.1
+- Qwen3-32B（2025）、QwQ-32B
+- Llama-4-Scout / Maverick（2025）
+- o3-mini-style 推理模型作为闭源参考
 
 **评估指标：**
 - Pass@1
@@ -703,7 +703,7 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 
 <div class="card">
-<h4>📄 mllm_fusion <small>(2191 字符)</small></h4>
+<h4>📄 mllm_fusion <small>(2562 字符)</small></h4>
 <details><summary>展开查看完整知识</summary><pre class="kb-content"># 多模态大模型的模态融合
 
 **本质问题：** 当前 MLLM 把视觉 token 和文本 token 简单拼接后交给 LLM 自己去 attention，这种浅层对齐导致：细粒度视觉推理差、幻觉、空间理解弱。
@@ -805,10 +805,16 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 - POPE（物体幻觉）
 - BLINK（视觉感知基础能力）
 
-**基线：**
-- LLaVA-1.6-7B (Vicuna)
-- Qwen2-VL-7B
-- InternVL2-8B
+**基线（2025-2026 主流，必须使用最新模型）：**
+- Qwen2.5-VL-7B / 72B（2025 年最强开源 VL 之一）
+- InternVL3-8B / 78B（2025）
+- LLaVA-OneVision-7B（2024 末→2025 主流）
+- Cambrian-1-8B / NVILA-8B / Molmo-7B（2024-2025）
+- ⚠️ LLaVA-1.5/1.6、Qwen2-VL、InternVL2 仅作为&quot;过时对比基线&quot;出现，不能作为主基线，否则 ICLR/NeurIPS 2026 会被秒拒。
+
+**Benchmark（必须包含 2025+ 新基准）：**
+- MMMU-Pro（2025 升级版）、MEGA-Bench（2025）、MMBench-V2、HallusionBench、BLINK
+- 仅用 GQA / VQAv2 / 老 MMBench 会被审稿人质疑&quot;为什么不在新 benchmark 上验证&quot;
 
 ---
 
@@ -823,7 +829,7 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 
 <div class="card">
-<h4>📄 mllm_visual_tokens <small>(2265 字符)</small></h4>
+<h4>📄 mllm_visual_tokens <small>(2461 字符)</small></h4>
 <details><summary>展开查看完整知识</summary><pre class="kb-content"># 视觉 Token 管理（MLLM）
 
 **本质问题：** 一张图经 ViT 编码后产生 300-700 个视觉 token，但文本任务真正需要的可能只有几十个。如何管理这些 token 是 MLLM 的核心工程痛点。
@@ -910,10 +916,11 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 - TextVQA（细粒度 OCR）
 - MME-RealWorld（实际效率）
 
-**基线：**
-- LLaVA-1.6-7B（全量 token）
-- FastV（attention-based pruning）
-- VisionZip（merge + prune 混合）
+**基线（2025-2026 主流，禁止用 LLaVA-1.5/1.6 作主基线）：**
+- Qwen2.5-VL-7B / InternVL3-8B / LLaVA-OneVision-7B（全量 token）
+- FastV / VisionZip / PyramidDrop（pruning baselines，2024-2025）
+- SparseVLM / TokenPacker / LLaVA-Mini（2025 新方法）
+- ⚠️ 评测必须额外报告 OCRBench / DocVQA / ChartQA / MMMU-Pro 等 2025 主流 benchmark
 
 **评估指标：**
 - 准确率 vs token 数量曲线
@@ -934,208 +941,612 @@ A（数字表征规律）+ B（模型编辑/可解释性）：可通过干预特
 </div>
 <div class="tab-content" id="tab-plans"><h2>💡 最新方案（Idea + 计划书）</h2>
 <div class="info-box">
-<b>文件：</b>forge_20260513_1828.json<br>
-<b>时间：</b>2026-05-13T18:28:00<br>
-<b>处理种子：</b>2
-&nbsp;|&nbsp;<b>生成 idea：</b>8
-&nbsp;|&nbsp;<b>通过验证：</b>1
-&nbsp;|&nbsp;<b>计划书：</b>1
+<b>文件：</b>forge_20260513_2228.json<br>
+<b>时间：</b>2026-05-13T22:28:30<br>
+<b>处理种子：</b>4
+&nbsp;|&nbsp;<b>生成 idea：</b>10
+&nbsp;|&nbsp;<b>通过验证：</b>6
+&nbsp;|&nbsp;<b>计划书：</b>6
 </div>
-<h3>种子 1: &quot;I don&#x27;t know!&quot;: Teaching neural networks to abstain with the HALO-Loss. [R]</h3><p>生成 8 idea，通过 1 个</p>
+<h3>种子 1: I scaled a pure Spiking Neural Network (SNN) to 1.088B parameters from scratch. Ran out of budget, but here is what I found [R]</h3><p>生成 4 idea，通过 2 个</p>
 <div class="card plan-card">
 <div class="plan-header">
 <span class="plan-rank">方案 1.1</span>
-<span class="model-tag">claude-sonnet</span>
+<span class="model-tag">gemini-pro</span>
+<span class="domain-tag">LLM 推理与测试时计算</span>
+</div>
+<div class="b-problem"><b>B 问题：</b>如何在有限推理预算下最大化推理能力</div>
+<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
+<details><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 借鉴 SNN 的“积分-放电”（Integrate-and-Fire）机制与替代梯度算法，为 LLM 引入一个可端到端训练的“推理电位”模块，实现基于置信度累积的动态推理预算（Dynamic Budget）控制，让模型自主决定何时结束思维链并输出答案。
+
+为什么不撞社区共识: 
+1. 契合“Dynamic Budget”高价值方向：完美响应了社区对“不同任务需要不同推理深度”的共识。
+2. 避开“思考越长越好”的误区：通过引入放电阈值和计算惩罚，强制模型在累积足够置信度后立即停止思考，防止过度推理导致的劣化（Overthinking / Hallucination）。
+3. 避开“PRM 难训练且有偏”的坑：不依赖步骤级的人工/模型打分，而是完全遵循社区主流的 ORM + RLVR 范式，只看最终结果对错，通过替代梯度将最终的 Reward 回传给每一步的“电位”累积过程。
+
+机制映射: 
+- A 的「膜电位累积与阈值放电 (LIF)」机制 ←→ B 的「动态推理预算与截断」问题。
+- 数学上的同构性在于「离散跳变的连续化优化」：SNN 面临的核心数学难题是脉冲发射 $S_t = \Theta(V_t - V_{th})$ 是不可导的阶跃函数，A 种子通过改进的替代梯度（Surrogate Gradients）解决了 10 亿参数的端到端信用分配；在 LLM 推理中，决定“何时从 `&lt;think&gt;` 阶段切换到 `&lt;answer&gt;` 阶段”同样是一个不可导的离散截断动作。我们将 SNN 的替代梯度数学形式直接平移到 LLM 的 Transformer 层之上，用连续的梯度流更新离散的思考终止动作，从而实现纯净的端到端 RL 训练。
+
+论文故事线:</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这是一份为你量身定制的、极具执行力的实验计划书。
+
+考虑到你的硬件条件是 8 张 L20 (48GB) 且无 NVLink，这是一个典型的“显存尚可，但卡间通信极慢（受限于 PCIe）”的配置。因此，绝对不能使用张量并行（TP）或流水线并行（PP）进行全参训练。我们的核心策略是：使用 GRPO（无需 Critic 模型，省显存） + vLLM 高效生成 + LoRA/QoRA 微调，框架首选支持 Ray 调度的 `OpenRLHF` 或轻量级手写脚本。
+
+---
+
+# 预实验计划（第 1 周）
+目标: 用最小成本（1.5B 模型 + GSM8K）验证“积分-放电（IF）机制 + 替代梯度”能否让模型学会动态截断，且不崩坏。
+
+### 1. 环境搭建
+由于无 NVLink，推荐使用 `OpenRLHF`（原生支持 Ray 和 vLLM，对 PCIe 节点友好）或直接基于 `trl` 手写轻量级 GRPO。
+```bash
+# 创建环境
+conda create -n snn_llm python=3.10 -y &amp;&amp; conda activate snn_llm
+# 安装核心库
+pip install torch==2.2.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install transformers datasets accelerate peft trl vllm wandb
+# 如果使用 OpenRLHF (推荐)
+git clone https://github.com/OpenRLHF/OpenRLHF.git
+cd OpenRLHF &amp;&amp; pip install -e .
+```
+
+### 2. 数据准备
+使用最经典的 GSM8K，过滤掉太长的数据，方便快速迭代。
+```python
+# data_prep.py
+from datasets import load_dataset
+ds = load_dataset(&quot;openai/gsm8k&quot;, &quot;main&quot;)
+# 构造 Prompt: &quot;Question: {q}\nLet&#x27;s think step by step.\n&lt;think&gt;&quot;
+# 答案提取正则: 匹配最后的数字
+ds.save_to_disk(&quot;./data/gsm8k_local&quot;)
+```
+
+### 3. 基线运行 (Vanilla Baseline)
+- 模型: `Qwen/Qwen2.5-1.5B-Instruct`（单卡即可跑满，迭代极快）。
+- 任务: 跑一个标准的 GRPO/PPO 训练，Reward 只有结果对错（Correct=+1, Wrong=-1）。
+- 目的: 确认环境无 Bug，记录 Baseline 的平均思考 Token 数和准确率。
+
+### 4. 核心验证实验（最小改动实现 Idea）
+这是本周的核心 Hack。为了在 LLM 中实现 SNN 的替代梯度，我们不需要改 Transformer 内部，只需在最后一层加一个 “电位预测头”（Potential Head）。
+
+代码级 Hack 方案 (伪代码逻辑):
+1. 网络结构: 在 LM Head 旁增加一个 `Linear(hidden_size, 1)`，输出当前步的电位增量 $v_t \in (0, 1)$（过 Sigmoid）。
+2. 前向生成 (Forward):
+   - 维护一个累积电位 $V_t = V_{t-1} + v_t$。
+   - 离散跳变: 当 $V_t \ge 1.0$ 时，强制模型在下一步输出 `&lt;answer&gt;` token，结束思考阶段。
+3. 替代梯度反向传播 (Surrogate Gradient Backward):
+   - 传统 RL 靠采样探索，我们这里用 SNN 的做法：将离散的截断动作视为阶跃函数 $S_t = \Theta(V_t - 1.0)$。
+   - 定义替代梯度：在 Backward 时，使用 Fast Sigmoid 的导数 $\frac{\partial S_t}{\partial V_t} = \frac{1}{(1 + \alpha |V_t - 1.0|)^2}$。
+   - Loss 设计: $Loss = Loss_{RL} + \lambda \sum_{t} S_t \cdot (t - T_{target})$。通过替代梯度，将最终的 Reward（或长度惩罚）直接传导给每一步的电位增量 $v_t$。
+
+执行方式: 在单卡或 2 卡上，使用自定义的 `GenerationMixin` 覆盖 HuggingFace 的 `generate` 方法，注入电位累积逻辑。
+
+### 5. 成功标准（有信号的标志）
+1. Loss 正常下降：电位头（Potential Head）的梯度没有爆炸或消失。
+2. 动态长度涌现：模型在训练后，对于简单的加减法，电位 $V_t$ 累积极快（例如 20 个 token 就达到 1.0 并输出 `&lt;answer&gt;`）；对于复杂的应用题，电位累积变慢（需要 100 个 token）。
+3. 指标：准确率不低于 Baseline 的 90%，但平均思考 Token 数显著下降（例如减少 30%）。
+
+### 6. 预估资源
+- 硬件: 2 张 L20 (1 张跑 vLLM 生成，1 张跑训练更新)。
+- 时间: 编码 Hack 3 天，跑通 Baseline 1 天，跑通核心实验 3 天。
+
+---
+
+# 完整实验计划（第 2-4 周，仅预实验通过后执行）
+
+如果预实验证明“电位累积+替代梯度”能走通，立即扩大规模，准备写 Paper。
+
+### 1. 完整实验矩阵
+- 模型: 统一升级为 `Qwen2.5-7B-Instruct` 和 `Llama-3.1-8B-Instruct`（使用 LoRA，8 张 L20 采用 ZeRO-2 + 梯度检查点，完全可以跑）。
+- 数据集:
+  - MATH (高难度数学，最能体现 Dynamic Budget 价值)
+  - GSM8K (基础数学)
+  - HotpotQA (多跳问答，测试逻辑推理)
+
+### 2. 对比基线 (Baselines)
+1. Vanilla CoT: 原始模型直接 Zero-shot CoT。
+2. Standard RLVR (GRPO): 社区主流做法（如 DeepSeek-R1-Zero 的早期形态），只给最终 Reward，不限制长度（作为“过度思考 Overthinking”的靶子）。
+3. Pause Tokens: 借鉴 *Pause Tokens (Goyal et al., 2023)*，允许模型输出无意义的 `&lt;pause&gt;` token，但不具备显式的电位累积机制。
+4. Early Exit / Length Penalty: 在标准 RL 中直接对长度加线性惩罚（不使用替代梯度和电位机制，证明我们的 SNN 机制在信用分配上更优）。
+
+### 3. 评估指标列表
+- Accuracy (Pass@1): 最终答案的准确率。
+- Average Reasoning Tokens: 平均 `&lt;think&gt;` 阶段的长度。
+- Compute Efficiency (Accuracy / Token): 单位 Token 带来的准确率收益（核心卖点）。
+- Overthinking Rate: 简单题被强行思考很长导致出错的比例。
+
+### 4. 消融实验设计 (Ablation Studies)
+1. 替代梯度函数的选择: 对比 Fast Sigmoid, ATan, Straight-Through Estimator (STE) 对训练稳定性的影响。
+2. 放电阈值 $V_{th}$ 的设定: 固定阈值 (1.0) vs. 可学习阈值。
+3. 惩罚系数 $\lambda$ 的敏感度: 不同的长度惩罚力度如何影响“思考-准确率”帕累托前沿 (Pareto Frontier)。
+
+### 5. 图表规划（论文核心 Visuals）
+- 图 1 (Teaser): 概念图。左边是传统 LLM（固定思考或盲目长思考），右边是我们的 IF-LLM（电位槽随思考逐渐填满，满了立刻“啪”一下放电输出答案，不同难度题目填满速度不同）。
+- 图 2 (Method): 架构图。展示 Transformer 最后一层如何分出 Potential Head，以及替代梯度如何穿透不可导的截断动作回传。
+- 图 3 (Main Result): 散点折线图。X 轴是 Average Tokens，Y 轴是 Accuracy。展示我们的方法在左上角（Token少，Acc高），打破了传统 RLVR 的 Pareto 前沿。
+- 图 4 (Case Study): 截取一个 Easy 样本和一个 Hard 样本，画出它们随 Token 生成的电位 $V_t$ 上升曲线（Easy 曲线陡峭，Hard 曲线平缓）。
+
+### 6. 论文结构草案
+- Title: *Spiking</pre></details>
+</div>
+
+<div class="card plan-card">
+<div class="plan-header">
+<span class="plan-rank">方案 1.2</span>
+<span class="model-tag">gemini-pro</span>
+<span class="domain-tag">LLM Agent 长期记忆</span>
+</div>
+<div class="b-problem"><b>B 问题：</b>Agent 在长任务中的记忆管理</div>
+<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
+<details><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 引入 SNN 的“积分-触发（Integrate-and-Fire）”机制，提出 Spiking Memory 架构：为 Working Memory 中的概念/事件维护轻量级的“激活电位”，仅在电位累积突破阈值（Spike）时，才触发 LLM 进行高成本的记忆反思与分层固化（写入长期记忆）。
+
+为什么不撞社区共识: 
+1. 避开了“强行遗忘（艾宾浩斯）”与“全量存入向量库”的误区：我们不按时间盲目丢弃信息，也不把所有废话塞进 RAG。Spike 机制本质上是重要性累积，只把真正成熟、反复出现或高价值的上下文提炼并“晋升”到冷存储。
+2. 契合“分层存储”与“Working Memory 动态压缩”的共识：完美回答了 Agent 记忆管理中最难的“何时（When）进行记忆转移”问题，替代了目前 MemGPT/Letta 依赖的固定轮次触发或昂贵的全局 LLM 轮询反思。
+3. 遵循“先做 training-free”原则：电位累积完全可以通过轻量级 Embedding 相似度或启发式规则实现，无需从头训练大模型。
+
+机制映射: 
+- A 的「Leaky Integrate-and-Fire (LIF) 膜电位累积与脉冲发射」机制 ←→</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>你好！我是AI研究员。这个 Spiking Memory 的 Idea 非常漂亮！它巧妙地将神经科学的 LIF (Leaky Integrate-and-Fire) 模型与 LLM Agent 的记忆管理痛点（何时反思、如何降本）结合，且坚持 Training-free，极具顶会（如 ICLR/NeurIPS/ACL）潜力。
+
+针对你拥有的 8 张 L20 (48GB, 无NVLink) 硬件条件，由于无 NVLink，我们应避免跨卡张量并行（TP）训练，而是充分利用 48GB 大显存和 8 卡数量优势，采用 vLLM 部署多实例并发推理（Data Parallelism） 的策略。
+
+以下是为你量身定制的 4 周可执行计划书：
+
+---
+
+# 🚀 预实验计划（第 1 周）
+目标: 用最小代码量（&lt;500行）和最快速度，验证“LIF机制能否在保持准确率的同时，显著降低反思（Reflection）的 Token 开销”。
+
+### 1. 环境搭建 (Day 1)
+不建议直接魔改 MemGPT（代码太重），我们手搓一个轻量级评测框架。
+*   Python 环境: `conda create -n spiking_mem python=3.10 -y &amp;&amp; conda activate spiking_mem`
+*   核心依赖: `pip install vllm sentence-transformers faiss-gpu datasets openai`
+*   模型准备: 
+    *   LLM (推理与反思): `huggingface-cli download meta-llama/Meta-Llama-3-8B-Instruct` (单张 L20 轻松装下)
+    *   Embedding (电位计算): `huggingface-cli download BAAI/bge-m3`
+
+### 2. 数据准备 (Day 1)
+我们需要一个需要长期记忆且有重复概念的对话/任务数据集。
+*   数据集: Multi-Session Chat (MSC) 或 QMSum (长会议摘要，按时间步切分模拟流式输入)。
+*   预处理 (以 MSC 为例):
+    *   编写脚本，将多轮对话展平为流式输入（Streaming Input）。
+    *   构建一个“大海捞针-重复版 (Repeated NIAH)”的合成测试：在 100 轮闲聊中，分 5 次隐晦地提到“Alice 喜欢吃苹果”，看系统能否在第 5 次触发 Spike 并固化该记忆。
+
+### 3. 基线运行 (Day 2)
+实现两个最简单的 Baseline，跑通评测 Pipeline：
+*   Baseline A (Sliding Window): 仅保留最近 20 轮对话，无长期记忆。
+*   Baseline B (Fixed-Interval Reflection): 每隔 $K=10$ 轮，强制调用 LLM 对 Working Memory 进行总结，存入向量库。
+
+### 4. 核心验证实验：Spiking Memory 最小实现 (Day 3-4)
+编写 `spiking_memory.py`，核心逻辑如下：
+1.  初始化: 维护一个 Working Memory 列表，每个元素是一个 Dict: `{&quot;text&quot;: str, &quot;embedding&quot;: array, &quot;potential&quot;: float, &quot;last_t&quot;: int}`。
+2.  输入 (Input): 收到新句子 $x_t$，计算其 Embedding $e_t$。
+3.  泄漏与积分 (Leaky Integrate):
+    *   遍历 WM 中的已有记忆 $m_i$。
+    *   计算时间衰减（Leak）: $V_i = V_i \times \exp(-\frac{t - m_i.last\_t}{\tau})$
+    *   计算相似度（Integrate）: $sim = \text{cosine\_sim}(e_t, m_i.embedding)$
+    *   如果 $sim &gt; 0.6$，则 $V_i = V_i + sim$，并更新 $m_i.last\_t = t$。
+4.  触发与固化 (Fire &amp; Consolidate):
+    *   如果某个 $m_i$ 的 $V_i &gt; V_{threshold}$ (例如 2.5)：
+    *   Spike! 提取 $m_i$ 及其相关的上下文，调用 LLM Prompt: *&quot;根据以下片段，总结关于该主题的长期事实...&quot;*
+    *   将总结写入长期记忆（FAISS），并将 WM 中这些片段的电位清零（Refractory Period / 不应期）。
+
+### 5. 成功标准 (Day 5 验收)
+*   指标 1 (有效性): 在 MSC 数据集上的问答准确率（或 Rouge-L）&gt;= Fixed-Interval Baseline。
+*   指标 2 (经济性): 触发 LLM Reflection 的次数比 Fixed-Interval 减少 40% 以上。
+*   现象: 打印电位变化日志，能清晰看到“无关闲聊电位衰减至 0，而反复提及的关键信息电位阶梯上升并触发 Spike”。
+
+### 6. 预估资源
+*   硬件: 2 张 L20。1 张跑 vLLM 部署 Llama-3，1 张跑 Embedding 和主控脚本。
+*   耗时: 预实验跑完 MSC 的一个子集（约 500 个 session）只需不到 10 小时。
+
+---
+
+# 🏆 完整实验计划（第 2-4 周）
+*(仅在预实验证明“降本且不降效”后启动)*
+
+由于你有 8 张 L20，我们可以极大地加速实验。启动 8 个 vLLM 实例（每卡一个），通过 API 端口区分，并行跑不同的数据集和消融实验。
+
+### 1. 完整实验矩阵 (Datasets x Models)
+*   模型: Llama-3-8B-Instruct, Mistral-7B-Instruct-v0.2。
+*   数据集 (覆盖三种场景):
+    1.  日常长对话: MSC (Multi-Session Chat)
+    2.  长文本/多文档问答: Loogle 或 LongBench 的流式变体（按段落喂入）。
+    3.  Agent 轨迹/环境探索: ScienceWorld 或 WebArena 的简化版（验证动作记忆的固化）。
+
+### 2. 对比基线 (Baselines)
+1.  Vanilla LLM: 无记忆，仅靠原生 Context Window。
+2.  Naive RAG: 所有历史记录无脑 Chunking + Embedding 存入 FAISS。
+3.  MemGPT (Fixed-turn): 社区共识基线，固定轮次触发记忆整理。
+4.  Recency-based Reflection: 类似 Generative Agents，基于时间衰减和单次重要性打分（不累积）。
+
+### 3. 评估指标列表
+*   Performance (效能): 
+    *   QA 准确率 (Exact Match / F1)。
+    *   LLM-as-a-Judge 评分 (针对开放式对话)。
+*   Efficiency (开销 - 核心卖点):
+    *   Reflection Tokens: 用于记忆反思的 Token 总消耗量（越低越好）。
+    *   Memory Size: 最终写入长期记忆库的 Chunk 数量（衡量记忆压缩率）。
+*   Latency (延迟): 端到端响应时间（证明 Embedding 积分计算的开销远小于 LLM 轮询）。
+
+### 4. 消融实验设计 (Ablation Studies)
+这是论文能否中顶会的关键，需证明 LIF 机制缺一不可：
+*   w/o Leaky (移除泄漏): 电位只增不减。预期：大量垃圾信息最终也会突破阈值，导致频繁无效 Spike。
+*   w/o Integrate (移除积分): 不累积，仅靠单次输入的 Embedding 相似度或 LLM 打分决定是否固化。预期：无法捕捉“多次微弱暗示”的长期概念。
+*   Threshold Sensitivity: 阈值 $V_{threshold}$ 设为 1.5, 2.0, 2.5, 3.0 的性能-开销折线图。
+
+### 5. 图表规划 (论文视觉呈现)
+*   图 1 (Teaser): 概念对比图。左边是 MemGPT（定时盲目反思），右边是 Spiking Memory（电位累积，精准触发）。
+*   图 2 (Method): 架构图。Working Memory 中的节点随着时间推移，颜色变淡（Leak），遇到相似输入时变红（Integrate），爆红后闪电符号（Spike）写入 Long-term Memory。
+*   图 3 (The &quot;Money&quot; Plot): 散点图。X轴是 Reflection Token Cost，Y轴是 Accuracy。Spiking Memory 应该位于左上角（高准确率，低开销）。
+*   图 4 (Case Study): 真实电位变化曲线图。画出某几个 Concept 的电位随对话轮次（Time step）的波动曲线，标注出 Spike 发生的瞬间。
+
+### 6. 论文结构草案
+*   Title: *Spiking Memory: Leaky Integrate-and-Fire Mechanism for Training-Free Working Memory Consolidation in LLM Agents*
+*   Abstract: 痛点（Agent记忆固化成本高、时机难定） -&gt; 灵感（SNN的LIF机制） -&gt; 方法（Spiking Memory） -&gt; 结果（性能持平，</pre></details>
+</div>
+<h3>种子 2: Can LLMs model real-world systems in TLA+?</h3><p>生成 3 idea，通过 2 个</p>
+<div class="card plan-card">
+<div class="plan-header">
+<span class="plan-rank">方案 2.1</span>
+<span class="model-tag">gemini-pro</span>
+<span class="domain-tag">LLM 推理与测试时计算</span>
+</div>
+<div class="b-problem"><b>B 问题：</b>如何在有限推理预算下最大化推理能力</div>
+<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
+<details><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 
+将 LLM 的隐式/非正式思维链（CoT）转化为类似 TLA+ 的显式形式化状态机（Formal State Machine），通过符号化引擎在测试时（Test-Time）进行零成本的步级验证与死循环检测，从而在有限算力预算下实现最高效的多轨迹搜索（MCTS）与动态预算截断。
+
+为什么不撞社区共识: 
+1. 避开了“思维链越长越好”的误区：明确针对 O1/R1 类模型常见的“思考死循环（Thinking Loops）”问题，通过状态机检测到状态未实质更新时主动截断，符合“存在最优 budget”的共识。
+2. 避开了“强行训练 PRM”的深坑：顺应社区对 ORM+RLVR 的偏好，不训练昂贵且易有偏的神经 PRM，而是用形式化状态转化（类似 TLA+ 的状态断言）作为低成本、确定性的 Process Supervision。
+3. 避开了“弱模型自我批评”的陷阱：不依赖 LLM 自身的 self-refine，而是依赖外部符号引擎对形式化状态的客观校验。
+4. 契合高价值方向：完美切中“多轨迹搜索 + 自选择”、“Process Supervision 的低成本化”与“Dynamic Budget”三大前沿方向。
+
+机制映射: 
+A 的「将非正式系统需求转化为严格 TLA+ 状态机与时序逻辑」机制 ←→ B 的「长思维链中推理步骤难以低成本验证与预算浪费」问题。
+数学上的同构性在于：一段正确的数学/代码推理本质</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这是一份为你量身定制的、极具执行力的 4 周实验计划书。
+
+作为有经验的 AI 研究者，我必须先指出一个落地时的 pragmatic adaptation（务实调整）：真正的 TLA+ 语法对 LLM 来说 zero-shot 生成难度极高，且 TLC model checker 接口较重。为了在 4 周内出 paper，我们将“TLA+ 状态机”具象化为数学/逻辑推理中的“符号化状态（Symbolic State）”。
+具体而言：我们将 LLM 的 CoT 强制格式化为 `[当前已知条件集合(State)] -&gt; [推导动作(Action)] -&gt; [新条件(New State)]`。符号引擎使用 SymPy (数学) 或 Z3 (逻辑) 来做零成本的步级校验和死循环（State 重复）检测。
+
+针对你的硬件（8 张 L20 48GB，无 NVLink），这套配置非常不适合做大模型张量并行（TP&gt;2 会被 PCIe 带宽瓶颈卡死），但极其适合做数据并行（DP=8）的 Test-Time 搜索。我们将选用单卡即可装下的 7B/14B 模型（如 Qwen2.5-Math-7B 或 DeepSeek-R1-Distill-Qwen-7B）。
+
+---
+
+# 🚀 预实验计划（第 1 周）：Go / No-Go 验证
+
+目标: 用最小成本验证“符号化状态机截断死循环 + 步级验证”能否在相同 Token 预算下显著提升 MCTS 搜索效率。
+
+### 1. 环境搭建
+*   代码库: 基于轻量级 MCTS 框架（如 `tsllm` 或自己手写一个基于 `vLLM` 的 Python 脚本）。
+*   Python 环境:
+    ```bash
+    conda create -n formal_cot python=3.10 -y
+    conda activate formal_cot
+    pip install vllm sympy z3-solver datasets jsonlines
+    ```
+*   部署策略: 利用无 NVLink 的特点，在 8 张卡上启动 8 个独立的 `vLLM` 实例（Data Parallel），通过 Python `multiprocessing` 分发请求，最大化吞吐量。
+
+### 2. 数据准备
+*   数据集: 选择 `MATH` 数据集中的 `Algebra`（代数）子集。代数推导最容易被转化为状态机。
+*   下载与预处理:
+    ```python
+    from datasets import load_dataset
+    # 仅取 200 条作为预实验
+    ds = load_dataset(&quot;lighteval/MATH&quot;, &quot;all&quot;, split=&quot;test&quot;).filter(lambda x: x[&#x27;type&#x27;] == &#x27;Algebra&#x27;).select(range(200))
+    ds.to_json(&quot;math_algebra_200.jsonl&quot;)
+    ```
+
+### 3. 基线运行 (Baseline)
+*   模型: `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B` (自带长 CoT，容易陷入死循环，完美契合我们的靶点)。
+*   Vanilla Baseline: 跑一个 Best-of-16 (Bo16)。记录平均消耗的 Token 数和最终准确率（Pass@16）。
+*   目的: 确认 vLLM 环境正常，获取一个“无干预”状态下的 Compute-Accuracy 坐标点。
+
+### 4. 核心验证实验 (The Hack)
+*   Prompt 设计 (Few-shot): 引导模型输出结构化 CoT。
+    *   *格式:* `&lt;state&gt; x+y=5, x-y=1 &lt;/state&gt; &lt;action&gt; add eq1 and eq2 &lt;/action&gt; &lt;state&gt; 2x=6, x-y=1 &lt;/state&gt;`
+*   外部符号引擎 (Python 脚本):
+    *   死循环检测 (Loop Detection): 维护一个当前轨迹的 `set(states)`。如果解析到的新 `&lt;state&gt;` 已经存在于集合中，立即调用 vLLM 的 `abort` 接口截断该生成，释放算力。
+    *   步级验证 (Step Verification): 用 `SymPy` 解析 `&lt;state&gt;`。如果 `&lt;action&gt;` 导致了数学上不成立的 `&lt;state&gt;`（例如 `2x=6 -&gt; x=4`），立即截断并赋予该 MCTS 节点 `-1` 的 reward。
+*   执行: 在这 200 条数据上，运行带有上述引擎干预的 MCTS。限制总生成 Token 数不超过 Baseline 的 Bo16。
+
+### 5. 成功标准 (Go/No-Go 信号)
+满足以下任意一条即可进入完整实验：
+1.  算力节省: 在达到与 Bo16 相同准确率的情况下，总消耗 Token 数减少 &gt; 30%（证明死循环截断有效）。
+2.  性能突破: 在与 Bo16 消耗相同 Token 总数的情况下，准确率绝对值提升 &gt; 5%（证明步级验证引导 MCTS 有效）。
+3.  现象观察: 成功捕获并截断了至少 20% 样本中的 &quot;Thinking Loops&quot;（证明 R1 确实存在该问题且被我们解决）。
+
+### 6. 预估资源
+*   硬件: 8 张 L20 齐开。
+*   时间: 脚本编写 3 天，跑实验 1 天，数据分析 1 天。总计 5 天。
+
+---
+
+# 🏆 完整实验计划（第 2-4 周）
+*(仅在预实验获得明确信号后执行)*
+
+### 1. 完整实验矩阵
+*   模型:
+    *   `DeepSeek-R1-Distill-Qwen-7B` (代表强 RL 模型，验证能否锦上添花)
+    *   `Qwen2.5-Math-7B-Instruct` (代表标准 SFT 模型，验证能否赋予其强 Test-Time 伸缩能力)
+    *   `Llama-3.1-8B-Instruct` (泛化性验证)
+*   数据集 (3个领域):
+    *   *Math:* MATH 完整测试集 (5000题) -&gt; 引擎: SymPy
+    *   *Logic:* FOLIO (一阶逻辑) -&gt; 引擎: Z3 Solver
+    *   *Code:* MBPP -&gt; 引擎: Python `exec()` 状态捕获
+
+### 2. 所有对比基线 (Baselines)
+1.  Greedy Decoding (下限)
+2.  Best-of-N (BoN) (最常见的 Test-Time Compute 扩缩容基线)
+3.  Standard MCTS (无符号引擎，仅靠 LLM 自我评估/Self-Refine) - *来源: AlphaMath (2024)*
+4.  ORM/PRM-guided Search (使用开源的 Math-PRM，如 `Qwen2.5-Math-PRM-7B`) - *来源: Let&#x27;s Verify Step by Step (Lightman et al.)*
+    *   *核心论点:* 我们的零成本符号引擎比加载一个 7B PRM 速度快 100 倍，且没有幻觉。
+
+### 3. 评估指标列表
+*   Pass@1 (最终准确率)
+*   Token Budget / Compute Cost (平均每题消耗的生成 Token 数，这是核心 X 轴)
+*   Loop Truncation Rate (触发死循环截断的比例)
+*   Time-to-Solution (端到端延迟，证明符号引擎开销可忽略不计)
+
+### 4. 消融实验设计 (Ablations)
+*   Ablation 1: 仅死循环检测 vs. 仅步级正确性验证 vs. 两者结合。 (证明两个机制都有贡献)。
+*   Ablation 2: 状态机粒度。 (粗粒度：每 5 步检查一次 vs. 细粒度：每 1 步检查一次)。
+*   Ablation 3: 动态预算分配。 (对于简单题，引擎很快发现已到达终态，提前终止搜索；对于难题，自动扩展 MCTS 宽度)。
+
+### 5. 图表规划 (Paper Figures)
+*   Figure 1 (Teaser): 概念对比图。左边是传统长 CoT 陷入死循环（红色漩涡）；右边是我们的 Formal State Machine，在循环处被剪刀剪断，并重定向到正确分支。
+*   Figure 2 (核心结果): 帕累托前沿曲线 (Pareto Frontier)。X轴是 Test-Time Compute (Tokens)，Y轴是 Accuracy。我们的方法曲线应该在 BoN 和 PRM-MCTS 的左上方（同算力下精度更高，同精度下算力极低）。
+*   Figure 3 (Case Study): 一棵真实的 MCTS 搜索树可视化。用红色节点标出被 SymPy/Z3 拦截的无效状态和死循环，绿色标出最终路径。
+*   Table 1: 主实验结果大表（3个模型 x 3个数据集的 Accuracy 和 Token 消耗）。
+
+### 6. 论文结构草案
+*   Title Idea: *Escape the Thinking Loop: Zero-Cost Formal State Machines for Efficient Test-Time Compute*
+*   Abstract: 针对 O1/R1 类模型在长推理中易陷入死循环且验证成本高的问题，提出将 CoT 映射为形式化状态机...
+*   Intro: 痛点（PRM 贵且有偏，Self-refine 不靠谱，长 CoT 浪费算力） -&gt; 洞察（数学/代码推理本质是状态转移） -&gt; 贡献。
+*   Method:
+    *   3.1 Implicit CoT to Explicit State Machine (Prompting &amp; Parsing)
+    *   3.2 Zero-Cost Symbolic Verification (SymPy/Z3 integration)
+    *   3.3 State-Guided MCTS and Dynamic Truncation
+*   Experiments: (对应上述矩阵和图表)
+*   Conclusion &amp; Future Work.
+
+### 7. 风险点和 Plan B
+*   风险 1: LLM 不听话，无法严格输出 `&lt;state&gt;` 标签，导致解析失败。
+    *   *Plan B:* 放弃严格的 XML 标签。写一个基于正则表达式的启发式提取器（Heuristic Extractor），直接从自然语言 CoT</pre></details>
+</div>
+
+<div class="card plan-card">
+<div class="plan-header">
+<span class="plan-rank">方案 2.2</span>
+<span class="model-tag">gpt-5.5</span>
+<span class="domain-tag">LLM Agent 长期记忆</span>
+</div>
+<div class="b-problem"><b>B 问题：</b>Agent 在长任务中的记忆管理</div>
+<div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
+<details><summary>📌 Idea 原文</summary><pre>===  
+核心idea（一句话）: 把 Agent 长期记忆管理建模为“可验证的任务记忆状态机”：LLM 不直接决定存/忘，而是从长任务轨迹中生成 TLA+-style 的记忆契约，包括状态变量、事件转移、长期不变量，再用模型检查约束 memory write / consolidation / retrieval。
+
+为什么不撞社区共识:  
+- 不做“遗忘曲线”，也不强行删除信息；原始 episode 仍进冷存储，方法只维护一个可验证的 hot working/semantic abstraction，符合“分层存储 + 按需调用”。  
+- 不把 memory 等同于 RAG；向量检索只是候选召回，最终由任务状态机中的变量依赖、时序约束、未完成目标来决定哪些记忆对当前任务有用。  
+- 不把全部信息塞进向量库；方法显式维护 图/符号状态 + 向量冷存储 + 原始日志 的混合记忆。  
+- 属于 B 领域认可的方向：working memory 动态压缩、episodic memory 组织、自我反思 + 记忆更新、跨任务经验迁移。
+
+机制映射:  
+A 的「从自然语言需求生成 TLA+ 形式化状态机与时序逻辑约束」机制 ←→ B 的「从长任务交互历史中生成可维护、可检索、可验证的长期记忆状态」问题。  
+数学上的同构性在于：二者都需要把非结构化自然语言轨迹映射为一个有限状态抽象  
+\[
+S_t = (V_t, E_t, G_t, C_t)
+\]  
+其中状态变量表示用户偏好、任务目标、承诺、约束、已知事实；转移表示 observation / action / memory update；时序逻辑公式表示“不能遗忘仍有效的承诺”“后续回答必须尊重用户已声明偏好”“任务完成前 unresolved goal 必须保持可检索”等 invariant / liveness property。  
+因此，memory management 不再只是 embedding similarity，而是一个受 temporal constraints 约束的 state update 与 retrieval problem。
+
+论文故事线:  
+现有 Agent memory 系统在长任务中主要依赖启发式摘要、向量检索或 LLM 自反思，问题是：它们不知道哪些事实是长期约束、哪些只是局部细节，也无法验证 memory update 是否破坏了长期一致性。我们提出一种 Formal-Contract Memory：让 Agent 在每轮任务后把自然语言交互压缩成可检查的任务状态机，用符号不变量指导 memory consolidation 和 retrieval，从而在不增加大量上下文的情况下保持长期一致性。
+
+方法描述（2-3句）:  
+系统维护三层记忆：原始 episode 冷存储、向量/图索引中间层、以及一个 TLA+-style compact memory contract 作为 hot working memory。每轮交互后，LLM 提取候选 memory update，并生成或修改状态变量、转移规则和 invariant；轻量模型检查器验证 update 是否违反已有约束，若冲突则触发反思修正。检索时先根据当前任务目标和 memory contract 找到相关变量/未完成目标/依赖边，再调用向量库取回对应原始 episode，而不是纯语义相似召回。
+
+草拟标题:  
+SpecMem: Verifiable State-Machine Memory for Long-Horizon LLM Agents
+
+关键实验:  
+  - 数据集:  
+    - LoCoMo：长对话长期一致性、人物偏好、早期事实 recall。  
+    - LongMemEval：长期记忆问答与跨会话信息利用。  
+    - RULER-128K / InfiniteBench：长上下文 needle / multi-hop retrieval 压力测试。  
+    - SWE-Bench-Verified：作为长任务 agent 场景，测试代码修改过程中 issue constraints、previous attempts、file-level facts 的长期维护。  
+
+  - 基线:  
+    - Memory agent：MemGPT-v2 / Letta, A-Mem, LangMem 2025, Mem0。  
+    - RAG-2025 baseline：BGE-M3 / Nomic v2 / E5-Mistral-2025 embedding + Qwen3-32B / DeepSeek-V3 / Llama-4 生成器。  
+    - Full-context baseline：Claude 3.5/4、Gemini 1.5/2、Qwen3-128K、DeepSeek-V3 long-context 版本，取可用 API 或公开权重。  
+    - Ablation：无 model checking、无 symbolic contract、仅摘要 memory、仅向量检索。  
+
+  - 指标:  
+    - 任务完成率 / SWE-Bench-Verified resolved rate。  
+    - 记忆检索准确率：Recall@k、evidence hit rate、multi-hop retrieval accuracy。  
+    - 长期一致性：几千轮后对早期用户偏好、承诺、约束的 violation rate。  
+    - Token 成本：平均输入 token、检索 token、总推理成本。  
+    - Memory update 质量：contradiction rate、stale memory rate、unresolved goal retention。  
+
+  - 预期结果:  
+    - 在 LoCoMo / LongMemEval 上，相比 Mem0 / LangMem 2025，显著降低长期偏好和承诺的 violation rate。  
+    - 在 RULER-128K / InfiniteBench 上，纯 semantic RAG 对低相似但任务关键 facts 容易漏召回，SpecMem 通过变量依赖召回提升 multi-hop 和 early-fact recall。  
+    - 在 SWE-Bench-Verified 上，提升复杂 issue 中对约束、失败尝试、相关文件状态的保持能力，同时 token 成本低于 full-context。  
+
+预实验（1周内）:  
+实现一个 training-free prototype：用 Qwen3-32B 或 DeepSeek-V3 生成 memory contract，使用简化 TLA+-like JSON DSL 表示变量、事件、invariant，并编译到 bounded checker 或 Python constraint checker。  
+先在 LoCoMo 子集和 LongMemEval 子集上比较三种方法：pure RAG、summary memory、SpecMem。  
+成功标准：在不增加超过 20% token 成本的情况下，early-session fact recall 或 preference consistency 至少提升 10%，并且 memory contradiction rate 明显下降。
+
+风险:  
+最可能失败的原因是 LLM 生成的 formal contract 过于脆弱或过细，导致 checker 开销大、更新频繁失败。缓解方式是不用完整 TLA+ 覆盖所有自然语言事实，而只 formalize 长期约束、用户偏好、未完成目标、承诺和因果/时间依赖；普通细节仍保存在向量/episode 冷存储中。  
+===</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+</div>
+<h3>种子 3: Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</h3><p>生成 3 idea，通过 2 个</p>
+<div class="card plan-card">
+<div class="plan-header">
+<span class="plan-rank">方案 3.1</span>
+<span class="model-tag">gemini-pro</span>
 <span class="domain-tag">多模态大模型 - 模态融合</span>
 </div>
 <div class="b-problem"><b>B 问题：</b>视觉信息与文本信息的深层融合机制</div>
 <div class="cc"><b>共识检查：✅</b> 通过共识检查</div>
 <details><summary>📌 Idea 原文</summary><pre>===
-核心idea（一句话）: 在多模态LLM的视觉编码阶段引入&quot;几何感知的特征置信度&quot;机制——让视觉token的特征范数显式编码其语义可靠性，使LLM在融合时能感知哪些视觉区域是&quot;高置信&quot;的、哪些是&quot;模糊/低信息&quot;的，从而在attention层面实现质量感知的模态融合。
+核心idea（一句话）: Git-Vision：将高分辨率图像的 Dynamic Tiles 视为“代码仓库”，摒弃一次性塞入所有视觉 token 的做法，让 LLM 通过生成纯文本指令（Markdown 坐标）按需、迭代地拉取局部高清视觉 token（Git Diffs）来更新其工作记忆。
 
-为什么不撞社区共识:
-- ❌ 不是&quot;给MLLM加额外视觉attention层&quot;（我们不改LLM的attention结构，只在视觉token的表示上动手）
-- ❌ 不是&quot;让文本token主动query视觉token&quot;（不改attention pattern，causal attention保持不变）
-- ❌ 不是&quot;让视觉token和文本token更相似&quot;（我们是在视觉token内部区分质量，不是拉近两个模态的分布）
-- ✅ 对应社区认可方向：&quot;Text-Aware Visual Encoding&quot;——先理解哪些视觉信息是可信的，再让LLM有差异地利用它们
-- ✅ 对应社区认可方向：&quot;Mixture of Vision Encoders&quot;的精神——不同视觉区域的语义密度不同，应该被区别对待
-- ✅ 直接打击幻觉问题（HallusionBench），这是社区公认的核心痛点之一
+为什么不撞社区共识: 
+1. 避开错误直觉2（文本</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这份计划书针对你的核心 Idea（Git-Vision：按需拉取局部视觉 Token）量身定制。考虑到你拥有 8 张 L20（48GB，无 NVLink），最大的硬件瓶颈是卡间通信（PCIe 带宽低），因此我们将绝对避免使用全参数张量并行（Tensor Parallelism）或 ZeRO-3，而是采用 ZeRO-2/DDP + LoRA/QoRA 的策略，以最大化单卡吞吐量。
 
-机制映射:
-A的「特征范数编码置信度」机制 ←→ B的「视觉token质量异质性导致幻觉」问题
-
-数学上的同构性在于：
-- HALO-Loss的核心洞察：CE Loss让所有样本的特征范数趋向无穷大，导致模型无法区分&quot;我见过的&quot;和&quot;我没见过的&quot;。数学上，softmax(Wᵀf/‖f‖·‖f‖) 在 ‖f‖→∞ 时对任何输入都给出极度尖锐的分布。
-- MLLM的对应问题：CLIP视觉encoder对所有patch都输出固定范数的token（经过LayerNorm归一化），LLM无法从token的几何属性中感知&quot;这个patch的视觉语义是清晰的&quot;还是&quot;这是背景噪声/低信息区域&quot;。LLM只能靠attention权重隐式学习，但这个信号极弱且不稳定，导致模型对模糊视觉区域产生幻觉式填充。
-- 同构性：两者本质上都是&quot;特征空间的几何结构没有编码不确定性&quot;的问题。HALO的解法是让范数成为置信度信号；映射到MLLM就是：让视觉token的范数（或等价的显式置信度标量）在projection之前被重新标定，使LLM的attention机制能自然地&quot;少信任&quot;低置信视觉token。
-
-论文故事线（从B领域自身出发）:
-当前MLLM幻觉的一个被忽视的根源：视觉encoder（CLIP）的输出经过LayerNorm后，所有视觉token的范数被强制均一化，这抹去了&quot;语义密度&quot;信息。一张图中，清晰的前景物体和模糊的背景噪声，在进入LLM时携带的几何信号是完全相同的。LLM的attention机制没有先验来区分&quot;可信视觉证据&quot;和&quot;低质量视觉填充&quot;，只能靠大量数据隐式学习，这在分布外场景（罕见物体、低质量图像、遮挡）下必然失效，表现为幻觉。
-
-我们的核心主张：视觉token的特征范数应该成为一个显式的、可学习的语义置信度信号，而不是被归一化抹去。
-
-方法描述（2-3句）:
-在CLIP视觉encoder输出之后、linear projection之前，插入一个轻量级的&quot;Geometric Confidence Calibration（GCC）&quot;模块：(1) 用一个小网络（2层MLP）预测每个patch token的置信度标量 c_i ∈ (0,1]，训练时用HALO风格的几何损失约束——高语义密度的token应有大范数，低信息token的范数应收缩向原点附近的&quot;拒识区域&quot;；(2) 将置信度标量以乘性方式调制token的投影结果：ṽ_i = c_i · Proj(v_i)，使低置信token在LLM的attention中自然获得更小的key/value幅度；(3) 在训练时增加一个辅助损失，用VQA的答案置信度作为弱监督信号反向传播到c_i的预测，无需额外标注。整个GCC模块参数量 &lt; 5M，可插入任何现有MLLM而不改变LLM结构。
-
-草拟标题:
-&quot;Geometry-Aware Visual Token Calibration for Hallucination Mitigation in Multimodal LLMs&quot;
-或更具体：
-&quot;HALO-Vision: Teaching MLLMs to Distrust Uncertain Visual Tokens via Feature Geometry Calibration&quot;
-
-关键实验:
-- 数据集:
-  - HallusionBench（核心，直接测幻觉）
-  - POPE（物体幻觉，消融用）
-  - MMBench（综合能力，确保不退化）
-  - MMMU（高难度推理，测置信度机制在复杂场景的效果）
-  - MathVista（视觉推理，测细粒度视觉理解）
-- 基线:
-  - LLaVA-1.6-7B（直接插入GCC模块，对比原版）
-  - InternVL2-8B（验证方法的通用性）
-  - 消融：去掉几何损失（只用MLP置信度）、去掉乘性调制（只用加性）、去掉辅助损失
-- 指标:
-  - HallusionBench: accuracy, yes-ratio
-  - POPE: F1, accuracy
-  - MMBench: overall score
-  - 新增指标：置信度校准曲线（高置信token对应的VQA正确率 vs 低置信token，验证c_i确实有意义）
-- 预期结果:
-  - HallusionBench: +3~5点（幻觉是最直接受益的）
-  - POPE F1: +1~2点
-  - MMBench: 持平或微涨（不退化是底线）
-  - 置信度校准曲线：高c_i的token对应的视觉区域应该是语义清晰的前景，可视化展示
-
-预实验（1周内）:
-具体做什么：
-1. 取LLaVA-1.6-7B，冻结所有参数，只训练一个2层MLP（输入：CLIP patch token，输出：标量c_i）
-2. 用最简单的代理任务训练这个MLP：对于VQA数据，如果模型答对，则答案中涉及的视觉区域（用attention rollout近似）的token应该有高c_i；答错则低c_i。这是一个弱监督二分类。
-3. 训练完后，不改变任何LLM权重，只用c_i做可视化：在POPE/HallusionBench的错误样本上，看低c_i的token是否集中在&quot;幻觉来源&quot;的视觉区域（背景、遮挡、模糊区域）。
-
-成功标准：
-- 低c_i token的可视化结果与人类直觉一致（背景/模糊区域置信度低）的比例 &gt; 60%
-- 在POPE上，将低c_i token的投影向量乘以0.1（手动抑制）后，直接inference，幻觉率下降 &gt; 2%（无需任何训练）
-
-这个预实验的意义：如果成功，说明CLIP的特征空间中确实存在可被挖掘的&quot;几何置信度&quot;信号，方法的核心假设成立。如果失败（c_i随机分布，可视化无意义），说明CLIP的归一化太彻底，需要换成在projection之后操作，或改用范数本身而非学习的标量。
-
-风险:
-最可能失败的原因：
-
-1. CLIP的LayerNorm太强：CLIP的最后几层LayerNorm会把所有token的范数压到几乎相同，导致&quot;几何置信度&quot;信号</pre></details>
-<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这份计划书针对你的硬件条件（8张 L20 48GB，无NVLink）进行了深度定制。无NVLink意味着跨卡通信（AllReduce）会受到PCIe带宽的严重限制，因此在训练策略上必须避免频繁的跨卡梯度同步，尽量采用数据并行+梯度累加，或者ZeRO-2（避免ZeRO-3的高频通信）。
-
-以下是极具执行力的 4 周实验计划。
+以下是极具执行力的 4 周实验计划：
 
 ---
 
-# 🚀 预实验计划（第 1 周）
+# 预实验计划（第 1 周）
+目标: 用最小成本验证“LLM 能否学会输出坐标指令，并利用新插入的局部 Token 提升回答准确率”。
 
-目标: 用最小成本（不训练LLM，只训一个&lt;5M的MLP）验证CLIP特征空间中是否存在可提取的&quot;几何置信度&quot;信号，并验证抑制低置信度token能否直接减少幻觉。
-
-### 1. 环境搭建 (Day 1)
-*   代码库: 使用官方 `LLaVA` (用于模型加载和修改) + `lmms-eval` (用于标准化评测)。
-*   Python环境:
+### 1. 环境搭建
+*   代码库: 使用 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) (支持多轮图文对话微调，开箱即用) + `transformers`。
+*   基础模型: `llava-1.5-7b-hf` (7B 模型在 48GB 显存上跑 LoRA 绰绰有余，且生态成熟)。
+*   环境配置:
     ```bash
-    conda create -n gcc_mllm python=3.10 -y
-    conda activate gcc_mllm
-    pip install torch==2.1.2 torchvision --index-url https://download.pytorch.org/whl/cu121
-    git clone https://github.com/haotian-liu/LLaVA.git &amp;&amp; cd LLaVA &amp;&amp; pip install -e .
-    git clone https://github.com/EvolvingLMMs-Lab/lmms-eval.git &amp;&amp; cd lmms-eval &amp;&amp; pip install -e .
+    conda create -n gitvision python=3.10 -y &amp;&amp; conda activate gitvision
+    pip install torch==2.1.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+    git clone https://github.com/hiyouga/LLaMA-Factory.git &amp;&amp; cd LLaMA-Factory
+    pip install -e &quot;.[torch,metrics]&quot;
     ```
 
-### 2. 数据准备 (Day 1)
-*   训练代理任务数据: 下载 `VQAv2` 的一个极小验证集（约5000张图），用于快速训练MLP。
-*   评测数据: 下载 `POPE` 数据集（直接通过 `lmms-eval` 自动下载）。
+### 2. 数据准备 (合成最小验证集)
+*   数据集: 下载 [DocVQA](https://www.docvqa.org/) 的一个极小子集（1000 张图）。DocVQA 必须看清局部小字才能回答，最适合验证此 Idea。
+*   预处理脚本 (写一个 `prepare_data.py`):
+    1. 将每张图切分为 2x2 的 4 个 Tiles（坐标为 `[0,0], [0,1], [1,0], [1,1]`）。
+    2. 用 OCR 工具（或现成标注）找出答案所在的 Tile 坐标（假设在右上角 `[0,1]`）。
+    3. 核心：构造多轮对话 JSON 格式（伪造 Git Pull 过程）:
+    ```json
+    [
+      {
+        &quot;messages&quot;: [
+          {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;&lt;image&gt; What is the invoice number?&quot;},
+          {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;I need to check the top-right area. [PULL: 0, 1]&quot;},
+          {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;&lt;image&gt; (这里在训练时放对应Tile的图像)&quot;},
+          {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;The invoice number is 12345.&quot;}
+        ]
+      }
+    ]
+    ```
 
-### 3. 基线运行 (Day 1)
-*   目的: 确认环境无误，记录 Vanilla LLaVA-1.6-7B 的 POPE 原始分数。
-*   命令:
+### 3. 基线运行 (Vanilla Baseline)
+*   操作: 直接用原始 `llava-1.5-7b-hf` 对这 1000 张图（缩放到 336x336）进行 Zero-shot 推理。
+*   预期: 准确率极低（&lt; 10%），因为全局低分辨率图根本看不清发票号码。
+
+### 4. 核心验证实验 (最小改动实现)
+*   训练: 使用 LLaMA-Factory 跑 LoRA 微调。
     ```bash
-    accelerate launch --num_processes=1 -m lmms_eval --model llava --model_args pretrained=&quot;liuhaotian/llava-v1.6-vicuna-7b&quot; --tasks pope --batch_size 1 --log_samples
+    CUDA_VISIBLE_DEVICES=0,1,2,3 llamafactory-cli train \
+        --stage sft --model_name_or_path llava-hf/llava-1.5-7b-hf \
+        --dataset docvqa_git_format --template llava \
+        --finetuning_type lora --lora_target q_proj,v_proj \
+        --output_dir saves/git-vision-test --per_device_train_batch_size 4 \
+        --gradient_accumulation_steps 4 --lr_scheduler_type cosine \
+        --logging_steps 10 --save_steps 100 --learning_rate 5e-5 \
+        --num_train_epochs 3 --fp16 --ddp_find_unused_parameters false
     ```
+    *(注：无 NVLink 时，4卡 DDP 效率最高，约 2-3 小时跑完)*
+*   推理引擎 (写一个 `inference_git.py`):
+    写一个 `while` 循环拦截生成：
+    1. 输入全局图 + Prompt，开始 `model.generate`。
+    2. 如果生成的文本包含 `[PULL: x, y]`，中断生成。
+    3. 裁剪原图对应 `(x, y)` 的 Tile，过 Vision Encoder 得到 Token。
+    4. 将这些 Token 拼接到当前的 `input_ids` 和 `past_key_values` 后面。
+    5. 继续 `generate`，直到输出最终答案。
 
-### 4. 核心验证实验 (Day 2-4)
-Step 4.1: 提取伪标签 (Day 2)
-*   操作: 写一个简短的脚本，加载冻结的 LLaVA-1.6-7B。遍历 5000 条 VQAv2 数据。
-*   获取信号: 对于每个样本，输入图像和问题，获取模型输出。提取LLM最后一层对视觉token的 Cross-Attention 权重（或直接用输入视觉token的梯度范数作为显著性图）。
-*   二值化: 将注意力权重排名前 30% 的视觉 token 标记为 `1` (高置信)，后 70% 标记为 `0` (低置信)。保存这些 `(CLIP_feature, label)` 对。
-
-Step 4.2: 训练置信度 MLP (Day 3)
-*   操作: 独立写一个 PyTorch 脚本，定义一个 2 层 MLP（输入维度 1024，输出维度 1，Sigmoid 激活）。
-*   训练: 用 Step 4.1 提取的特征和标签，跑一个简单的 Binary Cross Entropy (BCE) Loss。在单张 L20 上训练，几分钟即可收敛。
-
-Step 4.3: 侵入式推理 (Day 4)
-*   操作: 修改 LLaVA 的 `modeling_llava.py`。在 CLIP 输出后、Projector 之前，插入你训练好的 MLP。
-*   逻辑:
-    ```python
-    # 伪代码
-    clip_features = vision_tower(images)
-    c_i = mlp(clip_features) # shape: [batch, num_tokens, 1]
-    
-    # 核心 Hack: 手动抑制低置信度 token
-    # 如果 c_i &lt; 0.5，将其特征范数缩小到 0.1 倍
-    mask = (c_i &lt; 0.5).float()
-    modified_features = clip_features * (1 - mask) + clip_features * mask * 0.1
-    
-    projected_features = projector(modified_features)
-    ```
-*   评测: 再次运行 POPE 评测脚本。
-
-### 5. 成功标准 (Day 5 总结)
-1.  可视化: 随机抽 20 张图，将 $c_i$ 映射回 24x24 的图像网格（Heatmap）。如果高亮区域 &gt;60% 集中在前景物体/问题相关区域，说明信号存在。
-2.  指标: 侵入式推理后的 POPE Accuracy 或 F1 相比基线提升 &gt; 1.5%。
+### 5. 成功标准 (Go/No-Go 判定)
+*   现象: 模型在测试集上能主动输出 `[PULL: x, y]`，且 80% 以上拉取了正确的坐标。
+*   指标: 最终 QA 准确率比 Baseline 绝对提升 +20% 以上。
+*   满足以上条件，立即进入完整实验。
 
 ### 6. 预估资源
-*   硬件: 1 张 L20 即可（无需多卡通信）。
-*   时间: 5 天内完成。
+*   硬件: 4 张 L20 (留 4 张备用或跑其他实验)。
+*   时间: 数据处理 1 天，训练 0.5 天，写推理脚本 2 天，Debug 1.5 天。
 
 ---
 
-# 🏆 完整实验计划（第 2-4 周，仅预实验通过后执行）
-
-前提: 预实验证明 CLIP 特征中确实存在可挖掘的置信度信号。接下来将 GCC 模块与 MLLM 联合训练（Projector + GCC 模块微调，冻结 LLM 和 Vision Tower）。
+# 完整实验计划（第 2-4 周）
+*(仅在预实验成功后执行)*
 
 ### 1. 完整实验矩阵
-| 模型 | 视觉编码器 | 训练策略 | 目的 |
-| :--- | :--- | :--- | :--- |
-| LLaVA-1.5-7B | CLIP-ViT-L | Projector + GCC Tuning | 快速迭代，消融实验的主力 |
-| LLaVA-1.6-7B | CLIP-ViT-L (AnyRes) | Projector + GCC Tuning | 刷主表格，证明在SOTA模型上有效 |
-| InternVL2-8B | InternViT | 仅插入GCC微调 | 证明方法不依赖于特定的CLIP架构 |
+在 8 张 L20 上全量铺开，采用数据并行（Data Parallelism）。
+*   数据集 (高分辨率敏感):
+    *   文档/OCR: DocVQA, InfoVQA, ChartQA.
+    *   密集物体/细节: VCR, HR-VQA (或 VQA-v2 的高分辨率子集).
+*   网格划分策略: 2x2 (4 tiles), 3x3 (9 tiles).
+*   最大拉取次数 (Max Pulls): 限制为 1, 2, 3 次（防止无限循环）。
 
-### 2. 对比基线
-1.  Vanilla Baseline: 官方开源权重直接测试。
-2.  Standard Finetune: 不加 GCC，仅用相同数据微调 Projector（控制变量，证明收益来自架构而非多训了几个epoch）。
-3.  VCD (Visual Contrastive Decoding): 训练免的幻觉缓解 SOTA 方法（直接在 `lmms-eval` 中开启参数即可对比）。
-4.  OPERA: 另一种基于 Attention 惩罚的幻觉缓解方法。
+### 2. 对比基线 (Baselines)
+1.  Vanilla LLaVA-1.5 (全局低分辨，单次输入)。
+2.  LLaVA-NeXT (AnyRes) (社区共识：一次性把全局图+所有局部 Tiles 的 Token 全部塞入)。
+3.  UReader (Shape-adaptive，同样是一次性塞入)。
 
 ### 3. 评估指标列表
-*   幻觉核心: `HallusionBench` (Acc, Yes-ratio), `POPE` (F1, Acc, Yes-ratio)。
-*   综合能力 (防退化): `MMBench` (Overall), `MME` (Perception &amp; Cognition)。
-*   复杂推理: `MMMU` (Val set), `MathVista`。
-*   自定义指标 (置信度校准曲线): 按照 $c_i$ 的值将 token 分为 10 个 Bin，计算每个 Bin 对应的 VQA 准确率。预期画出一条完美的正相关曲线（$c_i$ 越高，准确率越高）。
+*   性能指标: Accuracy / ANLS (针对 DocVQA)。
+*   效率指标 (Git-Vision 的核心卖点):
+    *   Visual Token Count: 处理每个问题平均消耗的视觉 Token 数量（预期比 LLaVA-NeXT 减少 70% 以上）。
+    *   TTFT (Time to First Token): 首字延迟（预期大幅降低，因为初始 Prompt 极短）。
+    *   Total Inference Latency: 端到端推理时间。
 
-### 4. 训练设计与消融实验 (Week 2-3)
+### 4. 消融实验设计 (Ablation Studies)
+*   A. 坐标表示法: Markdown 相对坐标 `[PULL: row 1, col 2]` vs. 绝对像素坐标 `[PULL: 100px, 200px]` vs. 语义区域 `[PULL: top-right]`。
+*   B. 记忆更新策略 (Git Diff 策略):
+    *   *Append:* 保留上一次 Pull 的 Token，继续追加新的。
+    *   *Replace:* 丢弃上一次 Pull 的 Token，只保留全局图和最新 Pull 的 Token（极致省显存）。
+*   C. 容错率: 如果模型 Pull 错了空白区域，它能否</pre></details>
+</div>
 
-训练数据: LLaVA 官方的 665K SFT 数据集。
-硬件策略 (针对无NVLink的L20):
-*   绝对不要做 Full LLM Finetuning。
-*   使用 DeepSpeed ZeRO-2，开启 Gradient Checkpointing。
-*   由于只训练 Projector (约20M参数) + GCC (约5M参数)，通信量极小，无NVLink的劣势被完美规避。8张 L20 跑 665K 数据大约只需 10-15 小时。
+<div class="card plan-card">
+<div class="plan-header">
+<span class="plan-rank">方案 3.2</span>
+<span class="model-tag">gemini-pro</span>
+<span class="domain-tag">LLM Agent 长期记忆</span>
+</div>
+<div class="b-problem"><b>B 问题：</b>Agent 在长任务中的记忆管理</div>
+<div class="cc"><b>共识检查：✅</b> 检查调用失败，默认通过</div>
+<details><summary>📌 Idea 原文</summary><pre>【原方案】
+===
+核心idea（一句话）: 摒弃传统的向量数据库，将 Agent 的长期记忆建模为一个受版本控制的纯文本文件系统（Git + Markdown），通过 Commit 历史实现情景记忆（Episodic），通过主分支文件实现语义知识（Semantic），利用大模型原生的代码/文本理解能力进行记忆的读写与回溯。
 
-Loss 设计 (核心创新):
-$L_{total} = L_{CE\_LLM} + \lambda L_{HALO\_GCC}$
-*   $L_{CE\_LLM}$: 标准的 LLM Next-token 预测交叉熵损失。
-*   $L_{HALO\_GCC}$: 几何约束损失。$\max(0, \gamma - \|c_i \cdot v_i\|)$ 对于有用的 token，$\max(0, \|c_i \cdot v_i\| - \epsilon)$ 对于无用的 token（可用预实验的伪标签，或直接用无监督的对比损失）。
+为什么不撞社区共识: 
+1. 避开了“全部存进向量数据库就是记忆”的误区：向量检索丢失了时间、因果和关系，而 Git 的 Commit DAG（有向无环图）天然保留了知识演进的时间线和因果链。
+2. 避开了“直接套用遗忘曲线”的误区：Git 机制下，旧知识并没有被“遗忘”或删除，而是作为历史版本（冷存储）留在版本库中，主存（Working Directory）只保留最新状态，完美契合社区“不遗忘，只做分层存储”的共识。
+3. 契合“自我反思 + 记忆更新”的高价值方向：Agent 在完成阶段性任务后，通过生成 `git commit message`（反思总结）并提交 `diff`（记忆更新），将反思过程完全形式化。
 
-消融实验 (Ablations):
-1.  w/o HALO Loss: 去掉几何约束，只让模型隐式学习 $c_i$。
-2.  Additive vs. Multiplicative: 将 $\tilde{v}_i = c_i \cdot \text{Proj}(v_i)$ 改为 $\tilde{v}_i = \text{Proj}(v_i) + \text{MLP}(v_i)$。证明乘性（范数缩放）的几何意义更优。
-3.  Position of GCC: 在 Projector 之前 vs. 在 Projector 之后。
+机制映射: 
+A 的「Git 版本控制与纯文本」机制 ←→ B 的「Agent 分层记忆与时序因果」问题。
+*数学与结构上的同构性在于*：传统的 RAG 记忆是无序集合 $M = \{v_1, v_2, ..., v_n\}$，缺乏时间动态；而 Git 记忆是一个状态转移 DAG $M_t = M_{t-1} \oplus \Delta_t$。
+- Working Memory（工作记忆） $\leftrightarrow$ Git Working Directory / Staging Area（当前上下文与未提交的修改）。
+- Semantic Memory（语义记忆） $\leftrightarrow$ Markdown 文件的最新快照（结构化的全局知识）。
+- Episodic Memory（情景记忆） $\leftrightarrow$ Git Commit History（$\Delta_t$ 的集合，记录了“何时、为何、修改了什么”）。
 
-### 5. 图表规划 (Week 4 写作准备)
-*   Figure 1 (Teaser): 概念对比图。左边：传统 MLLM（所有视觉 token 范数相同，LLM 被迫吸收背景噪声产生幻觉）。右边：我们的 GCC（高置信度 token 范数大，低置信度 token 范数收缩，LLM 轻松过滤噪声）。
-*   Figure 2 (Method): GCC 模块的架构图和 HALO-Loss 的几何空间示意图。
-*   Table 1 (Main Results): 包含 5 个 Benchmark 的大表格。
-*   Figure 3 (Calibration): 置信度校准曲线（Line chart）。
-*   Figure 4 (Qualitative): 3 组对比案例。展示原版模型产生幻觉的图片，附带我们的</pre></details>
+论文故事线: 
+当前 LLM Agent 的长期记忆严重依赖 Vector DB (RAG)，但这导致了严重的“时序失忆”与“因果断裂”——Agent 知道某条信息存在，却不知道它是何时、在什么任务背景下被写入的，也无法处理知识的冲突与覆写。我们观察到，现代 LLM 在预训练阶段消耗了海量的 GitHub 数据，对 Git 的 diff、commit 和 Markdown 结构具有极高的原生敏感度。因此，我们提出 Version-Controlled Memory (VCM)，将记忆管理还原为纯文本的版本控制过程，无需额外训练即可实现高度透明、支持时序回溯和动态更新的 Agent 长期记忆。
+
+方法描述（2-3句）: 
+Agent 挂载一个本地的 Git 仓库作为记忆库，所有知识以 Markdown 格式分类存储。在执行长任务时，Agent 通过标准的 Git 命令（如 `git log` 检索情景历史，`git grep` 检索语义，`git diff` 查看状态变化）与记忆库交互；任务节点结束时，Agent 被 prompt 触发自我反思，生成标准的 patch 文件和 commit message，将新经验原子化地提交到记忆库中，甚至在试错失败时通过 `git checkout` 回滚到历史稳定状态。
+
+关键实验: 
+- 主基线: 与 2025-2026 年长期记忆 Agent 主流系统对比，包括 MemGPT-v2、A-Mem、Letta、LangMem 2025、Mem0，以及 RAG-2025；传统 Vector DB-RAG 仅作为“过时对比 / 消融基线”保留，不作为主基线。
+- 数据集 / Benchmark: 在 LoCoMo 与 LongMemEval 上评估长期对话记忆、跨轮事实更新、时间顺序追踪与冲突覆写能力；在 RULER-128K 与 InfiniteBench 上评估长上下文压力下的检索与回溯能力；在 SWE-Bench-Verified 上评估面向真实软件工程任务的版本化经验积累与失败回滚能力。
+- 评估方法: 采用记忆命中率、时间归因准确率、因果链恢复准确率、冲突知识更新准确率、历史版本回溯成功率、任务完成率、token / latency / storage 开销作为主要指标；同时报告无 Git history、无 commit message、无 diff patch、仅 Markdown 快照、仅 Vector DB-RAG 等消融设置。</pre></details>
+<details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
 </div>
 </div>
 

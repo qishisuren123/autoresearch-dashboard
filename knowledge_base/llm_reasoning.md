@@ -73,19 +73,17 @@
 
 ## 四、数据集和基线
 
-**数据集：**
-- MATH-500
-- GSM8K
-- AIME 2024/2025
-- Olympiad Bench
-- LiveCodeBench
-- GPQA
-- ARC-AGI
+**数据集（2025-2026 主流）：**
+- MATH-500、AIME 2024/2025、Olympiad Bench
+- LiveCodeBench-v6（2025 滚动更新）、SWE-Bench-Verified
+- ARC-AGI-2（2025）、FrontierMath、HumanEval-V
+- ⚠️ 仅用 GSM8K / 老 GPQA 作为主指标会被审稿人质疑"已被刷爆"
 
-**基线：**
-- DeepSeek-R1-7B (或蒸馏版)
-- Qwen2.5-Math-7B
-- Llama-3.1-8B + CoT prompt
+**基线（2025-2026 主流推理模型，禁止用 Llama-2/3、Vicuna、GPT-3.5 作主基线）：**
+- DeepSeek-R1（2025 旗舰）/ DeepSeek-V3.1
+- Qwen3-32B（2025）、QwQ-32B
+- Llama-4-Scout / Maverick（2025）
+- o3-mini-style 推理模型作为闭源参考
 
 **评估指标：**
 - Pass@1

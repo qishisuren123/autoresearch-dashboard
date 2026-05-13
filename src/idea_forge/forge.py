@@ -19,10 +19,25 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from llm_client import call_model
 from idea_forge.b_library import get_b_library, format_b_context
 from idea_forge.consensus_check import filter_by_consensus
+from idea_forge.freshness import step2_5_freshness_refresh
 
-# 三个模型各自独立思考
-IDEA_MODELS = ["gemini-pro", "gpt-5.5", "claude-sonnet"]
+# 三个模型各自独立思考；交叉验证时全员评审（包括生成者自己），避免单一模型主导否决
+IDEA_MODELS = ["gemini-pro", "gpt-5.5", "claude-opus"]
 PLAN_MODEL = "gpt-5.5"
+
+# 时新性引导（鼓励性，不是硬约束 —— 击杀机制已下放到 Step 2.5 通过 B 库 + arxiv 自动刷新）
+FRESHNESS_REQUIREMENT = """【时新性引导 - 尽量遵守，但不必担心被一票否决】
+当前时间是 2026 年 5 月。**优先使用 2025-2026 年最新的模型、数据集、benchmark**。
+若不确定最新版本是什么，请尽量用你**已知最近**的型号；后续 Step 2.5 会通过 B 库 + arxiv 自动刷新升级，
+所以构思时**优先把机制讲清楚**，模型/数据细节稍旧也没关系。
+
+参考方向（B 库可能持续更新，以你知道的最新为准）：
+- 多模态：Qwen2.5-VL / InternVL3 / LLaVA-OneVision / Cambrian-1 / NVILA / Molmo（或更新者）
+- LLM 推理：DeepSeek-R1/V3.1 / Qwen3 / Llama-4 / QwQ / o-series（或更新者）
+- Agent 记忆：MemGPT-v2 / Letta / Mem0 / LangMem 2025（或更新者）
+- Benchmark：MMMU-Pro / MEGA-Bench / LiveBench / SWE-Bench-Verified / ARC-AGI-2（或更新者）
+- 避免：LLaVA-1.5/1.6、Qwen2-VL、InternVL2、Llama-2、Vicuna、GPT-3.5 等已被替代的型号作主基线
+"""
 
 
 def generate_deep_idea_prompt(seed, b_direction):
@@ -45,6 +60,7 @@ def generate_deep_idea_prompt(seed, b_direction):
     b_context = format_b_context(b_direction, include_full_knowledge=True)
 
     prompt = f"""你是一位在 B 领域深耕多年的顶级研究者，目标是产出能被 ICLR/NeurIPS/ICML 接收的论文。
+当前是 2026 年 5 月，你必须使用最新的模型与 benchmark，否则论文会被审稿人秒拒。
 
 【任务】
 下面给你一个"A 种子"（近期被社区热议的技术 insight）和一个"B 方向"（你所在的研究领域）。
@@ -63,6 +79,8 @@ B 方向附带了**该领域的真实社区共识、路线之争、常见误区*
 - 8 张 L20 GPU（48GB 显存，无 NVLink）
 - 4 周时间
 - 只能用公开数据集
+
+{FRESHNESS_REQUIREMENT}
 
 【核心要求 - 极其重要，必须严格遵守】
 
@@ -157,14 +175,38 @@ def step1_deep_ideation(seed, b_directions):
     return all_ideas
 
 
+def _parse_verdict(result):
+    """从评审输出里提取最终判定。支持中英混写。"""
+    if not result:
+        return False
+    tail = result[-400:]
+    # 找最后一行 "判定" 行
+    verdict_line = ""
+    for line in reversed(tail.splitlines()):
+        if "判定" in line or "verdict" in line.lower():
+            verdict_line = line
+            break
+    target = verdict_line if verdict_line else tail
+    # 优先看是否明确"不通过 / fail / reject"
+    neg_keys = ["不通过", "拒绝", "reject", "fail"]
+    for k in neg_keys:
+        if k in target.lower() if k.isascii() else k in target:
+            return False
+    return ("通过" in target) or ("pass" in target.lower()) or ("accept" in target.lower())
+
+
 def step2_strict_validation(ideas):
     """
     Step 2: 严格交叉验证（目标顶会水平）
-    每个 idea 由生成它之外的两个模型评审
-    标准: 能否产出顶会论文级别的贡献
+    全员评审：所有 IDEA_MODELS（包括生成者自己）都参与打分，避免单一模型主导否决。
+
+    通过/不通过判定**只看 D1/D2/D3（机制深度、方法简洁、实验充分）**：3 票里 ≥2 票通过。
+    D4（时新性）仅记录为 freshness_flags，**不再一票否决**——因为旧模型/数据可在
+    Step 2.5 通过 B 库 + arxiv 搜索就地刷新升级，不应击杀好计划。
     """
     print(f"\n{'─' * 60}")
-    print(f"  Step 2: 严格交叉验证 ({len(ideas)} 个候选)")
+    print(f"  Step 2: 严格交叉验证 ({len(ideas)} 个候选 × {len(IDEA_MODELS)} 评审员/全员评审)")
+    print(f"  通过门槛：D1/D2/D3 ≥2 评审员通过；D4 仅作软警告供 Step 2.5 刷新")
     print(f"{'─' * 60}")
 
     validated = []
@@ -172,62 +214,95 @@ def step2_strict_validation(ideas):
     for idx, item in enumerate(ideas):
         source = item["source_model"]
         idea_text = item["idea_text"]
-        reviewers = [m for m in IDEA_MODELS if m != source]
+        reviewers = list(IDEA_MODELS)  # 全员评审，含生成者
 
         votes_pass = 0
         total_reviews = 0
         reviews = []
+        freshness_flags = []
+
+        print(f"\n  [{idx+1}/{len(ideas)}] 来自 [{source}] | {item.get('b_domain','?')}")
 
         for reviewer in reviewers:
-            review_prompt = f"""你是一位顶级 AI 会议的审稿人。请评审以下研究方案。
-
-注意：你不需要判断这个方向是否"热门"或"值得做"——它已经被社区验证过热度了。
-你只需要判断：这个**具体的方法设计**是否有足够的技术深度。
+            tag = "(self)" if reviewer == source else ""
+            review_prompt = f"""你是一位顶级 AI 会议（NeurIPS/ICLR/ICML/CVPR）的资深审稿人。
+当前是 2026 年 5 月。请严格按四个维度评审下面的研究方案。
 
 === 方案 ===
 {idea_text}
 === 方案结束 ===
 
-请只关注这几个核心问题:
-1. 机制映射是否有深层道理（数学/直觉上是否说得通）？还是表面类比硬凑的？
-2. 提出的方法是否足够简洁且有明确的技术贡献？
-3. 实验设计是否能convincingly验证这个假设？
+【评审维度 - 必须逐项给出明确判断】
 
-判定:
-- 如果方法有深层道理 + 足够简洁 + 实验可验证 → 输出"通过"
-- 如果机制映射牵强、或方法过于复杂、或实验无法验证 → 输出"不通过"
+[D1] 机制深度: 机制映射是否有数学或物理直觉上的深层道理，而非表面类比硬凑？
+[D2] 方法简洁: 方法是否能用 2-3 句说清楚核心贡献？过度复杂会扣分。
+[D3] 实验充分: 实验设计能否 convincingly 验证假设？是否包含必要的消融与对照？
+[D4] 时新性（仅作软警告，不影响通过判定）:
+     提到的模型/数据/benchmark 是否是 2025-2026 最新的？
+     若发现过时项（如 LLaVA-1.5/1.6、Qwen2-VL、InternVL2、Llama-2、Vicuna、GPT-3.5、纯 GQA/VQAv2 老 benchmark）请明确列出。
+     **重要：D4 不再决定通过/不通过——下游 Step 2.5 会通过 B 库 + arxiv 搜索自动刷新升级，所以请只如实标记，不要因为 D4 就把整体判"不通过"。**
 
-判定（一个词）: 通过 / 不通过
+【输出格式 - 必须严格遵守】
+D1机制深度: <通过/不通过> | <一句话理由>
+D2方法简洁: <通过/不通过> | <一句话理由>
+D3实验充分: <通过/不通过> | <一句话理由>
+D4时新性:   <过时/最新> | <若过时则列出具体过时项；若最新则写"全部为2025+模型/数据"。注意此项不影响整体判定。>
+
+判定（综合，一个词）: 通过 / 不通过
+（**规则：仅看 D1/D2/D3，3 个里 ≥2 通过即"通过"；D4 不参与判定**）
 核心理由（一句话）:"""
 
-            result = call_model(reviewer, review_prompt, temperature=0.2, max_tokens=500)
-            total_reviews += 1
+            result = call_model(reviewer, review_prompt, temperature=0.2, max_tokens=700)
+            if not result:
+                print(f"    [{reviewer}{tag}] ⚠️ 调用失败")
+                time.sleep(3)
+                continue
 
-            if result:
-                reviews.append(result)
-                # 解析判定
-                last_200 = result[-300:]
-                if "通过" in last_200 and "不通过" not in last_200.split("判定")[-1][:30]:
-                    votes_pass += 1
-                    print(f"    [{reviewer}] → ✅ 通过")
-                else:
-                    # 提取理由
-                    reason = ""
-                    for line in result.split("\n")[-3:]:
-                        if "理由" in line:
-                            reason = line.split(":", 1)[-1].strip()[:40]
-                    print(f"    [{reviewer}] → ❌ {reason}")
+            total_reviews += 1
+            passed = _parse_verdict(result)
+            reviews.append({"reviewer": reviewer, "is_self": reviewer == source, "verdict": "通过" if passed else "不通过", "text": result})
+
+            # 抽 D4 时新性结论（仅作软警告，不影响通过判定）
+            d4_line = ""
+            for line in result.splitlines():
+                if "D4" in line or "时新性" in line:
+                    d4_line = line.strip()
+                    break
+            # 任一负面信号都记录为软警告，留给 Step 2.5 处理
+            d4_stale = False
+            if d4_line:
+                low = d4_line.lower()
+                if any(k in d4_line for k in ["过时", "不通过", "不及格", "需要升级"]) or \
+                   any(k in low for k in ["stale", "outdated", "old"]):
+                    d4_stale = True
+            if d4_stale:
+                freshness_flags.append(f"[{reviewer}] {d4_line[:160]}")
+
+            if passed:
+                votes_pass += 1
+                print(f"    [{reviewer}{tag}] → ✅ 通过 | {d4_line[:60]}")
             else:
-                total_reviews -= 1
-                print(f"    [{reviewer}] → ⚠️ 调用失败")
+                # 摘要核心理由
+                reason = ""
+                for line in result.splitlines()[-3:]:
+                    if "理由" in line:
+                        reason = line.split(":", 1)[-1].strip()[:80]
+                        break
+                print(f"    [{reviewer}{tag}] → ❌ | {reason or d4_line[:60]}")
             time.sleep(3)
 
-        # 严格标准: 需要过半通过
+        # 综合判定：3 票里 ≥2 票通过才算 pass（>50%）
         pass_rate = votes_pass / total_reviews if total_reviews > 0 else 0
-        if pass_rate > 0.5:
-            item["validation"] = {"votes": votes_pass, "total": total_reviews, "reviews": reviews}
+        verdict_pass = pass_rate > 0.5
+        if verdict_pass:
+            item["validation"] = {
+                "votes": votes_pass,
+                "total": total_reviews,
+                "reviews": reviews,
+                "freshness_flags": freshness_flags,
+            }
             validated.append(item)
-            print(f"  → ✅ 通过交叉验证 ({votes_pass}/{total_reviews})")
+            print(f"  → ✅ 通过 ({votes_pass}/{total_reviews}){' [时新性有警告]' if freshness_flags else ''}")
         else:
             print(f"  → ❌ 未通过 ({votes_pass}/{total_reviews})")
 
@@ -319,13 +394,16 @@ def run_idea_forge(seeds, b_ids=None):
             print("  无有效 idea，跳过")
             continue
 
-        # Step 2: 严格验证
+        # Step 2: 严格验证（D1/D2/D3 决定通过；D4 仅记录为 freshness_flags）
         validated = step2_strict_validation(ideas)
         if not validated:
             print("  无 idea 通过验证")
             continue
 
-        # Step 2.5: 社区共识检查（新增：避免撞 B 领域常识）
+        # Step 2.5: 时新性刷新（B 库 + arxiv 双渠道；不击杀，只升级）
+        validated = step2_5_freshness_refresh(validated, enable_arxiv=True)
+
+        # Step 2.6: 社区共识检查（避免撞 B 领域常识）
         consensus_passed = filter_by_consensus(validated)
         if not consensus_passed:
             print("  无 idea 通过共识检查")

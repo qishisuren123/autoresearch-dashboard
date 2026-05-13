@@ -7,14 +7,60 @@ LLM 统一调用客户端
   - GPT-5.5: 优先走 linghuo（anyrouter.top, Responses API），失败回落收费中转站
   - Claude:  ⚠️ 当前 anyrouter 网关对 Anthropic 协议有 bug（panic / 误报 1m 错误），
              call_claude 始终走收费 evomap。免费版本仅供 Claude Code CLI 使用。
+
+代理策略（2026-05-13 起）：
+  - 服务器位于受限网络环境，部分 API 必须经代理 127.0.0.1:10407（SSH 反向隧道）
+  - 启动前自动 TCP 探测代理是否存活；如代理死了：
+      · Gemini / anyrouter（灵活渠道）→ 明确报错并返回 None，**不会崩**
+      · evomap Claude / gpt-5.5 付费中转站 → 直连可达，正常工作
+  - 所有调用强制 trust_env=False，避免环境变量污染
 """
 
 import json
 import httpx
+import socket
+import time as _global_time
 from pathlib import Path
 
 CONFIG_PATH = Path("/data/renyiming/config.json")
 PROXY_URL = "http://127.0.0.1:10407"
+_PROXY_HOST = "127.0.0.1"
+_PROXY_PORT = 10407
+
+
+_PROXY_CACHE = {"checked_at": 0.0, "alive": None}
+
+
+def proxy_alive(ttl_seconds=20):
+    """快速 TCP 探测代理端口是否监听；结果缓存 ttl_seconds 秒"""
+    now = _global_time.time()
+    if _PROXY_CACHE["alive"] is not None and now - _PROXY_CACHE["checked_at"] < ttl_seconds:
+        return _PROXY_CACHE["alive"]
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1.5)
+        ok = s.connect_ex((_PROXY_HOST, _PROXY_PORT)) == 0
+        s.close()
+    except Exception:
+        ok = False
+    _PROXY_CACHE["alive"] = ok
+    _PROXY_CACHE["checked_at"] = now
+    return ok
+
+
+def _httpx_kwargs(needs_proxy, *, timeout=120):
+    """
+    返回 httpx.Client 的标准 kwargs。
+    - needs_proxy=True：仅在代理活着时加 proxy；代理死时返回 None（上层应跳过/降级）
+    - needs_proxy=False：明确不走代理，且 trust_env=False 避免 env 污染
+    """
+    base = {"timeout": timeout, "trust_env": False}
+    if not needs_proxy:
+        return base
+    if proxy_alive():
+        base["proxy"] = PROXY_URL
+        return base
+    return None  # 信号：代理需要但不可用
 
 
 def load_config():
@@ -64,17 +110,21 @@ def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, ma
         "max_tokens": max_tokens,
     }
 
+    # Gemini 在受限网络下必须走代理；config 字段 needs_proxy 默认 False，
+    # 但实测官方 generativelanguage.googleapis.com 直连不通 → 这里强制按 True 处理
+    needs_proxy = cfg.get("needs_proxy", False) or "googleapis.com" in cfg.get("base_url", "")
+
     for attempt in range(retries):
+        kwargs = _httpx_kwargs(needs_proxy=needs_proxy, timeout=120)
+        if kwargs is None:
+            print(f"  [Gemini/{preset_name}] 代理 127.0.0.1:10407 不可用（SSH 隧道断了？），跳过")
+            return None
         try:
-            kwargs = {"timeout": 120}
-            if cfg.get("needs_proxy"):
-                kwargs["proxy"] = PROXY_URL
             with httpx.Client(**kwargs) as client:
                 resp = client.post(url, headers=headers, json=payload)
             if resp.status_code == 200:
                 content = resp.json()["choices"][0]["message"].get("content")
                 if content is None:
-                    # thinking 模型 max_tokens 过小时无输出，重试无意义
                     print(f"  [Gemini] 无输出内容（max_tokens 过小或全用于 thinking）")
                     return None
                 return content
@@ -99,8 +149,13 @@ def call_gemini(prompt, preset_name="gemini-3.1-flash-lite", temperature=0.3, ma
 def call_linghuo_claude(prompt, model="claude-opus-4-7", temperature=0.3, max_tokens=2000):
     """通过 Claude Code CLI 调用 anyrouter 免费渠道（1M context）。
     北京时间 00:00-08:00 免费；逐 key 轮换；--no-session-persistence 保证无状态。
-    成功返回字符串；全部失败返回 None。"""
+    需要 SSH 代理（anyrouter.top 直连 SSL 阻断）。
+    成功返回字符串；全部失败/无代理 返回 None。"""
     import subprocess, os
+
+    if not proxy_alive():
+        print(f"  [灵活Claude] 代理 127.0.0.1:10407 不可用（SSH 隧道断了？），跳过 → 上层会回落到 evomap")
+        return None
 
     lh_cfg = get_preset("linghuo-claude")
     if not lh_cfg:
@@ -114,6 +169,11 @@ def call_linghuo_claude(prompt, model="claude-opus-4-7", temperature=0.3, max_to
         env = os.environ.copy()
         env["ANTHROPIC_AUTH_TOKEN"] = key
         env["ANTHROPIC_BASE_URL"] = base_url
+        # 显式把代理传给 claude CLI（它内部用 Node fetch，会读 HTTPS_PROXY）
+        env["HTTPS_PROXY"] = PROXY_URL
+        env["HTTP_PROXY"] = PROXY_URL
+        env["https_proxy"] = PROXY_URL
+        env["http_proxy"] = PROXY_URL
 
         cmd = [
             "claude", "-p", prompt,
@@ -190,10 +250,12 @@ def call_claude(prompt, preset_name="claude-sonnet-4-6", temperature=0.3, max_to
 
     for attempt in range(retries):
         try:
-            req_kwargs = {"timeout": 180}
-            if cfg.get("needs_proxy"):
-                req_kwargs["proxy"] = PROXY_URL
-            resp = httpx.post(url, headers=headers, json=payload, **req_kwargs)
+            kwargs = _httpx_kwargs(needs_proxy=cfg.get("needs_proxy", False), timeout=180)
+            if kwargs is None:
+                print(f"  [Claude/{cfg['model']}] 代理需要但不可用，跳过")
+                return None
+            with httpx.Client(**kwargs) as client:
+                resp = client.post(url, headers=headers, json=payload)
             if resp.status_code == 200:
                 data = resp.json()
                 for block in data.get("content", []):
@@ -232,9 +294,13 @@ def _extract_responses_text(data):
 
 def call_linghuo_gpt(prompt, preset_name="linghuo-gpt-5.5", max_output_tokens=None):
     """北京时间00:00-08:00免费；多 key 轮换；走 OpenAI Responses API。
-    成功返回字符串；全部 key 失败返回 None（上层应回落到收费渠道）。"""
+    anyrouter.top 直连 SSL 阻断 → 必须经代理；代理不可用时返回 None 让上层回落收费。"""
     cfg = get_preset(preset_name)
     if not cfg or cfg.get("provider") != "openai_responses":
+        return None
+
+    if not proxy_alive():
+        print(f"  [灵活GPT] 代理不可用（SSH 隧道断了？），跳过 → 上层会回落到收费中转站")
         return None
 
     keys = cfg.get("auth_keys", [])
@@ -252,10 +318,11 @@ def call_linghuo_gpt(prompt, preset_name="linghuo-gpt-5.5", max_output_tokens=No
         print(f"  [灵活GPT/{model}] 尝试 key {i+1}/{len(keys)}...")
         headers = {"Content-Type": "application/json", "Authorization": f"Bearer {key}"}
         try:
-            req_kwargs = {"timeout": timeout}
-            if cfg.get("needs_proxy"):
-                req_kwargs["proxy"] = PROXY_URL
-            resp = httpx.post(url, headers=headers, json=payload, **req_kwargs)
+            kwargs = _httpx_kwargs(needs_proxy=True, timeout=timeout)
+            if kwargs is None:
+                return None
+            with httpx.Client(**kwargs) as client:
+                resp = client.post(url, headers=headers, json=payload)
             if resp.status_code == 200:
                 text = _extract_responses_text(resp.json())
                 if text:
@@ -303,7 +370,11 @@ def call_gpt(prompt, temperature=0.3, max_tokens=2000, retries=2, force_paid=Fal
     import time
     for attempt in range(retries + 1):
         try:
-            with httpx.Client(timeout=120) as client:
+            kwargs = _httpx_kwargs(needs_proxy=cfg.get("needs_proxy", False), timeout=120)
+            if kwargs is None:
+                print(f"  [GPT/收费] 代理需要但不可用，放弃")
+                return None
+            with httpx.Client(**kwargs) as client:
                 resp = client.post(url, headers=headers, json=payload)
             if resp.status_code == 200:
                 return resp.json()["choices"][0]["message"]["content"]

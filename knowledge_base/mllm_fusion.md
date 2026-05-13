@@ -99,10 +99,16 @@
 - POPE（物体幻觉）
 - BLINK（视觉感知基础能力）
 
-**基线：**
-- LLaVA-1.6-7B (Vicuna)
-- Qwen2-VL-7B
-- InternVL2-8B
+**基线（2025-2026 主流，必须使用最新模型）：**
+- Qwen2.5-VL-7B / 72B（2025 年最强开源 VL 之一）
+- InternVL3-8B / 78B（2025）
+- LLaVA-OneVision-7B（2024 末→2025 主流）
+- Cambrian-1-8B / NVILA-8B / Molmo-7B（2024-2025）
+- ⚠️ LLaVA-1.5/1.6、Qwen2-VL、InternVL2 仅作为"过时对比基线"出现，不能作为主基线，否则 ICLR/NeurIPS 2026 会被秒拒。
+
+**Benchmark（必须包含 2025+ 新基准）：**
+- MMMU-Pro（2025 升级版）、MEGA-Bench（2025）、MMBench-V2、HallusionBench、BLINK
+- 仅用 GQA / VQAv2 / 老 MMBench 会被审稿人质疑"为什么不在新 benchmark 上验证"
 
 ---
 

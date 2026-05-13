@@ -1,0 +1,111 @@
+[20:08:58] 补跑 Forge：共 4 个待处理种子
+[20:08:58]   · PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090
+[20:08:58]   · I scaled a pure Spiking Neural Network (SNN) to 1.088B parameters from
+[20:08:58]   · Can LLMs model real-world systems in TLA+?
+[20:08:58]   · Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and 
+
+════════════════════════════════════════════════════════════
+  Idea Forge - 研究方案锻造
+════════════════════════════════════════════════════════════
+  A 种子: 4 个
+  B 方向: 4 个
+  模型: gemini-pro, gpt-5.5, claude-opus
+  目标: 顶会级别论文
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [1/4] A: PFlash: 10x prefill speedup over llama.cpp at 128K on a
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────
+  Step 1: 深度构思 (A × 4 个 B 方向 × 3 模型)
+  A: PFlash: 10x prefill speedup over llama.cpp at 128K
+────────────────────────────────────────────────────────────
+
+  B方向: 多模态大模型 - 模态融合 - 视觉信息与文本信息的深层融合机制...
+    [gemini-pro] 构思中... → 
+    [gpt-5.5] 构思中... 调用失败
+    [claude-opus] 构思中...  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+ 调用失败
+
+  B方向: 多模态大模型 - 视觉 Token 管理 - 视觉 token 的数量、层间动态、查询相关性...
+    [gemini-pro] 构思中... → 引入“投机式视觉 Token 管理（Speculative Visual Token Management, SpecV
+    [gpt-5.5] 构思中... 调用失败
+    [claude-opus] 构思中...  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+ 调用失败
+
+  B方向: LLM 推理与测试时计算 - 如何在有限推理预算下最大化推理能力...
+    [gemini-pro] 构思中... → 无合理映射
+    [gpt-5.5] 构思中... 调用失败
+    [claude-opus] 构思中...  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+ 调用失败
+
+  B方向: LLM Agent 长期记忆 - Agent 在长任务中的记忆管理...
+    [gemini-pro] 构思中... → 引入“投机式记忆阅读（Speculative Memory Reading）”，由端侧小模型快速全量阅读 Agent 的
+    [gpt-5.5] 构思中... 调用失败
+    [claude-opus] 构思中...  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+ 调用失败
+
+  共产生 3 个候选 idea
+
+────────────────────────────────────────────────────────────
+  Step 2: 严格交叉验证 (3 个候选 × 3 评审员/全员评审)
+────────────────────────────────────────────────────────────
+
+  [1/3] 来自 [gemini-pro] | 多模态大模型 - 模态融合
+  [Gemini] 失败(重试3次): The read operation timed out
+    [gemini-pro(self)] ⚠️ 调用失败
+    [gpt-5.5] → ❌ | 该方案本质上是长视觉 token 场景下的推理加速技巧，既没有解决深层多模态融合机制，也缺少实验设计和 2025+ 时新基线。
+  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+    [claude-opus] ⚠️ 调用失败
+  → ❌ 未通过 (0/1)
+
+  [2/3] 来自 [gemini-pro] | 多模态大模型 - 视觉 Token 管理
+    [gemini-pro(self)] → ✅ 通过 | 
+    [gpt-5.5] → ❌ | 虽然机制有一定深度且表述简洁，但实验方案缺失且未体现2025-2026最新模型与benchmark，按顶会标准会被认为不充分且时新性不达标。
+  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+    [claude-opus] ⚠️ 调用失败
+  → ❌ 未通过 (1/2)
+
+  [3/3] 来自 [gemini-pro] | LLM Agent 长期记忆
+    [gemini-pro(self)] → ✅ 通过 | 
+    [gpt-5.5] → ❌ | 想法简洁但机制缺少形式化支撑，实验与2025+基线/benchmark完全缺失，按顶会标准不可接受。
+  [Claude/claude-opus-4-7] HTTP 502: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+    [claude-opus] ⚠️ 调用失败
+  → ❌ 未通过 (1/2)
+
+  通过验证: 0/3
+  无 idea 通过验证
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [2/4] A: I scaled a pure Spiking Neural Network (SNN) to 1.088B 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+────────────────────────────────────────────────────────────
+  Step 1: 深度构思 (A × 4 个 B 方向 × 3 模型)
+  A: I scaled a pure Spiking Neural Network (SNN) to 1.
+────────────────────────────────────────────────────────────
+
+  B方向: 多模态大模型 - 模态融合 - 视觉信息与文本信息的深层融合机制...
+    [gemini-pro] 构思中... → 借鉴 SNN 的“积分-触发（Integrate-and-Fire）”机制与替代梯度训练法，在 MLLM 的不同 Tra
+    [gpt-5.5] 构思中...
