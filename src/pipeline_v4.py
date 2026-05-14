@@ -35,6 +35,81 @@ except ImportError:
         return 1.0, []
 
 
+# ============================================================
+# 跨天去重：避免每天反复花 token 研判同一篇帖子
+# ============================================================
+def _normalize_title(t):
+    """归一化 title 用于模糊匹配：去掉常见前缀/标点/空白，统一小写，保留前 60 字符"""
+    if not t:
+        return ""
+    s = t.lower().strip()
+    # 去掉常见前缀
+    for pref in ['show hn:', '[r]', '[p]', '[d]', '[discussion]', '[research]', '[project]']:
+        if s.startswith(pref):
+            s = s[len(pref):].strip()
+    # 去掉标点和多余空白
+    import re as _re
+    s = _re.sub(r'[\s\-_/\(\)\[\]\.,\'":;!?]+', ' ', s).strip()
+    return s[:60]
+
+
+def load_processed_keys():
+    """
+    扫描 verified/pipeline_v4_*.json，把所有已经被 final_pro_judgment 处理过的
+    帖子的 url/reddit_url/hn_url/title 收集成集合，作为黑名单。
+
+    返回 (urls_set, titles_set, normalized_titles_set)。
+    任何帖子只要 url、原 title、或归一化 title 命中其一就视作"已处理"。
+    """
+    urls = set()
+    titles = set()
+    normalized = set()
+    for f in sorted(VERIFIED_DIR.glob('pipeline_v4_*.json')):
+        try:
+            d = json.loads(f.read_text(encoding='utf-8'))
+        except Exception:
+            continue
+        for c in d.get('final_candidates', []):
+            for k in ('reddit_url', 'hn_url', 'url'):
+                u = c.get(k)
+                if u:
+                    urls.add(u.rstrip('/'))
+            t = (c.get('title') or '').strip()
+            if t:
+                titles.add(t)
+                n = _normalize_title(t)
+                if len(n) >= 20:  # 太短的 title 不归一化以免误伤
+                    normalized.add(n)
+    return urls, titles, normalized
+
+
+def filter_already_processed(posts, processed_urls, processed_titles, processed_norm, label=""):
+    """剔除历史已研判过的帖子；url 精确 + title 精确 + 归一化 title 模糊三路兜底。"""
+    if not posts:
+        return posts
+    fresh, dup = [], []
+    for p in posts:
+        u_keys = []
+        for k in ('reddit_url', 'hn_url', 'url'):
+            v = p.get(k)
+            if v:
+                u_keys.append(v.rstrip('/'))
+        title = (p.get('title') or '').strip()
+        norm = _normalize_title(title)
+        is_dup = (
+            title in processed_titles
+            or any(u in processed_urls for u in u_keys)
+            or (len(norm) >= 20 and norm in processed_norm)
+        )
+        if is_dup:
+            dup.append(p)
+        else:
+            fresh.append(p)
+    if dup:
+        print(f"  [{label}] 跨天去重: 跳过 {len(dup)} 个历史已研判帖（节省 token）")
+    return fresh
+
+
 def search_reddit_research(subreddit, query, time_filter="month", limit=50):
     """在 Reddit 搜索研究相关帖子（看近1个月）"""
     url = f"https://www.reddit.com/r/{subreddit}/search.json"
@@ -362,6 +437,16 @@ def run_pipeline_v4():
     print(f"\n  Reddit 高质量讨论: {len(reddit_quality)} 帖")
     print(f"  HN 高质量讨论: {len(hn_quality)} 帖")
 
+    # Stage 1.5: 跨天去重——剔除历史 verified 文件里已经研判过的帖子，避免反复浪费 token
+    print(f"\n{'=' * 60}")
+    print(f"  Stage 1.5: 跨天去重")
+    print(f"{'=' * 60}")
+    processed_urls, processed_titles, processed_norm = load_processed_keys()
+    print(f"  历史已研判帖子库: {len(processed_titles)} 条 title / {len(processed_urls)} 条 url / {len(processed_norm)} 归一化 key")
+    reddit_quality = filter_already_processed(reddit_quality, processed_urls, processed_titles, processed_norm, "Reddit")
+    hn_quality = filter_already_processed(hn_quality, processed_urls, processed_titles, processed_norm, "HN")
+    print(f"  去重后剩余: Reddit {len(reddit_quality)} 帖 / HN {len(hn_quality)} 帖")
+
     # Stage 2: LLM 判断 insight
     reddit_insightful = llm_insight_filter(reddit_quality, "Reddit")
     hn_insightful = llm_insight_filter(hn_quality, "Hacker News")
@@ -388,9 +473,10 @@ def run_pipeline_v4():
         "approach": "社区真实讨论为入口 → LLM insight过滤 → Pro深度研判",
         "stats": {
             "reddit_raw": len(reddit_posts),
-            "reddit_quality": len(reddit_quality),
+            "reddit_quality_after_dedup": len(reddit_quality),
             "hn_raw": len(hn_posts),
-            "hn_quality": len(hn_quality),
+            "hn_quality_after_dedup": len(hn_quality),
+            "historical_seen_titles": len(processed_titles),
             "after_insight_filter": len(all_insightful),
             "final_judged": len(judged),
         },

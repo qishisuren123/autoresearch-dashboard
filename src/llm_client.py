@@ -341,10 +341,10 @@ def call_linghuo_gpt(prompt, preset_name="linghuo-gpt-5.5", max_output_tokens=No
 # GPT-5.5（主入口：免费窗口优先灵活，否则走收费中转站）
 # ============================================================
 def call_gpt(prompt, temperature=0.3, max_tokens=2000, retries=2, force_paid=False):
-    """免费窗口优先 anyrouter（免费），失败或非免费窗口走 35.220.164.252 中转站（收费）。
+    """始终优先 anyrouter 灵活渠道（实测全天可用，免费窗口外也能跑通），失败回落 35.220.164.252 收费中转站。
     force_paid=True 可强制走收费版本（用于排除灵活渠道质量问题时）。"""
-    # 1) 免费窗口优先灵活
-    if not force_paid and _is_linghuo_free_window():
+    # 1) 始终优先灵活（24h 可用，省钱）
+    if not force_paid:
         result = call_linghuo_gpt(prompt, "linghuo-gpt-5.5", max_output_tokens=max_tokens)
         if result:
             return result

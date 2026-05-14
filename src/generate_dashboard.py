@@ -1,14 +1,13 @@
 """
-生成静态 HTML Dashboard
-- 支持历史日期切换
-- 候选池/储备池折叠显示
-- 每天结果独立存储
+生成大浪淘沙主页 index.html（按日期 timeline 展示每天的种子）
 """
 
 import json
 import glob
+import html
 from datetime import datetime
 from pathlib import Path
+from collections import defaultdict
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -16,213 +15,208 @@ VERIFIED_DIR = DATA_DIR / "verified"
 CANDIDATES_DIR = DATA_DIR / "candidates"
 
 
-def get_available_dates():
-    """获取所有有结果的日期"""
-    dates = set()
-    for f in glob.glob(str(VERIFIED_DIR / "*.json")):
-        fname = Path(f).stem
-        # 提取日期部分 (YYYYMMDD)
-        parts = fname.split("_")
-        for part in parts:
-            if len(part) == 8 and part.isdigit():
-                dates.add(part)
-                break
-    return sorted(dates, reverse=True)
+def esc(s):
+    return html.escape(str(s))
 
 
-def load_latest_result():
-    """加载最新的 pipeline 结果"""
-    # 优先 final_*, 其次 pipeline_v4_*, pipeline_v3_*
-    for pattern in ["final_*.json", "pipeline_v4_*.json", "pipeline_v5_*.json", "pipeline_v3_*.json"]:
-        files = sorted(glob.glob(str(VERIFIED_DIR / pattern)))
-        if files:
-            with open(files[-1]) as f:
-                return json.load(f), Path(files[-1]).stem
-    return None, None
+def collect_seeds_by_date():
+    """按日期归集 pipeline_v4 的研判结果"""
+    by_date = defaultdict(list)
+    for f in sorted(glob.glob(str(VERIFIED_DIR / "pipeline_v4_*.json"))):
+        date = Path(f).stem.split("_")[-1]
+        try:
+            d = json.loads(Path(f).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for c in d.get("final_candidates", []):
+            by_date[date].append(c)
+    # 降序日期
+    return [(date, by_date[date]) for date in sorted(by_date.keys(), reverse=True)]
 
 
-def load_reserve_pool():
-    """加载储备池"""
-    reserve_file = CANDIDATES_DIR / "reserve_pool.json"
-    if reserve_file.exists():
-        with open(reserve_file) as f:
-            return json.load(f)
-    return []
+def render_seed_card(idx, c):
+    title = esc((c.get("title") or "")[:140])
+    url = esc(c.get("reddit_url") or c.get("hn_url") or c.get("url") or "#")
+    conclusion = esc((c.get("conclusion") or "")[:300])
+    channel = esc(c.get("subreddit") or c.get("source") or c.get("channel") or "")
+    comments = c.get("num_comments") or 0
+    score = c.get("score") or 0
+    judgment = (c.get("llm_judgment") or "").replace("**", "")
+
+    if "强推荐" in (c.get("conclusion") or ""):
+        tag_class, tag_text = "tag-strong", "强推荐做 A 种子"
+    elif "值得" in (c.get("conclusion") or "") or "深入" in (c.get("conclusion") or ""):
+        tag_class, tag_text = "tag-worth", "值得深入"
+    elif "不适合" in (c.get("conclusion") or ""):
+        tag_class, tag_text = "tag-skip", "不适合做 A 种子"
+    else:
+        tag_class, tag_text = "tag-skip", "待判断"
+
+    # judgment 高亮关键词
+    jhtml = ""
+    if judgment and judgment != "调用失败":
+        for line in judgment.split("\n"):
+            line = line.strip()
+            if not line:
+                continue
+            line_h = esc(line)
+            for lab in ["核心insight", "核心 insight", "社区热议原因", "方法简洁度",
+                       "A+B潜力", "A+B 潜力", "可行性", "最终判定"]:
+                if lab in line:
+                    line_h = line_h.replace(lab, f'<span class="jl">{lab}</span>', 1)
+                    break
+            jhtml += f'<div>{line_h}</div>'
+
+    meta_parts = []
+    if channel:
+        meta_parts.append(f'<span class="ch">{channel}</span>')
+    if comments:
+        meta_parts.append(f'<span class="hot">{comments} 评论</span>')
+    if score:
+        meta_parts.append(f'<span>{score} 分</span>')
+
+    return f'''<div class="card">
+<div class="card-top"><div class="rank">{idx}</div>
+<h3><a href="{url}" target="_blank">{title}</a></h3>
+<span class="tag {tag_class}">{tag_text}</span></div>
+<div class="meta">{" ".join(meta_parts)}</div>
+<div class="judgment">{jhtml}</div>
+</div>'''
 
 
 def generate_html():
-    data, source_name = load_latest_result()
-    if not data:
+    timeline = collect_seeds_by_date()
+    if not timeline:
         print("No data found")
         return
 
-    candidates = data.get("final_candidates", data.get("top_candidates", []))
-    stats = data.get("stats", {})
-    reserve = load_reserve_pool()
-    dates = get_available_dates()
+    # 计算总览统计
+    all_unique_titles = set()
+    total_strong = 0
+    total_worth = 0
+    total_skip = 0
+    total_records = 0
+    for date, seeds in timeline:
+        for c in seeds:
+            t = (c.get("title") or "").strip()
+            if t and t not in all_unique_titles:
+                all_unique_titles.add(t)
+                con = c.get("conclusion") or ""
+                if "强推荐" in con: total_strong += 1
+                elif "值得" in con or "深入" in con: total_worth += 1
+                elif "不适合" in con: total_skip += 1
+            total_records += 1
 
-    # 日期选择器 HTML
-    date_options = ""
-    for d in dates[:30]:
-        formatted = f"{d[:4]}-{d[4:6]}-{d[6:8]}"
-        date_options += f'<option value="{d}">{formatted}</option>\n'
+    # 渲染 timeline
+    timeline_html_parts = []
+    for date, seeds in timeline:
+        d_fmt = f"{date[:4]}-{date[4:6]}-{date[6:]}"
+        strong_count = sum(1 for s in seeds if "强推荐" in (s.get("conclusion") or ""))
 
-    html = f'''<!DOCTYPE html>
+        timeline_html_parts.append(f'<div class="day-block">')
+        timeline_html_parts.append(f'<div class="day-header">')
+        timeline_html_parts.append(f'<h3>📅 {d_fmt}</h3>')
+        timeline_html_parts.append(f'<div class="day-stats">')
+        timeline_html_parts.append(f'<span class="badge badge-info">{len(seeds)} 候选</span> ')
+        if strong_count:
+            timeline_html_parts.append(f'<span class="badge badge-strong">{strong_count} 强推荐</span>')
+        timeline_html_parts.append('</div></div>')
+
+        # 按 strong → worth → skip 排序
+        def k(c):
+            con = c.get("conclusion") or ""
+            if "强推荐" in con: return 0
+            if "值得" in con or "深入" in con: return 1
+            if "不适合" in con: return 2
+            return 3
+        seeds_sorted = sorted(seeds, key=k)
+        for i, c in enumerate(seeds_sorted, 1):
+            timeline_html_parts.append(render_seed_card(i, c))
+
+        timeline_html_parts.append('</div>')
+
+    timeline_html = "\n".join(timeline_html_parts)
+
+    html_page = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8"><title>大浪淘沙</title>
+<meta charset="UTF-8">
+<title>大浪淘沙 - 每日研究热点</title>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
-body{{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.7;padding:20px}}
-.container{{max-width:1100px;margin:0 auto}}
-header{{background:linear-gradient(135deg,#1a1b2e,#16213e);border:1px solid #2a2d3e;border-radius:12px;padding:28px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}}
-header h1{{font-size:22px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
-.sub{{color:#9ca3af;font-size:12px;margin-top:4px}}
-.date-nav{{display:flex;align-items:center;gap:8px}}
-.date-nav select{{background:#111827;color:#e4e4e7;border:1px solid #2a2d3e;border-radius:6px;padding:6px 12px;font-size:13px}}
-.info{{background:#111827;border:1px solid #2a2d3e;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#9ca3af;line-height:1.8}}
+body{{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#0f1117;color:#e4e4e7;line-height:1.7;padding:20px}}
+.container{{max-width:1200px;margin:0 auto}}
+header{{background:linear-gradient(135deg,#1a1b2e,#16213e);border:1px solid #2a2d3e;border-radius:14px;padding:28px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}}
+header h1{{font-size:24px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+header .sub{{color:#9ca3af;font-size:12px;margin-top:6px}}
+header .sub a{{color:#a78bfa;text-decoration:none}}header .sub a:hover{{text-decoration:underline}}
+
+.info{{background:#111827;border:1px solid #2a2d3e;border-radius:8px;padding:14px 18px;margin-bottom:18px;font-size:12.5px;color:#9ca3af;line-height:1.9}}
 .info strong{{color:#60a5fa}}
-.stats{{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px}}
-.stat{{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:8px;padding:10px;text-align:center}}
-.stat .n{{font-size:22px;font-weight:700;color:#60a5fa}}
-.stat .l{{color:#9ca3af;font-size:10px}}
-.card{{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:18px;margin-bottom:12px;transition:border-color .2s}}
+
+.stats{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}}
+.stat{{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:14px;text-align:center}}
+.stat .n{{font-size:26px;font-weight:700;color:#60a5fa}}
+.stat .l{{color:#9ca3af;font-size:11px;margin-top:2px}}
+
+.day-block{{margin-bottom:28px}}
+.day-header{{
+  background:linear-gradient(135deg,#1a1b2e,#16213e);
+  border:1px solid #2a2d3e;border-radius:10px;
+  padding:14px 20px;margin-bottom:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+}}
+.day-header h3{{font-size:18px;color:#60a5fa;margin:0}}
+.day-stats{{display:flex;gap:6px;flex-wrap:wrap}}
+.badge{{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:500}}
+.badge-strong{{background:#064e3b;color:#34d399}}
+.badge-info{{background:#1e293b;color:#9ca3af}}
+
+.card{{background:#1a1b2e;border:1px solid #2a2d3e;border-radius:10px;padding:16px 18px;margin-bottom:10px;margin-left:14px;transition:border-color .2s}}
 .card:hover{{border-color:#3b82f6}}
-.card-top{{display:flex;align-items:center;gap:8px;margin-bottom:6px}}
-.rank{{background:#111827;color:#60a5fa;font-weight:700;font-size:12px;min-width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center}}
-.card h3{{font-size:13px;color:#f4f4f5;line-height:1.4;flex:1}}
+.card-top{{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}}
+.rank{{background:#111827;color:#60a5fa;font-weight:700;font-size:12px;min-width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}}
+.card h3{{font-size:13.5px;color:#f4f4f5;line-height:1.4;flex:1;min-width:200px;font-weight:600}}
 .card h3 a{{color:#f4f4f5;text-decoration:none}}.card h3 a:hover{{color:#60a5fa}}
-.meta{{font-size:11px;color:#6b7280;margin-bottom:6px;display:flex;gap:10px;flex-wrap:wrap}}
+.meta{{font-size:11px;color:#6b7280;margin-bottom:8px;display:flex;gap:10px;flex-wrap:wrap}}
 .meta .ch{{color:#a78bfa;font-weight:500}}.meta .hot{{color:#f59e0b}}
-.tag{{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-bottom:8px}}
+.tag{{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;flex-shrink:0}}
 .tag-strong{{background:#064e3b;color:#34d399}}.tag-worth{{background:#422006;color:#fbbf24}}.tag-skip{{background:#1f2937;color:#6b7280}}
 .judgment{{background:#111827;border-radius:6px;padding:12px;font-size:11.5px;line-height:1.8;color:#d1d5db}}
 .judgment .jl{{color:#60a5fa;font-weight:600}}
 a{{color:#60a5fa;text-decoration:none}}a:hover{{text-decoration:underline}}
-.divider{{border-top:1px solid #2a2d3e;margin:20px 0 12px;padding-top:12px}}
-.divider h2{{font-size:15px;color:#a78bfa;margin-bottom:2px}}.divider .desc{{font-size:11px;color:#6b7280}}
-.collapsible{{margin-top:16px}}
-.collapse-btn{{background:#111827;border:1px solid #2a2d3e;color:#9ca3af;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:13px;width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center}}
-.collapse-btn:hover{{border-color:#3b82f6;color:#e4e4e7}}
-.collapse-content{{display:none;padding:12px 0}}
-.collapse-content.open{{display:block}}
-.reserve-item{{background:#111827;border-radius:6px;padding:10px 14px;margin:6px 0;font-size:12px;display:flex;justify-content:space-between;align-items:center}}
-.reserve-item .title{{color:#d1d5db;flex:1}}.reserve-item .date{{color:#6b7280;font-size:11px}}
 </style>
 </head>
 <body><div class="container">
 <header>
 <div>
-<h1>大浪淘沙 - 每日研究热点</h1>
-<div class="sub">{datetime.now().strftime('%Y-%m-%d %H:%M')} | 数据源: {source_name} | <a href="./ideas.html" style="color:#a78bfa">→ 查看 Idea 生成结果 (Idea Forge)</a></div>
-</div>
-<div class="date-nav">
-<select onchange="alert('历史查看功能: 请在 data/verified/ 目录下查找对应日期的 JSON 文件')">
-<option value="">选择历史日期</option>
-{date_options}
-</select>
+<h1>🌊 大浪淘沙 · 每日研究热点</h1>
+<div class="sub">{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+8) · 累计 {len(timeline)} 个采集日 · <a href="./ideas.html">→ Idea Forge Timeline</a></div>
 </div>
 </header>
 
 <div class="info">
-<strong>信号源:</strong> Reddit/HN 社区讨论 · Emergent Mind 社交热度 · OpenAI/DeepMind/BAIR/Google Research 博客 · 机器之心/新智元/智东西 · Paper Digest 顶会<br>
-<strong>顶会:</strong> ICLR / ICML / NeurIPS / CVPR / ACL / EMNLP / AAAI / ECCV / ICCV<br>
-<strong>筛选:</strong> 规则初筛 → LLM(Flash) insight 过滤 → LLM(Pro) A+B 迁移研判
+<strong>信号源:</strong> Reddit / Hacker News 社区讨论 · OpenAI / DeepMind / BAIR / Google Research / MSR / Karpathy / Simon Willison / Sebastian Raschka 等研究者博客 · 量子位 / Leiphone / MarkTechPost / VentureBeat / Paper Digest · arXiv / HuggingFace Daily Papers · GitHub Trending<br>
+<strong>筛选漏斗:</strong> 跨天去重 → 规则初筛 → LLM(Gemini Flash) insight 过滤 → LLM(Gemini Pro) A+B 迁移研判
 </div>
 
 <div class="stats">
-'''
+<div class="stat"><div class="n">{len(timeline)}</div><div class="l">采集日数</div></div>
+<div class="stat"><div class="n">{len(all_unique_titles)}</div><div class="l">候选(去重)</div></div>
+<div class="stat"><div class="n">{total_strong}</div><div class="l">强推荐 A 种子</div></div>
+<div class="stat"><div class="n">{total_worth}</div><div class="l">值得深入</div></div>
+<div class="stat"><div class="n">{total_skip}</div><div class="l">不适合 A 种子</div></div>
+<div class="stat"><div class="n">{total_records}</div><div class="l">研判记录</div></div>
+</div>
 
-    for key, label in [
-        ("community_discussion", "社区讨论"),
-        ("emergent_mind", "Emergent Mind"),
-        ("research_blogs", "Lab 博客"),
-        ("conference_highlights", "顶会"),
-        ("total_final", "最终候选"),
-    ]:
-        val = stats.get(key, "—")
-        html += f'<div class="stat"><div class="n">{val}</div><div class="l">{label}</div></div>\n'
+{timeline_html}
 
-    html += '</div>\n'
+</div></body></html>'''
 
-    # 候选卡片
-    rank = 1
-    for c in candidates:
-        title = c.get('title', '')[:80]
-        url = c.get('reddit_url', c.get('hn_url', c.get('url', '#')))
-        comments = c.get('num_comments', 0)
-        score = c.get('score', 0)
-        channel = c.get('channel', c.get('blog_name', c.get('source', '')))
-        conclusion = c.get('conclusion', '')
-        judgment = c.get('llm_judgment', '')
-
-        # 标签完全以 LLM 最终判定为准
-        if '强推荐' in conclusion:
-            tc, tt = 'tag-strong', '强推荐做 A 种子'
-        elif '值得' in conclusion or '深入' in conclusion:
-            tc, tt = 'tag-worth', '值得深入了解'
-        elif '不适合' in conclusion:
-            tc, tt = 'tag-skip', '不适合做 A 种子'
-        elif conclusion:
-            # 有判定但不匹配上面的，直接用原文
-            tc, tt = 'tag-skip', conclusion[:20]
-        else:
-            tc, tt = 'tag-skip', '待判断'
-
-        jhtml = ''
-        if judgment and judgment != '调用失败':
-            for line in judgment.split('\n'):
-                line = line.strip()
-                if not line:
-                    continue
-                line = line.replace('**', '')
-                for lab in ['核心insight', '核心 insight', '社区热议原因', '方法简洁度',
-                           'A+B潜力', 'A+B 潜力', '可行性', '最终判定']:
-                    if lab in line:
-                        line = line.replace(lab, f'<span class="jl">{lab}</span>', 1)
-                        break
-                jhtml += f'<div>{line}</div>'
-
-        meta_parts = [f'<span class="ch">{channel}</span>']
-        if comments:
-            meta_parts.append(f'<span class="hot">{comments} 评论</span>')
-        if score:
-            meta_parts.append(f'<span>{score} 分</span>')
-
-        html += f'''<div class="card">
-<div class="card-top"><div class="rank">{rank}</div><h3><a href="{url}" target="_blank">{title}</a></h3></div>
-<div class="meta">{' '.join(meta_parts)}</div>
-<span class="tag {tc}">{tt}</span>
-<div class="judgment">{jhtml}</div>
-</div>\n'''
-        rank += 1
-
-    # 储备池（折叠）
-    html += f'''
-<div class="collapsible">
-<button class="collapse-btn" onclick="this.nextElementSibling.classList.toggle('open')">
-<span>📦 储备池（{len(reserve)} 条 | 15天内无起色自动移除）</span>
-<span>▼</span>
-</button>
-<div class="collapse-content">
-'''
-    if reserve:
-        for item in reserve[:30]:
-            title = item.get("title", "")[:60]
-            added = item.get("added_to_reserve", "")[:10]
-            html += f'<div class="reserve-item"><span class="title">{title}</span><span class="date">{added}</span></div>\n'
-    else:
-        html += '<div class="reserve-item"><span class="title">储备池为空</span></div>\n'
-
-    html += '</div></div>\n'
-
-    html += '</div></body></html>'
-
-    # 写入
     output_file = PROJECT_ROOT / "index.html"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(html)
-    print(f"Generated {output_file} ({len(html)} bytes)")
+        f.write(html_page)
+    print(f"Generated {output_file} ({len(html_page)} bytes)")
 
 
 if __name__ == "__main__":
