@@ -13,47 +13,7 @@
       "subreddit": "LocalLLaMA",
       "llm_judgment": "**核心insight:** 将通常用于生成阶段的“投机解码（Speculative Decoding）”思想创新性地引入到了长文本的 **Prefill（预填充）阶段**。通过小模型快速处理长Prompt并由大模型（27B）进行验证，打破了单卡处理超长上下文时的算力与显存带宽瓶颈。\n\n**社区热议原因:** 极大地击中了开源社区“在消费级单卡（24G显存）上无法忍受长文本处理延迟”的痛点。10倍的提速让本地运行128K长文本RAG、全代码库分析等应用从“理论可行”变成了“体验流畅”。\n\n**方法简洁度:** 核心算法思路非常简洁优雅，本质是“投机采样”在推理生命周期另一阶段的自然延伸。但其底层工程实现（C++/CUDA结合量化）具有较高的系统级复杂度。\n\n**A+B潜力:** 作为“方法A（投机预填充）”，最适合迁移到：1）**多模态大模型**（加速超长视频/多图输入的视觉Token预填充）；2）**端侧/边缘计算**（在手机等算力受限设备上加速本地模型启动）；3）**MoE架构**（结合专家路由概率进行更高效的投机预填充）。\n\n**可行性:** 算力（8张L20）极其充裕，但4周时间对于从头编写底层CUDA Kernel风险极高。如果基于现有框架（如vLLM或llama.cpp）在Python/高层C++端做算法级A+B验证或衍生，4周时间完全可行。\n\n**最终判定:** 【强推荐】。将成熟的投机思想跨界应用到长文本Prefill阶段，既有极高的工程实用价值，又为长上下文推理加速打开了新的算法设计空间，非常适合作为A种子进行跨领域迁移。",
       "conclusion": "** 【强推荐】。将成熟的投机思想跨界应用到长文本Prefill阶段，既有极高的工程实用价值，又为长上下文推理加速打开了新的算法设计空间，非常适合作为A种子进行跨领域迁移。"
-    },
-    {
-      "title": "I scaled a pure Spiking Neural Network (SNN) to 1.088B parameters from scratch. Ran out of budget, but here is what I found [R]",
-      "url": "https://www.reddit.com/r/MachineLearning/comments/1skql34/i_scaled_a_pure_spiking_neural_network_snn_to/",
-      "reddit_url": "https://www.reddit.com/r/MachineLearning/comments/1skql34/i_scaled_a_pure_spiking_neural_network_snn_to/",
-      "score": 146,
-      "num_comments": 60,
-      "upvote_ratio": 0.84,
-      "flair": "Research",
-      "created": "2026-04-14T06:42:36",
-      "selftext": "Hey everyone. I’m an 18yo indie dev, and I’ve been experimenting with Spiking Neural Networks (SNNs) for language modeling. A lot of papers (like SpikeBERT) mention that training 1B+ SNNs directly from random initialization fails due to vanishing gradients, so people usually do ANN-to-SNN conversion or distillation. I wanted to see if I could force it to converge purely in the spike domain. I had to stop at 27k steps because my wallet is literally empty lol, but the loss converged to 4.4.\n\nHere ",
-      "subreddit": "MachineLearning",
-      "llm_judgment": "**核心insight:** 突破了“大参数量SNN必须依赖ANN转换”的学界共识，证明了通过特定的架构调整或优化策略（如改进的替代梯度），纯SNN可以直接从头（from scratch）训练至10亿参数规模。这为极低功耗的大语言模型（LLM）原生训练提供了可行性证明。\n\n**社区热议原因:** 一方面触动了“SNN难以原生扩展到大模型（梯度消失严重）”这一长期痛点，迎合了当前对低功耗/边缘端LLM的迫切需求；另一方面，“18岁独立开发者单挑学术界难题”的个人英雄主义叙事极具话题性和反差感。\n\n**方法简洁度:** 极大概率非常简洁优雅。受限于个人算力和预算，作者必然采用了某种轻量级的架构微调（如残差连接的变体）或替代梯度（Surrogate Gradient）的巧妙设计，而非复杂的工程堆料，非常适合作为基础模块进行迁移。\n\n**A+B潜力:** \n1) **SNN + 线性RNN/SSM (如Mamba/RWKV)**：结合两者的时序处理优势，探索极致的端侧低功耗长文本模型；\n2) **SNN + 具身智能/连续控制**：将原生大尺度SNN应用于需要极低延迟、高能效且依赖事件驱动的机器人端侧大脑。\n\n**可行性:** 完全可行且算力充裕。原作者作为预算受限的独立开发者都能触达1B规模，8张L20（单卡48GB显存）配合4周时间，足够完成1B模型的复现，或在100M-500M规模上进行充分的A+B衍生消融实验。\n\n**最终判定:** 【强推荐】。原生大尺度SNN是通向下一代极低功耗AI的核心路径，该工作提供了一个极具性价比且自带流量的“破局点”，非常适合作为A+B创新的底层基座。",
-      "conclusion": "** 【强推荐】。原生大尺度SNN是通向下一代极低功耗AI的核心路径，该工作提供了一个极具性价比且自带流量的“破局点”，非常适合作为A+B创新的底层基座。"
-    },
-    {
-      "title": "Can LLMs model real-world systems in TLA+?",
-      "url": "https://www.sigops.org/2026/can-llms-model-real-world-systems-in-tla/",
-      "hn_url": "https://news.ycombinator.com/item?id=48065254",
-      "score": 120,
-      "num_comments": 32,
-      "created": "2026-05-08T16:21:56Z",
-      "source": "hackernews",
-      "llm_judgment": "**核心insight**: 核心洞见在于评估LLM能否跨越自然语言与严格数学逻辑的鸿沟，将非正式的真实世界系统需求，转化为可被机器验证的TLA+形式化规范（状态机与时序逻辑）。\n\n**社区热议原因**: TLA+学习曲线极陡峭，是分布式系统工程师的长期痛点；同时，形式化验证（非黑即白的数学证明）是检验LLM是否具备真实逻辑推理能力（而非单纯文本拼接）的终极试金石，极具争议性。\n\n**方法简洁度**: 核心思路非常简洁优雅，本质上是“自然语言描述 -> LLM生成代码 -> TLC模型检查器验证 -> 错误日志反馈给LLM迭代修复”的闭环（Agentic Loop）。\n\n**A+B潜力**: \n1. **LLM + 智能合约安全**: 迁移至Solidity/Move，生成形式化规范以发现DeFi漏洞。\n2. **LLM + 硬件逻辑验证**: 迁移至Verilog/SystemVerilog，结合EDA工具进行芯片设计的自动化验证。\n3. **LLM + 自动定理证明**: 迁移至Lean 4或Coq，辅助底层核心代码（如OS内核、加密算法）的严格数学证明。\n\n**可行性**: 完全可行。8张L20算力充足，4周时间足够爬取GitHub上的TLA+开源语料构建评测基准，并完成开源模型（如Llama-3-8B/70B）的微调或搭建基于提示词的Agent验证闭环。\n\n**最终判定**: 【强推荐】。它巧妙地将LLM的“模糊生成”与形式化工具的“绝对严谨”相结合，既有极高的工程实用价值，又是极佳的AI推理能力研究种子。",
-      "conclusion": "【强推荐】。它巧妙地将LLM的“模糊生成”与形式化工具的“绝对严谨”相结合，既有极高的工程实用价值，又是极佳的AI推理能力研究种子。"
-    },
-    {
-      "title": "Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)",
-      "url": "https://github.com/nex-crm/wuphf",
-      "hn_url": "https://news.ycombinator.com/item?id=47899844",
-      "score": 260,
-      "num_comments": 115,
-      "created": "2026-04-25T08:53:53Z",
-      "source": "hackernews",
-      "vip_mentions": [
-        "Andrej Karpathy"
-      ],
-      "vip_boost": 1.5,
-      "llm_judgment": "**核心insight:** 摒弃复杂的向量数据库（Vector DB），利用最基础的纯文本（Markdown）和版本控制（Git）作为AI Agent的长期记忆与知识库。这种“Karpathy风格”的极简架构让Agent的知识读写、修改和回溯过程完全透明，且高度契合大模型处理纯文本的天赋。\n\n**社区热议原因:** 触动了开发者对当前RAG和Agent记忆系统“过度工程化（如滥用复杂数据库）”的疲劳痛点。采用Git+Markdown不仅大幅降低了开发门槛，还完美解决了Agent行为不可解释、难以调试和无法回滚的痛点。\n\n**方法简洁度:** 极度简洁优雅。将复杂的Agent记忆与状态管理“降维”为标准的文件读写和Git Commit，没有引入任何黑盒机制，是极其理想的“方法A”基座。\n\n**A+B潜力:** 作为“方法A（基于Git+Markdown的Agent记忆机制）”，最适合迁移到：1）**多智能体协作系统**（Agent之间通过类似Pull Request的方式进行代码/文档的审查与合并）；2）**动态长文本生成**（如长篇小说、法律合同的迭代式撰写与版本控制）；3）**游戏NPC/虚拟伴侣的长期记忆演化**（记忆随时间自然迭代且可追溯）。\n\n**可行性:** 绰绰有余。该框架本身偏向工程架构，主要依赖API调用；若要在4周内利用8张L20微调出专门针对“Markdown精准编辑与Git指令操作”优化的开源本地模型（如Llama-3-8B），算力和时间完全充足。\n\n**最终判定:** 【强推荐】。它提供了一个极其优雅、轻量且可解释的Agent记忆范式，是做“Agent+X”应用层创新或微调特定任务模型的绝佳基础种子。",
-      "conclusion": "** 【强推荐】。它提供了一个极其优雅、轻量且可解释的Agent记忆范式，是做“Agent+X”应用层创新或微调特定任务模型的绝佳基础种子。"
     }
   ],
-  "count": 4
+  "count": 1
 }
