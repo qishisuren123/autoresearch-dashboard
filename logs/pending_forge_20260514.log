@@ -1,7 +1,0 @@
-[01:30:01] pending 列表为空，无需补跑
-[10:56:32] 补跑 Forge：共 1 个待处理种子
-[10:56:32]   · PFlash: 10x prefill speedup over llama.cpp at 128K on a RTX 3090
-[12:15:56] 补跑完成，耗时 79.4 分钟
-[12:15:56] 结果: {'seeds_processed': 1, 'total_ideas': 7, 'total_validated': 4, 'total_plans': 4}
-[12:15:56] 网页已更新
-[12:15:56] Idea 页面已更新

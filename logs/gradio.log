@@ -1,2 +1,0 @@
-/data/renyiming/AutoResearch/idea_forge_app.py:321: UserWarning: The parameters have been moved from the Blocks constructor to the launch() method in Gradio 6.0: theme. Please pass these parameters to launch() instead.
-  with gr.Blocks(title="大浪淘沙 - Idea Forge", theme=gr.themes.Soft()) as demo:
