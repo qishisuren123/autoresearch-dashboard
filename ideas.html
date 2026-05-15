@@ -133,19 +133,19 @@ details pre {
 
 <header>
 <h1>🌊 AutoResearch · Idea Forge Timeline</h1>
-<div class="sub">每日 cron 自动运行 · 更新于 2026-05-15 11:59 (UTC+8)</div>
+<div class="sub">每日 cron 自动运行 · 更新于 2026-05-16 02:52 (UTC+8)</div>
 <a class="nav-link" href="./index.html">← 信息聚合主页</a>
 </header>
 
 
 <div class="stats">
-  <div class="stat"><div class="n">6</div><div class="l">活跃天数</div></div>
+  <div class="stat"><div class="n">7</div><div class="l">活跃天数</div></div>
   <div class="stat"><div class="n">19</div><div class="l">候选种子（去重）</div></div>
-  <div class="stat"><div class="n">9</div><div class="l">强推荐 A 种子</div></div>
+  <div class="stat"><div class="n">8</div><div class="l">强推荐 A 种子</div></div>
   <div class="stat"><div class="n">4</div><div class="l">B 方向知识库</div></div>
-  <div class="stat"><div class="n">77</div><div class="l">候选 Idea</div></div>
-  <div class="stat"><div class="n">26</div><div class="l">通过严格验证</div></div>
-  <div class="stat"><div class="n">24</div><div class="l">输出计划书</div></div>
+  <div class="stat"><div class="n">80</div><div class="l">候选 Idea</div></div>
+  <div class="stat"><div class="n">29</div><div class="l">通过严格验证</div></div>
+  <div class="stat"><div class="n">26</div><div class="l">输出计划书</div></div>
 </div>
 
 
@@ -160,10 +160,252 @@ details pre {
 <p>每个日期分组展示当天大浪淘沙的种子和当天 Forge 产出的计划书。</p>
 <div class="day-block">
 <div class="day-header">
+<h3>📅 2026-05-16</h3>
+<div class="day-stats">
+<span class="badge badge-seed">0 候选 / <b>0</b> 强推荐</span> 
+<span class="badge badge-plan">3 计划书</span>
+ <span class="badge badge-info">Forge 文件: forge_20260516_0252.json</span>
+</div></div>
+<div class="day-section"><h4>💡 当天 Forge 通过验证 + 产出计划书</h4>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">1</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Show HN: AI memory with biological decay (52% recall)</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或非 2025+ 项包括 Claude 3.5、Gemini 1.5、BGE-M3、E5-Mistral、DeepSeek-V3、MemGPT / Letta、RULER-128K、InfiniteBench、SWE-Bench-Verified、LoCoMo；部分“2025”命名项需进</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）:  
+把“遗忘曲线”改造成 任务效用条件下的记忆半衰期：不删除长期记忆，而是根据未来任务效用的衰减/强化动态决定哪些记忆留在 working memory、哪些降级到 episodic cold storage、哪些被压缩成 semantic memory。
+
+为什么不撞社区共识:  
+- 不做“直接套艾宾浩斯遗忘曲线”，也不物理删除信息；因此避开“AI 不该强行遗忘”的主流反对点。  
+- 本质是 分层存储 + 按需调用：高效用记忆进热层/上下文，低效用记忆进冷层但仍可检索。  
+- 符合值得做方向里的 Working Memory 动态压缩、Episodic Memory 组织、自我反思 + 记忆更新。  
+- 不把 memory 简化成纯 RAG；检索分数不是只有 embedding similarity，而是结合任务效用、时间、访问频率、图结构中心性和 LLM 反思重要性。
+
+机制映射:  
+A 的「生物记忆随时间自然衰减、被复习后强化」机制 ←→ B 的「有限上下文预算下，历史信息的未来任务效用会随任务阶段变化而衰减或被重新激活」问题。  
+数学上的同构性在于：二者都可以表示为一个 survival / hazard model。对每条记忆 \(m_i\)，维护一个任务条件生存分数：
+
+\[
+S_i(t \mid \tau)=\exp \left(-\int_{t_i}^{t} h_i(s,\tau) ds \right)
+\]
+
+其中 \(h_i\) 不是生物遗忘率，而是“该记忆继续占据热层上下文的机会成本/失效风险”。LLM 重要性评分、最近访问、任务相关性、图中心性、是否被反思强化都会降低 hazard；过期、低任务相关、冗余、与当前目标冲突的信息会提高 hazard。最终不是决定“记不记得”，而是决定 hot / warm / cold memory tier assignment。
+
+论文故事线:  
+LLM Agent 长任务失败的核心不是“没有足够存储”，而是“上下文预算内不知道哪些历史信息值得保持激活”。Full-context 会导致 token 成本和 attention 稀释；普通 RAG 又只按语义相似取回，不能判断记忆对当前任务是否真的有用。我们提出一种 training-free 的任务效用半衰期记忆管理器，把长期记忆管理建模为预算约束下的动态缓存/分层存储问题：重要且可复用的经验被持续强化，暂时无用的信息被降级但不丢失，需要时仍可从冷层召回。
+
+方法描述（2-3句）:  
+构建三层记忆：working memory 保存当前高效用片段，episodic memory 保存完整事件轨迹，semantic memory 保存反思后抽取的稳定规则/用户偏好/技能。每条记忆维护一个 utility half-life score，由 recency、access reinforcement、LLM-estimated importance、task-conditioned relevance、graph centrality 和 redundancy penalty 共同更新；该分数决定记忆被保留、压缩、降级或重新激活。检索时使用“语义相似度 × 任务效用生存分数 × 图邻域扩展”的混合排序，而不是单纯向量 RAG。
+
+草拟标题:  
+Utility Half-Life Memory: Task-Conditioned Decay for Hierarchical Long-Term Memory in LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo：长对话中的用户偏好、长期一致性、跨轮记忆。  
+    - LongMemEval：长期记忆 QA 与历史事件追踪。  
+    - RULER-128K：压力测试长上下文 needle / multi-hop retrieval。  
+    - InfiniteBench：长文档/长序列检索与推理。  
+    - SWE-Bench-Verified：作为 agentic 长任务场景，测试跨文件修改、历史调试轨迹和失败经验复用。
+  - 基线:  
+    - Full-context：Claude 3.5/4、Gemini 1.5/2、Qwen3-128K、DeepSeek-V3/V3.1，视 API 可用性选择。  
+    - RAG-2025：BGE-M3 / Nomic v2 / E5-Mistral-2025 embedding + Qwen3-32B / DeepSeek-V3 生成器。  
+    - Agent memory：MemGPT-v2 / Letta、A-Mem、LangMem 2025、Mem0。  
+    - 消融：无 decay、固定时间 decay、只用 recency、只用 embedding RAG、无图结构、无反思强化、物理删除版本。
+  - 指标:  
+    - 任务完成率 / QA accuracy / SWE-Bench resolve rate。  
+    - 记忆检索准确率、MRR、Recall@k、multi-hop recall。  
+    - Token 成本、上下文长度、检索调用次数、延迟。  
+    - 长期一致性：数千轮后是否保留早期偏好/约束。  
+    - Memory pollution：无关记忆进入上下文的比例。  
+  - 预期结果:  
+    - 相比 Full-context，在接近或更高准确率下显著降低 token 成本。  
+    - 相比普通 RAG，提高长期一致性和任务完成率，尤其是在存在大量相似但无关历史片段时。  
+    - 相比固定时间衰减，utility-conditioned half-life 在 LoCoMo / LongMemEval 上更稳，因为早期但重要的记忆会被强化而不是被时间误杀。  
+    - 在 SWE-Bench-Verified 上，预期提升主要来自保留调试轨迹、失败原因和已验证修改，而不是盲目塞入所有历史上下文。
+
+预实验（1周内）:  
+先在 LoCoMo + LongMemEval 上做 training-free 原型。实现三层 memory store：hot context buffer、episodic vector+timestamp store、semantic summary store。用 Qwen3-32B 或 DeepSeek-V3 作为 generator，embedding 用 BGE-M3 / Nomic v2；比较 vanilla RAG、recency RAG、固定 decay、utility half-life memory。  
+成功标准：在相同或更低 token budget 下，utility half-life memory 相比 vanilla RAG 至少提升 3-5% QA accuracy / F1，并降低 20% 以上输入 token；同时在人工抽样中显示更少无关记忆进入上下文。
+
+风险:  
+最可能失败的原因是 LLM 估计的重要性/任务效用噪声太大，导致 half-life score 不稳定：重要记忆被错误降级，或无关记忆被反复强化。缓解方法是加入保守机制：不物理删除、冷层可回溯检索、用图邻域和访问证据校正单次 LLM 判断，并报告“误降级恢复率”作为诊断指标。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260516_0252.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">2</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Zero-shot World Models Are Developmentally Efficient Learners [R]</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或非2025+项包括 Gemini 1.5、Claude 3.5、BGE-M3、RULER-128K、InfiniteBench、SWE-Bench-Verified、MemGPT/Letta、E5-Mistral；但 Qwen3、DeepSeek-V3、Claude 4、Llama-4</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 将 Agent 长期记忆管理建模为“任务条件下的预测性状态压缩”：所有经历都进冷存储，但只有能显著降低未来任务/对话预测误差的事件，被动态压缩并提升到工作记忆或热层 episodic/semantic memory。
+
+为什么不撞社区共识:  
+- 不做“艾宾浩斯式遗忘”，而是分层存储 + 按需提升：原始轨迹仍保存在冷存储，不强行删除。  
+- 不把 memory 简化成 RAG：检索/存储依据不是 embedding 相似度，而是“对未来任务状态、用户偏好、约束、未完成事项的预测价值”。  
+- 符合 B 领域有前景方向：working memory 动态压缩、episodic memory 组织、自我反思 + 记忆更新、任务条件检索。  
+- 方法可以 training-free 起步，用 frozen LLM 做预测与反思评分，避免“memory 必须训练”的误区。
+
+机制映射:  
+A 的「时间连续第一人称经验 → 预测未来观测 → 学到紧凑世界状态」机制 ←→ B 的「Agent 连续交互轨迹 → 预测未来任务需求/用户约束/未完成目标 → 学到紧凑可调用记忆状态」问题。  
+数学上的同构性在于：二者都可写成在预算约束下学习一个压缩状态 \(M_t=f(h_{\le t})\)，使其最小化未来预测损失：
+\[
+\min_{M_t: |M_t|\le B} \mathbb{E}[\mathcal{L}(Y_{t:t+k}, g(M_t, q_t))]
+\]
+其中 A 中 \(Y\) 是未来视觉观测，B 中 \(Y\) 是未来任务所需事实、约束、偏好、代码状态或对话答案。记忆的重要性不由“时间远近”或“语义相似度”决定，而由该片段对未来损失的边际下降决定：
+\[
+\Delta(m)=\mathcal{L}(Y|M_t)-\mathcal{L}(Y|M_t \cup m)
+\]
+
+论文故事线:  
+当前 LLM Agent 长期记忆系统通常在两个极端之间摇摆：全上下文导致 token 爆炸和 attention 稀释，RAG 又只会找“语义相似”的内容，而不一定找“对当前任务有用”的内容。我们提出，长期记忆的核心不是存储容量，而是预测性组织能力：Agent 应该维护一个能预测未来任务需求的紧凑状态，并据此决定哪些经历进入工作记忆、哪些形成 episodic memory、哪些抽象为 semantic memory、哪些仅保存在冷存储。
+
+方法描述（2-3句）:  
+提出 Predictive Memory Consolidation, PMC。每个 episode 结束后，冻结 LLM 生成若干未来可能查询/任务需求/约束检查点，并评估当前事件片段对这些未来目标的边际预测收益；高收益片段被提升为热层 episodic memory 或抽象为 semantic facts，低收益片段只进入冷存储。在线阶段，检索时同时使用向量相似度、时间/关系图路径和预测性 utility score，返回最能降低当前任务不确定性的记忆，而不是单纯最相似的记忆。
+
+草拟标题:  
+Predictive Memory Consolidation for Long-Horizon LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo：长对话记忆与用户偏好一致性。  
+    - LongMemEval：长期事实、事件、偏好追踪。  
+    - RULER-128K：needle / multi-hop / variable tracking，测试长上下文替代能力。  
+    - InfiniteBench：超长上下文 QA 与推理。  
+    - SWE-Bench-Verified：作为更难的 agentic setting，测试跨文件、跨步骤代码修改中的记忆压缩与状态保持。
+  - 基线:  
+    - Full-context：Gemini 1.5/2、Claude 3.5/4、Qwen3-128K、DeepSeek-V3 长上下文版本。  
+    - Agent memory：MemGPT-v2 / Letta、A-Mem、LangMem 2025、Mem0。  
+    - RAG-2025：BGE-M3 / Nomic v2 / E5-Mistral-2025 + Qwen3-32B / DeepSeek-V3 / Llama-4 生成器。  
+    - Ablation：仅向量 RAG、仅时间最近记忆、仅 LLM summary、无预测性 utility、无图结构。
+  - 指标:  
+    - 任务完成率 / QA accuracy。  
+    - 记忆检索准确率与 recall@k。  
+    - Token 成本与调用成本。  
+    - 长期一致性：几千轮后是否仍保持用户偏好、约束和早期事件。  
+    - Memory pollution：检索到无关记忆导致错误决策的比例。
+  - 预期结果:  
+    - 相比 RAG-2025，在 LoCoMo / LongMemEval 上提高长期一致性和多跳记忆 QA。  
+    - 相比 full-context，在接近准确率的同时显著降低 token 成本。  
+    - 相比 MemGPT-v2 / Mem0 / LangMem，减少无关记忆注入，提高复杂任务中的有效检索率。  
+    - 在 SWE-Bench-Verified 上不一定显著超过专门 coding agent，但应能降低重复读取上下文和错误状态恢复。
+
+预实验（1周内）:  
+在 LoCoMo 和 LongMemEval 上实现 training-free PMC 原型：用 Qwen3-32B 或 DeepSeek-V3 作为预测器/生成器，BGE-M3 或 E5-Mistral-2025 做向量索引，Neo4j/NetworkX 构建事件-实体-时间图。比较三组：vanilla RAG、LLM summary memory、PMC。成功标准：在相同 token budget 下，PMC 的记忆 QA accuracy 至少提升 5%，检索无关记忆比例下降，且平均输入 token 低于 full-context 50% 以上。
+
+风险:  
+最可能失败的原因是 LLM 生成的“未来查询/预测目标”质量不稳定，导致 utility score 噪声大，错误提升无关记忆。缓解方式是使用多采样自一致性、把预测目标限制为可验证 schema，例如用户偏好、未完成任务、实体关系、时间约束、代码状态，并保留冷存储以便必要时回溯。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260516_0252.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">3</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">多模态大模型 - 视觉 Token 管理</span>
+    <span class="seed-tag">来自种子：UT Memory: Depth-State Trade-offs in Reasoning</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>视觉 token 的数量、层间动态、查询相关性</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或偏旧项包括 GQA、POPE、OCRBench、DocVQA、ChartQA；LLaVA-OneVision 也已不算 2026 最新，但 Qwen2.5-VL、InternVL3、MMBench-V2、MMMU-Pro 相对较新。注意此项不影响整体判定。</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===  
+核心idea（一句话）: 把视觉 token 管理建模为“层深 depth 与视觉状态大小 state-size 的 Pareto 权衡”：浅层保留全量 token，随层深用 query-aware、空间连续的 token merging 动态压缩到合适的 64–256 个视觉状态，而不是固定比例 prune。
+
+为什么不撞社区共识:  
+- 不做“按时间遗忘”：视觉 token 没有时间维度，本方法只沿 Transformer 层深度 动态压缩。  
+- 不做纯 attention top-k：不是让 token 自主竞争，而是基于 query 相关性 + 空间邻域一致性 + 语义相似性 做 merge。  
+- 不压成 1 个全局 token：深层仍保留 64–256 个视觉状态，避免 Q-Former 式瓶颈。  
+- 不用 RL：使用可微 soft assignment / straight-through top-k budget head。  
+- 符合社区有价值方向：层间渐进式 token 减少、query-aware + layer-depth 双因素、空间结构保持的 merge。
+
+机制映射:  
+A 的「depth-state trade-off」机制 ←→ B 的「不同层需要不同数量视觉 token」问题。数学上的同构性在于：  
+- A 中推理过程可看作层深递推状态：  
+  \[
+  s_{\ell+1}=F_\ell(s_\ell), \quad |s_\ell| = \text{state size}
+  \]  
+  需要在更多 depth 与更大 state 之间权衡。  
+- B 中视觉 token 也是层间递推状态：  
+  \[
+  X_{\ell+1}=F_\ell(X_\ell, q), \quad X_\ell \in \mathbb{R}^{n_\ell \times d}
+  \]  
+  其中 \(n_\ell\) 就是视觉状态大小，\(\ell\) 是层深，query \(q\) 决定哪些区域应被保留。  
+- 因此视觉 token 管理可写成一个 depth-conditioned information bottleneck：  
+  \[
+  \min_{\{n_\ell, M_\ell\}} \sum_\ell \text{Cost}(n_\ell)
+  + \lambda \cdot \mathcal{L}_{task}
+  + \beta \cdot D_{\text{distill}}(Y_{\text{full}}, Y_{\text{compressed}})
+  \]  
+  约束是浅层大 \(n_\ell\)、深层小 \(n_\ell\)，且压缩算子 \(M_\ell\) 应保留 query-relevant 与 spatially coherent 信息。
+
+论文故事线:  
+现有 MLLM 视觉 token 压缩方法通常只回答“哪些 token 重要”，但没有系统回答“在第几层应该保留多少视觉状态”。然而视觉 token 的需求天然随层深变化：浅层负责局部纹理、OCR、细粒度空间关系，深层负责语义聚合。我们提出将视觉 token 管理显式建模为 depth-state allocation 问题，在每一层根据 query 难度和视觉状态冗余度动态决定 token budget，并用空间保持的 merging 替代激进 pruning。
+
+方法描述（2-3句）:  
+提出 DS-Merge: Depth-State Query-aware Visual Token Merging。在浅层保留全量视觉 token；从中层开始，budget head 根据 query embedding、当前视觉 token 熵、跨模态 attention 统计预测每层 token 数 \(n_\ell(q)\)，然后用 query-aware similarity 与空间邻域约束把相邻且语义相似的 token merge 成新的视觉状态。训练时用全量-token teacher 做 logits/attention distillation，并加入任务损失；推理时只需插入轻量 merging 模块，可作为 Qwen2.5-VL / InternVL3 / LLaVA-OneVision 的 plug-in。
+
+草拟标题:  
+Depth-State Visual Token Memory: Query-Aware Progressive Merging for Efficient Multimodal Large Language Models
+
+关键实验:  
+  - 数据集:  
+    - 综合理解：MMBench-V2, MMMU-Pro  
+    - 空间推理：GQA  
+    - 幻觉：POPE  
+    - OCR / 文档 / 图表：OCRBench, DocVQA, ChartQA  
+    - 可选效率评测：MME-RealWorld 或 MEGA-Bench 子集  
+  - 基线:  
+    - 全量 token：Qwen2.5-VL-7B, InternVL3-8B, LLaVA-OneVision-7B  
+    - 压缩方法：FastV-2025, VisionZip, PyramidDrop, SparseVLM, TokenPacker, LLaVA-Mini  
+    - 消融：固定层间 schedule、仅 query-aware、仅 depth-aware、prune-only、merge-only、无空间约束  
+  - 指标:  
+    - Accuracy / score vs average visual token 数量曲线  
+    - Prefill latency、tokens/s、峰值显存、KV cache 占用  
+    - OCRBench / DocVQA / ChartQA 上的细粒度信息保真度  
+    - POPE 上的 hallucination rate  
+  - 预期结果:  
+    - 在平均视觉 token 减少 50–70% 时，MMBench-V2 / GQA / MMMU-Pro 准确率下降 &lt;1–1.5 个点。  
+    - 相比 FastV / PyramidDrop，OCRBench、DocVQA、ChartQA 掉点更小，因为 merge 保留了局部信息。  
+    - KV cache 降低约 40–60%，prefill latency 提升 1.3–1.8×，无 NVLink 的 8×L20 环境下收益更明显。  
+    - 在 POPE 上 hallucination 不显著上升，优于 prune-heavy 方法。
+
+预实验（1周内）:  
+先做 inference-only 原型，不训练大模型。选 LLaVA-OneVision-7B 或 InternVL3-8B，插入三段式 schedule：浅层全量，中层 \(576 \rightarrow 192\)，深层 \(192 \rightarrow 96\)。比较三种策略：随机 merge、空间相邻 merge、query-aware 空间 merge；在 MMBench-V2 dev、GQA 子集、POPE、OCRBench 小子集上评估。成功标准：在平均视觉 token 减少 ≥40% 时，综合准确率下降 ≤2 个点，并且 query-aware 空间 merge 明显优于随机 merge / attention top-k prune。
+
+风险:  
+最可能失败的是 query-aware budget head 不稳定：不同模型的跨模态 attention 分布差异很大，直接迁移可能导致 OCR / 图表任务掉点。缓解方式是加入任务类型感知的最小 token 下限，例如 OCRBench / DocVQA / ChartQA 自动提高深层 token floor 到 128–256，并用 full-token teacher 做蒸馏约束。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260516_0252.json</small></div>
+</div>
+</div>
+</div>
+<div class="day-block">
+<div class="day-header">
 <h3>📅 2026-05-15</h3>
 <div class="day-stats">
-<span class="badge badge-seed">4 候选 / <b>2</b> 强推荐</span> 
-<span class="badge badge-plan">5 计划书</span>
+<span class="badge badge-seed">4 候选 / <b>1</b> 强推荐</span> 
+<span class="badge badge-plan">4 计划书</span>
  <span class="badge badge-info">Forge 文件: forge_20260515_1159.json</span>
 </div></div>
 <div class="day-section"><h4>🌱 当天大浪淘沙候选种子</h4>
@@ -171,27 +413,6 @@ details pre {
 <div class="card seed-card">
   <div class="card-top">
     <span class="rank">1</span>
-    <h4><a href="https://news.ycombinator.com/item?id=47835411" target="_blank">Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</a></h4>
-    <span class="tag tag-strong">强推荐做 A 种子</span>
-  </div>
-  <div class="meta"><span class="ch">hackernews</span> <span class="hot">74 评论</span> <span>160 分</span></div>
-  <div class="conclusion"><b>判定：</b>** 【强推荐】。经典博弈论数学解与LLM推理能力的结合是当前解决“多目标对齐”和“多智能体协作”的黄金切入点，方法优雅且极易低成本扩展出高质量的衍生工作。</div>
-  <details><summary>完整研判 (点击展开)</summary><pre>核心insight: 将博弈论中的纳什讨价还价解（Nash bargaining solution）作为数学约束或推理框架引入LLM，用严格的数学模型取代LLM模糊的“道德直觉”，从而实现可量化、系统化的公平分配与冲突调解。
-
-社区热议原因: 触动了“AI对齐与公平性缺乏客观标准”的痛点；同时引发了哲学与工程层面的争议——纯数学的博弈论模型（基于理性人假设）是否能真正捕捉并解决复杂且充满主观性的人类伦理与现实公平问题。
-
-方法简洁度: 核心思路非常简洁优雅。将经典的纳什议价公式（最大化各方效用增量的乘积）转化为LLM的效用评估函数、Prompt约束或多智能体协商规则，逻辑清晰，极具模块化特征。
-
-A+B潜力: 作为“方法A”（基于博弈论解的LLM协商机制），最适合迁移到：1）多智能体系统（Multi-Agent）中的有限资源分配与任务动态调度；2）RLHF/模型对齐，用纳什均衡替代单一的人类偏好奖励模型，解决多目标/多价值观冲突时的模型微调。
-
-可行性: 完全可行且资源绰绰有余。该方向重在机制设计与推理框架，主要依赖API调用或在开源模型（如Llama-3-8B/70B）上进行轻量级SFT/DPO，8张L20在4周内足以完成高质量的衍生实验与论文撰写。
-
-最终判定: 【强推荐】。经典博弈论数学解与LLM推理能力的结合是当前解决“多目标对齐”和“多智能体协作”的黄金切入点，方法优雅且极易低成本扩展出高质量的衍生工作。</pre></details>
-</div>
-
-<div class="card seed-card">
-  <div class="card-top">
-    <span class="rank">2</span>
     <h4><a href="https://news.ycombinator.com/item?id=47850212" target="_blank">CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production</a></h4>
     <span class="tag tag-strong">强推荐做 A 种子</span>
   </div>
@@ -215,7 +436,7 @@ A+B潜力:
 
 <div class="card seed-card">
   <div class="card-top">
-    <span class="rank">3</span>
+    <span class="rank">2</span>
     <h4><a href="https://www.reddit.com/r/MachineLearning/comments/1tc1xr3/humanlevel_performance_via_ml_was_not_proven/" target="_blank">Human-level performance via ML was *not* proven impossible with complexity theory [D]</a></h4>
     <span class="tag tag-skip">不适合做 A 种子</span>
   </div>
@@ -236,7 +457,7 @@ A+B潜力: 由于是纯理论探讨，它不适合作为算法“方法A”进�
 
 <div class="card seed-card">
   <div class="card-top">
-    <span class="rank">4</span>
+    <span class="rank">3</span>
     <h4><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ta4rvs/mtp_on_unsloth/" target="_blank">MTP on Unsloth</a></h4>
     <span class="tag tag-skip">待判断</span>
   </div>
@@ -265,182 +486,33 @@ A+B潜力:
 最终判定: 
 【值得深入】。MTP（多Token预测）是下一代大模型推理的标配技术，目前正处于“权重已开源但工程基建未完善”的红利期，非常适合做工程优化或结合特定场景的衍生研究。</pre></details>
 </div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">4</span>
+    <h4><a href="https://news.ycombinator.com/item?id=47835411" target="_blank">Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hackernews</span> <span class="hot">74 评论</span> <span>160 分</span></div>
+  <div class="conclusion"><b>判定：</b>[已归档至 SeedVault]</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>核心insight: 将博弈论中的纳什讨价还价解（Nash bargaining solution）作为数学约束或推理框架引入LLM，用严格的数学模型取代LLM模糊的“道德直觉”，从而实现可量化、系统化的公平分配与冲突调解。
+
+社区热议原因: 触动了“AI对齐与公平性缺乏客观标准”的痛点；同时引发了哲学与工程层面的争议——纯数学的博弈论模型（基于理性人假设）是否能真正捕捉并解决复杂且充满主观性的人类伦理与现实公平问题。
+
+方法简洁度: 核心思路非常简洁优雅。将经典的纳什议价公式（最大化各方效用增量的乘积）转化为LLM的效用评估函数、Prompt约束或多智能体协商规则，逻辑清晰，极具模块化特征。
+
+A+B潜力: 作为“方法A”（基于博弈论解的LLM协商机制），最适合迁移到：1）多智能体系统（Multi-Agent）中的有限资源分配与任务动态调度；2）RLHF/模型对齐，用纳什均衡替代单一的人类偏好奖励模型，解决多目标/多价值观冲突时的模型微调。
+
+可行性: 完全可行且资源绰绰有余。该方向重在机制设计与推理框架，主要依赖API调用或在开源模型（如Llama-3-8B/70B）上进行轻量级SFT/DPO，8张L20在4周内足以完成高质量的衍生实验与论文撰写。
+
+最终判定: 【强推荐】。经典博弈论数学解与LLM推理能力的结合是当前解决“多目标对齐”和“多智能体协作”的黄金切入点，方法优雅且极易低成本扩展出高质量的衍生工作。</pre></details>
+</div>
 </div>
 <div class="day-section"><h4>💡 当天 Forge 通过验证 + 产出计划书</h4>
 
 <div class="card plan-card">
   <div class="plan-header">
     <span class="plan-rank">1</span>
-    <span class="model-tag">gpt-5.5</span>
-    <span class="domain-tag">多模态大模型 - 模态融合</span>
-    <span class="seed-tag">来自种子：Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</span>
-  </div>
-  <div class="b-problem"><b>B 领域问题：</b>视觉信息与文本信息的深层融合机制</div>
-  <div class="val-box">✅ 严格交叉验证通过 (2/2)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或非2025+项包括 LLaVA-OneVision-7B、Cambrian-1-8B、Molmo-7B、MathVista、HallusionBench、MMBench-V2、BLINK；其余如 Qwen2.5-VL、InternVL3、MMMU-Pro、MEGA-Bench 相对较新</div>
-  
-  <div class="cc-box"><b>共识检查 ✅</b> 通过共识检查</div>
-  <details open><summary>📌 Idea 原文</summary><pre>===  
-核心idea（一句话）: 用 Nash bargaining 做 query-conditioned visual token/encoder budget allocation：在 CLIP/DINO/SAM、多 tile、多尺度视觉证据之间，以纳什讨价还价目标分配有限视觉 token，而不是简单拼接或 softmax 路由。
-
-为什么不撞社区共识:  
-- 不给 LLM 额外插 cross-attention 层，不破坏 decoder-only 预训练结构。  
-- 不是“文本 token 主动 query 视觉 token”，而是在视觉输入进入 LLM 前做 question-conditioned token packing，符合 Text-Aware Visual Encoding 路线。  
-- 不强行让视觉 token 和文本 token 分布相似，保留不同视觉 encoder 的模态/能力差异。  
-- 符合社区看好的 Mixture of Vision Encoders、Native Resolution + Dynamic Tiling、Text-Aware Visual Encoding 三个方向：核心是如何在有限上下文预算下选择互补视觉证据。  
-
-机制映射:  
-A 的「Nash bargaining 在多个 agent 之间做公平且 Pareto-efficient 的资源分配」机制 ←→ B 的「多个视觉证据源：不同 encoder、不同 tile、不同尺度，在有限视觉 token budget 下争夺进入 LLM 的机会」问题。  
-数学上的同构性在于：二者都是在约束资源 \(B\) 下，为多个参与方 \(i\) 分配资源 \(b_i\)，最大化  
-\[
-\max_{\{b_i\}} \sum_i \log(U_i(b_i;q,I)-d_i), \quad \sum_i b_i \le B
-\]  
-其中 \(U_i\) 是某个视觉源对当前问题的边际效用，\(d_i\) 是 disagreement utility，即不给该源额外 token 时的基线效用。Nash 目标不会像普通 softmax router 那样只选最高分源，而是按“归一化边际收益”分配 token，鼓励 CLIP 的全局语义、DINO 的局部纹理、SAM 的区域边界、high-res tile 的细节信息形成互补。
-
-论文故事线:  
-当前 MLLM 的视觉 token 组织方式过于粗糙：要么把所有 tile/encoder token 简单拼接，造成大量冗余；要么用 learned router/top-k 只保留最高相关 token，容易忽视弱但关键的局部证据。真正的问题不是“视觉和文本是否相似”，而是不同视觉证据在不同问题中具有不同边际价值，模型需要一种稳定、可解释、Pareto-efficient 的视觉证据分配机制。
-
-方法描述（2-3句）:  
-构建一个轻量级 Nash Visual Bargaining Router：对每个候选视觉源 \(i\)，包括 encoder、tile、scale、region，预测其 question-conditioned utility curve \(U_i(b_i;q,I)\)，然后通过 Nash bargaining objective 在总 token budget 下求解每个源应保留的 token 数和 gating weight。选出的 token 仍然按标准 decoder-only token concatenation 输入 Qwen2.5-VL / InternVL3 类模型，只训练 router、projector 和少量 LoRA，不改 LLM 主干结构。  
-
-草拟标题:  
-BargainVL: Nash-Bargained Visual Token Allocation for Efficient and Complementary Multimodal Fusion
-
-关键实验:  
-  - 数据集:  
-    - MMMU-Pro：大学级多模态推理。  
-    - MEGA-Bench：2025 综合多模态能力评测。  
-    - MME-RealWorld：真实世界场景下的高分辨率感知、空间理解与复杂推理。  
-    - MathVision / OlympiadBench-MM：图表、几何、数学与奥赛级视觉推理。  
-    - OCRBench v2 / ChartMuseum：细粒度文字、表格、图表与文档视觉理解。  
-    - MMStar / RealWorldQA：综合感知、细粒度视觉定位与真实世界问答。  
-  - 基线:  
-    - 主基线：Qwen2.5-VL-7B、InternVL3-8B、GLM-4.1V-9B-Thinking、MiniCPM-V-4.5、Kimi-VL-A3B-Thinking、Ovis2-8B、NVILA-8B。  
-    - 大模型参考：Qwen2.5-VL-72B、InternVL3-78B、GLM-4.1V-32B-Thinking、Gemini-2.5-Pro、GPT-4.1 / GPT-5 系列，作为 upper reference，不作为主要训练对象。  
-    - 过时对比：LLaVA-OneVision-7B、Cambrian-1-8B、Molmo-7B，仅作为 historical / compatibility reference，不作为主基线。  
-    - 消融基线：uniform token allocation、softmax router、top-k relevance router、random tile dropping、single encoder only、CLIP+DINO naive concat。  
-  - 指标:  
-    - Accuracy / normalized score on MMMU-Pro, MEGA-Bench, MME-RealWorld, MathVision / OlympiadBench-MM, OCRBench v2 / ChartMuseum, MMStar / RealWorldQA。  
-    - Hallucination-sensitive accuracy / contradiction rate on MME-RealWorld and RealWorldQA-style adversarial subsets。  
-    - Token budget、latency、FLOPs、GPU memory。  
-    - Token allocation entropy 与 encoder/tile utilization，用于分析是否避免 router collapse。  
-  - 预期结果:  
-    - 在相同视觉 token budget 下，较 naive concat / top-k router 提升 1.5–3.5 points。  
-    - 在 MathVision / OlympiadBench-MM、OCRBench v2 / ChartMuseum、MME-RealWorld 上收益最大，因为这些任务需要局部细节、空间关系和抗语言先验。  
-    - 在减少 30–50% 视觉 token 时保持或超过 full-token baseline，证明 Nash allocation 不只是加模块，而是更有效地组织视觉证据。  
-
-预实验（1周内）:  
-在 Qwen2.5-VL-7B 或 InternVL3-8B 上冻结主干，接入 CLIP + DINOv2 + SAM/region features 的候选视觉源，先不训练完整 utility curve，而是用轻量 MLP 预测每个源的 relevance score，并设  
-\[
-U_i(b_i)=a_i \log(1+b_i)
-\]  
-做 Nash token allocation。  
-在 MathVision mini split、OCRBench v2 subset、MME-RealWorld subset 上比较 uniform allocation、top-k router 和 Nash router。成功标准：同等 token budget 下 Nash router 至少在两个 benchmark 上稳定超过 top-k router 1 point 以上，并且 encoder utilization 不塌缩到单一视觉源。
-
-风险:  
-最可能失败的原因是 utility 估计不准：如果 router 学不到某个视觉源对当前问题的真实边际贡献，Nash 目标只是在错误 utility 上做漂亮优化。备选方案是用 ablation-based distillation 生成 utility supervision：离线测量“移除某 encoder/tile 后 answer log-likelihood 下降量”，用它训练 utility predictor。  
-===</pre></details>
-  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>这是一份为你量身定制的、极具执行力的实验计划书。
-
-考虑到你的硬件条件（8张 L20 48GB，无 NVLink），最大的瓶颈是跨卡通讯极慢（PCIe瓶颈）。因此，我们绝对不能做张量并行（Tensor Parallelism）或 ZeRO-3，必须采用 ZeRO-2 + 冻结 LLM 主干 + 仅训练 Router/Projector 和少量 LoRA 的策略。L20 的单卡 48GB 显存足够跑 7B-8B 级别的模型（bf16 约占 16GB，留下充足空间给多视觉特征和激活值）。
-
----
-
-# 🚀 第一阶段：预实验计划（第 1 周）
-目标: 用最小开发成本（Hack 现有代码）验证“Nash 分配比 Top-k/Softmax 更好”。不从头搞多 Encoder，而是先在多 Tile / 多尺度上验证 Nash 机制。
-
-### 1. 环境搭建 (Day 1)
-*   代码库: 基于 HuggingFace `transformers` (用于模型 hack) + `lmms-eval` (用于快速评测)。
-*   Python 环境:
-    ```bash
-    conda create -n bargainvl python=3.10 -y &amp;&amp; conda activate bargainvl
-    pip install torch==2.4.0 torchvision --index-url https://download.pytorch.org/whl/cu121
-    pip install transformers accelerate peft deepspeed
-    git clone https://github.com/EvolvingLMMs-Lab/lmms-eval.git &amp;&amp; cd lmms-eval &amp;&amp; pip install -e .
-    ```
-
-### 2. 数据准备 (Day 1)
-为了快速迭代，不跑全集，构建一个 Mini-Eval-Suite：
-*   MathVision (Mini): 随机抽 300 题（验证局部细节和公式）。
-*   OCRBench v2 (Subset): 抽 500 题（验证高分辨率文字）。
-*   MME-RealWorld (Subset): 抽 500 题（验证复杂场景）。
-*   *操作:* 编写一个简单的 Python 脚本，从 HuggingFace Datasets 下载并采样保存为 local JSONL。
-
-### 3. 基线运行 (Day 2)
-*   模型: `Qwen/Qwen2.5-VL-7B-Instruct`
-*   操作: 直接用 `lmms-eval` 跑上述三个 Mini-Suite，记录 Vanilla 模型的 Accuracy 和平均 Visual Token 数量（作为 Budget 上限 $B_{max}$）。
-    ```bash
-    accelerate launch --num_processes=8 -m lmms_eval --model qwen2_5_vl --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct --tasks mathvision_mini,ocrbench_subset --batch_size 1
-    ```
-
-### 4. 核心验证实验 (Day 3-5)
-最小改动实现 (The Hack):
-1.  拦截视觉特征: 继承 `Qwen2_5_VLForConditionalGeneration`，在 `forward` 函数中，视觉特征经过 Vision Transformer 后、进入 LLM 前进行拦截。
-2.  定义 Agent: Qwen2.5-VL 原生支持 Dynamic Tiling。我们将每一个 Tile 视为一个参与 Nash 讨价还价的 Agent $i$。
-3.  轻量预测器: 冻结 LLM 和 ViT。加一个极小的 MLP（输入：Text Query 经过 Embedding 的均值 + Tile Feature 的均值），输出该 Tile 的 Relevance Score $a_i$。
-4.  Nash 分配 (贪心近似): 
-    *   效用函数设为 $U_i(b_i) = a_i \log(1+b_i)$。
-    *   *工程 Trick:* 严格的 Nash 求解不可导且慢。由于该效用函数是次模的（Submodular），我们可以用贪心边际效用算法（每次把 1 个 token 分给当前 $\frac{\partial U_i}{\partial b_i}$ 最大的 Tile）来快速分配 Token 预算 $B$（设为 $B_{max}$ 的 50%）。
-    *   *可导性:* 预实验阶段先不端到端训练 Router！用 Plan B 的思路：离线算好每个 Tile 的 $\Delta \log P(answer)$ 作为 $a_i$ 的伪标签，用 MSE 训练这个 MLP。
-5.  拼接输入: 根据分配到的 token 数 $b_i$，对每个 Tile 的 token 进行随机/均匀下采样（或 Top-k attention pooling），拼成最终的视觉序列喂给 LLM。
-
-### 5. 成功标准 (Day 6-7 分析)
-*   性能信号: 在总 Token 预算减少 50% 的情况下，Nash 分配的 Accuracy 超过 Top-k Router 至少 1.0 - 1.5 个百分点。
-*   行为信号: 打印 Token 分配的 Entropy。如果 Top-k 总是只选 1-2 个 Tile，而 Nash 能够根据问题（如：“图中左下角的字是什么” vs “总结全图”）动态分配给全局图和局部 Tile，说明机制生效。
-
-### 6. 预估资源
-*   硬件: 2 张 L20 用于代码调试，8 张 L20 并行跑 `lmms-eval`。
-*   耗时: 训练 MLP (1天) + 评测 (1天)。
-
----
----
-
-# 🚀 第二阶段：完整实验计划（第 2-4 周）
-*(仅在预实验证明 Nash 分配有效且不塌缩后启动)*
-
-### 1. 完整实验矩阵
-我们需要在多 Encoder (CLIP + DINOv2 + SAM) 和 多 Tile 上全面铺开。
-*   训练数据: LLaVA-Instruct-150K + 少量高质量 OCR/Math 数据（如 DocVQA, MathVision train split），总计约 300K 条。
-*   训练策略: 
-    *   冻结 LLM 和所有 Vision Encoders。
-    *   训练 Nash Router (MLP/Transformer layer) + 跨模态 Projector + LLM 的 LoRA (rank=64)。
-    *   使用 DeepSpeed ZeRO-2，Batch Size 设为每卡 2-4，梯度累加到全局 BS=128。
-
-### 2. 对比基线 (Baselines)
-*   主基线 (同级别): Qwen2.5-VL-7B, InternVL3-8B, GLM-4.1V-9B-Thinking, MiniCPM-V-4.5。
-*   Upper Reference (不参与公平对比，仅画线): Qwen2.5-VL-72B, GPT-4o。
-*   消融基线 (基于我们的模型架构):
-    *   *Naive Concat:* CLIP + DINO + SAM 所有 token 全拼接（性能上限，计算灾难）。
-    *   *Uniform Allocation:* 每个 Encoder/Tile 平分 Token 预算。
-    *   *Softmax Router:* 用 Softmax 算权重，按权重比例分配 Token。
-    *   *Top-K Router:* 只保留 Relevance 最高的 K 个源的所有 Token，其余丢弃。
-
-### 3. 评估指标列表
-*   核心能力: MMMU-Pro (综合), MEGA-Bench (综合), MME-RealWorld (真实世界), MathVision (数学), OCRBench v2 (文档)。
-*   效率指标: 平均 Visual Token 数量、推理 Latency (首字延迟 TTFT)、FLOPs。
-*   机制指标: Allocation Entropy（分配熵，衡量互补性）、Encoder Utilization Rate（各视觉源被激活的频率）。
-
-### 4. 消融实验设计 (Ablation Studies)
-*   Ablation 1: 效用函数设计 
-    *   对比 $U_i = a_i \log(1+b_i)$ vs $U_i = a_i \sqrt{b_i}$ vs 线性效用。
-*   Ablation 2: 视觉源的组合
-    *   仅 CLIP vs. CLIP+DINO vs. CLIP+DINO+SAM (证明 Nash 机制能很好地 handle 异构特征，源越多收益越大)。
-*   Ablation 3: 预算敏感度 (Budget Scaling)
-    *   测试 Token Budget 在 25%, 50%, 75%, 100% 下的表现。预期 Nash 曲线下降最平缓。
-
-### 5. 图表规划 (Paper Figures)
-*   Figure 1 (Teaser): 概念对比图。左边是 Naive Concat (臃肿) 和 Top-K (丢失局部信息)，右边是 Nash Bargaining (Pareto最优分配，CLIP给全局，DINO给纹理，SAM给边界)。
-*   Figure 2 (Method): BargainVL 架构图。展示 Text Query 如何生成 Utility Curve，Nash Solver 如何输出 Token 预算，最后如何 Packing 进 LLM。
-*   Figure 3 (Budget vs. Performance): 折线图。X轴是 Token Budget，Y轴是 MMMU-Pro 分数。BargainVL 的曲线应位于所有 Router 方法的最上方。
-*   Figure 4 (Qualitative/Heatmap): 案例分析。展示一个复杂数学几何题，Nash Router 给公式区域分配了高分辨率 Tile token，给几何图形分配了 SAM token，给背景分配了 0 token。
-
-### 6. 论文结构草案
-*   Abstract: 痛点 (视觉 token 冗余与粗暴路由) -&gt; 洞察 (不同视觉证据的边际效用不同) -&gt; 方法 (Nash Visual Bargaining) -&gt; 结果 (降 token 50% 性能不降</pre></details>
-  <div class="src-file"><small>来源：forge_20260515_1159.json</small></div>
-</div>
-
-<div class="card plan-card">
-  <div class="plan-header">
-    <span class="plan-rank">2</span>
     <span class="model-tag">gemini-pro</span>
     <span class="domain-tag">LLM 推理与测试时计算</span>
     <span class="seed-tag">来自种子：Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</span>
@@ -487,7 +559,7 @@ U_i(b_i)=a_i \log(1+b_i)
 
 <div class="card plan-card">
   <div class="plan-header">
-    <span class="plan-rank">3</span>
+    <span class="plan-rank">2</span>
     <span class="model-tag">gemini-pro</span>
     <span class="domain-tag">LLM Agent 长期记忆</span>
     <span class="seed-tag">来自种子：Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</span>
@@ -523,7 +595,7 @@ A 的「纳什讨价还价实现多方公平与效用最大化」机制 ←→ B
 
 <div class="card plan-card">
   <div class="plan-header">
-    <span class="plan-rank">4</span>
+    <span class="plan-rank">3</span>
     <span class="model-tag">gpt-5.5</span>
     <span class="domain-tag">LLM Agent 长期记忆</span>
     <span class="seed-tag">来自种子：Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness</span>
@@ -607,7 +679,7 @@ BargainMem: Nash Bargaining for Pareto-Efficient Working Memory Allocation in Lo
 
 <div class="card plan-card">
   <div class="plan-header">
-    <span class="plan-rank">5</span>
+    <span class="plan-rank">4</span>
     <span class="model-tag">gpt-5.5</span>
     <span class="domain-tag">LLM Agent 长期记忆</span>
     <span class="seed-tag">来自种子：CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production</span>
