@@ -133,19 +133,19 @@ details pre {
 
 <header>
 <h1>🌊 AutoResearch · Idea Forge Timeline</h1>
-<div class="sub">每日 cron 自动运行 · 更新于 2026-05-16 13:29 (UTC+8)</div>
+<div class="sub">每日 cron 自动运行 · 更新于 2026-05-17 03:15 (UTC+8)</div>
 <a class="nav-link" href="./index.html">← 信息聚合主页</a>
 </header>
 
 
 <div class="stats">
-  <div class="stat"><div class="n">8</div><div class="l">活跃天数</div></div>
-  <div class="stat"><div class="n">44</div><div class="l">候选种子（去重）</div></div>
+  <div class="stat"><div class="n">9</div><div class="l">活跃天数</div></div>
+  <div class="stat"><div class="n">45</div><div class="l">候选种子（去重）</div></div>
   <div class="stat"><div class="n">22</div><div class="l">强推荐 A 种子</div></div>
   <div class="stat"><div class="n">4</div><div class="l">B 方向知识库</div></div>
-  <div class="stat"><div class="n">90</div><div class="l">候选 Idea</div></div>
-  <div class="stat"><div class="n">37</div><div class="l">通过严格验证</div></div>
-  <div class="stat"><div class="n">33</div><div class="l">输出计划书</div></div>
+  <div class="stat"><div class="n">95</div><div class="l">候选 Idea</div></div>
+  <div class="stat"><div class="n">41</div><div class="l">通过严格验证</div></div>
+  <div class="stat"><div class="n">37</div><div class="l">输出计划书</div></div>
 </div>
 
 
@@ -158,6 +158,361 @@ details pre {
 <div class="tab-content active" id="tab-timeline">
 <h2>📅 按日期 Timeline（每日种子 + 通过的 Idea）</h2>
 <p>每个日期分组展示当天大浪淘沙的种子和当天 Forge 产出的计划书。</p>
+<div class="day-block">
+<div class="day-header">
+<h3>📅 2026-05-17</h3>
+<div class="day-stats">
+<span class="badge badge-seed">1 候选 / <b>0</b> 强推荐</span> 
+<span class="badge badge-plan">4 计划书</span>
+ <span class="badge badge-info">Forge 文件: forge_20260517_0315.json</span>
+</div></div>
+<div class="day-section"><h4>🌱 当天大浪淘沙候选种子</h4>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">1</span>
+    <h4><a href="https://www.leiphone.com/category/industrynews/b5v9DmMfzsVbkOyC.html" target="_blank">马斯克幼子虎头包走红，淘宝店主：店铺已经开了19年，销量翻了十几倍</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">rss_leiphone_ai</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+</div>
+<div class="day-section"><h4>💡 当天 Forge 通过验证 + 产出计划书</h4>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">1</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">多模态大模型 - 视觉 Token 管理</span>
+    <span class="seed-tag">来自种子：Show HN: AI memory with biological decay (52% recall)</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>视觉 token 的数量、层间动态、查询相关性</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或偏旧项包括 GQA、POPE、OCRBench、DocVQA、ChartQA；LLaVA-OneVision-7B 也不算 2026 最新基座，但 Qwen2.5-VL、InternVL3、MMBench-V2、MMMU-Pro 等相对较新。注意此项不影响整体判定。</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>【原方案】
+===
+核心idea（一句话）:  
+把“遗忘曲线”改写成层深-查询条件化的 token 生存函数：视觉 token 不按时间衰减，而是在 MLLM 层间根据 query 相关性、空间冗余和层深逐步降低“生存概率”，低生存 token 优先与空间邻近相似 token merge，极少量再 prune。
+
+为什么不撞社区共识:  
+- 不做“按时间衰减视觉 token”：视觉 token 没有时间维度，本方法的衰减轴是Transformer 层深度。  
+- 不做简单 attention top-k：token 删除/合并由query 相关性 + 空间一致性 + 语义相似性共同决定，避免破坏 patch 空间结构。  
+- 不把图像压成 1 个全局 token：目标预算保持在 64–256 个视觉 token，并且浅层保留全量细节。  
+- 符合社区认可方向：层间渐进式 token 减少、Query-aware token selection、保留空间结构的 merge、merge 为主少量 prune。
+
+机制映射:  
+A 的「不重要或久远记忆的生物衰减」机制 ←→ B 的「视觉 token 在深层对当前 query 的边际效用下降」。  
+数学上的同构性在于：二者都可以写成 survival / hazard 过程。  
+记忆系统中可写为  
+\[
+s_i(t)=\exp(-\int_0^t h_i(\tau)d\tau)
+\]  
+其中 \(h_i\) 是遗忘风险；视觉 token 管理中将时间 \(t\) 替换为层深 \(l\)：  
+\[
+s_i^{(l)} = s_i^{(l-1)} \exp(-h_i^{(l)})
+\]  
+\[
+h_i^{(l)} = \alpha_l \cdot (1-r_i^{(l)}) + \beta_l \cdot d_i^{(l)} + \gamma_l \cdot u_i^{(l)}
+\]  
+其中 \(r_i^{(l)}\) 是 query relevance，\(d_i^{(l)}\) 是空间/语义冗余度，\(u_i^{(l)}\) 是低置信或低贡献信号。核心不是“遗忘时间”，而是“随层深累计的 token 边际效用衰减”。
+
+论文故事线:  
+当前 MLLM 的视觉 token 压缩方法大多有两类问题：一类只看 attention 分数，容易破坏空间结构；另一类使用固定层间预算，无法适应不同 query 难度。我们提出一种把视觉 token 视为“跨层生存过程”的框架：浅层全量保留视觉细节，中深层根据 query 相关性和局部冗余动态降低 token 生存概率，并优先进行空间一致的 merge，从而在保持 OCR、图表、空间推理能力的同时显著降低 KV cache 和推理延迟。
+
+方法描述（2-3句）:  
+在 MLLM 推理时，为每个视觉 token 维护一个跨层 survival score；每隔若干 LLM 层，根据文本 query-visual attention、视觉 token 间 cosine similarity、2D patch 邻接关系估计 token hazard。低 survival 且空间相邻/语义相似的 token 被 merge 到邻近代表 token，只有极低 survival 且低 query relevance 的 token 才 prune；token 预算从浅层到深层自适应下降，例如 576→256→144→64，而非固定一刀切。
+
+草拟标题:  
+SurvivalMerge: Query-Conditioned Survival Modeling for Layer-Wise Visual Token Merging in Multimodal LLMs
+
+关键实验:
+  - 数据集:  
+    - 综合理解：MMBench-V2, MMMU-Pro, MMStar, MME-RealWorld  
+    - 空间推理：GQA, RealWorldQA, BLINK  
+    - 幻觉检测：POPE, HallusionBench, AMBER  
+    - OCR/文档/图表：OCRBench v2, DocVQA, MMLongBench-Doc, ChartQA, ChartQAPro  
+    - 可选效率场景：MME-RealWorld 或自建长图/高分辨率推理设置
+  - 基线:  
+    - 全量 token MLLM：Qwen2.5-VL-7B/32B, InternVL3-8B/14B, LLaVA-OneVision-7B/72B  
+    - Token 管理方法：FastV-2025, VisionZip, PyramidDrop, SparseVLM, TokenPacker, LLaVA-Mini  
+    - Ablation：仅 depth schedule、仅 query-aware、仅 spatial merge、attention top-k pruning、固定 token budget
+  - 指标:  
+    - Accuracy / score vs visual token 数量曲线  
+    - Prefill latency、end-to-end tokens/s  
+    - KV cache 占用  
+    - FLOPs 或实际显存峰值  
+    - OCRBench v2/DocVQA/MMLongBench-Doc/ChartQAPro 上的细粒度能力保留率  
+    - POPE/HallusionBench/AMBER 上的 hallucination rate
+  - 预期结果:  
+    - 在保留 25%–40% visual tokens 时，MMBench-V2/MMStar/MMMU-Pro 精度下降小于 1–2%。  
+    - OCRBench v2/DocVQA/MMLongBench-Doc/ChartQAPro 相比纯 pruning 方法明显更稳，因为 spatial merge 保留局部细节。  
+    - KV cache 降低约 35%–55%，prefill latency 提升约 1.3–1.8×。  
+    - 相比 FastV-2025/PyramidDrop，POPE/HallusionBench/AMBER 幻觉率不升或略降，因为 query-irrelevant 噪声 token 被合并/削弱。
+
+预实验（1周内）:  
+在 LLaVA-OneVision-7B 或 Qwen2.5-VL-7B 上做 training-free 插件版：选取 3 个压缩点，例如 LLM 第 8/16/24 层，将 visual token 从 576→256→144→64；hazard 由 text-visual attention、visual token cosine redundancy、2D 邻接约束组成。  
+先跑 MMBench-V2 dev、MMStar 子集、POPE/HallusionBench、OCRBench v2 子集，与 full token、FastV-2025-style attention top-k、VisionZip-style merging 对比。  
+成功标准：在视觉 token 减少 50% 以上时，综合任务平均精度下降不超过 2%，OCRBench v2/DocVQA 类任务显著优于纯 pruning，KV cache 至少下降 35%。
+
+风险:  
+最可能失败的原因是 query relevance 信号在早期层不稳定，导致重要 OCR 小字、图表坐标或细粒度区域被过早 merge。缓解方式是设置任务自适应下限：检测到 OCR/document/chart query 时提高中层 token budget，并对高局部梯度/文字区域 token 降低 hazard，保证细粒度视觉信息不被提前压缩。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260517_0315.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">2</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Skipping 90% of KV dequant work → +22.8% decode at 32K (llama.cpp, TurboQuant)</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 可能非2025+或偏旧项包括 BGE-M3、Gemini 1.5、Claude 3.5、SWE-Bench-Verified、RULER-128K、InfiniteBench、LoCoMo、MemGPT/Letta、部分传统 RAG baseline；但也包含 Qwen3、DeepSeek-</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 把 Agent 长期记忆做成“先低精度预筛、再高精度唤回”的 Lazy Memory Hydration：所有记忆都保留在冷存储中，但每一步只把任务条件下 Top-k 高效用记忆完整展开进 working memory。
+
+为什么不撞社区共识:  
+- 不做“遗忘曲线”式删除：记忆不被丢弃，只是分层存储，符合“不是遗忘，而是冷热分层”的主流实用路线。  
+- 不把记忆等同于普通 RAG：预筛信号不是单纯 embedding 相似度，而是任务条件下的效用估计，结合语义、时间、关系图、任务状态和历史成功反馈。  
+- 不把所有内容塞进向量库：冷存储包含原始 episode、摘要、实体关系图、符号标签和向量 sketch。  
+- 对应 B 领域有价值方向：主要切入 Working Memory 动态压缩 与 Episodic Memory 组织，并可扩展到 自我反思 + 记忆更新。
+
+机制映射:  
+A 的「用极低精度 KV 预筛，只对 Top-10% token 做完整反量化」机制 ←→ B 的「用低成本 memory sketch 预估任务效用，只对 Top-k episode 做完整唤回和推理」问题。  
+数学上的同构性在于：长上下文 attention 输出可写作  
+\[
+y=\sum_i \alpha_i v_i,\quad \alpha_i=\text{softmax}(q^\top k_i)
+\]  
+而 Agent 记忆读出可写作  
+\[
+M(s)=\sum_i u(s,m_i)\,\phi(m_i)
+\]  
+其中 \(s\) 是当前任务状态，\(m_i\) 是历史记忆，\(u(s,m_i)\) 是该记忆对当前决策的边际效用。两者都存在强稀疏性：大多数 token / memory 对最终输出或决策贡献接近 0。因此可以先用低精度 sketch 估计 \(\hat u(s,m_i)\)，只对 Top-k 记忆执行昂贵的 full hydration，包括原文展开、图邻居遍历、LLM 反思摘要和上下文注入。
+
+论文故事线:  
+长任务 Agent 的核心瓶颈不是“存不下”，而是“每一步不知道该把什么带进 working memory”。全量上下文导致成本爆炸和注意力稀释；普通 RAG 又只能找语义相似内容，不能判断任务效用。我们提出一种 training-free 的分层记忆读写机制：所有经验长期保留，但每次行动前只用低成本 sketch 选择少量高效用记忆进入主上下文，从而同时降低 token 成本、提升长期一致性和任务完成率。
+
+方法描述（2-3句）:  
+每条 episodic memory 同时存储四种表示：原始 episode、LLM 摘要、实体/事件图节点、低精度 task-utility sketch。Agent 每一步根据当前任务状态构造 query sketch，先在所有记忆上做廉价效用预筛，再只对 Top-k 记忆做完整 hydration：展开原文、取相关图邻居、生成任务条件摘要，并注入 working memory。任务结束后通过反思模块更新该记忆的 utility sketch、实体关系和成功/失败标签，但不删除原始记忆。
+
+草拟标题:  
+Lazy Memory Hydration: Sparse Task-Conditioned Recall for Long-Horizon LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo：长期对话一致性与个人记忆追踪。  
+    - LongMemEval：长期记忆检索与跨 episode 推理。  
+    - RULER-128K：控制式长上下文记忆压力测试。  
+    - InfiniteBench：超长上下文 QA / 推理。  
+    - SWE-Bench-Verified：检验真实长任务中跨文件、跨步骤经验复用能力。  
+
+  - 基线:  
+    - Memory 系统：MemGPT-v2 / Letta, A-Mem, LangMem 2025, Mem0, RAG-2025。  
+    - Full-context：使用 128K+ 上下文模型，如 Qwen3-128K / DeepSeek-V3 / Claude 3.5/4 / Gemini 1.5/2。  
+    - RAG baseline：使用 2025+ embedding，如 BGE-M3、Nomic v2、E5-Mistral-2025，生成器用 Qwen3-32B / DeepSeek-V3 / Llama-4 级别模型。  
+    - Ablation：  
+      1. 仅向量相似度检索；  
+      2. 仅摘要记忆；  
+      3. 无图结构；  
+      4. 无 utility sketch，直接 LLM rerank；  
+      5. Top-k 比例从 1%、5%、10%、20%、50% 扫描。  
+
+  - 指标:  
+    - 任务完成率 / pass@1。  
+    - 记忆检索准确率、Recall@k、MRR。  
+    - 长期一致性：几千轮后对早期事实、偏好、承诺的保持率。  
+    - Token 成本、wall-clock latency、LLM 调用次数。  
+    - Memory hydration ratio：每步真正展开的记忆比例。  
+    - 干扰鲁棒性：加入大量无关 episode 后性能下降幅度。  
+
+  - 预期结果:  
+    - 在 LoCoMo / LongMemEval 上，相比普通 RAG 与 Mem0，长期一致性和任务条件检索准确率提升。  
+    - 在 RULER-128K / InfiniteBench 上，用 5%-10% memory hydration 达到接近 full-context 的准确率，但显著降低 token 成本。  
+    - 在 SWE-Bench-Verified 上，相比无记忆或普通 RAG，能更好复用之前定位过的文件、bug 模式和修复策略，提高 resolved rate。  
+    - 相比 full-context，主要优势是成本和抗干扰；相比纯 RAG，主要优势是任务效用判断和跨 episode 推理。
+
+预实验（1周内）:  
+用 LoCoMo 和 LongMemEval 做最小版本：每条 memory 存原文、摘要、embedding、时间戳、实体标签和一个 8-bit utility sketch。当前 query 先用 sketch Top-k 预筛，再对 Top-k 调用 Qwen3-32B 或 DeepSeek-V3 生成任务条件摘要后回答。成功标准：在只展开 ≤10% 记忆的情况下，达到或超过 full RAG 的 QA 准确率，并将输入 token 成本降低至少 40%；同时在加入 5倍 distractor memories 后，性能下降小于普通 RAG。
+
+风险:  
+最可能失败的原因是 低精度 utility sketch 的预筛漏掉关键记忆，尤其是需要多跳、因果或弱语义相关的 episode。缓解方式是引入轻量级图扩展：Top-k 记忆 hydration 时额外带上其时间邻居、实体邻居和同任务邻居，并使用小比例随机探索 memory 以更新 sketch。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260517_0315.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">3</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Reasoning models don&#x27;t degrade gracefully - they hit a complexity cliff and collapse entirely [Research Analysis] [R]</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | LoCoMo、RULER-128K、InfiniteBench、SWE-Bench-Verified、Claude 3.5、Gemini 1.5、DeepSeek-V3、BGE-M3、E5-Mistral-class 等并非全部为 2025+ 最新项；但未出现 LLaVA-1.5/1.6、L</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===  
+核心idea（一句话）: 把长期记忆管理从“按相关性塞上下文”改成“按模型的记忆推理复杂度阈值调度”：当检索到的记忆证据图即将超过 LLM 的复杂度悬崖时，主动做任务条件下的图分解、压缩和分层调用，而不是继续堆 token。
+
+为什么不撞社区共识:  
+- 不做“遗忘曲线”，不删除记忆；原始 episodic memory 全部保留在冷存储中，只控制进入 working memory 的内容与结构。  
+- 不把 memory 简化成纯 RAG；检索后还会构建时间-实体-因果-任务依赖图，并判断这些记忆对当前任务是否“有用”，而不只是语义相似。  
+- 不把所有内容塞向量库；使用 图 + 向量 + 符号摘要 的混合记忆。  
+- 符合社区认可方向：Working Memory 动态压缩、Episodic Memory 组织、自我反思式记忆更新、分层记忆管理。  
+
+机制映射:  
+A 的「推理链长度超过模型有效容量后性能突然崩塌」机制 ←→ B 的「Agent 在长任务中把过多、过杂、跨时间的记忆塞进上下文后，决策性能突然崩塌」问题。  
+数学上的同构性在于：二者都不是简单的 token 长度问题，而是 条件推理图复杂度超过模型有效处理容量 的问题。  
+- 在 A 中，复杂度可表示为推理图的深度、分支数、依赖链长度、组合约束数量。  
+- 在 B 中，复杂度可表示为 memory evidence graph 的节点数、时间跨度、实体数、冲突边、因果边、跨 episode 跳数。  
+- 当 active memory graph 的有效复杂度 \(C(G_m)\) 超过模型容量阈值 \(\tau_{\text{LLM}}\) 时，LLM 不会线性变差，而会出现 retrieval 正确但 reasoning over memory 失败的 cliff。  
+- 因此长期记忆系统的关键不是“多召回”，而是让进入 working memory 的证据图满足 \(C(G_m) \leq \tau_{\text{LLM}}\)，同时把剩余信息保留在冷存储中按需二次调用。  
+
+论文故事线:  
+现有 Agent memory 方法主要优化“记住更多”和“检索更准”，但在真实长任务中，Agent 失败常常不是因为相关记忆没被召回，而是因为召回后的记忆集合太复杂：跨几百轮对话、多个实体、多个时间点、存在冲突更新，导致模型无法稳定地在这些记忆上推理。我们提出：长期记忆系统需要一个 complexity-aware working memory controller，它根据当前任务估计记忆证据图的推理负载，在超过模型可处理阈值前进行图分解、摘要编译和分层调用，从而避免“上下文爆炸”和“RAG 召回但不会用”的双重失败。
+
+方法描述（2-3句）:  
+构建一个 Cliff-Aware Hierarchical Memory Controller：先用向量检索召回候选 episodic memories，再抽取实体、时间、关系、因果和任务依赖，形成 memory evidence graph，并估计其复杂度分数。若复杂度超过模型阈值，系统不会丢弃记忆，而是将图划分为若干低复杂度子图，分别生成任务条件摘要、符号状态更新和必要证据指针，最后只把压缩后的 working memory 加入上下文，原始记忆保留在冷存储中可追溯检索。  
+
+草拟标题:  
+Beyond Relevance: Cliff-Aware Working Memory Control for Long-Horizon LLM Agents
+
+关键实验:  
+  - 数据集:  
+    - LoCoMo：长对话记忆、一致性、跨轮信息更新。  
+    - LongMemEval：长期记忆问答与多跳记忆访问。  
+    - RULER-128K / RULER-256K：控制化长上下文压力测试，分析 token 长度与 memory complexity 的区别。  
+    - InfiniteBench v2 / InfiniteBench-2025：长文档和长序列推理。  
+    - SWE-Bench-Verified / SWE-Bench-Verified 2025 split：检验长期任务中跨文件、跨步骤工作记忆管理是否改善实际 agent performance。  
+
+  - 基线:  
+    - Memory systems: MemGPT-v2 / Letta, A-Mem, LangMem 2025, Mem0, RAG-2025。  
+    - RAG baseline: Qwen3-Embedding / Jina Embeddings v4 / Voyage-3.5-class embedding + Qwen3-32B、DeepSeek-V3.1 / DeepSeek-R1-class 或 GLM-4.5 generator。  
+    - Full-context baseline: Claude Sonnet 4 / Claude Opus 4-class、Gemini 2.5 Pro / Gemini 2.5 Flash、GPT-5-class、Qwen3-128K / Qwen3-Next、DeepSeek-V3.1 long-context setting，视可用 API 和预算选择。  
+    - Ablations:  
+      1. vector-only RAG；  
+      2. graph retrieval without cliff controller；  
+      3. compression without graph partition；  
+      4. oracle retrieval；  
+      5. our method without complexity threshold calibration。  
+
+  - 指标:  
+    - 任务完成率 / QA accuracy。  
+    - 记忆检索准确率：Recall@k、evidence F1。  
+    - Memory reasoning accuracy：召回正确证据后最终回答是否正确。  
+    - 长期一致性：几千轮对话后是否保持人物偏好、事实更新、约束一致。  
+    - Token 成本、调用次数、延迟。  
+    - Cliff analysis：性能随 memory graph complexity 增长的曲线，验证是否存在突降以及方法是否把突降变成平滑下降。  
+
+  - 预期结果:  
+    - 在 LoCoMo / LongMemEval 上，相比 Mem0、A-Mem、LangMem 2025，提升长期一致性和多跳记忆问答准确率。  
+    - 在 RULER-128K / RULER-256K / InfiniteBench v2 上证明：相同 token 数下，memory graph complexity 更能预测失败；相同召回率下，复杂度控制能显著提高最终回答正确率。  
+    - 在 SWE-Bench-Verified / SWE-Bench-Verified 2025 split 上，预期不是大幅刷新 SOTA，而是降低长任务中由于历史操作、文件修改、issue 约束混乱导致的失败率，并显著降低上下文 token 成本。  
+
+预实验（1周内）:  
+1. 选 LoCoMo 和 LongMemEval 的一小部分样本，构建三种输入：  
+   - top-k vector RAG 直接拼接；  
+   - full retrieved memory；  
+   - graph-partitioned task-conditioned summaries。  
+2. 用 Qwen3-32B / DeepSeek-V3.1 API 或本地 32B 级模型测试，在固定召回证据的情况下比较最终 answer accuracy。  
+3. 同时记录 memory graph complexity：节点数、实体数、时间跨度、多跳路径长度、冲突边数量、子图数量。  
+4. 成功标准：  
+   - 观察到 RAG 召回率继续提升但 answer accuracy 反而下降的区间；  
+   - memory complexity 比 token length 更能预测失败；  
+   - graph-partitioned working memory 在相同或更低 token 成本下比直接拼接提升至少 5-10% accuracy。  
+
+风险:  
+最可能失败的原因是 memory graph complexity 指标不够稳定：如果实体/关系抽取噪声太大，复杂度估计可能无法可靠预测模型失败。备选方案是改用更简单的代理指标，例如 retrieved memories 的时间跨度、实体熵、互相矛盾的事实数量、多跳依赖长度，以及通过小规模 calibration 得到模型特定阈值。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260517_0315.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">4</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Can LLMs model real-world systems in TLA+?</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | LoCoMo、RULER-128K、InfiniteBench、SWE-Bench-Verified、BGE-M3、E5-Mistral、Claude 3.5、Gemini 1.5 等并非全部为2025+模型/数据；但包含 Qwen3、DeepSeek-V3、Claude 4、Gemini </div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>【原方案】
+===
+核心idea（一句话）: 把 Agent 长期记忆管理转化为“从自然语言交互历史自动生成可验证的时序记忆契约”，用 TLA+/时序逻辑约束来决定哪些信息进入 working memory、episodic memory、semantic memory，以及何时必须被检索。
+
+为什么不撞社区共识:  
+- 不做“强行遗忘”，而是做分层存储 + 按需调用：低优先级信息不删除，只降级到 cold episodic store。  
+- 不把记忆等同于 RAG：向量检索只负责候选召回，最终由任务条件下的时序/因果/义务约束判断是否该进入上下文。  
+- 不只用向量数据库：显式维护图结构 + 时间线 + 逻辑约束 + 向量索引的混合记忆。  
+- 符合 B 领域有价值方向：working memory 动态压缩、episodic memory 组织、自我反思 + 记忆更新、跨任务经验迁移。
+
+机制映射:  
+A 的「将非正式真实世界需求转成 TLA+ 状态机与时序逻辑规范」机制 ←→ B 的「将非正式交互历史转成可执行的记忆更新与检索规则」问题。  
+数学上的同构性在于：两者都可以表示为一个状态迁移系统。A 中状态是系统变量，动作是系统事件，性质是 safety/liveness；B 中状态是 Agent 的 memory state，动作是 observe/store/promote/compress/retrieve/act，性质是“关键事实不能丢失”“承诺在相关任务前必须被召回”“矛盾记忆必须被标记或修正”“短期上下文不能超过预算”。因此长期记忆管理可以被建模为受时序逻辑约束的状态机控制问题。
+
+论文故事线:  
+现有 Agent memory 方法主要依赖 embedding 相似度或 LLM 打分来决定存取，但长任务中的真正需求不是“最相似的信息”，而是“在当前任务状态下必须可用的信息”。例如用户早期给出的约束、未完成承诺、跨轮依赖、时间顺序和因果关系，往往与当前 query 语义相似度不高，却对任务成功至关重要。本文主张：长期记忆系统需要一个显式的、可检查的 memory contract，用于约束 memory update 与 retrieval，使 Agent 在长任务中保持一致、低成本且不遗漏关键依赖。
+
+方法描述（2-3句）:  
+提出 SpecMem：每段对话或任务轨迹进入系统后，LLM 抽取实体、事件、承诺、偏好、约束和因果依赖，并编译成轻量 TLA+/时序逻辑风格的 memory contract；记忆被分为 working memory、episodic store、semantic store 和 cold archive。检索时先用 2025+ embedding/graph 检索召回候选，再用当前任务状态对 memory contract 做约束检查和重排序，决定哪些记忆必须进入上下文、哪些只保留引用、哪些需要触发反思更新。
+
+草拟标题:  
+SpecMem: Verifiable Temporal Memory Contracts for Long-Horizon LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo-2025 / LoCoMo leaderboard split：长对话记忆、一致性、用户偏好与早期事实召回。  
+    - LongMemEval-2025 / LongMemEval updated split：长期记忆问答、跨会话依赖与低语义相似但高必要性记忆召回。  
+    - RULER-128K/256K + InfiniteBench-v2 / InfiniteBench-2025：压力测试长上下文、needle retrieval、多跳时序依赖与超长上下文替代方案。  
+    - SWE-Bench-Verified + SWE-Bench-Live / SWE-Bench-2025 updated tasks：评估代码 Agent 在多步修复中是否能保留 issue constraints、测试反馈和历史尝试。  
+  - 基线:  
+    - MemGPT-v2 / Letta  
+    - A-Mem  
+    - LangMem 2025  
+    - Mem0  
+    - RAG-2025/2026：Qwen3-Embedding、Gemini Embedding、Voyage-3.5 / Voyage-Code-3、Jina Embeddings v4 + Qwen3-32B/235B、DeepSeek-V3.1 / DeepSeek-R1、Claude Sonnet 4/4.5、Gemini 2.5 Pro  
+    - Full-context：GPT-5 系列、Claude Sonnet 4/4.5 或 Opus 4.x、Gemini 2.5 Pro/Flash 长上下文、Qwen3-Long 系列、DeepSeek-V3.1/R1 长上下文版本  
+    - 过时对比消融：BGE-M3、E5-Mistral、Claude 3.5、Gemini 1.5 仅作为 historical baselines，不作为主基线  
+    - Ablation：无 TLA+/logic contract、仅向量检索、仅图检索、仅 LLM importance scoring  
+  - 指标:  
+    - 任务完成率  
+    - 记忆检索准确率 / recall@k / necessity-aware recall  
+    - 长期一致性：几千轮后是否记得早期约束、偏好、承诺  
+    - Token 成本  
+    - 记忆冲突率  
+    - SWE-Bench-Verified / SWE-Bench-Live resolved rate  
+    - 每步检索延迟与 contract checking 开销  
+  - 预期结果:  
+    - 在 LoCoMo-2025 和 LongMemEval-2025 上，相比 Mem0 / LangMem 2025 / Letta / A-Mem，提高长期依赖召回与一致性，尤其是低语义相似但高任务必要性的记忆。  
+    - 在 RULER-128K/256K 和 InfiniteBench-v2/2025 上，token 成本显著低于 full-context，同时准确率接近或超过长上下文模型。  
+    - 在 SWE-Bench-Verified / SWE-Bench-Live 上，SpecMem 能更稳定保留 issue constraints、失败测试、已尝试补丁和 reviewer-style instructions，提高多步修复成功率。  
+    - Ablation 显示：提升主要来自 temporal/causal/obligation constraints，而不是单纯更强 embedding。
+
+预实验（1周内）:  
+用 LoCoMo-2025 子集和 LongMemEval-2025 子集实现最小版本：  
+1. 用 Qwen3-32B 或 DeepSeek-V3.1 将对话历史抽取为 JSON 格式的 memory contract，包括 `facts`、`preferences`、`commitments`、`temporal_order`、`conditions`、`must_retrieve_when`。  
+2. 用 Qwen3-Embedding 或 Gemini Embedding 做候选召回，再用 contract rules 对候选重排和强制注入。  
+3. 对比 vanilla RAG、LLM importance scoring、Mem0/Letta 可复现实装。  
+成功标准：在 500-1000 条长记忆 QA 上，SpecMem 的 answer accuracy 或 memory recall 至少提升 5-8%，同时上下文 token 不超过 full-context 的 30-40%。
+
+风险:  
+最可能失败的原因是 LLM 生成的 memory contract 不稳定或过度复杂，导致规则噪声抵消检索收益。缓解方式是先不用完整 TLA+ 语法，而采用受限 DSL，再将 DSL 编译到 TLA+/SMT-style checker；同时通过 self-consistency 和冲突检测过滤低置信规则。===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260517_0315.json</small></div>
+</div>
+</div>
+</div>
 <div class="day-block">
 <div class="day-header">
 <h3>📅 2026-05-16</h3>
