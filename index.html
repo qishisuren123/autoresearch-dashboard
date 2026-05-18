@@ -52,7 +52,7 @@ a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
 <header>
 <div>
 <h1>🌊 大浪淘沙 · 每日研究热点</h1>
-<div class="sub">2026-05-18 10:29 (UTC+8) · 累计 9 个采集日 · <a href="./ideas.html">→ Idea Forge Timeline</a></div>
+<div class="sub">2026-05-18 16:17 (UTC+8) · 累计 10 个采集日 · <a href="./ideas.html">→ Idea Forge Timeline</a></div>
 </div>
 </header>
 
@@ -62,12 +62,12 @@ a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <div class="stats">
-<div class="stat"><div class="n">9</div><div class="l">采集日数</div></div>
-<div class="stat"><div class="n">69</div><div class="l">候选(去重)</div></div>
+<div class="stat"><div class="n">10</div><div class="l">采集日数</div></div>
+<div class="stat"><div class="n">75</div><div class="l">候选(去重)</div></div>
 <div class="stat"><div class="n">33</div><div class="l">强推荐 A 种子</div></div>
 <div class="stat"><div class="n">15</div><div class="l">值得深入</div></div>
 <div class="stat"><div class="n">12</div><div class="l">不适合 A 种子</div></div>
-<div class="stat"><div class="n">88</div><div class="l">研判记录</div></div>
+<div class="stat"><div class="n">94</div><div class="l">研判记录</div></div>
 </div>
 
 <div class="day-block">
@@ -572,6 +572,55 @@ a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
 <span class="tag tag-skip">待判断</span></div>
 <div class="meta"><span class="ch">MachineLearning</span> <span class="hot">39 评论</span> <span>56 分</span></div>
 <div class="judgment"><div><span class="jl">核心insight</span>:</div><div>LLM在训练时呈现“自顶向下”（从输出层向输入层）的特征学习动态，导致底层表征受限于顶层的过早收敛。这种“反向学习”机制暗示了模型在构建深层逻辑抽象时存在根本缺陷，因此单纯的Scaling Law（缩放定律）存在不可逾越的能力天花板。</div><div><span class="jl">社区热议原因</span>:</div><div>直接挑战了当前统治AI界的“Scaling Law万能论”，触动了“算力信仰派”与“大模型能力见顶担忧派”的敏感神经。它为LLM“为何擅长模式匹配却缺乏真正逻辑推理能力”提供了一个直观且具有理论/动力学色彩的解释。</div><div><span class="jl">方法简洁度</span>:</div><div>核心思路在概念上非常优雅且直观。它本质上是一个关于训练动力学（Training Dynamics）的分析框架，通常只需通过探针（Probing）或层级梯度/表征相似度分析即可验证，无需复杂的架构魔改。</div><div><span class="jl">A+B潜力</span>:</div><div>1. A + 训练策略优化 (B)：利用该洞见设计新的优化器或学习率调度策略（如逐层解冻、底层大学习率/顶层小学习率），以打破反向学习限制，提升小模型推理能力。</div><div>2. A + 多模态/长文本对齐 (B)：探究视觉-语言模型（VLM）或超长上下文模型在对齐训练中，是否也存在这种阻碍深度语义融合的“反向学习”瓶颈。</div><div><span class="jl">可行性</span>:</div><div>完全可行。8张L20和4周时间足够从头训练或微调几个小型语言模型（如0.5B - 3B规模），并保存高频Checkpoint进行层级动力学分析，或验证你提出的干预策略。</div><div><span class="jl">最终判定</span>:</div><div>【值得深入】 这是一个极具启发性的“现象发现型”工作，非常适合作为A种子去衍生出新的训练干预策略（B），在小模型上验证即可产出具有理论深度的高质量论文。</div></div>
+</div>
+</div>
+<div class="day-block">
+<div class="day-header">
+<h3>📅 1520--</h3>
+<div class="day-stats">
+<span class="badge badge-info">6 候选</span> 
+</div></div>
+<div class="card">
+<div class="card-top"><div class="rank">1</div>
+<h3><a href="https://huggingface.co/papers/2603.19228" target="_blank">SAMA: Factorized Semantic Anchoring and Motion Alignment for Instruction-Guided Video Editing</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>68 分</span></div>
+<div class="judgment"></div>
+</div>
+<div class="card">
+<div class="card-top"><div class="rank">2</div>
+<h3><a href="https://huggingface.co/papers/2604.11753" target="_blank">Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>14 分</span></div>
+<div class="judgment"></div>
+</div>
+<div class="card">
+<div class="card-top"><div class="rank">3</div>
+<h3><a href="https://huggingface.co/papers/2605.04077" target="_blank">Balanced Aggregation: Understanding and Fixing Aggregation Bias in GRPO</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>7 分</span></div>
+<div class="judgment"></div>
+</div>
+<div class="card">
+<div class="card-top"><div class="rank">4</div>
+<h3><a href="https://huggingface.co/papers/2603.29002" target="_blank">Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>6 分</span></div>
+<div class="judgment"></div>
+</div>
+<div class="card">
+<div class="card-top"><div class="rank">5</div>
+<h3><a href="https://huggingface.co/papers/2603.18886" target="_blank">Reasoning over mathematical objects: on-policy reward modeling and test time aggregation</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>6 分</span></div>
+<div class="judgment"></div>
+</div>
+<div class="card">
+<div class="card-top"><div class="rank">6</div>
+<h3><a href="https://huggingface.co/papers/2604.14663" target="_blank">EdgeDetect: Importance-Aware Gradient Compression with Homomorphic Aggregation for Federated Intrusion Detection</a></h3>
+<span class="tag tag-skip">待判断</span></div>
+<div class="meta"><span class="ch">hf_daily_papers</span> <span>3 分</span></div>
+<div class="judgment"></div>
 </div>
 </div>
 <div class="day-block">

@@ -133,19 +133,19 @@ details pre {
 
 <header>
 <h1>🌊 AutoResearch · Idea Forge Timeline</h1>
-<div class="sub">每日 cron 自动运行 · 更新于 2026-05-18 10:29 (UTC+8)</div>
+<div class="sub">每日 cron 自动运行 · 更新于 2026-05-18 16:17 (UTC+8)</div>
 <a class="nav-link" href="./index.html">← 信息聚合主页</a>
 </header>
 
 
 <div class="stats">
-  <div class="stat"><div class="n">10</div><div class="l">活跃天数</div></div>
-  <div class="stat"><div class="n">69</div><div class="l">候选种子（去重）</div></div>
+  <div class="stat"><div class="n">11</div><div class="l">活跃天数</div></div>
+  <div class="stat"><div class="n">75</div><div class="l">候选种子（去重）</div></div>
   <div class="stat"><div class="n">33</div><div class="l">强推荐 A 种子</div></div>
   <div class="stat"><div class="n">4</div><div class="l">B 方向知识库</div></div>
-  <div class="stat"><div class="n">179</div><div class="l">候选 Idea</div></div>
-  <div class="stat"><div class="n">101</div><div class="l">通过严格验证</div></div>
-  <div class="stat"><div class="n">96</div><div class="l">输出计划书</div></div>
+  <div class="stat"><div class="n">184</div><div class="l">候选 Idea</div></div>
+  <div class="stat"><div class="n">105</div><div class="l">通过严格验证</div></div>
+  <div class="stat"><div class="n">100</div><div class="l">输出计划书</div></div>
 </div>
 
 
@@ -163,8 +163,8 @@ details pre {
 <h3>📅 2026-05-18</h3>
 <div class="day-stats">
 <span class="badge badge-seed">15 候选 / <b>8</b> 强推荐</span> 
-<span class="badge badge-plan">60 计划书</span>
- <span class="badge badge-info">Forge 文件: forge_20260518_0913.json, forge_20260518_1029.json</span>
+<span class="badge badge-plan">64 计划书</span>
+ <span class="badge badge-info">Forge 文件: forge_20260518_0913.json, forge_20260518_1029.json, forge_20260518_1617.json</span>
 </div></div>
 <div class="day-section"><h4>🌱 当天大浪淘沙候选种子</h4>
 
@@ -57667,6 +57667,316 @@ Figure 6: Marginal gain prediction
 ### 1. 完整实验矩阵 (Week </pre></details>
   <div class="src-file"><small>来源：forge_20260518_1029.json</small></div>
 </div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">61</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">多模态大模型 - 视觉 Token 管理</span>
+    <span class="seed-tag">来自种子：Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>视觉 token 的数量、层间动态、查询相关性</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 存在较老 benchmark/数据项：GQA、POPE、OCRBench、DocVQA、ChartQA；模型侧 Qwen2.5-VL、InternVL3、LLaVA-OneVision 相对较新。注意此项不影响整体判定。</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）:  
+把视觉 token 管理做成“并行局部聚合 + 层间全局再聚合”：浅层保留全量 token，随后按空间块并行地做 query-aware token merging，每层只把局部证据聚合成少量代表 token，再由全局轻量聚合器去重合并，形成动态的 576→256→128→64 token 层间预算。
+
+为什么不撞社区共识:  
+- 不做“按时间遗忘”：视觉 token 的压缩只随 Transformer 层深和 query 相关性变化，不引入时间衰减。  
+- 不做单纯 attention top-k pruning：核心是空间连续区域内的 merge，少量低相关 token 才 prune，避免破坏空间结构。  
+- 不压成 1 个全局 token：保留 64–256 个 query-relevant visual tokens，避免 Q-Former 式信息瓶颈。  
+- 不用 RL 训练选择器：使用可微 query-conditioned soft assignment / straight-through top-k merge。  
+- 符合社区有价值方向：层间渐进式 token 减少、query-aware + layer-depth 双因素、保留空间结构的 token merging。
+
+机制映射:  
+A 的「长程 agentic task 中多个并行子 agent 先各自处理局部子问题，再由 aggregator 汇总成紧凑状态」机制 ←→ B 的「视觉 token 在不同空间区域中包含大量局部冗余，需要在层间逐步聚合成 query-relevant 的 compact visual evidence」问题。  
+数学上的同构性在于：二者都是把大规模中间状态集合 \(X=\{x_i\}_{i=1}^N\) 划分为若干局部子集 \(G_k\)，并行计算局部摘要  
+\[
+z_k = \mathrm{Agg}_q(G_k),
+\]  
+再通过全局聚合  
+\[
+Z&#x27; = \mathrm{GlobalAgg}_q(\{z_k\}_{k=1}^K)
+\]  
+得到更小但任务相关的状态集合。区别只是 A 中的 \(x_i\) 是 agent trajectory / intermediate evidence，B 中的 \(x_i\) 是 ViT visual tokens；核心操作都是 query-conditioned aggregation under a compute budget。
+
+论文故事线:  
+现有视觉 token 压缩方法通常在两个方向上不够统一：FastV 类方法偏 attention pruning，容易丢失空间结构；VisionZip / ToMe 类方法偏视觉相似度 merging，但 query-awareness 不足。我们提出一个“并行局部聚合”的视角：视觉 token 的冗余主要发生在局部空间邻域内，而任务相关性由文本 query 决定，因此应该在每个空间块内并行做 query-aware merging，再在深层做跨块去重和预算调度。这样既保持浅层细节，又在深层减少 KV cache。
+
+方法描述（2-3句）:  
+提出 PQA-Merge: Parallel Query-Aware Aggregation for Visual Token Management。在 MLLM 的若干视觉-语言融合层中，把视觉 tokens 按 2D 空间邻域划分为局部块，每个块内根据 token 相似度、空间距离、以及 text query cross-attention 计算 soft assignment，将相近且 query 相关性相似的 tokens merge 成少量代表 token；随后用一个轻量全局聚合器消除跨块冗余，并按层深执行动态预算 \(N_l = \max(N_{\min}, \lfloor N_0 \cdot \rho^l \rfloor)\)。  
+训练上优先做 plug-and-play / calibration-free 版本；可选用少量公开 VQA/OCR 数据做轻量蒸馏，使压缩后 hidden states 或 logits 对齐全量 token 模型。
+
+草拟标题:  
+PQA-Merge: Parallel Query-Aware Spatial Aggregation for Layer-wise Visual Token Reduction in Multimodal LLMs
+
+关键实验:  
+  - 数据集:  
+    - 综合理解：MMBench-V2, MMMU-Pro  
+    - 视觉问答 / 空间推理：GQA  
+    - 幻觉检测：POPE  
+    - OCR / 文档 / 图表：OCRBench, DocVQA, ChartQA  
+    - 可选效率场景：MME-RealWorld / RealWorldQA  
+  - 基线:  
+    - 全量 token MLLM：Qwen2.5-VL-7B, InternVL3-8B, LLaVA-OneVision-7B  
+    - Token 压缩方法：FastV-2025, VisionZip, PyramidDrop, SparseVLM, TokenPacker, LLaVA-Mini  
+    - 消融：only spatial merge, only query-aware, only layer-wise schedule, global top-k pruning  
+  - 指标:  
+    - Accuracy / score vs. visual token number 曲线  
+    - 推理速度 tokens/s、首 token 延迟、总 latency  
+    - KV cache 占用、峰值显存  
+    - 不同 token budget 下的性能保持率，例如 576→256、576→128、576→64  
+  - 预期结果:  
+    - 在 128–256 visual tokens 下，相比全量 token 模型保持 97–99% 综合性能。  
+    - 相比 FastV / PyramidDrop，在 OCRBench、DocVQA、ChartQA 上掉点更小，因为空间结构保留更好。  
+    - 相比 VisionZip，在 GQA、MMBench-V2、MMMU-Pro 上更强，因为引入 query-aware 聚合。  
+    - KV cache 降低 40–70%，端到端推理速度提升 1.3–2.0×，具体取决于模型实现和 batch size。
+
+预实验（1周内）:  
+1. 选择 Qwen2.5-VL-7B 或 LLaVA-OneVision-7B 作为主模型，先做 inference-only 插件，不训练。  
+2. 在视觉 token 进入 LLM 后的中间层插入一次或两次 PQA-Merge：例如第 8 层 576→256，第 16 层 256→128。  
+3. 用 MMBench-V2 dev、GQA 子集、OCRBench 子集、POPE 子集快速评估。  
+4. 成功标准：  
+   - 128–256 tokens 下平均性能掉点 ≤2%；  
+   - OCRBench / DocVQA 类细粒度任务掉点不显著大于 VisionZip；  
+   - KV cache 至少降低 40%；  
+   - 相比 attention top-k pruning，在 POPE 上幻觉率不升或更低。
+
+风险:  
+最可能失败的原因是 query-aware 聚合信号在早期层不稳定：如果过早根据文本 query 合并 token，可能损伤 OCR、图表和小物体识别。缓解方式是浅层完全不压缩，只在中后层启用；同时对 OCRBench / DocVQA / ChartQA 使用更高最小 token budget，并加入空间连续性约束，避免把文字区域过度合并。  
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260518_1617.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">62</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或非2025+项包括 Gemini 1.5、Claude 3.5、BGE-M3、E5-Mistral、RULER-128K、InfiniteBench、SWE-Bench-Verified；其余如 Qwen3、DeepSeek-V3、Mem0/Letta/LangMem 等较新。注意此项</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 把长期记忆检索从“单次向量召回”改成“并行记忆侦察 + agentic 聚合”：多个 memory scout 并行读取不同时间/任务/主题记忆分片，产出任务条件下的证据摘要，再由 aggregator 构造一个受 token budget 约束的 working memory。
+
+为什么不撞社区共识:  
+- 不做“艾宾浩斯式遗忘”，不永久删除记忆；只是把记忆分层放在 episodic/semantic/cold storage 中，按需调入 working memory。  
+- 不把 memory 简化成 RAG；向量检索只作为候选生成，真正进入上下文前要经过任务条件下的 utility 判断、证据聚合和冲突消解。  
+- 符合社区认可方向：working memory 动态压缩、episodic memory 组织、自我反思式记忆更新、多 agent 共享记忆。  
+- 方法 training-free 起步，避免在 4 周和 8×L20 约束下做大规模训练，符合 MemGPT/Letta/Mem0 系路线的实用共识。
+
+机制映射:  
+A 的「多个 agent 并行处理长程任务片段，再由 agentic aggregator 合成全局决策」机制 ←→ B 的「长期记忆被分散在时间、主题、任务、关系图中的大量片段，单次检索无法判断哪些对当前任务真正有用」问题。  
+数学上的同构性在于：二者都是在巨大候选空间中求一个受预算约束的全局有效上下文。可形式化为  
+\[
+C^\*=\arg\max_{C\subset M,\ |C|\le B} U(C;q)
+\]  
+其中 \(M\) 是长期记忆库，\(q\) 是当前 agent 状态/任务，\(B\) 是 token budget，\(U\) 是任务效用而非语义相似度。并行 memory scouts 在不同 memory shard 上估计局部 utility 与证据摘要，aggregator 做近似全局的 budgeted evidence aggregation，类似对长程 agent 轨迹的 parallel rollouts + aggregation。
+
+论文故事线:  
+长期记忆系统的核心失败不是“记不住”，而是“记得太多但不会按任务调入”。现有 RAG-style memory 主要依赖 embedding 相似度，容易漏掉时间、因果、偏好、承诺、跨轮一致性等对 agent 决策真正重要的信息；full-context 又成本高且 attention 稀释。我们提出一种 training-free 的并行记忆聚合框架，把长期记忆组织成时间/任务/主题/关系分片，由多个 memory scout 并行判断“这段记忆对当前任务是否有用”，最后聚合成紧凑 working memory。
+
+方法描述（2-3句）:  
+将 agent 的长期记忆维护为 hybrid memory：向量索引 + 时间线 + entity/relation graph + task episode tags。每次需要决策时，系统并行启动若干 memory scout，分别从不同分片召回并压缩候选记忆，输出结构化字段：claim、evidence、timestamp、entities、task-relevance score、conflict flag。Aggregator 对这些候选做去重、冲突消解、重要性排序和 token-budget packing，生成最终 working memory，并在任务结束后用 reflection 写回新的 episodic/semantic memory。
+
+草拟标题:  
+Parallel Agentic Memory Aggregation for Task-Conditioned Long-Term Memory in LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo：长对话长期一致性、用户偏好/事实记忆。  
+    - LongMemEval：长期记忆问答与跨会话检索。  
+    - RULER-128K：长上下文 needle/reasoning 压力测试，验证相比 full-context 的成本优势。  
+    - InfiniteBench：极长上下文信息整合。  
+    - SWE-Bench-Verified：作为长程 agentic task，测试历史修改、错误反馈、issue 上下文是否能被有效调用。
+  - 基线:  
+    - Memory systems：MemGPT-v2 / Letta, A-Mem, LangMem 2025, Mem0, RAG-2025。  
+    - RAG baseline：BGE-M3 / Nomic v2 / E5-Mistral-2025 embedding + Qwen3-32B 或 DeepSeek-V3 generator。  
+    - Full-context baseline：Gemini 1.5/2、Claude 3.5/4、Qwen3-128K、DeepSeek-V3 long-context setting。  
+    - Ablation：单 scout、无 graph、无 aggregator、只向量检索、只时间分片、无 reflection write-back。
+  - 指标:  
+    - 任务完成率 / SWE-Bench-Verified resolved rate。  
+    - 记忆检索准确率：Recall@k、evidence precision、answer-grounding accuracy。  
+    - Token 成本和 wall-clock latency。  
+    - 长期一致性：几千轮对话后对早期用户事实、承诺、偏好是否保持一致。  
+    - Conflict handling accuracy：当不同记忆片段冲突时是否选择最新/更可信证据。
+  - 预期结果:  
+    - 相比普通 RAG，显著提升任务相关记忆召回和长程一致性。  
+    - 相比 full-context，接近或超过准确率，但 token 成本降低 50%-80%。  
+    - 相比 MemGPT-v2/Letta/Mem0，在 LoCoMo、LongMemEval 上提升多跳/跨会话记忆问题表现；在 SWE-Bench-Verified 上提升需要利用历史反馈的 issue resolve rate。
+
+预实验（1周内）:  
+先在 LoCoMo + LongMemEval 上做 training-free prototype。实现 4 类 memory scout：temporal scout、entity scout、semantic scout、episode scout；每个 scout 用同一 backbone 生成结构化 evidence card，aggregator 用规则 + LLM rerank 生成 working memory。成功标准：在相同 token budget 下，相比强 RAG-2025 baseline，记忆问答 accuracy/F1 提升 ≥5%，同时输入 token 数不超过 full-context 的 30%。
+
+风险:  
+最可能失败的原因是 aggregator 本身不稳定：它可能过度相信 scout 的摘要，导致错误证据被压缩后不可恢复。缓解方式是让 aggregator 保留 evidence pointer 和原文 span，最终回答前可按需回查原始记忆；同时加入 conflict flag 与 citation-based verification，避免“摘要幻觉”污染 working memory。
+===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260518_1617.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">63</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">多模态大模型 - 视觉 Token 管理</span>
+    <span class="seed-tag">来自种子：Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>视觉 token 的数量、层间动态、查询相关性</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或偏旧项包括 GQA、POPE、OCRBench、DocVQA、ChartQA、LLaVA-OneVision、VisionZip、SparseVLM、TokenPacker、LLaVA-Mini；但 Qwen2.5-VL、InternVL3、MMBench-V2、MMMU-Pro、Fa</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 把视觉 token 管理建模成“KV memory pipeline 的层间带宽分配问题”：浅层全量保留，随后根据 query 相关性与每层 KV/attention 内存压力，做空间连续的渐进式 merge，优先压缩会成为推理 memory bottleneck 的视觉 token。
+
+为什么不撞社区共识:  
+- 不做“按时间衰减视觉 token”：视觉 token 没有时间维度，本方法只沿 层深度 和 query 相关性 动态压缩。  
+- 不做单纯 attention top-k pruning：主操作是 spatially-constrained merge，只少量 prune 低相关且孤立 token，避免破坏空间结构。  
+- 不压成 1 个全局 token：保留 64–256 个视觉 token，并按任务难度动态调整。  
+- 符合社区认为有价值的方向：层间渐进式 token 减少 + query-aware token selection + 保留空间结构的 merge + 准确率/速度/KV cache 联合优化。
+
+机制映射:  
+A 的「disaggregated LLM inference 中 KV memory processing pipeline 的瓶颈分析与加速」机制 ←→ B 的「MLLM 中视觉 token 在各层造成 KV cache 与 attention memory traffic 过高」问题。  
+数学上的同构性在于：两者都可以写成一个 memory-traffic constrained rate-distortion problem：
+
+\[
+\min_{\{M_l\}} \mathcal{L}_{task} + \lambda \cdot T_{mem}(\{N_l\})
+\]
+
+其中 \(N_l\) 是第 \(l\) 层保留/合并后的视觉 token 数，\(M_l\) 是 token merge assignment matrix，\(T_{mem}\) 近似由每层视觉 token 产生的 KV 读写量与 attention memory traffic 决定：
+
+\[
+T_{mem} \approx \sum_l \frac{B_l(N_l)}{\text{BW}_l} + \frac{C_l(N_l)}{\text{Throughput}}
+\]
+
+A 中优化的是“哪些 KV page 热、什么时候搬、如何减少 memory pipeline stall”；B 中对应为“哪些视觉 token 对当前 query 和后续深层仍有用、在哪一层 merge、如何减少 KV cache 与 attention 读写”。本质都是 预测未来访问价值，并在 memory bottleneck 前做压缩/重排。
+
+论文故事线:  
+当前 MLLM 视觉 token 压缩方法大多以 accuracy-first 的启发式为主，例如固定层压缩、attention top-k、相似度 merge，但它们没有显式回答一个系统性问题：视觉 token 究竟在哪些层、以多少数量、以什么空间结构进入 KV cache，才最小化真实推理 memory bottleneck？  
+我们提出从 MLLM 自身出发的 token-memory co-design：把视觉 token 看成未来会进入每层 KV cache 的 memory objects，用 query relevance 估计其任务价值，用 per-layer memory pressure 估计其系统代价，在浅层保留细节，在中深层逐步做空间一致的 query-aware merge。
+
+方法描述（2-3句）:  
+提出 PipeMerge-VL：先用轻量 query-token scorer 估计每个视觉 token 对当前问题的相关性，再结合每层 profiling 得到的 memory pressure，自动生成层间 token budget，例如 \(576 \rightarrow 288 \rightarrow 144 \rightarrow 96/64\)。在每个压缩层内，不做全局 top-k，而是在局部空间窗口内把相似且 query relevance 接近的 token merge 成 super-token；仅对低相关、低语义残差且空间孤立的 token 做少量 prune。训练上使用冻结或 LoRA 微调的 MLLM backbone，加一个可微分 soft merge / straight-through assignment，并加入 task loss + token memory cost regularization。
+
+草拟标题:  
+PipeMerge-VL: Memory-Pipeline-Aware Query-Dependent Visual Token Merging for Efficient Multimodal Large Language Models
+
+关键实验:  
+- 数据集:  
+  - 综合理解：MMBench-V2, MMMU-Pro  
+  - 空间推理：GQA  
+  - 幻觉检测：POPE  
+  - OCR/文档/图表：OCRBench, DocVQA, ChartQA  
+  - 可选真实效率：MME-RealWorld 或 MEGA-Bench 子集  
+- 基线:  
+  - Full-token MLLM：Qwen2.5-VL-7B, InternVL3-8B, LLaVA-OneVision-7B  
+  - Token 管理方法：FastV-2025, VisionZip, PyramidDrop, SparseVLM, TokenPacker, LLaVA-Mini  
+  - 消融：fixed-ratio merge, attention top-k pruning, query-agnostic ToMe, layer-only schedule  
+- 指标:  
+  - 准确率 / benchmark score  
+  - accuracy vs visual token number curve  
+  - end-to-end latency / tokens/s  
+  - prefill latency 与 decode latency  
+  - KV cache 占用  
+  - GPU memory peak  
+  - OCR/Chart 类任务的细粒度信息保持率  
+- 预期结果:  
+  - 在 64–144 深层视觉 token 区间内，相比 full-token Qwen2.5-VL / InternVL3 保持 97–99% 综合性能。  
+  - 相比 FastV / PyramidDrop，在 GQA、DocVQA、ChartQA 上更稳，因为保留空间结构且以 merge 为主。  
+  - KV cache 降低 35–55%，prefill latency 降低 20–40%，端到端 throughput 提升 1.3–1.8×。  
+  - 在 POPE 上幻觉不显著增加，最好能略降，因为低相关视觉噪声被合并/抑制。
+
+预实验（1周内）:  
+1. 选 Qwen2.5-VL-7B 或 InternVL3-8B，冻结 backbone，只实现 inference-time 版本：在 3–4 个候选层插入 spatial window merge。  
+2. query relevance 用文本 token 对视觉 token 的 cross-attention 或 cosine similarity proxy，不训练选择器。  
+3. 在 GQA-dev、POPE、OCRBench 小子集、DocVQA 小子集上跑 token budget sweep：576→288→144→96→64。  
+4. 成功标准：  
+   - 144 token 时平均性能下降 ≤2%，KV cache 至少下降 35%。  
+   - 相比 attention top-k，在 DocVQA/ChartQA 上明显少掉点。  
+   - latency 至少有可测的 20%+ 改善，而不只是理论 FLOPs 降低。
+
+风险:  
+最可能失败的原因是 query relevance scorer 不够可靠，尤其在 OCRBench、DocVQA、ChartQA 中，小文本区域可能 attention 分数低但任务关键；如果 merge 过早或窗口过大，会损伤细粒度文字/表格结构。缓解方式是：OCR/文档类任务使用更保守的 token budget，加入 high-frequency / text-region protection，浅层延后压缩，并对文字密集区域只 merge 不 prune。===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260518_1617.json</small></div>
+</div>
+
+<div class="card plan-card">
+  <div class="plan-header">
+    <span class="plan-rank">64</span>
+    <span class="model-tag">gpt-5.5</span>
+    <span class="domain-tag">LLM Agent 长期记忆</span>
+    <span class="seed-tag">来自种子：Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference</span>
+  </div>
+  <div class="b-problem"><b>B 领域问题：</b>Agent 在长任务中的记忆管理</div>
+  <div class="val-box">✅ 严格交叉验证通过 (1/1)<br><b>时新性警告（已自动刷新）：</b><br>[gpt-5.5] D4时新性:   过时 | 过时或非 2025+ 项包括 Gemini 1.5、Claude 3.5、RULER-128K、InfiniteBench、SWE-Bench-Verified、MemGPT/Letta、BGE-M3、Nomic v2；但也包含 Qwen3、DeepSeek-V3、Claude 4、Gemi</div>
+  
+  <div class="cc-box"><b>共识检查 ✅</b> 检查调用失败，默认通过</div>
+  <details open><summary>📌 Idea 原文</summary><pre>===
+核心idea（一句话）: 把 Agent 长期记忆建模为“分离式 LLM 推理中的 KV/内存分层流水线”：用任务条件下的 marginal utility/token 来决定哪些记忆进入 working context，哪些被压缩成 warm memory，哪些留在可检索 cold memory，并把检索、压缩、反思更新做成异步流水线。
+
+为什么不撞社区共识:  
+- 不做“艾宾浩斯式遗忘”，不删除信息；只是 hot / warm / cold 分层存储，符合“不是遗忘，而是分层存储”的主流实用路线。  
+- 不把记忆等同于 RAG；检索排序不是只看 embedding similarity，而是看“对当前任务状态的预期贡献 / token 成本”。  
+- 不把所有东西塞进向量库；长期记忆由 episodic timeline + semantic graph + vector index + symbolic task state 共同组织。  
+- 切入点属于社区认可方向：Working Memory 动态压缩、Episodic Memory 组织、自我反思 + 记忆更新、跨任务经验复用。
+
+机制映射:  
+A 的「disaggregated inference 中将 KV / memory 分为 fast scarce memory、slow large memory，并通过 prefetch / eviction / compaction / pipeline scheduling 降低端到端延迟」机制 ←→ B 的「Agent 在长任务中需要在有限上下文窗口内选择、压缩、调入、调出长期记忆」问题。  
+数学上的同构性在于：二者都是 带容量约束的在线分层缓存与流水线调度问题。给定记忆单元 \(m_i\)，大小 \(s_i\)，访问/恢复成本 \(c_i\)，当前任务状态 \(z_t\)，预期效用 \(u_i(z_t)\)，目标是在上下文预算 \(C\) 下选择 hot working memory：
+
+\[
+\max_{S_t} \sum_{m_i \in S_t} u_i(z_t) - \lambda \sum_{m_i \in S_t} s_i - \mu \sum_{m_i \in S_t} c_i,
+\quad \text{s.t. } \sum_{m_i \in S_t} s_i \le C
+\]
+
+A 中优化的是“哪些 KV / memory block 留在 GPU fast path”；B 中优化的是“哪些 episodic / semantic memories 留在 LLM context fast path”。核心不是表面上的“都叫 memory”，而是 稀缺高速层 + 大容量慢速层 + 在线访问预测 + 压缩/调入/调出 的同一个结构。
+
+论文故事线:  
+当前 Agent memory 系统往往有两个极端：full-context 能保真但 token 成本和 attention dilution 不可持续；RAG 便宜但只做相似性检索，无法判断“当前任务真正需要什么”。我们提出一个 memory pipeline 视角：Agent 的长期记忆管理不是单次检索问题，而是一个持续运行的分层缓存系统，需要在每一步异步完成“记录、压缩、索引、预取、调入、反思更新”。该视角可以统一 working memory 压缩、episodic memory 组织和任务条件检索，并在不训练 backbone 的情况下提升长期一致性和任务完成率。
+
+方法描述（2-3句）:  
+提出 MemoPipe：每轮交互后把新信息写入 episodic log，并异步生成 semantic triples、task summaries 和 compressed memory blocks；执行下一步前，基于当前 goal、plan、工具状态和历史失败信号估计每个 memory block 的 task-conditioned utility/token，将最高效用的记忆调入 hot context，其余保留在 warm summary 或 cold vector/graph store。系统包含三个轻量模块：Utility Scorer、Memory Compactor、Async Prefetcher；全部 training-free，可用 Qwen3 / DeepSeek-V3 / Claude/Gemini API 或本地 Qwen3-32B 做 judge/scorer。
+
+草拟标题:  
+MemoPipe: Utility-Aware Memory Pipelining for Long-Horizon LLM Agents
+
+关键实验:
+  - 数据集:  
+    - LoCoMo：长对话记忆与长期一致性。  
+    - LongMemEval：长期记忆问答与跨会话 recall。  
+    - RULER-128K / InfiniteBench：长上下文压力测试，验证 full-context vs memory pipeline。  
+    - SWE-Bench-Verified：作为长任务 Agent 场景，测试跨文件、跨步骤记忆管理对修复率的影响。  
+  - 基线:  
+    - Full-context：Gemini 1.5/2、Claude 3.5/4、Qwen3-128K、DeepSeek-V3 长上下文配置。  
+    - RAG-2025：BGE-M3 / E5-Mistral-2025 / Nomic v2 embedding + Qwen3-32B 或 DeepSeek-V3 generator。  
+    - Agent memory：MemGPT-v2 / Letta、A-Mem、LangMem 2025、Mem0。  
+    - Ablation：无 utility scorer、仅 embedding similarity、无 compression、无 async prefetch、只 episodic、只 semantic graph。  
+  - 指标:  
+    - 任务完成率 / SWE-Bench pass@1。  
+    - 记忆检索准确率：是否调入 gold supporting memory。  
+    - 长期一致性：几千轮或长轨迹后是否保持用户偏好、早期约束、先前决策。  
+    - Token 成本、平均上下文长度、端到端延迟。  
+    - Memory pollution rate：调入上下文但对当前任务无用或误导的记忆比例。  
+  - 预期结果:  
+    - 相比 RAG-2025，MemoPipe 在 LoCoMo / LongMemEval 上提升长期 recall 和 consistency，同时降低无关记忆注入。  
+    - 相比 full-context，在接近或更高准确率下显著降低 token 成本。  
+    - 在 SWE-Bench-Verified 上，能减少 Agent 重复搜索、忘记先前假设、覆盖已完成修改等现象，提高修复率或降低平均步数。
+
+预实验（1周内）:  
+实现最小版 MemoPipe：episodic log + vector index + summary blocks + LLM-based utility scorer。先在 LoCoMo 和 LongMemEval 上跑 200-500 个样本，对比 RAG-2025 和简单 full-context 截断。成功标准：在相同或更低 token budget 下，gold memory recall 提升至少 10%，最终 QA / consistency 分数提升 5% 以上；同时无关检索率下降。
+
+风险:  
+最可能失败的是 utility scorer 本身成本高或不稳定，导致收益被额外 LLM 调用抵消。应对方式是先用 cheap scorer：embedding similarity 召回 top-k，再用小模型或规则特征估计 utility/token，只对候选集做 LLM rerank；并将 scorer、compaction、prefetch 异步化，避免阻塞 Agent 主循环。===</pre></details>
+  <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
+  <div class="src-file"><small>来源：forge_20260518_1617.json</small></div>
+</div>
 </div>
 </div>
 <div class="day-block">
@@ -64217,6 +64527,82 @@ PCA-Aligned Visual Projection (PAVP)：在训练开始前，用少量数据（�
   - CKA相似度显著提升（这</pre></details>
   <details><summary>📋 完整计划书（预实验 + 完整实验）</summary><pre>生成失败</pre></details>
   <div class="src-file"><small>来源：forge_20260509_2102.json</small></div>
+</div>
+</div>
+</div>
+<div class="day-block">
+<div class="day-header">
+<h3>📅 1520--</h3>
+<div class="day-stats">
+<span class="badge badge-seed">6 候选 / <b>0</b> 强推荐</span> 
+<span class="badge badge-plan">0 计划书</span>
+</div></div>
+<div class="day-section"><h4>🌱 当天大浪淘沙候选种子</h4>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">1</span>
+    <h4><a href="https://huggingface.co/papers/2603.19228" target="_blank">SAMA: Factorized Semantic Anchoring and Motion Alignment for Instruction-Guided Video Editing</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>68 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">2</span>
+    <h4><a href="https://huggingface.co/papers/2604.11753" target="_blank">Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>14 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">3</span>
+    <h4><a href="https://huggingface.co/papers/2605.04077" target="_blank">Balanced Aggregation: Understanding and Fixing Aggregation Bias in GRPO</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>7 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">4</span>
+    <h4><a href="https://huggingface.co/papers/2603.29002" target="_blank">Understand and Accelerate Memory Processing Pipeline for Disaggregated LLM Inference</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>6 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">5</span>
+    <h4><a href="https://huggingface.co/papers/2603.18886" target="_blank">Reasoning over mathematical objects: on-policy reward modeling and test time aggregation</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>6 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
+</div>
+
+<div class="card seed-card">
+  <div class="card-top">
+    <span class="rank">6</span>
+    <h4><a href="https://huggingface.co/papers/2604.14663" target="_blank">EdgeDetect: Importance-Aware Gradient Compression with Homomorphic Aggregation for Federated Intrusion Detection</a></h4>
+    <span class="tag tag-skip">待判断</span>
+  </div>
+  <div class="meta"><span class="ch">hf_daily_papers</span> <span>3 分</span></div>
+  <div class="conclusion"><b>判定：</b>待判断</div>
+  <details><summary>完整研判 (点击展开)</summary><pre>调用失败</pre></details>
 </div>
 </div>
 </div>
